@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #F5F0E8;
+  --orange: #FF6B35;
+  --teal: #00C2A8;
+  --gold: #F4D35E;
+  --dark: #1A1A1A;
+  --text: #F5F0E8;
+  --muted: #888;
+  --grid: #E8E3DA;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-syne: var(--font-syne);
+  --font-inter: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  font-family: var(--font-inter), sans-serif;
+}
+
+.grid-bg {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.terminal-card {
+  background: var(--dark);
+  border: 1px solid var(--orange);
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 560px;
+  width: 90vw;
+  box-shadow: 0 0 40px rgba(255, 107, 53, 0.15);
+}
+
+.terminal-card-fade-in {
+  animation: cardFadeIn 600ms ease-out forwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.blink-cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  background: var(--text);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.enter-button {
+  background: var(--orange);
+  color: var(--dark);
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.enter-button:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.enter-button-fade-in {
+  animation: buttonFadeIn 400ms ease-out forwards;
+}
+
+@keyframes buttonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress-block {
+  display: inline-block;
+  width: 12px;
+  height: 14px;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.progress-block.filled {
+  background: var(--orange);
+}
+
+.progress-block.empty {
+  background: #333;
 }

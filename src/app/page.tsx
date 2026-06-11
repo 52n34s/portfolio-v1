@@ -1,65 +1,218 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import NavBubbles from "@/components/NavBubbles";
+
+const CHAR_DELAY = 35;
+const TOTAL_BLOCKS = 6;
+const FILLED_BLOCKS = 4;
+
+function sleep(ms: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, ms));
+}
+
+async function typeText(
+  text: string,
+  onUpdate: (value: string) => void,
+  delay = CHAR_DELAY,
+) {
+  for (let i = 1; i <= text.length; i++) {
+    onUpdate(text.slice(0, i));
+    await sleep(delay);
+  }
+}
+
+type TerminalLine =
+  | { kind: "prompt"; content: string }
+  | { kind: "text"; content: string; checkmark?: boolean }
+  | { kind: "loading"; content: string; filledBlocks: number }
+  | { kind: "ready"; content: string };
 
 export default function Home() {
+  const [lines, setLines] = useState<TerminalLine[]>([]);
+  const [showCursor, setShowCursor] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+  const [cardVisible, setCardVisible] = useState(false);
+
+  useEffect(() => {
+    setCardVisible(true);
+
+    let cancelled = false;
+
+    async function runSequence() {
+      const addLine = (line: TerminalLine) => {
+        if (!cancelled) setLines((prev) => [...prev, line]);
+      };
+
+      const updateLastLine = (line: TerminalLine) => {
+        if (!cancelled) {
+          setLines((prev) => [...prev.slice(0, -1), line]);
+        }
+      };
+
+      // Prompt line
+      addLine({ kind: "prompt", content: "" });
+      await typeText("steffen@berlin:~$", (content) => {
+        if (!cancelled) updateLastLine({ kind: "prompt", content });
+      });
+      if (cancelled) return;
+      await sleep(300);
+
+      // > initializing...
+      addLine({ kind: "text", content: "" });
+      await typeText("> initializing...", (content) => {
+        if (!cancelled) updateLastLine({ kind: "text", content });
+      });
+      if (cancelled) return;
+      await sleep(200);
+
+      // > loading identity... with progress bar
+      addLine({ kind: "loading", content: "", filledBlocks: 0 });
+      const loadingPrefix = "> loading identity... ";
+      for (let i = 1; i <= loadingPrefix.length; i++) {
+        if (cancelled) return;
+        const partial = loadingPrefix.slice(0, i);
+        const progress = Math.ceil(
+          (i / loadingPrefix.length) * FILLED_BLOCKS,
+        );
+        updateLastLine({
+          kind: "loading",
+          content: partial,
+          filledBlocks: progress,
+        });
+        await sleep(CHAR_DELAY);
+      }
+      // Fill remaining blocks
+      for (let b = FILLED_BLOCKS + 1; b <= TOTAL_BLOCKS; b++) {
+        if (cancelled) return;
+        await sleep(80);
+        updateLastLine({
+          kind: "loading",
+          content: loadingPrefix,
+          filledBlocks: FILLED_BLOCKS,
+        });
+      }
+      if (cancelled) return;
+      await sleep(200);
+
+      // > mounting projects... done ✓
+      addLine({ kind: "text", content: "", checkmark: false });
+      const mountingText = "> mounting projects... done ";
+      await typeText(mountingText, (content) => {
+        if (!cancelled)
+          updateLastLine({ kind: "text", content, checkmark: false });
+      });
+      if (cancelled) return;
+      updateLastLine({ kind: "text", content: mountingText, checkmark: true });
+      await sleep(200);
+
+      // > starting peeranimo... done ✓
+      addLine({ kind: "text", content: "", checkmark: false });
+      const peeranimoText = "> starting peeranimo... done ";
+      await typeText(peeranimoText, (content) => {
+        if (!cancelled)
+          updateLastLine({ kind: "text", content, checkmark: false });
+      });
+      if (cancelled) return;
+      updateLastLine({ kind: "text", content: peeranimoText, checkmark: true });
+      await sleep(200);
+
+      // > ready.
+      addLine({ kind: "ready", content: "" });
+      await typeText("> ready.", (content) => {
+        if (!cancelled) updateLastLine({ kind: "ready", content });
+      });
+      if (cancelled) return;
+      setShowCursor(true);
+      await sleep(600);
+      if (!cancelled) setShowButton(true);
+    }
+
+    runSequence();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleEnter = () => {
+    const target = document.getElementById("room-02");
+    target?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const monoStyle = {
+    fontFamily: "var(--font-jetbrains-mono), monospace",
+    fontSize: "14px",
+    lineHeight: "1.8",
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="grid-bg relative flex min-h-screen items-center justify-center">
+      <NavBubbles />
+
+      <div
+        className={`terminal-card ${cardVisible ? "terminal-card-fade-in" : "opacity-0"}`}
+        style={{ opacity: cardVisible ? undefined : 0 }}
+      >
+        <div style={monoStyle}>
+          {lines.map((line, index) => {
+            if (line.kind === "prompt") {
+              return (
+                <div key={index} style={{ color: "var(--orange)" }}>
+                  {line.content}
+                </div>
+              );
+            }
+
+            if (line.kind === "loading") {
+              return (
+                <div key={index} style={{ color: "var(--text)" }}>
+                  {line.content}
+                  <span className="inline-flex gap-[2px] ml-1">
+                    {Array.from({ length: TOTAL_BLOCKS }).map((_, i) => (
+                      <span
+                        key={i}
+                        className={`progress-block ${i < line.filledBlocks ? "filled" : "empty"}`}
+                      />
+                    ))}
+                  </span>
+                </div>
+              );
+            }
+
+            if (line.kind === "ready") {
+              return (
+                <div key={index} style={{ color: "var(--text)" }}>
+                  {line.content}
+                  {showCursor && <span className="blink-cursor" />}
+                </div>
+              );
+            }
+
+            return (
+              <div key={index} style={{ color: "var(--text)" }}>
+                {line.content}
+                {line.checkmark && (
+                  <span style={{ color: "var(--teal)" }}>✓</span>
+                )}
+              </div>
+            );
+          })}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {showButton && (
+          <button
+            type="button"
+            onClick={handleEnter}
+            className="enter-button enter-button-fade-in mt-8"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            ENTER MY WORLD
+          </button>
+        )}
+      </div>
+
+      {/* Placeholder for Room 02 */}
+      <div id="room-02" className="absolute bottom-0 h-screen w-full" />
     </div>
   );
 }
