@@ -411,11 +411,11 @@ body {
 }
 
 .phone {
-  width: 280px;
-  height: 580px;
+  width: 360px;
+  height: 720px;
   background: var(--dark);
-  border-radius: 44px;
-  border: 8px solid #2a2a2a;
+  border-radius: 52px;
+  border: 10px solid #2a2a2a;
   box-shadow:
     0 0 0 1px #333,
     0 30px 80px rgba(0, 0, 0, 0.3),
@@ -671,9 +671,8 @@ body {
 
 @media (max-width: 1024px) {
   .phone {
-    width: 360px;
-    height: 740px;
-    border-radius: 56px;
+    width: 400px;
+    height: 760px;
   }
 }
 
@@ -693,10 +692,10 @@ body {
   }
 
   .phone {
-    width: 85vw;
-    max-width: 340px;
-    height: 75vh;
-    max-height: 680px;
+    width: 92vw;
+    max-width: 380px;
+    height: 78vh;
+    max-height: 720px;
     border-radius: 52px;
   }
 
