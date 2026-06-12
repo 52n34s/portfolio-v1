@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import { Syne, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const syne = Syne({
-  weight: ["400", "600", "700", "800"],
-  subsets: ["latin"],
-  variable: "--font-syne",
-});
 
 const inter = Inter({
   weight: ["300", "400", "500"],
@@ -36,8 +30,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );

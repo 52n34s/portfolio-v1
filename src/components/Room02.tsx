@@ -104,7 +104,7 @@ export default function Room02({ visible }: Room02Props) {
           onMouseLeave={() => label.action === "plant" && setPlantHover(false)}
         >
           {label.action === "plant" && plantHover && (
-            <div className="room-02-tooltip">{"> fun fact: ich tränke sie nie."}</div>
+            <div className="room-02-tooltip">{"> fun fact: I never water it."}</div>
           )}
           <button
             type="button"
