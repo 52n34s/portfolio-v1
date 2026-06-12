@@ -138,6 +138,36 @@ body {
   animation: float 4s ease-in-out infinite;
 }
 
+.room-02-studio {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60%;
+  max-width: 700px;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 600ms ease-out 200ms;
+}
+
+.room-02-studio.visible {
+  opacity: 0.9;
+}
+
+.room-02-studio img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+.room-02-text {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  margin-left: clamp(1.5rem, 8vw, 6rem);
+}
+
 .room-fade-left {
   opacity: 0;
   transform: translateX(-20px);

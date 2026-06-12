@@ -242,108 +242,96 @@ export default function Home() {
       {/* Room 02 — ~/home */}
       <section
         id="room-02"
-        className="grid-bg flex min-h-screen items-center px-6 py-16"
+        className="grid-bg relative flex min-h-screen items-center overflow-hidden px-6 py-16"
       >
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left — Text */}
-          <div className={`room-fade-left ${room02Visible ? "visible" : ""}`}>
-            <p
-              style={{
-                fontFamily: "var(--font-jetbrains-mono), monospace",
-                fontSize: "12px",
-                color: "var(--muted)",
-              }}
-            >
-              ~/home
-            </p>
+        {/* Background — Studio */}
+        <div
+          className={`room-02-studio ${room02Visible ? "visible" : ""}`}
+          aria-hidden="true"
+        >
+          <div className="studio-float">
+            <img src="/studio.png" alt="Steffen's Studio Berlin" />
+          </div>
+        </div>
 
-            <h1
-              className="mt-2"
-              style={{
-                fontFamily: "var(--font-syne), sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(64px, 12vw, 120px)",
-                color: "var(--dark)",
-                letterSpacing: "-0.03em",
-                lineHeight: 1,
-              }}
-            >
-              STEFFEN
-            </h1>
+        {/* Foreground — Text */}
+        <div className={`room-02-text room-fade-left ${room02Visible ? "visible" : ""}`}>
+          <p
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: "12px",
+              color: "var(--muted)",
+            }}
+          >
+            ~/home
+          </p>
 
-            <p
-              className="mt-3"
-              style={{
-                fontFamily: "var(--font-jetbrains-mono), monospace",
-                fontSize: "13px",
-                color: "var(--muted)",
-              }}
-            >
-              Founder · Developer · Berlin Mitte
-            </p>
+          <h1
+            className="mt-2"
+            style={{
+              fontFamily: "var(--font-syne), sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(80px, 14vw, 140px)",
+              color: "var(--dark)",
+              letterSpacing: "-0.03em",
+              lineHeight: 1,
+            }}
+          >
+            STEFFEN
+          </h1>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["10+ Platforms", "4 SaaS Products", "100k Reach"].map(
-                (stat) => (
-                  <button key={stat} type="button" className="stat-pill">
-                    {`[ ${stat} ]`}
-                  </button>
-                ),
-              )}
-            </div>
+          <p
+            className="mt-3"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: "13px",
+              color: "var(--muted)",
+            }}
+          >
+            Founder · Developer · Berlin Mitte
+          </p>
 
-            <p
-              className="mt-10"
-              style={{
-                fontFamily: "var(--font-inter), sans-serif",
-                fontWeight: 300,
-                fontSize: "15px",
-                color: "var(--muted)",
-                maxWidth: "380px",
-                lineHeight: 1.7,
-              }}
-            >
-              Ich baue keine Websites.
-              <br />
-              Ich baue Unternehmen — von der Idee
-              <br />
-              bis zum fertigen Produkt.
-            </p>
-
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button
-                type="button"
-                onClick={() => navigateToRoom("room-03")}
-                className="btn-primary"
-              >
-                Explore my work →
+          <div className="mt-8 flex flex-wrap gap-3">
+            {["10+ Platforms", "4 SaaS Products", "100k Reach"].map((stat) => (
+              <button key={stat} type="button" className="stat-pill">
+                {`[ ${stat} ]`}
               </button>
-              <button
-                type="button"
-                onClick={() => setAboutOpen(true)}
-                className="btn-ghost"
-              >
-                ./about me
-              </button>
-            </div>
+            ))}
           </div>
 
-          {/* Right — Studio Image */}
-          <div
-            className={`room-fade-right flex justify-center lg:justify-end ${room02Visible ? "visible" : ""}`}
+          <p
+            className="mt-10"
+            style={{
+              fontFamily: "var(--font-inter), sans-serif",
+              fontWeight: 300,
+              fontSize: "15px",
+              color: "var(--muted)",
+              maxWidth: "380px",
+              lineHeight: 1.7,
+            }}
           >
-            <div className="studio-float">
-              <img
-                src="/studio.png"
-                alt="Steffen's Studio Berlin"
-                style={{
-                  width: "100%",
-                  maxWidth: "520px",
-                  height: "auto",
-                  filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.15))",
-                }}
-              />
-            </div>
+            Ich baue keine Websites.
+            <br />
+            Ich baue Unternehmen — von der Idee
+            <br />
+            bis zum fertigen Produkt.
+          </p>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <button
+              type="button"
+              onClick={() => navigateToRoom("room-03")}
+              className="btn-primary"
+            >
+              Explore my work →
+            </button>
+            <button
+              type="button"
+              onClick={() => setAboutOpen(true)}
+              className="btn-ghost"
+            >
+              ./about me
+            </button>
           </div>
         </div>
       </section>
