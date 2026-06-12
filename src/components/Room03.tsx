@@ -112,7 +112,7 @@ const projects: Project[] = [
   },
   {
     id: "reelhouseai",
-    name: "ReelhouseAI",
+    name: "AI Film Platform",
     year: "2025",
     tagline:
       "Curated AI film discovery platform with creator dashboards and moderation workflows.",
@@ -121,7 +121,7 @@ const projects: Project[] = [
       "Moderation System",
       "Multi-Role",
       "Creator Platform",
-      "Self-Built",
+      "Client Project · NDA",
     ],
     description:
       "A curated discovery platform for independent AI short films with a multi-role architecture supporting creators, moderators, and public audiences. Moderation states, approval logic, and creator dashboards built for scale.",
@@ -166,6 +166,44 @@ const projects: Project[] = [
     url: "#",
     featured: false,
     accentColor: "#7B8FD4",
+  },
+  {
+    id: "coursehub",
+    name: "CourseHub",
+    year: "2025",
+    tagline:
+      "Full platform architecture and Blueprint for a sports courses marketplace — designed before a single line was built.",
+    tags: [
+      "Blueprint",
+      "Marketplace",
+      "Stripe Connect",
+      "Architecture",
+      "Client Project",
+    ],
+    description:
+      "A sports course and cohort marketplace I architected as a paid Blueprint engagement — the entire value delivered was architecture, not code. Covered 11 core entities, Stripe Connect Express integration, seat reservation logic, role-based permissions, and three build scenarios with honest hour estimates.",
+    url: "#",
+    featured: false,
+    accentColor: "#2563EB",
+  },
+  {
+    id: "seeingtree",
+    name: "SeeingTree — FamilySpace",
+    year: "2025",
+    tagline:
+      "Full system audit and takeover strategy for a live Bubble SaaS — assessed, diagnosed, and restructured for production readiness.",
+    tags: [
+      "Platform Audit",
+      "Takeover",
+      "Multi-Role",
+      "SaaS Architecture",
+      "Client Project",
+    ],
+    description:
+      "A family and community SaaS platform I was brought in to audit and take over after structural problems blocked further growth. My audit covered data model architecture, privacy rules, role-based access control, feed and notification workflows, and multi-space isolation logic — delivered as a senior-level remediation roadmap.",
+    url: "#",
+    featured: false,
+    accentColor: "#16A34A",
   },
 ];
 
