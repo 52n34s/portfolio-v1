@@ -37,7 +37,11 @@ const LABELS = [
   },
 ];
 
-const STATS = ["10+ Platforms", "4 SaaS Products", "100k Reach"];
+const STRENGTHS = [
+  "Out-of-the-box thinker",
+  "Systems architect",
+  "Idea to launch",
+];
 
 function MouseIcon() {
   return (
@@ -151,9 +155,9 @@ export default function Room02({ visible }: Room02Props) {
           </div>
 
           <div className="room-02-whoami-stats">
-            {STATS.map((stat) => (
-              <span key={stat} className="stat-pill">
-                {`[ ${stat} ]`}
+            {STRENGTHS.map((strength) => (
+              <span key={strength} className="stat-pill">
+                {`[ ${strength} ]`}
               </span>
             ))}
           </div>

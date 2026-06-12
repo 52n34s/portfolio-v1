@@ -255,10 +255,11 @@ export default function Room03({ visible }: Room03Props) {
       <div className="room-03-header">
         <p className="room-03-label">./builds</p>
         <h2 className="room-03-title">
-          Products I
+          Some of what
           <br />
-          architected.
+          I&apos;ve built.
         </h2>
+        <p className="room-03-subtitle">A selection of 10+ projects.</p>
       </div>
 
       <div className="room-03-phone-wrap">
