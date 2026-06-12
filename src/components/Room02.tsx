@@ -11,29 +11,29 @@ const LABELS = [
   {
     id: "about",
     text: "~/about →",
-    left: "18%",
-    top: "45%",
+    left: "22%",
+    top: "52%",
     action: "about" as const,
   },
   {
     id: "builds",
     text: "./builds →",
-    left: "42%",
-    top: "48%",
+    left: "44%",
+    top: "52%",
     action: "room-03" as const,
   },
   {
     id: "works",
     text: "./works →",
-    left: "62%",
-    top: "38%",
+    left: "63%",
+    top: "40%",
     action: "room-03" as const,
   },
   {
     id: "plant",
     text: "(hover me)",
-    left: "14%",
-    top: "68%",
+    left: "20%",
+    top: "72%",
     action: "plant" as const,
   },
 ];
@@ -133,18 +133,21 @@ export default function Room02({ visible, onNavigate }: Room02Props) {
           </div>
 
           <div className="room-02-whoami-body">
-            <p>Ich bin Steffen.</p>
-            <p>Freelance Developer. Founder. Content Creator.</p>
-            <p>Berlin Mitte.</p>
+            <p>Steffen. Berlin. Builder.</p>
             <p className="room-02-whoami-gap">
-              Ich kleide mich bunt — weil ich lange nicht ich selbst sein
-              durfte. Das sieht man auf der Straße. Das spürt man in meiner
-              Arbeit.
-            </p>
-            <p>
-              Ich baue keine Websites.
+              I think in systems,
               <br />
-              <span className="room-02-highlight">Ich baue Unternehmen.</span>
+              act in products,
+              <br />
+              and ask every evening: &ldquo;What if?&rdquo;
+            </p>
+            <p>Founder. Developer. Creative.</p>
+            <p className="room-02-whoami-gap">
+              I don&apos;t build websites.
+              <br />
+              <span className="room-02-highlight">
+                I build companies that scale.
+              </span>
             </p>
           </div>
 

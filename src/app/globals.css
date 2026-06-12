@@ -234,8 +234,8 @@ body {
 .room-02-whoami {
   position: absolute;
   bottom: 2rem;
-  right: 5rem;
-  width: 320px;
+  left: 2rem;
+  width: 300px;
   background: var(--dark);
   border: 1px solid var(--orange);
   border-radius: 12px;
@@ -293,8 +293,9 @@ body {
 
 .room-02-whoami-stats {
   display: flex;
+  flex-direction: row;
+  gap: 6px;
   flex-wrap: wrap;
-  gap: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -331,8 +332,8 @@ body {
 
   .room-02-whoami {
     bottom: 1rem;
-    right: 1rem;
     left: 1rem;
+    right: 1rem;
     width: auto;
   }
 
