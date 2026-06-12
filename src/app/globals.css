@@ -123,3 +123,117 @@ body {
 .progress-block.empty {
   background: #333;
 }
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.studio-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.room-fade-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 600ms ease-out,
+    transform 600ms ease-out;
+}
+
+.room-fade-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.room-fade-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 600ms ease-out 200ms,
+    transform 600ms ease-out 200ms;
+}
+
+.room-fade-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stat-pill {
+  background: var(--dark);
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  border-radius: 100px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--dark);
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-card {
+  background: var(--dark);
+  border: 1px solid var(--orange);
+  border-radius: 16px;
+}
+
+.modal-close-btn {
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.modal-close-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
