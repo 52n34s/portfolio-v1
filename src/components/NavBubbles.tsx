@@ -7,7 +7,7 @@ const rooms = [
   { id: "room-02", label: "~/home" },
   { id: "room-03", label: "./builds" },
   { id: "room-04", label: "~/peeranimo" },
-  { id: "room-05", label: "./beliefs" },
+  { id: "room-05", label: "./work-with-me" },
   { id: "room-06", label: ">_ contact" },
 ];
 
