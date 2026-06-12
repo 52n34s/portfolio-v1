@@ -32,8 +32,8 @@ const LABELS = [
   {
     id: "plant",
     text: "(hover me)",
-    left: "20%",
-    top: "72%",
+    left: "26%",
+    top: "68%",
     action: "plant" as const,
   },
 ];
