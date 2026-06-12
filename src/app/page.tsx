@@ -30,7 +30,7 @@ async function typeText(
 type TerminalLine =
   | { kind: "prompt"; content: string }
   | { kind: "text"; content: string; checkmark?: boolean }
-  | { kind: "loading"; content: string; filledBlocks: number }
+  | { kind: "loading"; content: string; filledBlocks: number; showBlocks?: boolean }
   | { kind: "ready"; content: string };
 
 export default function Home() {
@@ -77,29 +77,29 @@ export default function Home() {
       if (cancelled) return;
       await sleep(200);
 
-      addLine({ kind: "loading", content: "", filledBlocks: 0 });
+      addLine({ kind: "loading", content: "", filledBlocks: 0, showBlocks: false });
       const loadingPrefix = "> loading identity... ";
-      for (let i = 1; i <= loadingPrefix.length; i++) {
+      await typeText(loadingPrefix, (content) => {
+        if (!cancelled)
+          updateLastLine({
+            kind: "loading",
+            content,
+            filledBlocks: 0,
+            showBlocks: false,
+          });
+      });
+      if (cancelled) return;
+      await sleep(200);
+
+      for (let b = 1; b <= FILLED_BLOCKS; b++) {
         if (cancelled) return;
-        const partial = loadingPrefix.slice(0, i);
-        const progress = Math.ceil(
-          (i / loadingPrefix.length) * FILLED_BLOCKS,
-        );
-        updateLastLine({
-          kind: "loading",
-          content: partial,
-          filledBlocks: progress,
-        });
-        await sleep(CHAR_DELAY);
-      }
-      for (let b = FILLED_BLOCKS + 1; b <= TOTAL_BLOCKS; b++) {
-        if (cancelled) return;
-        await sleep(80);
         updateLastLine({
           kind: "loading",
           content: loadingPrefix,
-          filledBlocks: FILLED_BLOCKS,
+          filledBlocks: b,
+          showBlocks: true,
         });
+        await sleep(150);
       }
       if (cancelled) return;
       await sleep(200);
@@ -214,14 +214,16 @@ export default function Home() {
                 return (
                   <div key={index} style={{ color: "var(--text)" }}>
                     {line.content}
-                    <span className="inline-flex gap-[2px] ml-1">
-                      {Array.from({ length: TOTAL_BLOCKS }).map((_, i) => (
-                        <span
-                          key={i}
-                          className={`progress-block ${i < line.filledBlocks ? "filled" : "empty"}`}
-                        />
-                      ))}
-                    </span>
+                    {line.showBlocks && (
+                      <span className="inline-flex gap-[2px] ml-1">
+                        {Array.from({ length: TOTAL_BLOCKS }).map((_, i) => (
+                          <span
+                            key={i}
+                            className={`progress-block ${i < line.filledBlocks ? "filled" : "empty"}`}
+                          />
+                        ))}
+                      </span>
+                    )}
                   </div>
                 );
               }
