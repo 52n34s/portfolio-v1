@@ -4,7 +4,6 @@ import { useState } from "react";
 
 interface Room02Props {
   visible: boolean;
-  onNavigate: (roomId: string) => void;
 }
 
 const LABELS = [
@@ -64,7 +63,7 @@ function MouseIcon() {
   );
 }
 
-export default function Room02({ visible, onNavigate }: Room02Props) {
+export default function Room02({ visible }: Room02Props) {
   const [whoamiOpen, setWhoamiOpen] = useState(true);
   const [plantHover, setPlantHover] = useState(false);
 
@@ -74,7 +73,7 @@ export default function Room02({ visible, onNavigate }: Room02Props) {
       return;
     }
     if (action === "room-03") {
-      onNavigate("room-03");
+      document.getElementById("room-03")?.scrollIntoView({ behavior: "smooth" });
       return;
     }
   };

@@ -155,12 +155,8 @@ export default function Home() {
       { threshold: 0.5 },
     );
 
-    const room01 = document.getElementById("room-01");
-    const room02 = document.getElementById("room-02");
-    const room03 = document.getElementById("room-03");
-    if (room01) observer.observe(room01);
-    if (room02) observer.observe(room02);
-    if (room03) observer.observe(room03);
+    const roomElements = document.querySelectorAll('[id^="room-"]');
+    roomElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
@@ -175,7 +171,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBubbles activeRoom={activeRoom} onNavigate={navigateToRoom} />
+      <NavBubbles activeRoom={activeRoom} />
 
       {/* Room 01 — Boot Screen */}
       <section
@@ -244,7 +240,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Room02 visible={room02Visible} onNavigate={navigateToRoom} />
+      <Room02 visible={room02Visible} />
       <Room03 visible={room03Visible} />
     </>
   );
