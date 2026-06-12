@@ -14,66 +14,158 @@ interface Project {
   accentColor: string;
 }
 
-const PROJECTS: Project[] = [
+const projects: Project[] = [
   {
     id: "peeranimo",
     name: "Peeranimo",
     year: "2026",
-    tagline: "Du bist nicht allein — vor dem Sprung.",
-    tags: ["Community", "Peer-to-Peer", "DACH", "Bubble + Stripe"],
+    tagline:
+      "Community platform connecting people by shared life context and direction.",
+    tags: [
+      "Next.js",
+      "Supabase",
+      "Community Platform",
+      "Auth & RLS",
+      "Self-Built",
+    ],
     description:
-      "A peer-to-peer community for people with an unfulfilled dream. No coaching. No experts. Just real people who feel the same — before they dare to leap.",
+      "A community platform to help people find others in the same chapter of life — not by interest tag, but by shared context, values, and direction. Built on Next.js, TypeScript, and Supabase with custom auth, group architecture, and RLS throughout.",
     url: "https://peeranimo.com",
     featured: true,
-    accentColor: "#FF6B35",
-  },
-  {
-    id: "the",
-    name: "THE",
-    year: "2024",
-    tagline: "The future of honest reviews.",
-    tags: ["SaaS", "Reviews", "AI Analysis", "Community"],
-    description:
-      "A platform for verified, honest reviews with AI-powered analysis and competitor insights. Built for brands that want real feedback.",
-    url: "#",
-    featured: false,
-    accentColor: "#F4D35E",
+    accentColor: "#5B4FCF",
   },
   {
     id: "getabite",
     name: "GetaBite",
     year: "2025",
-    tagline: "Restaurant websites that actually convert.",
-    tags: ["SaaS", "Restaurants", "QR Menus", "Reservations"],
+    tagline:
+      "Multi-location hospitality SaaS with reservation infrastructure and operator dashboards.",
+    tags: [
+      "SaaS",
+      "Multi-Location",
+      "Reservation Logic",
+      "Stripe Billing",
+      "Self-Built",
+    ],
     description:
-      "A complete SaaS platform for restaurants — beautiful websites, reservation systems, QR menus and a powerful dashboard.",
-    url: "#",
+      "A complete operational system for restaurants and cafés — branded websites, QR menus, and structured reservation flows. The complexity lives in the backend: capacity rules, time-slot logic, booking windows, and location-specific behavior.",
+    url: "https://getabite.app",
     featured: false,
-    accentColor: "#00C2A8",
+    accentColor: "#22C55E",
   },
   {
     id: "applento",
     name: "Applento",
     year: "2025",
-    tagline: "Rental applications reimagined.",
-    tags: ["PropTech", "Automation", "Landlords", "Tenants"],
+    tagline:
+      "Real estate applicant screening and workflow platform for agents, companies, and applicants.",
+    tags: [
+      "SaaS",
+      "Workflow Platform",
+      "Multi-Role",
+      "Real Estate",
+      "Self-Built",
+    ],
     description:
-      "Streamlined rental applications for landlords and tenants. Less paperwork, more clarity, faster decisions.",
-    url: "#",
+      "A workflow-driven platform replacing spreadsheets and emails in real estate screening. Supports multiple stakeholder perspectives — agents, applicants, and company-level operators — each with their own interface and data visibility.",
+    url: "https://applento.com",
     featured: false,
-    accentColor: "#7B5CF0",
+    accentColor: "#7B2FE8",
+  },
+  {
+    id: "the",
+    name: "THE",
+    year: "2024",
+    tagline:
+      "Brand review and trust platform with AI-powered summaries, community layer, and embeddable badge system.",
+    tags: [
+      "SaaS",
+      "AI Integration",
+      "Community",
+      "Trust & Reviews",
+      "Self-Built",
+    ],
+    description:
+      "A brand review and trust platform combining structured review collection, public brand profiles, a community layer, AI-powered summaries, and an embeddable trust badge into one coherent system.",
+    url: "https://thehonestexperience.com",
+    featured: false,
+    accentColor: "#E8372A",
+  },
+  {
+    id: "faroutmedx",
+    name: "Far Out MedX",
+    year: "2025",
+    tagline:
+      "Credential tracking platform for high-stakes professionals with GPT-4o OCR and smart alerts.",
+    tags: [
+      "SaaS",
+      "AI / OCR",
+      "Certification Tracking",
+      "GPT-4o Vision",
+      "Client Project",
+    ],
+    description:
+      "A credential and certification tracking platform for EMS, wildfire, offshore, and military professionals. Built with a GPT-4o Vision OCR pipeline, smart expiration alerts, and public shareable credential profiles.",
+    url: "https://faroutmedx.com",
+    featured: false,
+    accentColor: "#C05A14",
   },
   {
     id: "reelhouseai",
     name: "ReelhouseAI",
     year: "2025",
-    tagline: "Curated home for independent AI films.",
-    tags: ["AI", "Film", "Curation", "Community"],
+    tagline:
+      "Curated AI film discovery platform with creator dashboards and moderation workflows.",
+    tags: [
+      "SaaS",
+      "Moderation System",
+      "Multi-Role",
+      "Creator Platform",
+      "Self-Built",
+    ],
     description:
-      "A curated platform for independent AI-generated films. Discover, watch and support the next wave of AI cinema.",
+      "A curated discovery platform for independent AI short films with a multi-role architecture supporting creators, moderators, and public audiences. Moderation states, approval logic, and creator dashboards built for scale.",
     url: "#",
     featured: false,
-    accentColor: "#FF6B8A",
+    accentColor: "#F5A623",
+  },
+  {
+    id: "aidirector",
+    name: "AI Director Studio",
+    year: "2025",
+    tagline:
+      "AI-powered scene planning tool for structured prompt generation across multi-scene film projects.",
+    tags: [
+      "AI Integration",
+      "Creative Tools",
+      "Prompt Engineering",
+      "SaaS",
+      "Self-Built",
+    ],
+    description:
+      "An AI-powered film planning tool that translates high-level creative intent into structured scene-by-scene prompts for AI-generated short films. Separates projects, scenes, characters, and generation state for non-linear creative workflows.",
+    url: "#",
+    featured: false,
+    accentColor: "#2563EB",
+  },
+  {
+    id: "watertesting",
+    name: "Water Testing Lab",
+    year: "2025",
+    tagline:
+      "Multi-tenant compliance SaaS for water testing labs with five user roles and audit logging.",
+    tags: [
+      "Multi-Tenant SaaS",
+      "Compliance",
+      "Audit Logging",
+      "Five User Roles",
+      "Client Project",
+    ],
+    description:
+      "A multi-tenant SaaS system managing the full chain from field technician sampling through internal lab processing to compliance reporting. Five distinct user roles, mobile-friendly field data capture, and first-class audit logging.",
+    url: "#",
+    featured: false,
+    accentColor: "#7B8FD4",
   },
 ];
 
@@ -97,7 +189,7 @@ export default function Room03({ visible }: Room03Props) {
     const interval = setInterval(() => {
       count += 1;
       setShownCount(count);
-      if (count >= PROJECTS.length) clearInterval(interval);
+      if (count >= projects.length) clearInterval(interval);
     }, 200);
 
     return () => clearInterval(interval);
@@ -147,7 +239,7 @@ export default function Room03({ visible }: Room03Props) {
               </div>
 
               <div className="chat-list">
-                {PROJECTS.slice(0, shownCount).map((project, index) => (
+                {projects.slice(0, shownCount).map((project, index) => (
                   <div
                     key={project.id}
                     className="chat-row"
@@ -179,7 +271,7 @@ export default function Room03({ visible }: Room03Props) {
                   className="phone-back-btn"
                   onClick={handleBack}
                 >
-                  ← Zurück
+                  ← Back
                 </button>
 
                 <h3
