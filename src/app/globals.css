@@ -669,6 +669,14 @@ body {
   }
 }
 
+@media (max-width: 1024px) {
+  .phone {
+    width: 360px;
+    height: 740px;
+    border-radius: 56px;
+  }
+}
+
 @media (max-width: 768px) {
   .room-03-header {
     top: 1.25rem;
@@ -681,7 +689,15 @@ body {
 
   .room-03-phone-wrap {
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
+    transform: translate(-50%, -50%);
+  }
+
+  .phone {
+    width: 85vw;
+    max-width: 340px;
+    height: 75vh;
+    max-height: 680px;
+    border-radius: 52px;
   }
 
   .room-03-ghost {
@@ -1497,17 +1513,17 @@ body {
 }
 
 /* Mobile navigation */
-.nav-mobile-trigger {
-  display: none;
-}
-
-.nav-mobile-overlay {
+.nav-mobile {
   display: none;
 }
 
 @media (max-width: 1023px) {
   .nav-bubbles-desktop {
     display: none;
+  }
+
+  .nav-mobile {
+    display: block;
   }
 
   .nav-mobile-trigger {
@@ -1529,59 +1545,18 @@ body {
     justify-content: center;
   }
 
-  .nav-mobile-overlay {
-    display: flex;
+  .nav-mobile-dropdown {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #0d0d0dee;
-    backdrop-filter: blur(16px);
-    z-index: 110;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  .nav-mobile-close {
-    position: fixed;
-    top: 1.5rem;
     right: 1.5rem;
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: none;
-    color: var(--orange);
-    font-size: 28px;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 101;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nav-mobile-menu {
+    top: 4rem;
+    background: #0d0d0dee;
+    backdrop-filter: blur(12px);
+    border: 0.5px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .nav-mobile-item {
-    background: none;
-    border: none;
-    font-family: var(--font-display), sans-serif;
-    font-size: clamp(28px, 6vw, 48px);
-    font-weight: 600;
-    color: var(--text);
-    cursor: pointer;
-    transition: color 200ms ease;
-  }
-
-  .nav-mobile-item-active {
-    color: var(--orange);
+    gap: 1rem;
+    z-index: 98;
   }
 }

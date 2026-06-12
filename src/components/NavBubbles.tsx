@@ -20,6 +20,53 @@ interface NavBubblesProps {
   activeRoom: string;
 }
 
+function NavRoomItems({
+  activeRoom,
+  onSelect,
+}: {
+  activeRoom: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <>
+      <div
+        className="absolute top-4 bottom-4 left-4 w-px -translate-x-1/2"
+        style={{ background: "#CCC" }}
+      />
+
+      {rooms.map((room) => {
+        const isActive = activeRoom === room.id;
+
+        return (
+          <div key={room.id} className="flex items-center gap-3 py-1">
+            <button
+              type="button"
+              onClick={() => onSelect(room.id)}
+              className="relative z-10 h-8 w-8 shrink-0 rounded-full transition-transform hover:scale-110"
+              style={{
+                background: isActive ? "var(--orange)" : "transparent",
+                border: isActive ? "none" : "1px solid #CCC",
+              }}
+              aria-label={room.label}
+              aria-current={isActive ? "page" : undefined}
+            />
+
+            <span
+              className="whitespace-nowrap"
+              style={{
+                ...labelStyle,
+                color: isActive ? "var(--orange)" : "#888",
+              }}
+            >
+              {isActive ? `${room.label} ← aktiv` : room.label}
+            </span>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
 export default function NavBubbles({ activeRoom }: NavBubblesProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -40,85 +87,33 @@ export default function NavBubbles({ activeRoom }: NavBubblesProps) {
         aria-label="Room navigation"
       >
         <div className="relative flex flex-col">
-          <div
-            className="absolute top-4 bottom-4 left-4 w-px -translate-x-1/2"
-            style={{ background: "#CCC" }}
-          />
-
-          {rooms.map((room) => {
-            const isActive = activeRoom === room.id;
-
-            return (
-              <div key={room.id} className="flex items-center gap-3 py-3">
-                <button
-                  type="button"
-                  onClick={() => handleClick(room.id)}
-                  className="relative z-10 h-8 w-8 shrink-0 rounded-full transition-transform hover:scale-110"
-                  style={{
-                    background: isActive ? "var(--orange)" : "transparent",
-                    border: isActive ? "none" : "1px solid #CCC",
-                  }}
-                  aria-label={room.label}
-                  aria-current={isActive ? "page" : undefined}
-                />
-
-                <span
-                  className="whitespace-nowrap"
-                  style={{
-                    ...labelStyle,
-                    color: isActive ? "var(--orange)" : "#888",
-                  }}
-                >
-                  {isActive ? `${room.label} ← aktiv` : room.label}
-                </span>
-              </div>
-            );
-          })}
+          <NavRoomItems activeRoom={activeRoom} onSelect={handleClick} />
         </div>
       </nav>
 
-      {/* Mobile menu trigger */}
-      {!menuOpen && (
+      {/* Mobile / tablet — collapsible bubble list */}
+      <div className="nav-mobile">
         <button
           type="button"
           className="nav-mobile-trigger"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open navigation menu"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
         >
           {">_"}
         </button>
-      )}
 
-      {/* Mobile fullscreen overlay */}
-      {menuOpen && (
-        <div className="nav-mobile-overlay" role="presentation">
-          <button
-            type="button"
-            className="nav-mobile-close"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close navigation menu"
+        {menuOpen && (
+          <nav
+            className="nav-mobile-dropdown"
+            aria-label="Mobile room navigation"
           >
-            ×
-          </button>
-
-          <nav className="nav-mobile-menu" aria-label="Mobile room navigation">
-            {rooms.map((room) => {
-              const isActive = activeRoom === room.id;
-
-              return (
-                <button
-                  key={room.id}
-                  type="button"
-                  className={`nav-mobile-item ${isActive ? "nav-mobile-item-active" : ""}`}
-                  onClick={() => handleNav(room.id)}
-                >
-                  {room.label}
-                </button>
-              );
-            })}
+            <div className="relative flex flex-col">
+              <NavRoomItems activeRoom={activeRoom} onSelect={handleNav} />
+            </div>
           </nav>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
