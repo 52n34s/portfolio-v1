@@ -5,6 +5,8 @@ import NavBubbles from "@/components/NavBubbles";
 import Room02 from "@/components/Room02";
 import Room03 from "@/components/Room03";
 import Room04 from "@/components/Room04";
+import Room05 from "@/components/Room05";
+import Room06 from "@/components/Room06";
 
 const CHAR_DELAY = 35;
 const TOTAL_BLOCKS = 6;
@@ -160,7 +162,14 @@ export default function Home() {
       { threshold: 0.5 },
     );
 
-    const roomIds = ["room-01", "room-02", "room-03", "room-04"];
+    const roomIds = [
+      "room-01",
+      "room-02",
+      "room-03",
+      "room-04",
+      "room-05",
+      "room-06",
+    ];
 
     roomIds.forEach((id) => {
       const el = document.getElementById(id);
@@ -252,6 +261,8 @@ export default function Home() {
       <Room02 visible={room02Visible} />
       <Room03 visible={room03Visible} />
       <Room04 visible={room04Visible} />
+      <Room05 />
+      <Room06 />
     </>
   );
 }

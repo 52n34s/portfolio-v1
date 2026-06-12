@@ -1111,6 +1111,284 @@ body {
   }
 }
 
+/* Room 05 — ./beliefs */
+.room-05 {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.room-05-content {
+  text-align: center;
+}
+
+.room-05-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.room-05-title {
+  margin-top: 0.75rem;
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  font-size: clamp(44px, 7vw, 80px);
+  color: var(--dark);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.room-05-sub {
+  margin-top: 1rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* Room 06 — >_ contact */
+.room-06 {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #0d0d0d;
+  background-image:
+    linear-gradient(#1a1a1a 1px, transparent 1px),
+    linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.room-06-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  min-height: 100vh;
+}
+
+.room-06-left {
+  flex: 1;
+  max-width: 480px;
+}
+
+.room-06-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  color: #555;
+}
+
+.room-06-headline {
+  margin-top: 0.75rem;
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px);
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.room-06-sub {
+  margin-top: 1.25rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.7;
+}
+
+.room-06-usps {
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0 0;
+}
+
+.room-06-usp {
+  margin-bottom: 1.5rem;
+}
+
+.room-06-usp-title {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.room-06-arrow {
+  font-family: var(--font-jetbrains-mono), monospace;
+  color: var(--orange);
+}
+
+.room-06-usp-sub {
+  margin-top: 0.25rem;
+  padding-left: 1.25rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.room-06-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.room-06-social-btn {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  padding: 8px 16px;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.room-06-social-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.room-06-form-wrap {
+  flex: 1;
+  max-width: 480px;
+  width: 100%;
+}
+
+.room-06-form {
+  background: #111;
+  border: 0.5px solid #222;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.room-06-field {
+  margin-bottom: 1.25rem;
+  border: none;
+  padding: 0;
+  min-width: 0;
+}
+
+.room-06-field-label {
+  display: block;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.room-06-input {
+  width: 100%;
+  background: #1a1a1a;
+  border: 0.5px solid #2a2a2a;
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 200ms ease;
+}
+
+.room-06-input:focus {
+  border-color: var(--orange);
+}
+
+.room-06-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.room-06-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.room-06-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+}
+
+.room-06-checkbox {
+  accent-color: var(--orange);
+  width: 16px;
+  height: 16px;
+}
+
+.room-06-submit {
+  width: 100%;
+  background: var(--orange);
+  color: #0d0d0d;
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  margin-top: 0.5rem;
+}
+
+.room-06-submit:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.room-06-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.room-06-success {
+  background: #111;
+  border: 0.5px solid #222;
+  border-radius: 16px;
+  padding: 2rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 14px;
+  color: var(--teal);
+  line-height: 1.8;
+}
+
+.room-06-error {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  color: #ff4d4f;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .room-06-inner {
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .room-06-left,
+  .room-06-form-wrap {
+    max-width: 100%;
+  }
+}
+
 .room-fade-left {
   opacity: 0;
   transform: translateX(-20px);

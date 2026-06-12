@@ -40,16 +40,20 @@ const PEERS = [
 ];
 
 const FEATURES = [
-  { icon: "👥", title: "Real people", subtitle: "No coaches. No gurus." },
+  {
+    icon: "👥",
+    title: "Same chapter",
+    subtitle: "People in the exact same moment of life.",
+  },
   {
     icon: "❤️",
     title: "Real connection",
-    subtitle: "Share. Support. Grow together.",
+    subtitle: "Share. Support. Show up for each other.",
   },
   {
     icon: "✦",
-    title: "Real progress",
-    subtitle: "8-week programs. Lasting impact.",
+    title: "Your moment",
+    subtitle: "This is where your next chapter begins.",
   },
 ];
 
@@ -111,9 +115,6 @@ export default function Room04({ visible }: Room04Props) {
             >
               Join Peeranimo →
             </a>
-            <button type="button" className="room-04-btn-ghost">
-              See How It Works ▷
-            </button>
           </div>
 
           <div className="room-04-waiting">
@@ -179,7 +180,7 @@ export default function Room04({ visible }: Room04Props) {
                 x1="250"
                 y1="250"
                 x2="250"
-                y2="440"
+                y2="415"
                 stroke="#5B4FCF"
                 strokeWidth="1.5"
                 strokeDasharray="6 4"
