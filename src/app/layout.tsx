@@ -23,6 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Steffen — 52n34s.com",
   description: "Personal portfolio of Steffen",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
