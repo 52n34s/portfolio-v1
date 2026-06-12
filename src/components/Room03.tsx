@@ -140,7 +140,7 @@ const projects: Project[] = [
       "Creative Tools",
       "Prompt Engineering",
       "SaaS",
-      "Self-Built",
+      "Client Project · NDA",
     ],
     description:
       "An AI-powered film planning tool that translates high-level creative intent into structured scene-by-scene prompts for AI-generated short films. Separates projects, scenes, characters, and generation state for non-linear creative workflows.",
@@ -188,7 +188,7 @@ const projects: Project[] = [
   },
   {
     id: "seeingtree",
-    name: "SeeingTree — FamilySpace",
+    name: "FamilySpace",
     year: "2025",
     tagline:
       "Full system audit and takeover strategy for a live Bubble SaaS — assessed, diagnosed, and restructured for production readiness.",

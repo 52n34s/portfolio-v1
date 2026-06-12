@@ -3,7 +3,7 @@ import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const syne = Syne({
-  weight: ["400", "700", "800"],
+  weight: ["400", "600", "700", "800"],
   subsets: ["latin"],
   variable: "--font-syne",
 });
