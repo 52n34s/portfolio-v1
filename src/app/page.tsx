@@ -206,7 +206,7 @@ export default function Home() {
             onClick={handleEnter}
             className="enter-button enter-button-fade-in mt-8"
           >
-            ENTER MY WORLD
+            {"> ./enter-my-world"}
           </button>
         )}
       </div>
