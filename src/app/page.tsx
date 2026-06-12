@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import NavBubbles from "@/components/NavBubbles";
 import Room02 from "@/components/Room02";
+import Room03 from "@/components/Room03";
 
 const CHAR_DELAY = 35;
 const TOTAL_BLOCKS = 6;
@@ -36,6 +37,7 @@ export default function Home() {
   const [cardVisible, setCardVisible] = useState(false);
   const [activeRoom, setActiveRoom] = useState("room-01");
   const [room02Visible, setRoom02Visible] = useState(false);
+  const [room03Visible, setRoom03Visible] = useState(false);
 
   const navigateToRoom = useCallback((roomId: string) => {
     document.getElementById(roomId)?.scrollIntoView({ behavior: "smooth" });
@@ -144,6 +146,9 @@ export default function Home() {
             if (entry.target.id === "room-02") {
               setRoom02Visible(true);
             }
+            if (entry.target.id === "room-03") {
+              setRoom03Visible(true);
+            }
           }
         });
       },
@@ -152,8 +157,10 @@ export default function Home() {
 
     const room01 = document.getElementById("room-01");
     const room02 = document.getElementById("room-02");
+    const room03 = document.getElementById("room-03");
     if (room01) observer.observe(room01);
     if (room02) observer.observe(room02);
+    if (room03) observer.observe(room03);
 
     return () => observer.disconnect();
   }, []);
@@ -238,6 +245,7 @@ export default function Home() {
       </section>
 
       <Room02 visible={room02Visible} onNavigate={navigateToRoom} />
+      <Room03 visible={room03Visible} />
     </>
   );
 }
