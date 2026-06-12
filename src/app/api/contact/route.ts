@@ -2,31 +2,90 @@ import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-const resend = new Resend(process.env.RESEND_API_KEY!)
-
-export async function POST(req: NextRequest) {
-  const { name, email, projectTypes, message } = await req.json()
-
-  // Save to Supabase
-  const { error } = await supabase
-    .from('portfolio_contacts')
-    .insert([{ name, email, project_types: projectTypes, message }])
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  if (!url || !key) {
+    console.error('[contact] Missing Supabase env vars:', {
+      hasUrl: Boolean(url),
+      hasServiceRoleKey: Boolean(key),
+    })
+    return null
   }
 
-  // Send email via Resend
-  await resend.emails.send({
-    from: 'portfolio@52n34s.com',
-    to: 'steffen@52n34s.com',
-    subject: `🔔 New project inquiry from ${name}`,
-    html: `
+  return createClient(url, key, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  })
+}
+
+function getResend() {
+  const key = process.env.RESEND_API_KEY
+
+  if (!key) {
+    console.error('[contact] Missing RESEND_API_KEY')
+    return null
+  }
+
+  return new Resend(key)
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const supabase = getSupabase()
+    const resend = getResend()
+
+    if (!supabase || !resend) {
+      return NextResponse.json(
+        { error: 'Server configuration incomplete.' },
+        { status: 500 },
+      )
+    }
+
+    const { name, email, projectTypes, message } = await req.json()
+
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: 'Name, email, and message are required.' },
+        { status: 400 },
+      )
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('portfolio_contacts')
+        .insert([{ name, email, project_types: projectTypes ?? [], message }])
+        .select('id')
+        .single()
+
+      if (error) {
+        console.error('[contact] Supabase insert failed:', {
+          message: error.message,
+          code: error.code,
+          details: error.details,
+          hint: error.hint,
+        })
+        return NextResponse.json({ error: error.message }, { status: 500 })
+      }
+
+      console.log('[contact] Supabase insert ok:', { id: data?.id })
+    } catch (supabaseError) {
+      console.error('[contact] Supabase unexpected error:', supabaseError)
+      return NextResponse.json(
+        { error: 'Database error.' },
+        { status: 500 },
+      )
+    }
+
+    try {
+      const emailResult = await resend.emails.send({
+        from: 'portfolio@52n34s.com',
+        to: 'steffen@52n34s.com',
+        subject: `🔔 New project inquiry from ${name}`,
+        html: `
       <!DOCTYPE html>
       <html>
         <head>
@@ -84,8 +143,29 @@ export async function POST(req: NextRequest) {
           </div>
         </body>
       </html>
-    `
-  })
+    `,
+      })
 
-  return NextResponse.json({ success: true })
+      if (emailResult.error) {
+        console.error('[contact] Resend send failed:', emailResult.error)
+        return NextResponse.json(
+          { error: emailResult.error.message },
+          { status: 500 },
+        )
+      }
+
+      console.log('[contact] Resend send ok:', { id: emailResult.data?.id })
+    } catch (resendError) {
+      console.error('[contact] Resend unexpected error:', resendError)
+      return NextResponse.json({ error: 'Email error.' }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('[contact] Route unexpected error:', error)
+    return NextResponse.json(
+      { error: 'Something went wrong.' },
+      { status: 500 },
+    )
+  }
 }

@@ -34,9 +34,9 @@ const PROJECT_TYPES = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Upwork", href: "https://upwork.com" },
+  { label: "Instagram", href: "https://www.instagram.com/steffenletsdoit/" },
+  { label: "Upwork", href: "https://www.upwork.com/freelancers/~01984538d26b3fcb98?viewMode=1" },
+  { label: "Email", href: "mailto:steffen@52n34s.com" },
 ];
 
 export default function Room06() {
@@ -120,8 +120,9 @@ export default function Room06() {
               <a
                 key={link.label}
                 href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(link.href.startsWith("http")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
                 className="room-06-social-btn"
               >
                 {link.label}
