@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import NavBubbles from "@/components/NavBubbles";
-import AboutModal from "@/components/AboutModal";
+import Room02 from "@/components/Room02";
 
 const CHAR_DELAY = 35;
 const TOTAL_BLOCKS = 6;
@@ -36,7 +36,6 @@ export default function Home() {
   const [cardVisible, setCardVisible] = useState(false);
   const [activeRoom, setActiveRoom] = useState("room-01");
   const [room02Visible, setRoom02Visible] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
 
   const navigateToRoom = useCallback((roomId: string) => {
     document.getElementById(roomId)?.scrollIntoView({ behavior: "smooth" });
@@ -170,7 +169,6 @@ export default function Home() {
   return (
     <>
       <NavBubbles activeRoom={activeRoom} onNavigate={navigateToRoom} />
-      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
 
       {/* Room 01 — Boot Screen */}
       <section
@@ -239,102 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Room 02 — ~/home */}
-      <section
-        id="room-02"
-        className="grid-bg relative flex min-h-screen items-start overflow-hidden px-6"
-      >
-        {/* Background — Studio */}
-        <div
-          className={`room-02-studio ${room02Visible ? "visible" : ""}`}
-          aria-hidden="true"
-        >
-          <div className="studio-float">
-            <img src="/studio.png" alt="Steffen's Studio Berlin" />
-          </div>
-        </div>
-
-        {/* Foreground — Text */}
-        <div className={`room-02-text room-fade-left ${room02Visible ? "visible" : ""}`}>
-          <p
-            style={{
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: "12px",
-              color: "var(--muted)",
-            }}
-          >
-            ~/home
-          </p>
-
-          <h1
-            className="mt-2 relative"
-            style={{
-              fontFamily: "var(--font-syne), sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(80px, 14vw, 140px)",
-              color: "var(--dark)",
-              letterSpacing: "-0.03em",
-              lineHeight: 0.95,
-            }}
-          >
-            STEFFEN
-          </h1>
-
-          <p
-            className="mt-3"
-            style={{
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: "13px",
-              color: "var(--muted)",
-            }}
-          >
-            Founder · Developer · Berlin Mitte
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            {["10+ Platforms", "4 SaaS Products", "100k Reach"].map((stat) => (
-              <button key={stat} type="button" className="stat-pill">
-                {`[ ${stat} ]`}
-              </button>
-            ))}
-          </div>
-
-          <p
-            className="mt-10"
-            style={{
-              fontFamily: "var(--font-inter), sans-serif",
-              fontWeight: 300,
-              fontSize: "15px",
-              color: "var(--muted)",
-              maxWidth: "380px",
-              lineHeight: 1.7,
-            }}
-          >
-            Ich baue keine Websites.
-            <br />
-            Ich baue Unternehmen — von der Idee
-            <br />
-            bis zum fertigen Produkt.
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <button
-              type="button"
-              onClick={() => navigateToRoom("room-03")}
-              className="btn-primary"
-            >
-              Explore my work →
-            </button>
-            <button
-              type="button"
-              onClick={() => setAboutOpen(true)}
-              className="btn-ghost"
-            >
-              ./about me
-            </button>
-          </div>
-        </div>
-      </section>
+      <Room02 visible={room02Visible} onNavigate={navigateToRoom} />
     </>
   );
 }

@@ -138,35 +138,207 @@ body {
   animation: float 4s ease-in-out infinite;
 }
 
-.room-02-studio {
-  position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 60%;
-  max-width: 700px;
+/* Room 02 — ~/home */
+.room-02 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   opacity: 0;
+  transition: opacity 600ms ease-out;
+}
+
+.room-02-visible {
+  opacity: 1;
+}
+
+.room-02-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-width: 900px;
   z-index: 1;
   pointer-events: none;
-  transition: opacity 600ms ease-out 200ms;
 }
 
-.room-02-studio.visible {
-  opacity: 0.85;
-}
-
-.room-02-studio img {
+.room-02-bg img {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+  display: block;
 }
 
-.room-02-text {
-  position: relative;
-  z-index: 2;
-  max-width: 480px;
-  padding-top: clamp(3rem, 8vh, 6rem);
-  padding-left: clamp(1.5rem, 6vw, 4rem);
+.room-02-headline-block {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 10;
+}
+
+.room-02-headline {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  font-size: clamp(60px, 10vw, 120px);
+  color: var(--dark);
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.room-02-subtitle {
+  margin-top: 0.5rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.room-02-label-wrap {
+  position: absolute;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+.room-02-label {
+  background: var(--dark);
+  color: var(--text);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.room-02-label:hover {
+  background: var(--orange);
+  color: var(--dark);
+}
+
+.room-02-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dark);
+  color: var(--text);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  border: 1px solid var(--orange);
+}
+
+.room-02-whoami {
+  position: absolute;
+  bottom: 2rem;
+  right: 5rem;
+  width: 320px;
+  background: var(--dark);
+  border: 1px solid var(--orange);
+  border-radius: 12px;
+  padding: 1.5rem;
+  z-index: 10;
+}
+
+.room-02-whoami-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.room-02-whoami-title {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  color: var(--orange);
+}
+
+.room-02-whoami-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 200ms ease;
+}
+
+.room-02-whoami-close:hover {
+  color: var(--orange);
+}
+
+.room-02-whoami-body {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.room-02-whoami-body p + p {
+  margin-top: 0.5rem;
+}
+
+.room-02-whoami-gap {
+  margin-top: 0.75rem !important;
+}
+
+.room-02-highlight {
+  color: var(--orange);
+}
+
+.room-02-whoami-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.room-02-click-around {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .room-02-bg {
+    width: 95vw;
+  }
+
+  .room-02-headline-block {
+    top: 1.25rem;
+    left: 1.25rem;
+  }
+
+  .room-02-label {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .room-02-whoami {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+  }
+
+  .room-02-click-around {
+    bottom: 0.75rem;
+  }
 }
 
 .room-fade-left {
