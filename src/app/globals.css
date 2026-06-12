@@ -824,7 +824,8 @@ body {
   color: #fff;
   font-family: var(--font-syne), sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
+  letter-spacing: 0.02em;
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
@@ -842,9 +843,10 @@ body {
   background: transparent;
   border: 1px solid #5b4fcf;
   color: #5b4fcf;
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
-  font-size: 14px;
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
   padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;

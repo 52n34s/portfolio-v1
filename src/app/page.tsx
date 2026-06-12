@@ -160,8 +160,12 @@ export default function Home() {
       { threshold: 0.5 },
     );
 
-    const roomElements = document.querySelectorAll('[id^="room-"]');
-    roomElements.forEach((el) => observer.observe(el));
+    const roomIds = ["room-01", "room-02", "room-03", "room-04"];
+
+    roomIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
     return () => observer.disconnect();
   }, []);
