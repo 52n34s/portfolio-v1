@@ -242,7 +242,7 @@ export default function Home() {
       {/* Room 02 — ~/home */}
       <section
         id="room-02"
-        className="grid-bg relative flex min-h-screen items-center overflow-hidden px-6 py-16"
+        className="grid-bg relative flex min-h-screen items-start overflow-hidden px-6"
       >
         {/* Background — Studio */}
         <div
@@ -267,14 +267,14 @@ export default function Home() {
           </p>
 
           <h1
-            className="mt-2"
+            className="mt-2 relative"
             style={{
               fontFamily: "var(--font-syne), sans-serif",
               fontWeight: 800,
               fontSize: "clamp(80px, 14vw, 140px)",
               color: "var(--dark)",
               letterSpacing: "-0.03em",
-              lineHeight: 1,
+              lineHeight: 0.95,
             }}
           >
             STEFFEN
