@@ -80,7 +80,7 @@ export default function Room04({ visible }: Room04Props) {
           <h2 className="room-04-headline">
             Find people
             <br />
-            who get it
+            <span className="room-04-headline-accent">who get it</span>
             <span className="room-04-dot">.</span>
           </h2>
 

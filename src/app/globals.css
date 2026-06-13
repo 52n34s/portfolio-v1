@@ -804,6 +804,10 @@ body {
   line-height: 1.05;
 }
 
+.room-04-headline-accent {
+  color: #7b5cf0;
+}
+
 .room-04-dot {
   color: #f4a261;
 }
