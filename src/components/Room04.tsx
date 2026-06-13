@@ -148,7 +148,7 @@ export default function Room04({ visible }: Room04Props) {
                 x1="250"
                 y1="250"
                 x2="250"
-                y2="80"
+                y2="105"
                 stroke="#5B4FCF"
                 strokeWidth="1.5"
                 strokeDasharray="6 4"
@@ -213,7 +213,7 @@ export default function Room04({ visible }: Room04Props) {
               <span className="room-04-info-icon">👥</span>
               <div>
                 <p className="room-04-info-title">People like you.</p>
-                <p className="room-04-info-sub">All over the DACH region.</p>
+                <p className="room-04-info-sub">Worldwide.</p>
               </div>
             </div>
           </div>

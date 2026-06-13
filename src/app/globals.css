@@ -1038,7 +1038,7 @@ body {
 }
 
 .peer-node-diego {
-  bottom: 5%;
+  bottom: -12%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1113,8 +1113,8 @@ body {
 
 .room-04-info-card {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 20px;
+  left: -20px;
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
