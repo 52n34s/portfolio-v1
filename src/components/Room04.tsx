@@ -148,7 +148,7 @@ export default function Room04({ visible }: Room04Props) {
                 x1="250"
                 y1="250"
                 x2="250"
-                y2="105"
+                y2="120"
                 stroke="#5B4FCF"
                 strokeWidth="1.5"
                 strokeDasharray="6 4"
