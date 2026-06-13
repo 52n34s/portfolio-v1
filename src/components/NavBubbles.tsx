@@ -38,17 +38,20 @@ function NavRoomItems({
         const isActive = activeRoom === room.id;
 
         return (
-          <div key={room.id} className="flex items-center gap-3 py-1">
-            <button
-              type="button"
-              onClick={() => onSelect(room.id)}
-              className="relative z-10 h-8 w-8 shrink-0 rounded-full transition-transform hover:scale-110"
+          <button
+            key={room.id}
+            type="button"
+            onClick={() => onSelect(room.id)}
+            className="group flex w-full cursor-pointer items-center gap-3 border-none bg-transparent py-1 text-left"
+            aria-current={isActive ? "page" : undefined}
+          >
+            <span
+              className="relative z-10 h-8 w-8 shrink-0 rounded-full transition-transform group-hover:scale-110"
               style={{
                 background: isActive ? "var(--orange)" : "transparent",
                 border: isActive ? "none" : "1px solid #CCC",
               }}
-              aria-label={room.label}
-              aria-current={isActive ? "page" : undefined}
+              aria-hidden="true"
             />
 
             <span
@@ -60,7 +63,7 @@ function NavRoomItems({
             >
               {isActive ? `${room.label} ← aktiv` : room.label}
             </span>
-          </div>
+          </button>
         );
       })}
     </>

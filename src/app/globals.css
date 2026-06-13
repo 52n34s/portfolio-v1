@@ -2,7 +2,7 @@
 
 :root {
   --bg: #F5F0E8;
-  --orange: #FF6B35;
+  --orange: #7B5CF0;
   --teal: #00C2A8;
   --gold: #F4D35E;
   --dark: #1A1A1A;
@@ -1241,15 +1241,15 @@ body {
 }
 
 .room-05-case-btn:hover {
-  border-color: #ff6b35;
-  color: #ff6b35;
-  background: #ff6b3508;
+  border-color: #7b5cf0;
+  color: #7b5cf0;
+  background: #7b5cf008;
 }
 
 .room-05-case-btn-active {
-  border-color: #ff6b35;
-  color: #ff6b35;
-  background: #ff6b3512;
+  border-color: #7b5cf0;
+  color: #7b5cf0;
+  background: #7b5cf012;
 }
 
 .room-05-case-btn:disabled {
@@ -1286,7 +1286,7 @@ body {
   padding: 0;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 13px;
-  color: #ff6b35;
+  color: #7b5cf0;
   cursor: pointer;
   transition: opacity 0.2s;
 }
