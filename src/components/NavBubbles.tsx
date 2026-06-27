@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
   { kind: "scroll", id: "room-02", label: "~/home" },
   { kind: "scroll", id: "room-03", label: "./builds" },
   { kind: "scroll", id: "room-04", label: "~/peeranimo" },
-  { kind: "link", href: "/builds/orivela", label: "Orivela" },
+  { kind: "scroll", id: "room-03", label: "Orivela" },
   { kind: "scroll", id: "room-05", label: "./work-with-me" },
   { kind: "scroll", id: "room-06", label: ">_ contact" },
 ];
