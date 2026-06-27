@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface Project {
@@ -15,6 +16,25 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    id: "orivela",
+    name: "Orivela",
+    year: "2026",
+    tagline: "AI-powered iOS vault — shipped to App Store.",
+    tags: [
+      "Expo",
+      "Supabase",
+      "Claude Vision",
+      "WebCrypto",
+      "App Store",
+      "Self-Built",
+    ],
+    description:
+      "A personal records vault for iOS. Store documents, subscriptions, and contacts in one encrypted place — ask in plain language, scan with AI, find anything in seconds. Shipped solo from idea to App Store.",
+    url: "/builds/orivela",
+    featured: true,
+    accentColor: "#a78bfa",
+  },
   {
     id: "peeranimo",
     name: "Peeranimo",
@@ -335,18 +355,24 @@ export default function Room03({ visible }: Room03Props) {
 
                 <p className="phone-back-desc">{selectedProject.description}</p>
 
-                <a
-                  href={selectedProject.url}
-                  className="phone-back-visit"
-                  target={selectedProject.url.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    selectedProject.url.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                >
-                  → Visit Project
-                </a>
+                {selectedProject.url.startsWith("/") ? (
+                  <Link href={selectedProject.url} className="phone-back-visit">
+                    → View Case Study
+                  </Link>
+                ) : (
+                  <a
+                    href={selectedProject.url}
+                    className="phone-back-visit"
+                    target={selectedProject.url.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      selectedProject.url.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
+                    → Visit Project
+                  </a>
+                )}
               </>
             )}
           </div>
