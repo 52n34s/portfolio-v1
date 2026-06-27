@@ -1,4 +1,6 @@
-import BuildsNav from "@/components/BuildsNav";
+"use client";
+
+import NavBubbles from "@/components/NavBubbles";
 
 export default function BuildsLayout({
   children,
@@ -6,9 +8,9 @@ export default function BuildsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="builds-shell">
-      <BuildsNav />
+    <>
+      <NavBubbles />
       {children}
-    </div>
+    </>
   );
 }

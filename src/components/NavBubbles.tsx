@@ -1,14 +1,30 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-const rooms = [
-  { id: "room-01", label: ">_ boot" },
-  { id: "room-02", label: "~/home" },
-  { id: "room-03", label: "./builds" },
-  { id: "room-04", label: "~/peeranimo" },
-  { id: "room-05", label: "./work-with-me" },
-  { id: "room-06", label: ">_ contact" },
+type ScrollNavItem = {
+  kind: "scroll";
+  id: string;
+  label: string;
+};
+
+type LinkNavItem = {
+  kind: "link";
+  href: string;
+  label: string;
+};
+
+type NavItem = ScrollNavItem | LinkNavItem;
+
+const navItems: NavItem[] = [
+  { kind: "scroll", id: "room-01", label: ">_ boot" },
+  { kind: "scroll", id: "room-02", label: "~/home" },
+  { kind: "scroll", id: "room-03", label: "./builds" },
+  { kind: "scroll", id: "room-04", label: "~/peeranimo" },
+  { kind: "link", href: "/builds/orivela", label: "Orivela" },
+  { kind: "scroll", id: "room-05", label: "./work-with-me" },
+  { kind: "scroll", id: "room-06", label: ">_ contact" },
 ];
 
 const labelStyle = {
@@ -17,16 +33,26 @@ const labelStyle = {
 };
 
 interface NavBubblesProps {
-  activeRoom: string;
+  activeRoom?: string;
 }
 
 function NavRoomItems({
   activeRoom,
+  pathname,
   onSelect,
 }: {
   activeRoom: string;
-  onSelect: (id: string) => void;
+  pathname: string;
+  onSelect: (item: NavItem) => void;
 }) {
+  const isActive = (item: NavItem) => {
+    if (item.kind === "link") {
+      return pathname === item.href || pathname.startsWith(`${item.href}/`);
+    }
+
+    return pathname === "/" && activeRoom === item.id;
+  };
+
   return (
     <>
       <div
@@ -34,22 +60,23 @@ function NavRoomItems({
         style={{ background: "#CCC" }}
       />
 
-      {rooms.map((room) => {
-        const isActive = activeRoom === room.id;
+      {navItems.map((item) => {
+        const active = isActive(item);
+        const key = item.kind === "link" ? item.href : item.id;
 
         return (
           <button
-            key={room.id}
+            key={key}
             type="button"
-            onClick={() => onSelect(room.id)}
+            onClick={() => onSelect(item)}
             className="group flex w-full cursor-pointer items-center gap-3 border-none bg-transparent py-1 text-left"
-            aria-current={isActive ? "page" : undefined}
+            aria-current={active ? "page" : undefined}
           >
             <span
               className="relative z-10 h-8 w-8 shrink-0 rounded-full transition-transform group-hover:scale-110"
               style={{
-                background: isActive ? "var(--orange)" : "transparent",
-                border: isActive ? "none" : "1px solid #CCC",
+                background: active ? "var(--orange)" : "transparent",
+                border: active ? "none" : "1px solid #CCC",
               }}
               aria-hidden="true"
             />
@@ -58,10 +85,10 @@ function NavRoomItems({
               className="whitespace-nowrap"
               style={{
                 ...labelStyle,
-                color: isActive ? "var(--orange)" : "#888",
+                color: active ? "var(--orange)" : "#888",
               }}
             >
-              {isActive ? `${room.label} ← aktiv` : room.label}
+              {active ? `${item.label} ← aktiv` : item.label}
             </span>
           </button>
         );
@@ -70,31 +97,38 @@ function NavRoomItems({
   );
 }
 
-export default function NavBubbles({ activeRoom }: NavBubblesProps) {
+export default function NavBubbles({ activeRoom = "" }: NavBubblesProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const handleClick = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const handleSelect = (item: NavItem) => {
+    if (item.kind === "link") {
+      router.push(item.href);
+    } else if (pathname === "/") {
+      document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push(`/#${item.id}`);
+    }
 
-  const handleNav = (id: string) => {
-    handleClick(id);
     setMenuOpen(false);
   };
 
   return (
     <>
-      {/* Desktop navigation */}
       <nav
         className="nav-bubbles-desktop fixed right-6 top-1/2 z-50 -translate-y-1/2"
         aria-label="Room navigation"
       >
         <div className="relative flex flex-col">
-          <NavRoomItems activeRoom={activeRoom} onSelect={handleClick} />
+          <NavRoomItems
+            activeRoom={activeRoom}
+            pathname={pathname}
+            onSelect={handleSelect}
+          />
         </div>
       </nav>
 
-      {/* Mobile / tablet — collapsible bubble list */}
       <div className="nav-mobile">
         <button
           type="button"
@@ -112,7 +146,11 @@ export default function NavBubbles({ activeRoom }: NavBubblesProps) {
             aria-label="Mobile room navigation"
           >
             <div className="relative flex flex-col">
-              <NavRoomItems activeRoom={activeRoom} onSelect={handleNav} />
+              <NavRoomItems
+                activeRoom={activeRoom}
+                pathname={pathname}
+                onSelect={handleSelect}
+              />
             </div>
           </nav>
         )}
