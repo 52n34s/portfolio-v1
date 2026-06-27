@@ -1803,6 +1803,15 @@ body {
   font-size: 11px;
 }
 
+/* Room 03b — ./orivela */
+.room-03b {
+  width: 100vw;
+  min-height: 100vh;
+  background: #0e0b1a;
+  position: relative;
+  overflow: hidden;
+}
+
 /* Orivela build page — mirrors Room 04 layout */
 .orivela-room {
   --orivela-accent: #a78bfa;

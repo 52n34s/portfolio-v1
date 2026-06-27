@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import NavBubbles from "@/components/NavBubbles";
 import Room02 from "@/components/Room02";
 import Room03 from "@/components/Room03";
+import OrivelaBuild from "@/components/OrivelaBuild";
 import Room04 from "@/components/Room04";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
@@ -166,6 +167,7 @@ export default function Home() {
       "room-01",
       "room-02",
       "room-03",
+      "room-03b",
       "room-04",
       "room-05",
       "room-06",
@@ -262,6 +264,11 @@ export default function Home() {
 
       <Room02 visible={room02Visible} />
       <Room03 visible={room03Visible} />
+
+      <section id="room-03b" className="room-03b">
+        <OrivelaBuild />
+      </section>
+
       <Room04 visible={room04Visible} />
       <Room05 />
       <Room06 />

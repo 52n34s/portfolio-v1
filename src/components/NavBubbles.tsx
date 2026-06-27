@@ -21,8 +21,8 @@ const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: ">_ boot" },
   { kind: "scroll", id: "room-02", label: "~/home" },
   { kind: "scroll", id: "room-03", label: "./builds" },
+  { kind: "scroll", id: "room-03b", label: "./orivela" },
   { kind: "scroll", id: "room-04", label: "~/peeranimo" },
-  { kind: "scroll", id: "room-03", label: "Orivela" },
   { kind: "scroll", id: "room-05", label: "./work-with-me" },
   { kind: "scroll", id: "room-06", label: ">_ contact" },
 ];
@@ -62,7 +62,7 @@ function NavRoomItems({
 
       {navItems.map((item) => {
         const active = isActive(item);
-        const key = item.kind === "link" ? item.href : item.id;
+        const key = item.kind === "link" ? item.href : `${item.id}-${item.label}`;
 
         return (
           <button
