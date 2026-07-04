@@ -21,11 +21,77 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Steffen — 52n34s.com",
-  description: "Personal portfolio of Steffen",
+  title: "Steffen — Founder · Developer · Berlin Mitte",
+  description:
+    "I build businesses, not just software. Founder of Peeranimo and Orivela. Based in Berlin Mitte. 10+ platforms self-built and shipped.",
+  keywords: [
+    "Steffen",
+    "Founder Berlin",
+    "Developer Berlin Mitte",
+    "Peeranimo",
+    "Orivela",
+    "Indie Founder",
+    "Software Developer Berlin",
+  ],
+  authors: [{ name: "Steffen" }],
+  creator: "Steffen",
+  metadataBase: new URL("https://52n34s.app"),
+  alternates: {
+    canonical: "https://52n34s.app",
+  },
   icons: {
     icon: "/favicon.png",
   },
+  openGraph: {
+    title: "Steffen — Founder · Developer · Berlin Mitte",
+    description:
+      "I build businesses, not just software. Founder of Peeranimo and Orivela.",
+    url: "https://52n34s.app",
+    siteName: "Steffen — 52N34S",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Steffen — Founder · Developer · Berlin Mitte",
+    description:
+      "I build businesses, not just software. Founder of Peeranimo and Orivela.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Steffen",
+  jobTitle: "Founder & Developer",
+  description:
+    "I build businesses, not just software. Indie founder and developer based in Berlin Mitte. Creator of Peeranimo and Orivela.",
+  url: "https://52n34s.app",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Berlin Mitte",
+    addressCountry: "DE",
+  },
+  sameAs: [
+    "https://orivela.app",
+    "https://peeranimo.com",
+    "https://github.com/52n34s",
+  ],
+  knowsAbout: [
+    "Software Development",
+    "Product Design",
+    "Indie Hacking",
+    "iOS Development",
+    "Community Building",
+  ],
 };
 
 export default function RootLayout({
@@ -44,7 +110,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

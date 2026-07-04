@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://52n34s.app/sitemap.xml

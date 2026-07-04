@@ -16,20 +16,49 @@ const FILLED_BLOCKS = 4;
 const PAUSE_AFTER_PROMPT = 240;
 const PAUSE_SHORT = 160;
 const PAUSE_PROGRESS = 120;
-const PAUSE_BEFORE_BUTTON = 480;
 
-const BOOT_APPS = [
+type BootAppIcon =
+  | {
+      name: string;
+      sectionId: string;
+      kind: "image";
+      src: string;
+    }
+  | {
+      name: string;
+      sectionId: string;
+      kind: "builds";
+    }
+  | {
+      name: string;
+      sectionId: string;
+      kind: "start";
+    };
+
+const BOOT_APPS: BootAppIcon[] = [
   {
     name: "Orivela",
     sectionId: "room-03b",
+    kind: "image",
     src: "/app-logo-orivela.png",
   },
   {
     name: "Peeranimo",
     sectionId: "room-04",
+    kind: "image",
     src: "/app-logo-peeranimo.webp",
   },
-] as const;
+  {
+    name: "Builds",
+    sectionId: "room-03",
+    kind: "builds",
+  },
+  {
+    name: "Start",
+    sectionId: "room-02",
+    kind: "start",
+  },
+];
 
 function sleep(ms: number) {
   return new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -56,7 +85,6 @@ export default function Home() {
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [showCursor, setShowCursor] = useState(false);
   const [showAppIcons, setShowAppIcons] = useState(false);
-  const [showButton, setShowButton] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
   const [activeRoom, setActiveRoom] = useState("room-01");
   const [room02Visible, setRoom02Visible] = useState(false);
@@ -149,8 +177,6 @@ export default function Home() {
       if (cancelled) return;
       setShowCursor(true);
       setShowAppIcons(true);
-      await sleep(PAUSE_BEFORE_BUTTON);
-      if (!cancelled) setShowButton(true);
     }
 
     runSequence();
@@ -199,8 +225,6 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const handleEnter = () => navigateToRoom("room-02");
-
   const monoStyle = {
     fontFamily: "var(--font-jetbrains-mono), monospace",
     fontSize: "14px",
@@ -209,6 +233,15 @@ export default function Home() {
 
   return (
     <>
+      <div className="sr-only">
+        Steffen is a Founder and Developer based in Berlin Mitte, Germany. He
+        builds software products and businesses. He is the founder of Peeranimo,
+        a peer-to-peer community platform for people with unfulfilled dreams,
+        and Orivela, a personal records vault for iOS. His work spans 10+
+        platforms, self-built and shipped to production. He thinks in systems
+        and ships products end to end.
+      </div>
+
       <NavBubbles activeRoom={activeRoom} />
 
       {/* Room 01 — Boot Screen */}
@@ -267,16 +300,6 @@ export default function Home() {
               );
             })}
           </div>
-
-          {showButton && (
-            <button
-              type="button"
-              onClick={handleEnter}
-              className="enter-button enter-button-fade-in mt-8"
-            >
-              {"> ssh steffen@berlin"}
-            </button>
-          )}
         </div>
 
         {showAppIcons && (
@@ -288,13 +311,23 @@ export default function Home() {
                 onClick={() => navigateToRoom(app.sectionId)}
                 className="boot-app-icon-link"
               >
-                <Image
-                  src={app.src}
-                  alt={app.name}
-                  width={72}
-                  height={72}
-                  className="boot-app-icon-img"
-                />
+                {app.kind === "image" ? (
+                  <Image
+                    src={app.src}
+                    alt={app.name}
+                    width={72}
+                    height={72}
+                    className="boot-app-icon-img"
+                  />
+                ) : app.kind === "builds" ? (
+                  <span className="boot-app-icon-solid boot-app-icon-mono">
+                    &gt;_
+                  </span>
+                ) : (
+                  <span className="boot-app-icon-solid boot-app-icon-play" aria-hidden="true">
+                    ▶
+                  </span>
+                )}
                 <span className="boot-app-icon-label">{app.name}</span>
               </button>
             ))}
