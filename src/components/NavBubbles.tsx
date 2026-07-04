@@ -138,27 +138,22 @@ function NavRoomItems({
 }
 
 export default function NavBubbles() {
+  const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollActiveRoom, setScrollActiveRoom] = useState("room-01");
   const pathname = usePathname();
   const router = useRouter();
-
   const path = normalizePathname(pathname);
 
-  console.log("[NavBubbles render] pathname:", pathname);
-  console.log(
-    "[NavBubbles render] ROUTE_ACTIVE_LABEL lookup:",
-    ROUTE_ACTIVE_LABEL[pathname],
-  );
-  console.log("[NavBubbles] normalized:", path);
-  console.log(
-    "[NavBubbles render] ROUTE_ACTIVE_LABEL normalized lookup:",
-    ROUTE_ACTIVE_LABEL[path],
-  );
-
-  const activeRoom = path === "/" ? scrollActiveRoom : "";
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!mounted) {
+      return;
+    }
+
     if (path !== "/") {
       setScrollActiveRoom("");
       return;
@@ -181,7 +176,24 @@ export default function NavBubbles() {
     });
 
     return () => observer.disconnect();
-  }, [path]);
+  }, [mounted, path]);
+
+  if (!mounted) {
+    return null;
+  }
+
+  console.log("[NavBubbles render] pathname:", pathname);
+  console.log(
+    "[NavBubbles render] ROUTE_ACTIVE_LABEL lookup:",
+    ROUTE_ACTIVE_LABEL[pathname],
+  );
+  console.log("[NavBubbles] normalized:", path);
+  console.log(
+    "[NavBubbles render] ROUTE_ACTIVE_LABEL normalized lookup:",
+    ROUTE_ACTIVE_LABEL[path],
+  );
+
+  const activeRoom = path === "/" ? scrollActiveRoom : "";
 
   const handleSelect = (item: NavItem) => {
     if (item.kind === "link") {
