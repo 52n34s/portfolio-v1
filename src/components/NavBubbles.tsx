@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 type ScrollNavItem = {
   kind: "scroll";
@@ -66,14 +66,11 @@ function shouldShowNav(pathname: string): boolean {
 
 function isNavItemActive(
   item: NavItem,
-  pathname: string,
+  activeLabel: string | null,
   activeRoom: string,
 ): boolean {
-  const path = normalizePathname(pathname);
-
-  if (path !== "/") {
-    const label = ROUTE_ACTIVE_LABEL[path];
-    return label !== undefined && item.label === label;
+  if (activeLabel !== null) {
+    return item.label === activeLabel;
   }
 
   return item.kind === "scroll" && activeRoom === item.id;
@@ -85,11 +82,11 @@ const labelStyle = {
 };
 
 function NavRoomItems({
-  pathname,
+  activeLabel,
   activeRoom,
   onSelect,
 }: {
-  pathname: string;
+  activeLabel: string | null;
   activeRoom: string;
   onSelect: (item: NavItem) => void;
 }) {
@@ -101,7 +98,7 @@ function NavRoomItems({
       />
 
       {navItems.map((item) => {
-        const active = isNavItemActive(item, pathname, activeRoom);
+        const active = isNavItemActive(item, activeLabel, activeRoom);
         const key = item.kind === "link" ? item.href : `${item.id}-${item.label}`;
 
         return (
@@ -138,22 +135,20 @@ function NavRoomItems({
 }
 
 export default function NavBubbles() {
-  const [mounted, setMounted] = useState(false);
+  const rawPathname = usePathname();
+  const [pathname, setPathname] = useState("/");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollActiveRoom, setScrollActiveRoom] = useState("room-01");
-  const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setPathname(rawPathname);
+  }, [rawPathname]);
+
   const path = normalizePathname(pathname);
+  const activeLabel = path === "/" ? null : (ROUTE_ACTIVE_LABEL[path] ?? null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) {
-      return;
-    }
-
     if (path !== "/") {
       setScrollActiveRoom("");
       return;
@@ -176,22 +171,7 @@ export default function NavBubbles() {
     });
 
     return () => observer.disconnect();
-  }, [mounted, path]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  console.log("[NavBubbles render] pathname:", pathname);
-  console.log(
-    "[NavBubbles render] ROUTE_ACTIVE_LABEL lookup:",
-    ROUTE_ACTIVE_LABEL[pathname],
-  );
-  console.log("[NavBubbles] normalized:", path);
-  console.log(
-    "[NavBubbles render] ROUTE_ACTIVE_LABEL normalized lookup:",
-    ROUTE_ACTIVE_LABEL[path],
-  );
+  }, [path]);
 
   const activeRoom = path === "/" ? scrollActiveRoom : "";
 
@@ -221,7 +201,7 @@ export default function NavBubbles() {
       >
         <div className="relative flex flex-col">
           <NavRoomItems
-            pathname={pathname}
+            activeLabel={activeLabel}
             activeRoom={activeRoom}
             onSelect={handleSelect}
           />
@@ -246,7 +226,7 @@ export default function NavBubbles() {
           >
             <div className="relative flex flex-col">
               <NavRoomItems
-                pathname={pathname}
+                activeLabel={activeLabel}
                 activeRoom={activeRoom}
                 onSelect={handleSelect}
               />
