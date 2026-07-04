@@ -2,24 +2,24 @@ import Link from "next/link";
 
 const OUTCOMES = [
   {
-    icon: "⌕",
+    icon: "🔍",
     title: "Find anything in seconds",
-    body: "Ask in plain language — no folders, no scrolling.",
+    body: '"Where\'s my car registration?" — asked, answered.',
   },
   {
     icon: "📄",
-    title: "Scan any document",
-    body: "Point your camera at a PDF or receipt. AI extracts and files it.",
+    title: "Not just files. Everything.",
+    body: "Subscriptions, passport, lease, that paper in your drawer — all in one place.",
   },
   {
-    icon: "🔐",
+    icon: "🔒",
     title: "Only you can read it",
-    body: "Encrypted on-device with WebCrypto before it ever leaves your phone.",
+    body: "Encrypted on-device before it ever leaves your phone.",
   },
   {
-    icon: "✦",
+    icon: "🤖",
     title: "AI that knows your life",
-    body: "Contextual search across your vault — not just keyword matching.",
+    body: "Ask in plain language. No folders, no scrolling, no guessing.",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function OrivelaBuild() {
             <dl className="orivela-room-meta">
               <div className="orivela-room-meta-item">
                 <dt>Platform</dt>
-                <dd>iOS</dd>
+                <dd>iOS & Android</dd>
               </div>
               <div className="orivela-room-meta-item">
                 <dt>Role</dt>
@@ -192,9 +192,7 @@ export default function OrivelaBuild() {
         </div>
       </section>
 
-      {/* Dream outcomes — 2×2 grid */}
       <section className="orivela-room-section">
-        <h2 className="orivela-room-section-title">Dream outcomes</h2>
         <div className="orivela-room-outcomes">
           {OUTCOMES.map((outcome) => (
             <article key={outcome.title} className="orivela-room-outcome">
