@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ScrollNavItem = {
   kind: "scroll";
@@ -18,22 +18,11 @@ type LinkNavItem = {
 
 type NavItem = ScrollNavItem | LinkNavItem;
 
-function getItemHref(item: NavItem): string | undefined {
-  return item.kind === "link" ? item.href : item.href;
-}
-
-function isNavItemActive(
-  item: NavItem,
-  pathname: string,
-  activeRoom: string,
-): boolean {
-  if (pathname === "/") {
-    return item.kind === "scroll" && activeRoom === item.id;
-  }
-
-  const href = getItemHref(item);
-  return href === pathname;
-}
+const ROUTE_ACTIVE_LABEL: Record<string, string> = {
+  "/builds/orivela": "./orivela",
+  "/builds/peeranimo": "~/peeranimo",
+  "/builds": "./builds",
+};
 
 const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: ">_ boot" },
@@ -55,26 +44,55 @@ const navItems: NavItem[] = [
   { kind: "scroll", id: "room-06", label: ">_ contact" },
 ];
 
+const ROOM_IDS = [
+  "room-01",
+  "room-02",
+  "room-03",
+  "room-03b",
+  "room-04",
+  "room-05",
+  "room-06",
+];
+
+function normalizePathname(pathname: string): string {
+  if (!pathname || pathname === "/") return "/";
+  return pathname.replace(/\/+$/, "");
+}
+
+function shouldShowNav(pathname: string): boolean {
+  const path = normalizePathname(pathname);
+  return path === "/" || path in ROUTE_ACTIVE_LABEL;
+}
+
+function isNavItemActive(
+  item: NavItem,
+  pathname: string,
+  activeRoom: string,
+): boolean {
+  const path = normalizePathname(pathname);
+
+  if (path !== "/") {
+    const label = ROUTE_ACTIVE_LABEL[path];
+    return label !== undefined && item.label === label;
+  }
+
+  return item.kind === "scroll" && activeRoom === item.id;
+}
+
 const labelStyle = {
   fontFamily: "var(--font-jetbrains-mono), monospace",
   fontSize: "11px",
 };
 
-interface NavBubblesProps {
-  activeRoom?: string;
-}
-
 function NavRoomItems({
-  activeRoom,
   pathname,
+  activeRoom,
   onSelect,
 }: {
-  activeRoom: string;
   pathname: string;
+  activeRoom: string;
   onSelect: (item: NavItem) => void;
 }) {
-  const scrollActiveRoom = pathname === "/" ? activeRoom : "";
-
   return (
     <>
       <div
@@ -83,7 +101,7 @@ function NavRoomItems({
       />
 
       {navItems.map((item) => {
-        const active = isNavItemActive(item, pathname, scrollActiveRoom);
+        const active = isNavItemActive(item, pathname, activeRoom);
         const key = item.kind === "link" ? item.href : `${item.id}-${item.label}`;
 
         return (
@@ -119,17 +137,58 @@ function NavRoomItems({
   );
 }
 
-export default function NavBubbles({ activeRoom = "" }: NavBubblesProps) {
+export default function NavBubbles() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollActiveRoom, setScrollActiveRoom] = useState("room-01");
   const pathname = usePathname();
   const router = useRouter();
+
+  const path = normalizePathname(pathname);
+
+  console.log("[NavBubbles render] pathname:", pathname);
+  console.log(
+    "[NavBubbles render] ROUTE_ACTIVE_LABEL lookup:",
+    ROUTE_ACTIVE_LABEL[pathname],
+  );
+  console.log("[NavBubbles] normalized:", path);
+  console.log(
+    "[NavBubbles render] ROUTE_ACTIVE_LABEL normalized lookup:",
+    ROUTE_ACTIVE_LABEL[path],
+  );
+
+  const activeRoom = path === "/" ? scrollActiveRoom : "";
+
+  useEffect(() => {
+    if (path !== "/") {
+      setScrollActiveRoom("");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setScrollActiveRoom(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    ROOM_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [path]);
 
   const handleSelect = (item: NavItem) => {
     if (item.kind === "link") {
       router.push(item.href);
-    } else if (pathname === "/") {
+    } else if (path === "/") {
       document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
-    } else if (item.href) {
+    } else if (item.kind === "scroll" && item.href) {
       router.push(item.href);
     } else {
       router.push(`/#${item.id}`);
@@ -137,6 +196,10 @@ export default function NavBubbles({ activeRoom = "" }: NavBubblesProps) {
 
     setMenuOpen(false);
   };
+
+  if (!shouldShowNav(pathname)) {
+    return null;
+  }
 
   return (
     <>
@@ -146,8 +209,8 @@ export default function NavBubbles({ activeRoom = "" }: NavBubblesProps) {
       >
         <div className="relative flex flex-col">
           <NavRoomItems
-            activeRoom={activeRoom}
             pathname={pathname}
+            activeRoom={activeRoom}
             onSelect={handleSelect}
           />
         </div>
@@ -171,8 +234,8 @@ export default function NavBubbles({ activeRoom = "" }: NavBubblesProps) {
           >
             <div className="relative flex flex-col">
               <NavRoomItems
-                activeRoom={activeRoom}
                 pathname={pathname}
+                activeRoom={activeRoom}
                 onSelect={handleSelect}
               />
             </div>

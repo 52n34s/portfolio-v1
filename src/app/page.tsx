@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import NavBubbles from "@/components/NavBubbles";
 import Room02 from "@/components/Room02";
 import Room03 from "@/components/Room03";
 import OrivelaBuild from "@/components/OrivelaBuild";
@@ -240,8 +239,6 @@ export default function Home() {
         platforms, self-built and shipped to production. He thinks in systems
         and ships products end to end.
       </div>
-
-      <NavBubbles activeRoom={activeRoom} />
 
       {/* Room 01 — Boot Screen */}
       <section
