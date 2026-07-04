@@ -41,21 +41,27 @@ const RECORDS = [
     category: "Documents",
     categoryColor: "#5DCAA5",
     categoryBg: "rgba(29,158,117,0.2)",
-    date: "12 Jan 2026",
+    subtitle:
+      "Passport number: C3X8821K. Issued: June 2021. Expires: June 2031.",
+    date: "Jun 27, 2026",
   },
   {
     title: "Adobe Creative Cloud",
     category: "Finance",
     categoryColor: "#FAC775",
     categoryBg: "rgba(239,159,39,0.18)",
-    date: "03 Feb 2026",
+    subtitle:
+      "Plan: Complete. Price: €89/month. Renewal: automatically every 15th.",
+    date: "Jun 27, 2026",
   },
   {
-    title: "Apartment Emergency Contacts",
+    title: "Apartment — Emergency Contacts",
     category: "Home",
     categoryColor: "#85B7EB",
     categoryBg: "rgba(55,138,221,0.18)",
-    date: "18 Feb 2026",
+    subtitle:
+      "Landlord: Thomas Müller, 0172 443 8821. Building manager: Hausverwaltung Bergmann.",
+    date: "Jun 27, 2026",
   },
 ];
 
@@ -144,11 +150,9 @@ export default function OrivelaBuild() {
               <div className="orivela-phone-island" aria-hidden="true" />
               <div className="orivela-phone-screen">
                 <div className="orivela-app-header">
-                  <span className="orivela-app-logo">🦜</span>
-                  <div>
-                    <p className="orivela-app-greeting">Good afternoon</p>
-                    <p className="orivela-app-title">Orivela</p>
-                  </div>
+                  <p className="orivela-app-brand">🦜 Orivela</p>
+                  <p className="orivela-app-greeting">Good evening</p>
+                  <p className="orivela-app-count">5 records saved</p>
                 </div>
 
                 <div className="orivela-search">
@@ -156,26 +160,29 @@ export default function OrivelaBuild() {
                     ⌕
                   </span>
                   <span className="orivela-search-placeholder">
-                    Ask anything about your records…
+                    Ask a question or search your records...
                   </span>
                 </div>
+
+                <p className="orivela-recent-label">Recent</p>
 
                 <ul className="orivela-records">
                   {RECORDS.map((record) => (
                     <li key={record.title} className="orivela-record">
-                      <div className="orivela-record-main">
+                      <div className="orivela-record-top">
                         <p className="orivela-record-title">{record.title}</p>
-                        <span
-                          className="orivela-record-tag"
-                          style={{
-                            color: record.categoryColor,
-                            background: record.categoryBg,
-                          }}
-                        >
-                          {record.category}
-                        </span>
+                        <span className="orivela-record-date">{record.date}</span>
                       </div>
-                      <span className="orivela-record-date">{record.date}</span>
+                      <span
+                        className="orivela-record-tag"
+                        style={{
+                          color: record.categoryColor,
+                          background: record.categoryBg,
+                        }}
+                      >
+                        {record.category}
+                      </span>
+                      <p className="orivela-record-subtitle">{record.subtitle}</p>
                     </li>
                   ))}
                 </ul>
