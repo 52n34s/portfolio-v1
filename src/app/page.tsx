@@ -320,12 +320,15 @@ export default function Home() {
                     className="boot-app-icon-img"
                   />
                 ) : app.kind === "builds" ? (
-                  <span className="boot-app-icon-solid boot-app-icon-mono">
-                    &gt;_
+                  <span className="boot-app-icon-solid boot-app-icon-builds">
+                    <span className="boot-app-icon-builds-line1">&gt;_</span>
+                    <span className="boot-app-icon-builds-line2">builds</span>
                   </span>
                 ) : (
-                  <span className="boot-app-icon-solid boot-app-icon-play" aria-hidden="true">
-                    ▶
+                  <span className="boot-app-icon-solid boot-app-icon-start" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="white" width="30" height="30">
+                      <polygon points="6,4 20,12 6,20" />
+                    </svg>
                   </span>
                 )}
                 <span className="boot-app-icon-label">{app.name}</span>

@@ -18,38 +18,39 @@ type LinkNavItem = {
 
 type NavItem = ScrollNavItem | LinkNavItem;
 
-function matchesPath(pathname: string, href: string) {
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
 function getItemHref(item: NavItem): string | undefined {
   return item.kind === "link" ? item.href : item.href;
 }
 
-function isNavItemActive(item: NavItem, pathname: string, activeRoom: string) {
+function isNavItemActive(
+  item: NavItem,
+  pathname: string,
+  activeRoom: string,
+): boolean {
+  if (pathname === "/") {
+    return item.kind === "scroll" && activeRoom === item.id;
+  }
+
   const href = getItemHref(item);
-  if (href && matchesPath(pathname, href)) {
-    return true;
-  }
-
-  if (item.kind === "scroll" && pathname === "/") {
-    return activeRoom === item.id;
-  }
-
-  return false;
+  return href === pathname;
 }
 
 const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: ">_ boot" },
   { kind: "scroll", id: "room-02", label: "~/home" },
-  { kind: "scroll", id: "room-03", label: "./builds" },
+  { kind: "scroll", id: "room-03", label: "./builds", href: "/builds" },
   {
     kind: "scroll",
     id: "room-03b",
     label: "./orivela",
     href: "/builds/orivela",
   },
-  { kind: "scroll", id: "room-04", label: "~/peeranimo" },
+  {
+    kind: "scroll",
+    id: "room-04",
+    label: "~/peeranimo",
+    href: "/builds/peeranimo",
+  },
   { kind: "scroll", id: "room-05", label: "./work-with-me" },
   { kind: "scroll", id: "room-06", label: ">_ contact" },
 ];
@@ -72,7 +73,7 @@ function NavRoomItems({
   pathname: string;
   onSelect: (item: NavItem) => void;
 }) {
-  const isActive = (item: NavItem) => isNavItemActive(item, pathname, activeRoom);
+  const scrollActiveRoom = pathname === "/" ? activeRoom : "";
 
   return (
     <>
@@ -82,7 +83,7 @@ function NavRoomItems({
       />
 
       {navItems.map((item) => {
-        const active = isActive(item);
+        const active = isNavItemActive(item, pathname, scrollActiveRoom);
         const key = item.kind === "link" ? item.href : `${item.id}-${item.label}`;
 
         return (
