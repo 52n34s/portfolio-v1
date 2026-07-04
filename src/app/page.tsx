@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import NavBubbles from "@/components/NavBubbles";
 import Room02 from "@/components/Room02";
@@ -12,6 +14,19 @@ import Room06 from "@/components/Room06";
 const CHAR_DELAY = 35;
 const TOTAL_BLOCKS = 6;
 const FILLED_BLOCKS = 4;
+
+const BOOT_APPS = [
+  {
+    name: "Orivela",
+    href: "/builds/orivela",
+    src: "/app-logo-orivela.png",
+  },
+  {
+    name: "Peeranimo",
+    href: "/builds/peeranimo",
+    src: "/app-logo-peeranimo.webp",
+  },
+] as const;
 
 function sleep(ms: number) {
   return new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -37,6 +52,7 @@ type TerminalLine =
 export default function Home() {
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [showCursor, setShowCursor] = useState(false);
+  const [showAppIcons, setShowAppIcons] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
   const [activeRoom, setActiveRoom] = useState("room-01");
@@ -131,6 +147,7 @@ export default function Home() {
       });
       if (cancelled) return;
       setShowCursor(true);
+      setShowAppIcons(true);
       await sleep(600);
       if (!cancelled) setShowButton(true);
     }
@@ -249,6 +266,23 @@ export default function Home() {
               );
             })}
           </div>
+
+          {showAppIcons && (
+            <div className="boot-app-icons boot-app-icons-fade-in">
+              {BOOT_APPS.map((app) => (
+                <Link key={app.name} href={app.href} className="boot-app-icon-link">
+                  <Image
+                    src={app.src}
+                    alt={app.name}
+                    width={72}
+                    height={72}
+                    className="boot-app-icon-img"
+                  />
+                  <span className="boot-app-icon-label">{app.name}</span>
+                </Link>
+              ))}
+            </div>
+          )}
 
           {showButton && (
             <button

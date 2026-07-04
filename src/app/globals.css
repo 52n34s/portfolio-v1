@@ -99,6 +99,63 @@ body {
   animation: buttonFadeIn 400ms ease-out forwards;
 }
 
+.boot-app-icons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  margin-top: 2rem;
+}
+
+.boot-app-icons-fade-in {
+  animation: bootAppIconsFadeIn 400ms ease-out forwards;
+}
+
+@keyframes bootAppIconsFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boot-app-icon-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 200ms ease;
+}
+
+.boot-app-icon-link:hover {
+  transform: scale(1.04);
+}
+
+.boot-app-icon-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 22%;
+  object-fit: cover;
+}
+
+.boot-app-icon-label {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  color: #f5f0e8;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .boot-app-icon-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 @keyframes buttonFadeIn {
   from {
     opacity: 0;
