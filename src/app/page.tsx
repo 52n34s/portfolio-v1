@@ -10,12 +10,12 @@ import Room04 from "@/components/Room04";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
 
-const CHAR_DELAY = 28;
+const CHAR_DELAY = 22;
 const TOTAL_BLOCKS = 6;
 const FILLED_BLOCKS = 4;
-const PAUSE_AFTER_PROMPT = 240;
-const PAUSE_SHORT = 160;
-const PAUSE_PROGRESS = 120;
+const PAUSE_AFTER_PROMPT = 192;
+const PAUSE_SHORT = 128;
+const PAUSE_PROGRESS = 96;
 
 type BootAppIcon =
   | {
@@ -156,7 +156,6 @@ export default function Home() {
         "> mounting Berlin studio... done ",
         "> brewing next big idea... done ",
         "> questioning everything... done ",
-        "> starting peeranimo... done ",
       ];
 
       for (const doneText of doneLines) {
@@ -326,9 +325,7 @@ export default function Home() {
                   </span>
                 ) : (
                   <span className="boot-app-icon-solid boot-app-icon-start" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="white" width="30" height="30">
-                      <polygon points="6,4 20,12 6,20" />
-                    </svg>
+                    <span className="boot-app-icon-start-arrow">→</span>
                   </span>
                 )}
                 <span className="boot-app-icon-label">{app.name}</span>
