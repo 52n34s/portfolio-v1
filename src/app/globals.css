@@ -127,7 +127,10 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  text-decoration: none;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
   transition: transform 200ms ease;
 }
 
@@ -145,7 +148,7 @@ body {
 .boot-app-icon-label {
   font-family: var(--font-inter), sans-serif;
   font-size: 11px;
-  color: #f5f0e8;
+  color: #1a1a1a;
   line-height: 1.2;
 }
 

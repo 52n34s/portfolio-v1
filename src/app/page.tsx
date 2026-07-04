@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import NavBubbles from "@/components/NavBubbles";
 import Room02 from "@/components/Room02";
@@ -11,19 +10,23 @@ import Room04 from "@/components/Room04";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
 
-const CHAR_DELAY = 35;
+const CHAR_DELAY = 28;
 const TOTAL_BLOCKS = 6;
 const FILLED_BLOCKS = 4;
+const PAUSE_AFTER_PROMPT = 240;
+const PAUSE_SHORT = 160;
+const PAUSE_PROGRESS = 120;
+const PAUSE_BEFORE_BUTTON = 480;
 
 const BOOT_APPS = [
   {
     name: "Orivela",
-    href: "/builds/orivela",
+    sectionId: "room-03b",
     src: "/app-logo-orivela.png",
   },
   {
     name: "Peeranimo",
-    href: "/builds/peeranimo",
+    sectionId: "room-04",
     src: "/app-logo-peeranimo.webp",
   },
 ] as const;
@@ -85,14 +88,14 @@ export default function Home() {
         if (!cancelled) updateLastLine({ kind: "prompt", content });
       });
       if (cancelled) return;
-      await sleep(300);
+      await sleep(PAUSE_AFTER_PROMPT);
 
       addLine({ kind: "text", content: "" });
-      await typeText("> initializing...", (content) => {
+      await typeText("> initializing Steffen...", (content) => {
         if (!cancelled) updateLastLine({ kind: "text", content });
       });
       if (cancelled) return;
-      await sleep(200);
+      await sleep(PAUSE_SHORT);
 
       addLine({ kind: "loading", content: "", filledBlocks: 0, showBlocks: false });
       const loadingPrefix = "> loading identity... ";
@@ -106,7 +109,7 @@ export default function Home() {
           });
       });
       if (cancelled) return;
-      await sleep(200);
+      await sleep(PAUSE_SHORT);
 
       for (let b = 1; b <= FILLED_BLOCKS; b++) {
         if (cancelled) return;
@@ -116,30 +119,28 @@ export default function Home() {
           filledBlocks: b,
           showBlocks: true,
         });
-        await sleep(150);
+        await sleep(PAUSE_PROGRESS);
       }
       if (cancelled) return;
-      await sleep(200);
+      await sleep(PAUSE_SHORT);
 
-      addLine({ kind: "text", content: "", checkmark: false });
-      const mountingText = "> mounting projects... done ";
-      await typeText(mountingText, (content) => {
-        if (!cancelled)
-          updateLastLine({ kind: "text", content, checkmark: false });
-      });
-      if (cancelled) return;
-      updateLastLine({ kind: "text", content: mountingText, checkmark: true });
-      await sleep(200);
+      const doneLines = [
+        "> mounting Berlin studio... done ",
+        "> brewing next big idea... done ",
+        "> questioning everything... done ",
+        "> starting peeranimo... done ",
+      ];
 
-      addLine({ kind: "text", content: "", checkmark: false });
-      const peeranimoText = "> starting peeranimo... done ";
-      await typeText(peeranimoText, (content) => {
-        if (!cancelled)
-          updateLastLine({ kind: "text", content, checkmark: false });
-      });
-      if (cancelled) return;
-      updateLastLine({ kind: "text", content: peeranimoText, checkmark: true });
-      await sleep(200);
+      for (const doneText of doneLines) {
+        addLine({ kind: "text", content: "", checkmark: false });
+        await typeText(doneText, (content) => {
+          if (!cancelled)
+            updateLastLine({ kind: "text", content, checkmark: false });
+        });
+        if (cancelled) return;
+        updateLastLine({ kind: "text", content: doneText, checkmark: true });
+        await sleep(PAUSE_SHORT);
+      }
 
       addLine({ kind: "ready", content: "" });
       await typeText("> ready.", (content) => {
@@ -148,7 +149,7 @@ export default function Home() {
       if (cancelled) return;
       setShowCursor(true);
       setShowAppIcons(true);
-      await sleep(600);
+      await sleep(PAUSE_BEFORE_BUTTON);
       if (!cancelled) setShowButton(true);
     }
 
@@ -213,7 +214,7 @@ export default function Home() {
       {/* Room 01 — Boot Screen */}
       <section
         id="room-01"
-        className="grid-bg relative flex min-h-screen items-center justify-center"
+        className="grid-bg relative flex min-h-screen flex-col items-center justify-center"
       >
         <div
           className={`terminal-card ${cardVisible ? "terminal-card-fade-in" : "opacity-0"}`}
@@ -267,23 +268,6 @@ export default function Home() {
             })}
           </div>
 
-          {showAppIcons && (
-            <div className="boot-app-icons boot-app-icons-fade-in">
-              {BOOT_APPS.map((app) => (
-                <Link key={app.name} href={app.href} className="boot-app-icon-link">
-                  <Image
-                    src={app.src}
-                    alt={app.name}
-                    width={72}
-                    height={72}
-                    className="boot-app-icon-img"
-                  />
-                  <span className="boot-app-icon-label">{app.name}</span>
-                </Link>
-              ))}
-            </div>
-          )}
-
           {showButton && (
             <button
               type="button"
@@ -294,6 +278,28 @@ export default function Home() {
             </button>
           )}
         </div>
+
+        {showAppIcons && (
+          <div className="boot-app-icons boot-app-icons-fade-in">
+            {BOOT_APPS.map((app) => (
+              <button
+                key={app.name}
+                type="button"
+                onClick={() => navigateToRoom(app.sectionId)}
+                className="boot-app-icon-link"
+              >
+                <Image
+                  src={app.src}
+                  alt={app.name}
+                  width={72}
+                  height={72}
+                  className="boot-app-icon-img"
+                />
+                <span className="boot-app-icon-label">{app.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
       <Room02 visible={room02Visible} />
