@@ -85,6 +85,7 @@ const personSchema = {
     "https://orivela.app",
     "https://peeranimo.com",
     "https://github.com/52n34s",
+    "https://instagram.com/steffenletsdoit",
   ],
   knowsAbout: [
     "Software Development",
