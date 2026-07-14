@@ -1,27 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const FEATURES = [
   {
-    icon: "📸",
-    title: "Snap. Done.",
-    body: "Point your camera at your plate. Kolibi reads every ingredient separately in seconds.",
+    title: "Snap it. Done.",
+    body: "Kolibi recognizes every ingredient automatically. No database, no typing.",
   },
   {
-    icon: "⚡",
-    title: "No typing. No searching.",
-    body: "No database, no manual logging. Just the answer: am I on track today?",
+    title: "Always know what's left.",
+    body: "Your daily calorie budget at a glance. Remaining today, always visible.",
   },
   {
-    icon: "🎯",
-    title: "Built for real life",
-    body: "Fast food, home cooking, restaurant meals — Kolibi handles all of it.",
+    title: "You stay in control.",
+    body: "Every ingredient. Adjusted in seconds. Add, remove, tweak — your way.",
   },
-];
-
-const FOOD_ITEMS = [
-  { name: "Chicken breast", detail: "140g · 231 kcal" },
-  { name: "Brown rice", detail: "120g · 174 kcal" },
-  { name: "Broccoli", detail: "80g · 28 kcal" },
 ];
 
 const UPWORK_URL =
@@ -31,6 +23,15 @@ export default function KolibiBuild() {
   return (
     <main className="kolibi-room">
       <section className="kolibi-room-hero">
+        <Image
+          src="/koli-happy.png"
+          alt=""
+          width={180}
+          height={180}
+          className="kolibi-room-mascot"
+          aria-hidden="true"
+        />
+
         <div className="kolibi-room-inner">
           <div className="kolibi-room-content">
             <span className="kolibi-room-badge">AI Photo Calorie Tracker</span>
@@ -94,34 +95,25 @@ export default function KolibiBuild() {
           </div>
 
           <div className="kolibi-room-visual">
-            <div className="orivela-phone">
-              <div className="orivela-phone-island" aria-hidden="true" />
-              <div className="kolibi-phone-screen">
-                <div className="kolibi-app-header">
-                  <p className="kolibi-app-brand">🦅 Kolibi</p>
-                  <p className="kolibi-app-greeting">Good afternoon</p>
-                </div>
-
-                <p className="kolibi-app-kcal">496 kcal</p>
-                <p className="kolibi-app-meal">Lunch · high confidence</p>
-
-                <ul className="kolibi-food-list">
-                  {FOOD_ITEMS.map((item) => (
-                    <li key={item.name} className="kolibi-food-card">
-                      <p className="kolibi-food-name">{item.name}</p>
-                      <p className="kolibi-food-detail">{item.detail}</p>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="kolibi-progress">
-                  <div className="kolibi-progress-bar" aria-hidden="true">
-                    <span className="kolibi-progress-fill" />
-                  </div>
-                  <p className="kolibi-progress-label">
-                    Daily goal: 1,840 kcal — 27% tracked
-                  </p>
-                </div>
+            <div className="kolibi-screenshots">
+              <div className="kolibi-screenshot kolibi-screenshot-back">
+                <Image
+                  src="/2.png"
+                  alt="Kolibi dashboard showing remaining calories and today's meals"
+                  width={240}
+                  height={520}
+                  className="kolibi-screenshot-img"
+                />
+              </div>
+              <div className="kolibi-screenshot kolibi-screenshot-front">
+                <Image
+                  src="/1.png"
+                  alt="Kolibi meal editor with ingredient breakdown"
+                  width={260}
+                  height={560}
+                  className="kolibi-screenshot-img"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -132,11 +124,8 @@ export default function KolibiBuild() {
         <div className="kolibi-room-features">
           {FEATURES.map((feature) => (
             <article key={feature.title} className="kolibi-room-feature">
-              <span className="kolibi-room-feature-icon">{feature.icon}</span>
-              <div>
-                <h3 className="kolibi-room-feature-title">{feature.title}</h3>
-                <p className="kolibi-room-feature-body">{feature.body}</p>
-              </div>
+              <h3 className="kolibi-room-feature-title">{feature.title}</h3>
+              <p className="kolibi-room-feature-body">{feature.body}</p>
             </article>
           ))}
         </div>
