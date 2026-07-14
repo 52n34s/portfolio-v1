@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import Room02 from "@/components/Room02";
 import Room03 from "@/components/Room03";
+import KolibiBuild from "@/components/KolibiBuild";
 import OrivelaBuild from "@/components/OrivelaBuild";
 import Room04 from "@/components/Room04";
 import Room05 from "@/components/Room05";
@@ -46,6 +47,12 @@ const BOOT_APPS: BootAppIcon[] = [
     sectionId: "room-04",
     kind: "image",
     src: "/app-logo-peeranimo.webp",
+  },
+  {
+    name: "Kolibi",
+    sectionId: "room-03c",
+    kind: "image",
+    src: "/app-logo-kolibi.jpg",
   },
   {
     name: "Builds",
@@ -210,6 +217,7 @@ export default function Home() {
       "room-02",
       "room-03",
       "room-03b",
+      "room-03c",
       "room-04",
       "room-05",
       "room-06",
@@ -337,6 +345,10 @@ export default function Home() {
 
       <section id="room-03b" className="room-03b">
         <OrivelaBuild />
+      </section>
+
+      <section id="room-03c" className="room-03c">
+        <KolibiBuild />
       </section>
 
       <Room04 visible={room04Visible} />

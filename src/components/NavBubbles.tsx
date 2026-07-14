@@ -20,6 +20,7 @@ type NavItem = ScrollNavItem | LinkNavItem;
 
 const ROUTE_ACTIVE_LABEL: Record<string, string> = {
   "/builds/orivela": "./orivela",
+  "/builds/kolibi": "./kolibi",
   "/builds/peeranimo": "~/peeranimo",
   "/builds": "./builds",
 };
@@ -33,6 +34,11 @@ const navItems: NavItem[] = [
     id: "room-03b",
     label: "./orivela",
     href: "/builds/orivela",
+  },
+  {
+    kind: "link",
+    label: "./kolibi",
+    href: "/builds/kolibi",
   },
   {
     kind: "scroll",
@@ -49,6 +55,7 @@ const ROOM_IDS = [
   "room-02",
   "room-03",
   "room-03b",
+  "room-03c",
   "room-04",
   "room-05",
   "room-06",
