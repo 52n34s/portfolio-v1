@@ -4,7 +4,7 @@ import KolibiBuild from "@/components/KolibiBuild";
 export const metadata: Metadata = {
   title: "Kolibi — Steffen",
   description:
-    "AI photo calorie tracker for iOS and Android. Snap a plate, get every ingredient read separately — no typing, no database searching.",
+    "The fastest AI photo calorie tracker for iOS and Android. Snap a plate, done in seconds — no typing, no database searching.",
 };
 
 export default function KolibiBuildPage() {

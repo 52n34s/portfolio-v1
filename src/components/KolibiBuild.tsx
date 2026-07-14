@@ -3,16 +3,19 @@ import Link from "next/link";
 
 const FEATURES = [
   {
-    title: "Snap it. Done.",
-    body: "Kolibi recognizes every ingredient automatically. No database, no typing.",
+    eyebrow: "Step 1",
+    title: "Open. Snap.",
+    body: "3 seconds. That's all it takes to log a meal.",
   },
   {
-    title: "Always know what's left.",
-    body: "Your daily calorie budget at a glance. Remaining today, always visible.",
+    eyebrow: "Step 2",
+    title: "Kolibi reads everything.",
+    body: "Every ingredient. Every gram. Automatically — no database, no typing.",
   },
   {
-    title: "You stay in control.",
-    body: "Every ingredient. Adjusted in seconds. Add, remove, tweak — your way.",
+    eyebrow: "Step 3",
+    title: "Know your day.",
+    body: "Remaining calories. Always visible. Always accurate.",
   },
 ];
 
@@ -37,12 +40,12 @@ export default function KolibiBuild() {
             <span className="kolibi-room-badge">AI Photo Calorie Tracker</span>
 
             <h1 className="kolibi-room-headline">Snap a photo.</h1>
-            <h2 className="kolibi-room-headline-sub">Know instantly.</h2>
+            <h2 className="kolibi-room-headline-sub">Done in seconds.</h2>
 
             <p className="kolibi-room-intro">
-              Kolibi reads every ingredient on your plate — separately. No database
-              searching, no typing. Just the one answer you actually want: am I still
-              on track today?
+              Point. Shoot. Done. Kolibi reads every ingredient on your plate in
+              seconds — no typing, no searching, no effort. Just: am I still on
+              track today?
             </p>
 
             <div className="kolibi-room-divider" />
@@ -99,7 +102,7 @@ export default function KolibiBuild() {
               <div className="kolibi-screenshot kolibi-screenshot-back">
                 <Image
                   src="/2.png"
-                  alt="Kolibi dashboard showing remaining calories and today's meals"
+                  alt="Kolibi dashboard showing remaining calories for the day"
                   width={240}
                   height={520}
                   className="kolibi-screenshot-img"
@@ -107,8 +110,8 @@ export default function KolibiBuild() {
               </div>
               <div className="kolibi-screenshot kolibi-screenshot-front">
                 <Image
-                  src="/1.png"
-                  alt="Kolibi meal editor with ingredient breakdown"
+                  src="/3.png"
+                  alt="Kolibi scan flow — snap a photo of your meal"
                   width={260}
                   height={560}
                   className="kolibi-screenshot-img"
@@ -120,10 +123,15 @@ export default function KolibiBuild() {
         </div>
       </section>
 
+      <p className="kolibi-speed-statement">
+        The fastest calorie tracker you&apos;ve ever used.
+      </p>
+
       <section className="kolibi-room-section">
         <div className="kolibi-room-features">
           {FEATURES.map((feature) => (
             <article key={feature.title} className="kolibi-room-feature">
+              <p className="kolibi-room-feature-eyebrow">{feature.eyebrow}</p>
               <h3 className="kolibi-room-feature-title">{feature.title}</h3>
               <p className="kolibi-room-feature-body">{feature.body}</p>
             </article>

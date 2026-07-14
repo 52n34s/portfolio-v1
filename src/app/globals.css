@@ -2730,6 +2730,21 @@ body {
   padding: 0 2rem 5rem;
 }
 
+.kolibi-speed-statement {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 0 2rem;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--kolibi-accent);
+  letter-spacing: -0.02em;
+}
+
 .kolibi-room-features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2741,6 +2756,15 @@ body {
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(26, 26, 46, 0.08);
+}
+
+.kolibi-room-feature-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kolibi-accent);
 }
 
 .kolibi-room-feature-title {
