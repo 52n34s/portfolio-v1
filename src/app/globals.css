@@ -2689,83 +2689,106 @@ body {
 .kolibi-mockups {
   position: relative;
   width: 360px;
-  height: 520px;
+  height: 500px;
 }
 
 .kolibi-mockup {
   border-radius: 40px;
-  background: #f0f0f8;
   overflow: hidden;
   border: 8px solid #1a1a2e;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
 }
 
 .kolibi-mockup-screen {
-  padding: 14px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   color: #1a1a2e;
   font-family: var(--font-inter), sans-serif;
+}
+
+.kolibi-mockup-screen-home {
+  background: linear-gradient(180deg, #e8e4f8 0%, #f0f8f4 100%);
+  padding: 8px 12px 0;
+  min-height: 460px;
+}
+
+.kolibi-mockup-screen-edit {
+  background: #f0f0f8;
+  padding: 8px 12px 14px;
 }
 
 .kolibi-mockup-back {
   position: absolute;
   left: 0;
   top: 40px;
-  width: 240px;
+  width: 230px;
+  min-height: 460px;
   transform: rotate(-6deg);
   z-index: 1;
-  opacity: 0.85;
+  opacity: 0.92;
 }
 
 .kolibi-mockup-front {
   position: relative;
-  width: 260px;
-  margin-left: 80px;
+  width: 255px;
+  min-height: 480px;
+  margin-left: 70px;
+  transform: rotate(2deg);
   z-index: 2;
+}
+
+.kolibi-status-bar {
+  margin: 0 0 8px;
+  font-size: 7px;
+  font-weight: 500;
+  color: rgba(26, 26, 46, 0.55);
+  letter-spacing: 0.02em;
 }
 
 /* Dashboard mockup */
 .kolibi-dash-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
 .kolibi-dash-greeting {
   margin: 0;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.3;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .kolibi-dash-icon {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1;
 }
 
 .kolibi-dash-trial {
-  margin: 4px 0 10px;
+  margin: 4px 0 0;
   font-size: 8px;
-  color: rgba(26, 26, 46, 0.45);
+  color: #888;
 }
 
 .kolibi-dash-card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 16px;
-  margin-bottom: 10px;
+  margin-top: 12px;
 }
 
 .kolibi-dash-card-label {
   margin: 0;
-  font-size: 8px;
+  font-size: 12px;
   color: rgba(26, 26, 46, 0.5);
 }
 
 .kolibi-dash-card-kcal {
   margin: 4px 0 0;
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 800;
   line-height: 1;
   color: #3333cc;
   letter-spacing: -0.02em;
@@ -2773,61 +2796,102 @@ body {
 
 .kolibi-dash-card-sub {
   margin: 6px 0 0;
-  font-size: 7px;
-  color: rgba(26, 26, 46, 0.45);
+  font-size: 11px;
+  color: rgba(26, 26, 46, 0.5);
 }
 
 .kolibi-dash-weight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 12px;
+}
+
+.kolibi-dash-weight-col {
   display: flex;
-  justify-content: space-between;
-  gap: 0.35rem;
-  margin-bottom: 10px;
-  font-size: 7px;
-  color: rgba(26, 26, 46, 0.55);
-  line-height: 1.35;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kolibi-dash-weight-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.kolibi-dash-edit {
+  font-size: 8px;
+  opacity: 0.55;
+}
+
+.kolibi-dash-weight-label {
+  margin: 0;
+  font-size: 8px;
+  color: rgba(26, 26, 46, 0.5);
+}
+
+.kolibi-dash-weight-value {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kolibi-dash-weight-diff {
+  margin: 0;
+  font-size: 8px;
+  color: rgba(26, 26, 46, 0.45);
 }
 
 .kolibi-dash-section {
-  margin: 0 0 6px;
-  font-size: 9px;
+  margin: 16px 0 8px;
+  font-size: 14px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .kolibi-dash-meals {
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 1;
 }
 
 .kolibi-dash-meal {
-  padding: 7px 0;
-  border-top: 1px solid rgba(26, 26, 46, 0.08);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(26, 26, 46, 0.08);
 }
 
-.kolibi-dash-meal:first-child {
-  border-top: none;
-  padding-top: 0;
+.kolibi-dash-meal:last-child {
+  border-bottom: none;
 }
 
 .kolibi-dash-meal-name {
   margin: 0;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .kolibi-dash-meal-detail {
   margin: 2px 0 0;
-  font-size: 7px;
+  font-size: 8px;
   color: rgba(26, 26, 46, 0.5);
 }
 
-.kolibi-dash-nav {
+.kolibi-dash-tabbar {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-top: 12px;
-  padding-top: 8px;
+  gap: 8px;
+  margin-top: auto;
+  margin-left: -12px;
+  margin-right: -12px;
+  padding: 12px 14px 10px;
+  background: #fff;
   border-top: 1px solid rgba(26, 26, 46, 0.08);
 }
 
@@ -2835,35 +2899,45 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  font-size: 7px;
-  color: rgba(26, 26, 46, 0.55);
+  gap: 3px;
+  flex: 1;
+  font-size: 8px;
+  color: rgba(26, 26, 46, 0.5);
+  text-align: center;
 }
 
 .kolibi-dash-nav-emoji {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
 }
 
+.kolibi-dash-nav-barcode {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 700;
+  color: rgba(26, 26, 46, 0.45);
+}
+
 .kolibi-dash-nav-scan {
-  margin-top: -8px;
+  margin-top: -18px;
 }
 
 .kolibi-dash-nav-scan-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: #3333cc;
-  font-size: 14px;
+  background: linear-gradient(135deg, #3333cc, #00c2a8);
+  font-size: 22px;
   line-height: 1;
+  box-shadow: 0 4px 12px rgba(51, 51, 204, 0.25);
 }
 
 /* Edit meal mockup */
 .kolibi-edit-header {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   text-align: center;
   font-size: 10px;
   font-weight: 600;
@@ -2871,7 +2945,7 @@ body {
 
 .kolibi-edit-total {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .kolibi-edit-kcal {
@@ -2900,6 +2974,7 @@ body {
 
 .kolibi-edit-ingredient {
   background: #fff;
+  border: 1px solid #f0f0f0;
   border-radius: 8px;
   padding: 12px;
 }
@@ -2948,7 +3023,7 @@ body {
 }
 
 .kolibi-edit-add {
-  margin: 12px 0 10px;
+  margin: 10px 0 8px;
   text-align: center;
   font-size: 9px;
   font-weight: 600;
@@ -2961,11 +3036,25 @@ body {
   border: none;
   border-radius: 12px;
   padding: 11px 12px;
-  background: linear-gradient(135deg, #3333cc 0%, #00c2a8 100%);
+  background: linear-gradient(90deg, #3333cc 0%, #00c2a8 100%);
   color: #fff;
   font-family: var(--font-inter), sans-serif;
   font-size: 11px;
   font-weight: 600;
+  cursor: default;
+}
+
+.kolibi-edit-delete {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border: none;
+  background: transparent;
+  color: #e53935;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  text-align: center;
   cursor: default;
 }
 
