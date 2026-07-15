@@ -2969,6 +2969,19 @@ body {
   cursor: default;
 }
 
+.kolibi-room-speed {
+  position: relative;
+  z-index: 1;
+  margin: 48px 0;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 3vw, 28px);
+  color: var(--kolibi-accent);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
 .kolibi-room-section {
   position: relative;
   z-index: 1;
@@ -3014,8 +3027,18 @@ body {
   color: var(--kolibi-accent);
 }
 
-.kolibi-room-feature-title {
+.kolibi-room-feature-eyebrow {
   margin: 0;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--kolibi-accent);
+}
+
+.kolibi-room-feature-title {
+  margin: 0.5rem 0 0;
   font-family: var(--font-inter), sans-serif;
   font-weight: 600;
   font-size: 15px;
