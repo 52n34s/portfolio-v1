@@ -2686,40 +2686,287 @@ body {
   min-width: 0;
 }
 
-.kolibi-screenshots {
+.kolibi-mockups {
   position: relative;
-  width: 320px;
-  min-height: 560px;
+  width: 360px;
+  height: 520px;
 }
 
-.kolibi-screenshot {
+.kolibi-mockup {
   border-radius: 40px;
+  background: #f0f0f8;
   overflow: hidden;
-  background: #1a1a1a;
+  border: 8px solid #1a1a2e;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
 }
 
-.kolibi-screenshot-img {
-  display: block;
-  width: 100%;
-  height: auto;
+.kolibi-mockup-screen {
+  padding: 14px 12px 12px;
+  color: #1a1a2e;
+  font-family: var(--font-inter), sans-serif;
 }
 
-.kolibi-screenshot-back {
+.kolibi-mockup-back {
   position: absolute;
-  left: -20px;
-  top: 24px;
+  left: 0;
+  top: 40px;
   width: 240px;
   transform: rotate(-6deg);
   z-index: 1;
-  box-shadow: 0 12px 40px rgba(26, 26, 46, 0.18);
+  opacity: 0.85;
 }
 
-.kolibi-screenshot-front {
+.kolibi-mockup-front {
   position: relative;
   width: 260px;
-  margin-left: auto;
+  margin-left: 80px;
   z-index: 2;
-  box-shadow: 0 20px 50px rgba(26, 26, 46, 0.28);
+}
+
+/* Dashboard mockup */
+.kolibi-dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.kolibi-dash-greeting {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.kolibi-dash-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.kolibi-dash-trial {
+  margin: 4px 0 10px;
+  font-size: 8px;
+  color: rgba(26, 26, 46, 0.45);
+}
+
+.kolibi-dash-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.kolibi-dash-card-label {
+  margin: 0;
+  font-size: 8px;
+  color: rgba(26, 26, 46, 0.5);
+}
+
+.kolibi-dash-card-kcal {
+  margin: 4px 0 0;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  color: #3333cc;
+  letter-spacing: -0.02em;
+}
+
+.kolibi-dash-card-sub {
+  margin: 6px 0 0;
+  font-size: 7px;
+  color: rgba(26, 26, 46, 0.45);
+}
+
+.kolibi-dash-weight {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.35rem;
+  margin-bottom: 10px;
+  font-size: 7px;
+  color: rgba(26, 26, 46, 0.55);
+  line-height: 1.35;
+}
+
+.kolibi-dash-section {
+  margin: 0 0 6px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.kolibi-dash-meals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kolibi-dash-meal {
+  padding: 7px 0;
+  border-top: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.kolibi-dash-meal:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.kolibi-dash-meal-name {
+  margin: 0;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.kolibi-dash-meal-detail {
+  margin: 2px 0 0;
+  font-size: 7px;
+  color: rgba(26, 26, 46, 0.5);
+}
+
+.kolibi-dash-nav {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.kolibi-dash-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 7px;
+  color: rgba(26, 26, 46, 0.55);
+}
+
+.kolibi-dash-nav-emoji {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.kolibi-dash-nav-scan {
+  margin-top: -8px;
+}
+
+.kolibi-dash-nav-scan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #3333cc;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Edit meal mockup */
+.kolibi-edit-header {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.kolibi-edit-total {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.kolibi-edit-kcal {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  color: #3333cc;
+  letter-spacing: -0.03em;
+}
+
+.kolibi-edit-kcal-label {
+  margin: 4px 0 0;
+  font-size: 9px;
+  color: rgba(26, 26, 46, 0.5);
+}
+
+.kolibi-edit-ingredients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kolibi-edit-ingredient {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.kolibi-edit-ingredient-name {
+  margin: 0 0 8px;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.kolibi-edit-ingredient-row {
+  display: flex;
+  gap: 10px;
+}
+
+.kolibi-edit-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kolibi-edit-field-label {
+  font-size: 7px;
+  color: rgba(26, 26, 46, 0.45);
+}
+
+.kolibi-edit-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.kolibi-edit-step {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 10px;
+  line-height: 1;
+  color: rgba(26, 26, 46, 0.35);
+  cursor: default;
+}
+
+.kolibi-edit-add {
+  margin: 12px 0 10px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: #3333cc;
+}
+
+.kolibi-edit-save {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 12px;
+  background: linear-gradient(135deg, #3333cc 0%, #00c2a8 100%);
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: default;
 }
 
 .kolibi-room-section {

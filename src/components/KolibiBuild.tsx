@@ -19,8 +19,136 @@ const FEATURES = [
   },
 ];
 
+const MEALS = [
+  {
+    name: "Seared Tuna, Avocado, Cured Ham...",
+    detail: "295g · 706 kcal · 11:18 AM",
+  },
+  {
+    name: "Vegan Protein Cookie",
+    detail: "1 pcs · 189 kcal · 9:41 AM",
+  },
+  {
+    name: "Cola",
+    detail: "330 ml · 139 kcal · 9:15 AM",
+  },
+];
+
+const INGREDIENTS = [
+  { name: "Seared Tuna", amount: 120, kcal: 192 },
+  { name: "Avocado", amount: 80, kcal: 128 },
+  { name: "Cured Ham/Serrano Ham", amount: 60, kcal: 288 },
+  { name: "Scallions/Green Onions", amount: 25, kcal: 9 },
+];
+
 const UPWORK_URL =
   "https://www.upwork.com/freelancers/~01984538d26b3fcb98?viewMode=1";
+
+function KolibiDashboardMockup() {
+  return (
+    <div className="kolibi-mockup kolibi-mockup-back" aria-hidden="true">
+      <div className="kolibi-mockup-screen">
+        <div className="kolibi-dash-header">
+          <p className="kolibi-dash-greeting">Good morning, Steffen</p>
+          <span className="kolibi-dash-icon">🦅</span>
+        </div>
+        <p className="kolibi-dash-trial">Trial: 2 days left</p>
+
+        <div className="kolibi-dash-card">
+          <p className="kolibi-dash-card-label">Remaining today</p>
+          <p className="kolibi-dash-card-kcal">1132</p>
+          <p className="kolibi-dash-card-sub">Daily goal 2166 · +0 burned</p>
+        </div>
+
+        <div className="kolibi-dash-weight">
+          <span>Current weight — 87 kg</span>
+          <span>Target weight — 84 kg / -3 kg</span>
+        </div>
+
+        <p className="kolibi-dash-section">Today&apos;s meals</p>
+
+        <ul className="kolibi-dash-meals">
+          {MEALS.map((meal) => (
+            <li key={meal.name} className="kolibi-dash-meal">
+              <p className="kolibi-dash-meal-name">{meal.name}</p>
+              <p className="kolibi-dash-meal-detail">{meal.detail}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="kolibi-dash-nav">
+          <span className="kolibi-dash-nav-item">
+            <span className="kolibi-dash-nav-emoji">✏️</span>
+            Manual
+          </span>
+          <span className="kolibi-dash-nav-item kolibi-dash-nav-scan">
+            <span className="kolibi-dash-nav-scan-btn">📷</span>
+            Scan meal
+          </span>
+          <span className="kolibi-dash-nav-item">
+            <span className="kolibi-dash-nav-emoji">📊</span>
+            Barcode
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function KolibiEditMealMockup() {
+  return (
+    <div className="kolibi-mockup kolibi-mockup-front" aria-hidden="true">
+      <div className="kolibi-mockup-screen">
+        <p className="kolibi-edit-header">Edit meal</p>
+
+        <div className="kolibi-edit-total">
+          <p className="kolibi-edit-kcal">706</p>
+          <p className="kolibi-edit-kcal-label">Total kcal</p>
+        </div>
+
+        <ul className="kolibi-edit-ingredients">
+          {INGREDIENTS.map((item) => (
+            <li key={item.name} className="kolibi-edit-ingredient">
+              <p className="kolibi-edit-ingredient-name">{item.name}</p>
+              <div className="kolibi-edit-ingredient-row">
+                <span className="kolibi-edit-field">
+                  <span className="kolibi-edit-field-label">Amount</span>
+                  <span className="kolibi-edit-stepper">
+                    <button type="button" className="kolibi-edit-step">
+                      −
+                    </button>
+                    {item.amount}
+                    <button type="button" className="kolibi-edit-step">
+                      +
+                    </button>
+                  </span>
+                </span>
+                <span className="kolibi-edit-field">
+                  <span className="kolibi-edit-field-label">kcal</span>
+                  <span className="kolibi-edit-stepper">
+                    <button type="button" className="kolibi-edit-step">
+                      −
+                    </button>
+                    {item.kcal}
+                    <button type="button" className="kolibi-edit-step">
+                      +
+                    </button>
+                  </span>
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <p className="kolibi-edit-add">+ Add product</p>
+
+        <button type="button" className="kolibi-edit-save">
+          Save changes
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function KolibiBuild() {
   return (
@@ -98,26 +226,9 @@ export default function KolibiBuild() {
           </div>
 
           <div className="kolibi-room-visual">
-            <div className="kolibi-screenshots">
-              <div className="kolibi-screenshot kolibi-screenshot-back">
-                <Image
-                  src="/2.png"
-                  alt="Kolibi dashboard showing remaining calories for the day"
-                  width={240}
-                  height={520}
-                  className="kolibi-screenshot-img"
-                />
-              </div>
-              <div className="kolibi-screenshot kolibi-screenshot-front">
-                <Image
-                  src="/3.png"
-                  alt="Kolibi scan flow — snap a photo of your meal"
-                  width={260}
-                  height={560}
-                  className="kolibi-screenshot-img"
-                  priority
-                />
-              </div>
+            <div className="kolibi-mockups">
+              <KolibiDashboardMockup />
+              <KolibiEditMealMockup />
             </div>
           </div>
         </div>
