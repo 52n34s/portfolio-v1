@@ -307,13 +307,13 @@ export default function Home() {
         </div>
 
         {showAppIcons && (
-          <div className="boot-app-icons boot-app-icons-fade-in">
+          <div className="boot-app-icons boot-app-icons-fade-in flex flex-wrap justify-center gap-x-6 gap-y-6 md:flex-nowrap md:justify-center">
             {BOOT_APPS.map((app) => (
               <button
                 key={app.name}
                 type="button"
                 onClick={() => navigateToRoom(app.sectionId)}
-                className="boot-app-icon-link"
+                className="boot-app-icon-link basis-[28%] md:basis-auto"
               >
                 {app.kind === "image" ? (
                   <Image

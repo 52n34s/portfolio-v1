@@ -194,11 +194,19 @@ body {
 }
 
 .boot-app-icons {
-  display: flex;
-  justify-content: center;
   align-items: flex-start;
-  gap: 24px;
   margin-top: 2rem;
+  max-width: 360px;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .boot-app-icons {
+    max-width: none;
+    padding: 0;
+    gap: 24px;
+  }
 }
 
 .boot-app-icons-fade-in {
@@ -226,6 +234,7 @@ body {
   background: none;
   cursor: pointer;
   transition: transform 200ms ease;
+  max-width: 88px;
 }
 
 .boot-app-icon-link:hover {
