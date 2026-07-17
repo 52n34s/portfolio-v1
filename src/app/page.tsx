@@ -251,7 +251,7 @@ export default function Home() {
       {/* Room 01 — Boot Screen */}
       <section
         id="room-01"
-        className="grid-bg relative flex min-h-screen flex-col items-center justify-center"
+        className="grid-bg relative flex min-h-screen w-full max-w-[100vw] flex-col items-center justify-center overflow-x-hidden"
       >
         <div
           className={`terminal-card ${cardVisible ? "terminal-card-fade-in" : "opacity-0"}`}
@@ -307,13 +307,13 @@ export default function Home() {
         </div>
 
         {showAppIcons && (
-          <div className="boot-app-icons boot-app-icons-fade-in flex flex-wrap justify-center gap-x-6 gap-y-6 md:flex-nowrap md:justify-center">
+          <div className="boot-app-icons boot-app-icons-fade-in flex w-full min-w-0 max-w-[360px] flex-wrap justify-center gap-x-6 gap-y-6 px-4 md:max-w-none md:flex-nowrap md:justify-center md:px-0 md:gap-6">
             {BOOT_APPS.map((app) => (
               <button
                 key={app.name}
                 type="button"
                 onClick={() => navigateToRoom(app.sectionId)}
-                className="boot-app-icon-link basis-[28%] md:basis-auto"
+                className="boot-app-icon-link basis-[28%] min-w-0 md:basis-auto"
               >
                 {app.kind === "image" ? (
                   <Image
