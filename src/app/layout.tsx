@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Lora } from "next/font/google";
+import { Caveat, Inter, JetBrains_Mono, Lora } from "next/font/google";
 import NavBubbles from "@/components/NavBubbles";
 import "./globals.css";
 
@@ -19,6 +19,12 @@ const lora = Lora({
   weight: ["600"],
   subsets: ["latin"],
   variable: "--font-lora",
+});
+
+const caveat = Caveat({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-hand",
 });
 
 export const metadata: Metadata = {
@@ -104,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${lora.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${lora.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <link

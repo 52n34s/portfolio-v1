@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import HeroCollage from "@/components/HeroCollage";
+import AppScraps from "@/components/AppScraps";
 import Room02 from "@/components/Room02";
 import Room03 from "@/components/Room03";
 import KolibiBuild from "@/components/KolibiBuild";
@@ -248,9 +250,13 @@ export default function Home() {
         and ships products end to end.
       </div>
 
-      {/* Room 01 — Boot Screen */}
+      <HeroCollage />
+      <AppScraps />
+
+      {/* Boot-Screen — wird später als Einstieg zu den Rooms weiter unten platziert */}
+      {false && (
       <section
-        id="room-01"
+        id="room-01-boot"
         className="grid-bg relative flex min-h-screen w-full max-w-[100vw] flex-col items-center justify-center overflow-x-hidden"
       >
         <div
@@ -339,6 +345,7 @@ export default function Home() {
           </div>
         )}
       </section>
+      )}
 
       <Room02 visible={room02Visible} />
       <Room03 visible={room03Visible} />
