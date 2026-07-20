@@ -159,24 +159,20 @@ function ReceiptZigzag({ position }: { position: "top" | "bottom" }) {
 function UBahnSign() {
   return (
     <div
-      className={`flex items-center gap-2 border-2 border-[#1A1A1A] bg-[#F5F0E8] px-3 py-2 ${PAPER_SHADOW}`}
+      className={`flex items-center gap-3 bg-[#0B4EA2] px-4 py-2.5 ${PAPER_SHADOW}`}
     >
-      <div className="flex h-[30px] w-[30px] items-center justify-center bg-[#0F4C9C]">
-        <span className="text-[20px] font-bold leading-none text-white">U</span>
-      </div>
-      <span className="text-[15px] font-medium tracking-tight text-[#1A1A1A]">
+      <span className="text-[28px] font-bold leading-none text-white">U</span>
+      <div className="h-[28px] w-[2px] bg-white/85" />
+      <span className="whitespace-nowrap text-[20px] font-medium tracking-tight text-white">
         Rosenthaler Platz
       </span>
-      <div className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#0F4C9C]">
-        <span className="text-[12px] font-bold leading-none text-white">8</span>
-      </div>
     </div>
   );
 }
 
 function MateCup() {
   return (
-    <svg viewBox="0 0 100 110" className="h-[86px] w-auto" aria-hidden="true">
+    <svg viewBox="0 0 100 110" className="h-[82px] w-auto" aria-hidden="true">
       <path
         d="M26 52 C 26 40, 36 33, 50 33 C 64 33, 74 40, 74 52
            C 83 67, 78 92, 61 100 C 54 104, 46 104, 39 100
@@ -234,26 +230,38 @@ function SolDeMayo() {
 
 function FootballSvg() {
   return (
-    <svg viewBox="0 0 100 100" className="h-[76px] w-auto" aria-hidden="true">
+    <svg viewBox="0 0 120 120" className="h-[84px] w-auto" aria-hidden="true">
+      <defs>
+        <clipPath id="ballClip">
+          <circle cx="60" cy="60" r="55" />
+        </clipPath>
+      </defs>
+      <circle cx="60" cy="60" r="55" fill="#FFFFFF" />
+      <g clipPath="url(#ballClip)">
+        <path
+          d="M60 33 L85.7 51.7 L75.9 81.9 L44.1 81.9 L34.3 51.7 Z"
+          fill="#1A1A1A"
+        />
+        <path d="M96 10 L116 24 L108 47 L84 47 L77 24 Z" fill="#1A1A1A" />
+        <path d="M119 79 L134 98 L120 118 L98 111 L96 87 Z" fill="#1A1A1A" />
+        <path d="M60 122 L82 130 L82 154 L38 154 L38 130 Z" fill="#1A1A1A" />
+        <path d="M1 79 L24 87 L22 111 L0 118 L-14 98 Z" fill="#1A1A1A" />
+        <path d="M24 10 L43 24 L36 47 L12 47 L4 24 Z" fill="#1A1A1A" />
+        <g stroke="#1A1A1A" strokeWidth="2.5" fill="none">
+          <path d="M60 33 L60 -2" />
+          <path d="M85.7 51.7 L119 41" />
+          <path d="M75.9 81.9 L96 111" />
+          <path d="M44.1 81.9 L24 111" />
+          <path d="M34.3 51.7 L1 41" />
+        </g>
+      </g>
       <circle
-        cx="50"
-        cy="50"
-        r="46"
-        fill="#FFFFFF"
-        stroke="#1A1A1A"
-        strokeWidth="2.5"
-      />
-      <path d="M50 22 L68 35 L61 57 L39 57 L32 35 Z" fill="#1A1A1A" />
-      <path
-        d="M50 4 L50 22 M68 35 L86 29 M61 57 L72 74 M39 57 L28 74 M32 35 L14 29"
-        stroke="#1A1A1A"
-        strokeWidth="2.5"
-      />
-      <path
-        d="M20 78 C 30 86, 45 90, 58 88"
-        stroke="#1A1A1A"
-        strokeWidth="2.5"
+        cx="60"
+        cy="60"
+        r="55"
         fill="none"
+        stroke="#1A1A1A"
+        strokeWidth="2.5"
       />
     </svg>
   );
@@ -267,7 +275,7 @@ function Football() {
       <img
         src={BALL_SRC}
         alt=""
-        className="h-[76px] w-auto object-contain"
+        className="h-[84px] w-auto object-contain"
         onError={(e) => {
           e.currentTarget.style.display = "none";
           const fallback = e.currentTarget.nextElementSibling;
@@ -387,14 +395,90 @@ function HeadlineBlock({ className = "" }: { className?: string }) {
         className="text-4xl leading-[1.1] tracking-tight text-[#1A1A1A] md:text-5xl"
         style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
       >
-        Bring me something
+        Out-of-the-box thinker.
         <br />
-        you don&apos;t know how to build.
+        Creative mind.
+        <br />
+        Always building something new.
       </h1>
-      <p className="mt-4 text-base text-[#1A1A1A]/opacity-75">
-        Three apps of my own. I build platforms and apps for other people too —
-        that part pays.
+      <p className="mt-3 max-w-[430px] text-base text-[#1A1A1A]/opacity-75">
+        Three apps of my own — and platforms for people whose idea doesn&apos;t
+        exist yet.
       </p>
+    </div>
+  );
+}
+
+function PeeranimoPolaroids() {
+  const cards = [
+    {
+      src: "/peers/peeranimo_european_woman.jpg",
+      color: "#7B5CF0",
+      pos: "left-0 top-[8px] z-10 rotate-[-5deg] md:top-[10px] md:rotate-[-13deg]",
+      showTape: false,
+    },
+    {
+      src: "/peers/peeranimo_asia_woman.jpg",
+      color: "#00C2A8",
+      pos: "left-[42px] top-0 z-20 rotate-[-2deg] md:left-[56px]",
+      showTape: true,
+    },
+    {
+      src: "/peers/peeranimo_pepe_latino_woman.jpg",
+      color: "#D85A30",
+      pos: "left-[84px] top-[10px] z-30 rotate-[5deg] md:left-[112px] md:top-[14px] md:rotate-[9deg]",
+      showTape: false,
+    },
+  ] as const;
+
+  return (
+    <div className="relative h-[150px]">
+      {cards.map((card) => (
+        <div
+          key={card.src}
+          className={`absolute w-[78px] bg-white p-[6px] pb-[18px] md:w-[92px] ${PAPER_SHADOW} ${card.pos}`}
+        >
+          {card.showTape && (
+            <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
+          )}
+          <div className="relative aspect-square overflow-hidden">
+            <img
+              src={card.src}
+              alt=""
+              className="h-full w-full object-cover grayscale contrast-[1.7] brightness-[1.15]"
+            />
+            <div
+              className="absolute inset-0 mix-blend-color"
+              style={{ background: card.color }}
+            />
+            <div
+              className="absolute inset-0 opacity-25 mix-blend-screen"
+              style={{ background: "#F5F0E8" }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PeeranimoUnit() {
+  return (
+    <div className="w-[236px]">
+      <PeeranimoPolaroids />
+      <p
+        className="mt-1 -rotate-1 text-center text-[15px] leading-snug text-[#1A1A1A]"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
+      >
+        People who get it. Without searching for years.
+      </p>
+      <div className="mt-2.5">
+        <AppRow
+          icon={PEERANIMO_ICON}
+          name="Peeranimo"
+          platform="iOS · Web"
+        />
+      </div>
     </div>
   );
 }
@@ -408,7 +492,7 @@ export default function HomeCollage() {
       {/* Torn paper planes — z-0 */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <svg
-          className="absolute left-0 top-[20%] h-[52%] w-[34%] -rotate-[4deg]"
+          className="absolute left-0 top-[18%] h-[50%] w-[32%] -rotate-[4deg]"
           viewBox="0 0 280 340"
           preserveAspectRatio="none"
         >
@@ -428,7 +512,7 @@ export default function HomeCollage() {
           />
         </svg>
         <svg
-          className="absolute bottom-0 right-[8%] h-[32%] w-[28%] rotate-[3deg]"
+          className="absolute bottom-0 right-[7%] h-[28%] w-[26%] rotate-[3deg]"
           viewBox="0 0 260 280"
           preserveAspectRatio="none"
         >
@@ -443,11 +527,11 @@ export default function HomeCollage() {
       <Clickable
         label="Why Berlin?"
         scrollTo="#room-02"
-        className="left-[19%] top-[5%] z-10 rotate-[2deg]"
+        className="left-[20%] top-[4%] z-10 rotate-[2deg]"
       >
         <svg
           viewBox="0 0 120 420"
-          className="h-[130px] w-auto md:h-[230px]"
+          className="h-[210px] w-auto"
           aria-hidden="true"
         >
           <path
@@ -463,19 +547,19 @@ export default function HomeCollage() {
       </Clickable>
 
       <div
-        className="absolute bottom-[24%] left-[4%] z-20 hidden -rotate-[6deg] md:block"
+        className="absolute bottom-[30%] left-[2%] z-[25] hidden -rotate-[6deg] md:block"
         aria-hidden="true"
       >
         <UBahnSign />
       </div>
       <div
-        className="absolute left-[30%] top-[62%] z-10 rotate-[5deg]"
+        className="absolute bottom-[38%] left-[25%] z-20 rotate-[5deg]"
         aria-hidden="true"
       >
         <MateCup />
       </div>
       <div
-        className="absolute right-[13%] top-[24%] z-10 hidden md:block"
+        className="absolute right-[6%] top-[27%] z-10 hidden md:block"
         aria-hidden="true"
       >
         <SolDeMayo />
@@ -483,7 +567,7 @@ export default function HomeCollage() {
 
       {/* Football — desktop */}
       <div
-        className="pointer-events-none absolute bottom-[22%] left-[58%] z-[45] hidden rotate-[8deg] md:block"
+        className="pointer-events-none absolute bottom-[15%] left-[63%] z-[45] hidden rotate-[8deg] md:block"
         aria-hidden="true"
       >
         <Football />
@@ -491,7 +575,7 @@ export default function HomeCollage() {
 
       {/* TODO post-it */}
       <div
-        className={`absolute bottom-[30%] left-[47%] z-30 hidden w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 md:block ${PAPER_SHADOW}`}
+        className={`absolute bottom-[33%] left-[57%] z-30 hidden w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 md:block ${PAPER_SHADOW}`}
       >
         <Tape className="-left-1 -top-2 -rotate-[18deg]" />
         <p
@@ -505,7 +589,7 @@ export default function HomeCollage() {
       </div>
 
       {/* Steffen — desktop */}
-      <div className="absolute bottom-0 left-[7%] z-20 hidden h-[58vh] md:block">
+      <div className="absolute bottom-0 left-[6%] z-20 hidden h-[56vh] md:block">
         <img
           src="/me-steffen.png"
           alt="Steffen"
@@ -556,7 +640,7 @@ export default function HomeCollage() {
             className="text-[1.15rem] leading-snug text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-hand), cursive" }}
           >
-            I build apps and platforms for other people too. That part pays.
+            Bring me something nobody has built yet.
           </p>
           <a
             href="#room-05"
@@ -580,27 +664,19 @@ export default function HomeCollage() {
           <a href="/builds/kolibi" className="relative block w-full max-w-[200px]">
             <KolibiReceipt className="rotate-[2deg]" />
           </a>
-          <button
-            type="button"
-            onClick={() =>
-              document
-                .getElementById("room-04")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="relative block w-full max-w-[210px] border-0 bg-transparent p-0 text-left"
-          >
-            <PeeranimoPolaroidStack />
-          </button>
+          <a href="/builds/peeranimo" className="relative block w-full max-w-[236px]">
+            <PeeranimoUnit />
+          </a>
         </div>
       </div>
 
       {/* Desktop absolute layout */}
       <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-        <HeadlineBlock className="pointer-events-auto absolute left-[34%] top-[13%] max-w-[460px] pr-[6%]" />
+        <HeadlineBlock className="pointer-events-auto absolute left-[31%] top-[11%] z-30 max-w-[440px]" />
 
-        {/* Service note */}
+        {/* Service note — top-[52%] keeps ≥40px under 3-line headline */}
         <div
-          className={`pointer-events-auto absolute left-[34%] top-[40%] z-30 max-w-[380px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+          className={`pointer-events-auto absolute left-[32%] top-[52%] z-30 w-[300px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
         >
           <Tape className="-left-2 -top-2 -rotate-[14deg]" />
           <div
@@ -611,7 +687,7 @@ export default function HomeCollage() {
             className="text-[1.2rem] leading-snug text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-hand), cursive" }}
           >
-            Ready when you are.
+            Bring me something nobody has built yet.
           </p>
           <button
             type="button"
@@ -630,7 +706,7 @@ export default function HomeCollage() {
         <Clickable
           label="Orivela"
           href="/builds/orivela"
-          className="pointer-events-auto right-[20%] top-[8%] z-[35] w-[220px] -rotate-[5deg]"
+          className="pointer-events-auto right-[16%] top-[6%] z-[35] w-[225px] -rotate-[5deg]"
         >
           <OrivelaNote />
         </Clickable>
@@ -638,24 +714,24 @@ export default function HomeCollage() {
         <Clickable
           label="Kolibi"
           href="/builds/kolibi"
-          className="pointer-events-auto right-[13%] top-[30%] z-30 w-[170px] rotate-[4deg]"
+          className="pointer-events-auto right-[13%] top-[40%] z-30 w-[175px] rotate-[4deg]"
         >
           <KolibiReceipt />
         </Clickable>
 
         <Clickable
           label="Peeranimo"
-          scrollTo="#room-04"
-          className="pointer-events-auto bottom-[16%] left-[30%] z-[35] w-[210px]"
+          href="/builds/peeranimo"
+          className="pointer-events-auto bottom-[9%] left-[33%] z-[35]"
         >
-          <PeeranimoPolaroidStack />
+          <PeeranimoUnit />
         </Clickable>
 
         <Clickable
           label="See it live"
           href={APP_STORE_URL}
           external
-          className="pointer-events-auto right-[13%] top-[6%] z-40 -rotate-[16deg]"
+          className="pointer-events-auto right-[8%] top-[3%] z-40 -rotate-[16deg]"
         >
           <AppStoreStamp />
         </Clickable>
@@ -755,74 +831,6 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
         </div>
         <ReceiptZigzag position="bottom" />
       </article>
-    </div>
-  );
-}
-
-function PeeranimoPolaroidStack() {
-  const cards = [
-    {
-      src: "/peers/peeranimo_european_woman.jpg",
-      color: "#7B5CF0",
-      pos: "left-0 top-[8px] z-10 rotate-[-5deg] md:top-[10px] md:rotate-[-13deg]",
-      showTape: false,
-    },
-    {
-      src: "/peers/peeranimo_asia_woman.jpg",
-      color: "#00C2A8",
-      pos: "left-[42px] top-0 z-20 rotate-[-2deg] md:left-[56px]",
-      showTape: true,
-    },
-    {
-      src: "/peers/peeranimo_pepe_latino_woman.jpg",
-      color: "#D85A30",
-      pos: "left-[84px] top-[10px] z-30 rotate-[5deg] md:left-[112px] md:top-[14px] md:rotate-[9deg]",
-      showTape: false,
-    },
-  ] as const;
-
-  return (
-    <div className="relative">
-      <div className="relative h-[150px] w-[170px] md:h-[180px] md:w-[210px]">
-        {cards.map((card) => (
-          <div
-            key={card.src}
-            className={`absolute w-[78px] bg-white p-[6px] pb-[18px] md:w-[92px] ${PAPER_SHADOW} ${card.pos}`}
-          >
-            {card.showTape && (
-              <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
-            )}
-            <div className="relative aspect-square overflow-hidden">
-              <img
-                src={card.src}
-                alt=""
-                className="h-full w-full object-cover grayscale contrast-[1.7] brightness-[1.15]"
-              />
-              <div
-                className="absolute inset-0 mix-blend-color"
-                style={{ background: card.color }}
-              />
-              <div
-                className="absolute inset-0 opacity-25 mix-blend-screen"
-                style={{ background: "#F5F0E8" }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <p
-        className="mt-2 max-w-[210px] -rotate-[2deg] text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        People who get it. Without searching for years.
-      </p>
-      <div className="mt-3">
-        <AppRow
-          icon={PEERANIMO_ICON}
-          name="Peeranimo"
-          platform="iOS · Web"
-        />
-      </div>
     </div>
   );
 }
