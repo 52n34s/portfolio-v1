@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import HeroCollage from "@/components/HeroCollage";
-import AppScraps from "@/components/AppScraps";
+import HomeCollage from "@/components/HomeCollage";
 import Room02 from "@/components/Room02";
 import Room03 from "@/components/Room03";
 import KolibiBuild from "@/components/KolibiBuild";
@@ -250,8 +249,7 @@ export default function Home() {
         and ships products end to end.
       </div>
 
-      <HeroCollage />
-      <AppScraps />
+      <HomeCollage />
 
       {/* Boot-Screen — wird später als Einstieg zu den Rooms weiter unten platziert */}
       {false && (
