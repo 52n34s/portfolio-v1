@@ -1,9 +1,70 @@
 "use client";
 
-import Link from "next/link";
+import type { ReactNode } from "react";
 
-function scrollToRoom05() {
-  document.getElementById("room-05")?.scrollIntoView({ behavior: "smooth" });
+const APP_STORE_URL = "https://apps.apple.com/app/orivela";
+
+const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
+
+function Tape({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`absolute h-[22px] w-[64px] border-y border-white/60 bg-white/45 shadow-[0_1px_2px_rgba(0,0,0,0.08)] backdrop-blur-[1px] ${className}`}
+      style={{ clipPath: "polygon(3% 0%, 97% 4%, 100% 96%, 2% 100%)" }}
+      aria-hidden="true"
+    />
+  );
+}
+
+function Clickable({
+  label,
+  href,
+  scrollTo,
+  children,
+  className = "",
+  external = false,
+}: {
+  label: string;
+  href?: string;
+  scrollTo?: string;
+  children: ReactNode;
+  className?: string;
+  external?: boolean;
+}) {
+  const handle = () => {
+    if (scrollTo) {
+      document.querySelector(scrollTo)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const content = (
+    <div className="group relative cursor-pointer transition-transform duration-200 hover:scale-[1.04] hover:-rotate-1">
+      {children}
+      <span className="pointer-events-none absolute -bottom-6 left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-[#1A1A1A] px-3 py-1 text-xs text-[#F5F0E8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 md:block">
+        {label}
+      </span>
+    </div>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={`absolute ${className}`}
+        {...(external
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button type="button" onClick={handle} className={`absolute ${className}`}>
+      {content}
+    </button>
+  );
 }
 
 function TornEdge({ fill = "#F5F0E8" }: { fill?: string }) {
@@ -61,11 +122,7 @@ function UBahnSign() {
 
 function MateCup() {
   return (
-    <svg
-      viewBox="0 0 48 70"
-      className="h-[70px] w-auto"
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 48 70" className="h-[70px] w-auto" aria-hidden="true">
       <ellipse cx="24" cy="58" rx="16" ry="5" fill="#5C3A1E" />
       <path
         d="M10 28 C10 28 8 52 24 58 C40 52 38 28 38 28 Z"
@@ -116,13 +173,155 @@ function SolDeMayo() {
   );
 }
 
+function KabaCup() {
+  return (
+    <div className="relative h-[86px] w-[72px]">
+      <svg viewBox="0 0 72 86" className="h-full w-full" aria-hidden="true">
+        <path
+          d="M12 22 L14 78 C14 82 20 84 36 84 C52 84 58 82 58 78 L60 22 Z"
+          fill="#F5F5F5"
+          stroke="#DDD"
+          strokeWidth="1"
+        />
+        <ellipse cx="36" cy="22" rx="24" ry="7" fill="#EFEFEF" />
+        <ellipse cx="36" cy="22" rx="18" ry="5" fill="#6B4423" />
+        <path
+          d="M60 28 C70 28 72 40 72 48 C72 56 70 64 60 64"
+          fill="none"
+          stroke="#E8E8E8"
+          strokeWidth="5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M60 30 C68 30 70 40 70 48 C70 54 68 62 60 62"
+          fill="none"
+          stroke="#F5F5F5"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+      </svg>
+      <span
+        className="absolute left-1/2 top-[42%] -translate-x-1/2 -rotate-[3deg] text-[15px] leading-none text-[#E8A33D]"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
+      >
+        Kaba
+      </span>
+    </div>
+  );
+}
+
+function AppStoreStamp() {
+  return (
+    <svg
+      viewBox="0 0 92 92"
+      className="h-[92px] w-[92px] opacity-80"
+      aria-hidden="true"
+    >
+      <circle
+        cx="46"
+        cy="46"
+        r="43"
+        fill="none"
+        stroke="#1D9E75"
+        strokeWidth="3"
+      />
+      <circle
+        cx="46"
+        cy="46"
+        r="38"
+        fill="none"
+        stroke="#1D9E75"
+        strokeWidth="0.75"
+        opacity="0.5"
+      />
+      <defs>
+        <path
+          id="stamp-top"
+          d="M16 46 A30 30 0 0 1 76 46"
+          fill="none"
+        />
+        <path
+          id="stamp-bottom"
+          d="M18 50 A28 28 0 0 0 74 50"
+          fill="none"
+        />
+      </defs>
+      <text
+        fill="#1D9E75"
+        fontSize="9"
+        fontFamily="var(--font-jetbrains-mono), monospace"
+        letterSpacing="1.5"
+      >
+        <textPath href="#stamp-top" startOffset="50%" textAnchor="middle">
+          ORIVELA
+        </textPath>
+      </text>
+      <text
+        x="46"
+        y="50"
+        textAnchor="middle"
+        fill="#1D9E75"
+        fontSize="13"
+        fontWeight="700"
+        fontFamily="var(--font-jetbrains-mono), monospace"
+        letterSpacing="2"
+      >
+        LIVE
+      </text>
+      <text
+        fill="#1D9E75"
+        fontSize="6.5"
+        fontFamily="var(--font-jetbrains-mono), monospace"
+        letterSpacing="0.8"
+      >
+        <textPath href="#stamp-bottom" startOffset="50%" textAnchor="middle">
+          ON THE APP STORE
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
+function ClickHint() {
+  return (
+    <div
+      className="pointer-events-none absolute bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-2 md:flex"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 28 28" className="h-6 w-6 -rotate-[25deg] opacity-50">
+        <path
+          d="M6 22 C10 14, 14 10, 22 6"
+          fill="none"
+          stroke="#1A1A1A"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M16 5 L22 6 L20 12"
+          fill="none"
+          stroke="#1A1A1A"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <span
+        className="text-base text-[#1A1A1A]/50"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
+      >
+        click the things
+      </span>
+    </div>
+  );
+}
+
 export default function HomeCollage() {
   return (
     <section
       id="room-01"
       className="home-collage relative min-h-screen w-full overflow-hidden bg-[#F5F0E8] md:h-screen md:min-h-0"
     >
-      {/* a) Torn paper planes — z-0 */}
+      {/* Torn paper planes — z-0 */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <svg
           className="absolute left-0 top-[20%] h-[52%] w-[34%] -rotate-[4deg]"
@@ -156,8 +355,32 @@ export default function HomeCollage() {
         </svg>
       </div>
 
-      {/* Berlin / BA scraps — z-20 */}
-      <div className="pointer-events-none absolute left-[19%] top-[5%] z-20 rotate-[2deg]">
+      {/* Kaba stain — desktop only */}
+      <div
+        className="pointer-events-none absolute bottom-[18%] left-[52%] z-10 hidden rotate-[12deg] md:block"
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 120 90" className="w-[110px]">
+          <ellipse
+            cx="60"
+            cy="45"
+            rx="52"
+            ry="36"
+            fill="none"
+            stroke="#8B5E3C"
+            strokeWidth="5"
+            opacity="0.16"
+          />
+          <ellipse cx="58" cy="47" rx="40" ry="27" fill="#8B5E3C" opacity="0.07" />
+        </svg>
+      </div>
+
+      {/* Berlin / BA scraps */}
+      <Clickable
+        label="Why Berlin?"
+        scrollTo="#room-02"
+        className="left-[19%] top-[5%] z-20 rotate-[2deg]"
+      >
         <svg
           viewBox="0 0 120 420"
           className="h-[130px] w-auto md:h-[230px]"
@@ -173,7 +396,8 @@ export default function HomeCollage() {
           <path d="M58 96 L62 96 L61 44 L59 44 Z" fill="#1A1A1A" />
           <path d="M59 44 L61 44 L60 6 Z" fill="#1A1A1A" />
         </svg>
-      </div>
+      </Clickable>
+
       <div
         className="absolute bottom-[24%] left-[4%] z-20 hidden -rotate-[6deg] md:block"
         aria-hidden="true"
@@ -193,14 +417,31 @@ export default function HomeCollage() {
         <SolDeMayo />
       </div>
 
-      {/* b) Steffen — desktop absolute */}
-      <img
-        src="/me-steffen.png"
-        alt="Steffen"
-        className="pointer-events-none absolute bottom-0 left-[7%] z-20 hidden h-[58vh] w-auto object-contain md:block"
-      />
+      {/* Kaba cup — desktop only, not clickable */}
+      <div
+        className="pointer-events-none absolute bottom-[26%] left-[54%] z-20 hidden -rotate-[4deg] md:block"
+        aria-hidden="true"
+      >
+        <KabaCup />
+      </div>
 
-      {/* Mobile flow stack */}
+      {/* Steffen — desktop */}
+      <div className="absolute bottom-0 left-[7%] z-20 hidden h-[58vh] md:block">
+        <img
+          src="/me-steffen.png"
+          alt="Steffen"
+          className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+        />
+        <Clickable
+          label="Why I wear colors"
+          scrollTo="#room-02"
+          className="left-0 top-[45%] h-[55%] w-full"
+        >
+          <span className="block h-full w-full" aria-hidden="true" />
+        </Clickable>
+      </div>
+
+      {/* Mobile flow */}
       <div className="relative z-30 flex flex-col items-center px-6 pb-10 pt-16 md:hidden">
         <h1
           className="max-w-[320px] text-center text-4xl leading-[1.1] tracking-tight text-[#1A1A1A]"
@@ -217,36 +458,53 @@ export default function HomeCollage() {
         <img
           src="/me-steffen.png"
           alt="Steffen"
-          className="mt-6 h-[42vh] w-auto object-contain object-bottom"
+          className="mt-6 h-[42vh] w-auto object-contain object-bottom drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
         />
 
-        <div className="relative mt-6 w-full max-w-[340px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 shadow-[0_10px_30px_rgba(26,26,46,0.12)]">
+        <div
+          className={`relative mt-6 w-full max-w-[340px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+        >
+          <Tape className="-left-2 -top-2 -rotate-[14deg]" />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[46%] h-[3px] bg-gradient-to-b from-black/10 via-transparent to-white/50"
+            aria-hidden="true"
+          />
           <p
             className="text-[1.15rem] leading-snug text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-hand), cursive" }}
           >
             I build apps and platforms for other people too. That part pays.
           </p>
-          <button
-            type="button"
-            onClick={scrollToRoom05}
-            className="mt-4 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8]"
+          <a
+            href="#room-05"
+            onClick={(e) => {
+              e.preventDefault();
+              document
+                .getElementById("room-05")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="mt-4 inline-block rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8]"
           >
             Start a project →
-          </button>
+          </a>
           <TornEdge />
         </div>
 
         <div className="mt-10 flex w-full max-w-[320px] flex-col items-center gap-8">
-          <OrivelaNote className="-rotate-[3deg]" />
-          <KolibiReceipt className="rotate-[2deg]" />
-          <PeeranimoPolaroid className="-rotate-[3deg]" />
+          <a href="/builds/orivela" className="relative block w-full max-w-[280px]">
+            <OrivelaNote className="-rotate-[3deg]" />
+          </a>
+          <a href="/builds/kolibi" className="relative block w-full max-w-[200px]">
+            <KolibiReceipt className="rotate-[2deg]" />
+          </a>
+          <a href="/builds/peeranimo" className="relative block w-full max-w-[200px]">
+            <PeeranimoPolaroid className="-rotate-[3deg]" />
+          </a>
         </div>
       </div>
 
       {/* Desktop absolute layout */}
       <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-        {/* c) Headline */}
         <div className="pointer-events-auto absolute left-[34%] top-[13%] max-w-[460px] pr-[6%]">
           <h1
             className="text-5xl leading-[1.1] tracking-tight text-[#1A1A1A]"
@@ -261,8 +519,15 @@ export default function HomeCollage() {
           </p>
         </div>
 
-        {/* d) Service note */}
-        <div className="pointer-events-auto absolute left-[34%] top-[40%] max-w-[380px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 shadow-[0_10px_30px_rgba(26,26,46,0.12)]">
+        {/* Service note */}
+        <div
+          className={`pointer-events-auto absolute left-[34%] top-[40%] max-w-[380px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+        >
+          <Tape className="-left-2 -top-2 -rotate-[14deg]" />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[46%] h-[3px] bg-gradient-to-b from-black/10 via-transparent to-white/50"
+            aria-hidden="true"
+          />
           <p
             className="text-[1.2rem] leading-snug text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-hand), cursive" }}
@@ -271,7 +536,11 @@ export default function HomeCollage() {
           </p>
           <button
             type="button"
-            onClick={scrollToRoom05}
+            onClick={() =>
+              document
+                .getElementById("room-05")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             className="mt-4 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8] transition-opacity hover:opacity-90"
           >
             Start a project →
@@ -279,135 +548,166 @@ export default function HomeCollage() {
           <TornEdge />
         </div>
 
-        {/* App objects */}
-        <div className="pointer-events-auto absolute right-[20%] top-[8%] w-[220px] -rotate-[5deg]">
+        {/* App objects — clickable */}
+        <Clickable
+          label="Orivela"
+          href="/builds/orivela"
+          className="pointer-events-auto right-[20%] top-[8%] z-30 w-[220px] -rotate-[5deg]"
+        >
           <OrivelaNote />
-        </div>
-        <div className="pointer-events-auto absolute right-[10%] top-[46%] w-[170px] rotate-[4deg]">
+        </Clickable>
+
+        <Clickable
+          label="Kolibi"
+          href="/builds/kolibi"
+          className="pointer-events-auto right-[10%] top-[46%] z-30 w-[170px] rotate-[4deg]"
+        >
           <KolibiReceipt />
-        </div>
-        <div className="pointer-events-auto absolute bottom-[6%] left-[38%] w-[172px] -rotate-[7deg]">
+        </Clickable>
+
+        <Clickable
+          label="Peeranimo"
+          href="/builds/peeranimo"
+          className="pointer-events-auto bottom-[6%] left-[38%] z-30 w-[172px] -rotate-[7deg]"
+        >
           <PeeranimoPolaroid />
-        </div>
+        </Clickable>
+
+        <Clickable
+          label="See it live"
+          href={APP_STORE_URL}
+          external
+          className="pointer-events-auto right-[13%] top-[6%] z-30 -rotate-[16deg]"
+        >
+          <AppStoreStamp />
+        </Clickable>
       </div>
+
+      <ClickHint />
     </section>
   );
 }
 
 function OrivelaNote({ className = "" }: { className?: string }) {
   return (
-    <article
-      className={`relative overflow-hidden bg-[#FCF3C8] px-5 pb-7 pt-5 shadow-[0_12px_32px_rgba(26,26,46,0.14)] ${className}`}
-    >
+    <div className={`relative ${className}`}>
+      <Tape className="-left-2 -top-2 z-20 -rotate-[28deg]" />
       <div
-        className="pointer-events-none absolute inset-y-0 left-0 w-[3px] bg-[#E85A4F]"
+        className="absolute bottom-0 right-0 z-10 h-9 w-9 bg-[#EDE2B0]"
+        style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }}
         aria-hidden="true"
       />
-      <div
-        className="pointer-events-none absolute inset-0"
+      <article
+        className={`relative bg-[#FCF3C8] px-5 pb-7 pt-5 ${PAPER_SHADOW}`}
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(transparent, transparent 26px, rgba(55,138,221,0.22) 26px, rgba(55,138,221,0.22) 27px)",
-          backgroundPosition: "0 10px",
+          clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
         }}
-        aria-hidden="true"
-      />
-      <p
-        className="relative pl-2 text-[1.2rem] leading-snug text-[#1A2E5A]"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
       >
-        Every contract, every subscription. The answer in seconds.
-      </p>
-      <Link
-        href="/builds/orivela"
-        className="relative mt-4 inline-block pl-2 transition-transform hover:scale-105"
-      >
-        <img
-          src="/app-logo-orivela.png"
-          alt="Orivela"
-          className="h-12 w-12 rounded-[22%] object-cover shadow-md"
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-[3px] bg-[#E85A4F]"
+          aria-hidden="true"
         />
-      </Link>
-      <TornEdge fill="#F5F0E8" />
-    </article>
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(transparent, transparent 26px, rgba(55,138,221,0.22) 26px, rgba(55,138,221,0.22) 27px)",
+            backgroundPosition: "0 10px",
+          }}
+          aria-hidden="true"
+        />
+        <p
+          className="relative pl-2 text-[1.2rem] leading-snug text-[#1A2E5A]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          Every contract, every subscription. The answer in seconds.
+        </p>
+        <p
+          className="relative mt-1 -rotate-[1.5deg] pl-2 text-[0.95rem] leading-snug text-[#1A3A8F]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          even the ones you forgot about
+        </p>
+        <div className="relative mt-4 inline-block pl-2">
+          <img
+            src="/app-logo-orivela.png"
+            alt=""
+            className="h-12 w-12 rounded-[22%] object-cover shadow-md"
+          />
+        </div>
+        <TornEdge fill="#F5F0E8" />
+      </article>
+    </div>
   );
 }
 
 function KolibiReceipt({ className = "" }: { className?: string }) {
   return (
-    <article
-      className={`relative bg-white px-4 pb-5 pt-5 shadow-[0_12px_28px_rgba(26,26,46,0.14)] ${className}`}
-    >
-      <ReceiptZigzag position="top" />
-      <p
-        className="text-center text-[10px] font-medium uppercase tracking-[0.2em] text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-      >
-        KOLIBI
-      </p>
-      <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
-      <p
-        className="text-xs leading-relaxed text-[#333]"
-        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-      >
-        One photo. You know what&apos;s left for today.
-      </p>
-      <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
-      <p
-        className="text-right text-[10px] text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-      >
-        REMAINING&nbsp;&nbsp;&nbsp;&nbsp;412 kcal
-      </p>
-      <div className="mt-3 flex justify-center">
-        <Link
-          href="/builds/kolibi"
-          className="inline-block transition-transform hover:scale-105"
+    <div className={`relative ${className}`}>
+      <Tape className="left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
+      <article className={`relative bg-white px-4 pb-5 pt-5 ${PAPER_SHADOW}`}>
+        <ReceiptZigzag position="top" />
+        <p
+          className="text-center text-[10px] font-medium uppercase tracking-[0.2em] text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
         >
+          KOLIBI
+        </p>
+        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
+        <p
+          className="text-xs leading-relaxed text-[#333]"
+          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+        >
+          One photo. You know what&apos;s left for today.
+        </p>
+        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
+        <p
+          className="text-right text-[10px] text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+        >
+          REMAINING&nbsp;&nbsp;&nbsp;&nbsp;412 kcal
+        </p>
+        <div className="mt-3 flex justify-center">
           <img
             src="/app-logo-kolibi.jpg"
-            alt="Kolibi"
+            alt=""
             className="h-11 w-11 rounded-[22%] object-cover shadow-md"
           />
-        </Link>
-      </div>
-      <ReceiptZigzag position="bottom" />
-    </article>
+        </div>
+        <ReceiptZigzag position="bottom" />
+      </article>
+    </div>
   );
 }
 
 function PeeranimoPolaroid({ className = "" }: { className?: string }) {
   return (
-    <article
-      className={`bg-white px-2.5 pb-3 pt-2.5 shadow-[0_14px_36px_rgba(26,26,46,0.16)] ${className}`}
-    >
-      <div className="relative aspect-square w-full overflow-hidden">
-        <div className="relative h-full w-full overflow-hidden">
-          <img
-            src="/peers/peeranimo_european_woman.jpg"
-            alt=""
-            className="h-full w-full object-cover grayscale contrast-125 brightness-110"
-          />
-          <div className="absolute inset-0 bg-[#7B5CF0] mix-blend-color" />
-          <div className="absolute inset-0 bg-[#00C2A8] opacity-20 mix-blend-screen" />
-        </div>
-        <Link
-          href="/builds/peeranimo"
-          className="absolute bottom-2 right-2 z-10 inline-block transition-transform hover:scale-105"
-        >
+    <div className={`relative ${className}`}>
+      <Tape className="-right-2 -top-2 z-20 rotate-[34deg]" />
+      <article className={`bg-white px-2.5 pb-3 pt-2.5 ${PAPER_SHADOW}`}>
+        <div className="relative aspect-square w-full overflow-hidden">
+          <div className="relative h-full w-full overflow-hidden">
+            <img
+              src="/peers/peeranimo_european_woman.jpg"
+              alt=""
+              className="h-full w-full object-cover grayscale contrast-125 brightness-110"
+            />
+            <div className="absolute inset-0 bg-[#7B5CF0] mix-blend-color" />
+            <div className="absolute inset-0 bg-[#00C2A8] opacity-20 mix-blend-screen" />
+          </div>
           <img
             src="/app-logo-peeranimo.webp"
-            alt="Peeranimo"
-            className="h-10 w-10 rounded-[22%] object-cover shadow-md"
+            alt=""
+            className="absolute bottom-2 right-2 z-10 h-10 w-10 rounded-[22%] object-cover shadow-md"
           />
-        </Link>
-      </div>
-      <p
-        className="mt-2.5 px-1 text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        People who get it. Without searching for years.
-      </p>
-    </article>
+        </div>
+        <p
+          className="mt-2.5 px-1 text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          People who get it. Without searching for years.
+        </p>
+      </article>
+    </div>
   );
 }
