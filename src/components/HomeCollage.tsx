@@ -3,6 +3,11 @@
 import type { ReactNode } from "react";
 
 const APP_STORE_URL = "https://apps.apple.com/app/orivela";
+const BALL_SRC: string | null = null;
+
+const ORIVELA_ICON = "/app-logo-orivela.png";
+const KOLIBI_ICON = "/app-logo-kolibi.jpg";
+const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
@@ -13,6 +18,53 @@ function Tape({ className = "" }: { className?: string }) {
       style={{ clipPath: "polygon(3% 0%, 97% 4%, 100% 96%, 2% 100%)" }}
       aria-hidden="true"
     />
+  );
+}
+
+function AppRow({
+  icon,
+  name,
+  platform,
+  compact = false,
+}: {
+  icon: string;
+  name: string;
+  platform: string;
+  compact?: boolean;
+}) {
+  if (compact) {
+    return (
+      <div className="flex flex-col items-center gap-1">
+        <img
+          src={icon}
+          alt=""
+          className="h-[46px] w-[46px] rounded-[11px] border border-black/10"
+        />
+        <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
+          {name}
+        </p>
+        <span className="rounded-full bg-[#1A1A1A] px-2.5 py-[3px] text-[10px] text-[#F5F0E8]">
+          Open
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2.5">
+      <img
+        src={icon}
+        alt=""
+        className="h-[54px] w-[54px] rounded-[13px] border border-black/10"
+      />
+      <div className="leading-tight">
+        <p className="text-[13px] font-medium text-[#1A1A1A]">{name}</p>
+        <p className="text-[11px] text-[#1A1A1A]/55">{platform}</p>
+      </div>
+      <span className="ml-auto rounded-full bg-[#1A1A1A] px-3 py-1 text-[11px] text-[#F5F0E8]">
+        Open
+      </span>
+    </div>
   );
 }
 
@@ -107,36 +159,43 @@ function ReceiptZigzag({ position }: { position: "top" | "bottom" }) {
 function UBahnSign() {
   return (
     <div
-      className="flex h-11 w-11 items-center justify-center rounded-sm bg-[#0057A8] shadow-md"
-      aria-hidden="true"
+      className={`flex items-center gap-2 border-2 border-[#1A1A1A] bg-[#F5F0E8] px-3 py-2 ${PAPER_SHADOW}`}
     >
-      <span
-        className="text-2xl font-bold leading-none text-white"
-        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-      >
-        U
+      <div className="flex h-[30px] w-[30px] items-center justify-center bg-[#0F4C9C]">
+        <span className="text-[20px] font-bold leading-none text-white">U</span>
+      </div>
+      <span className="text-[15px] font-medium tracking-tight text-[#1A1A1A]">
+        Rosenthaler Platz
       </span>
+      <div className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#0F4C9C]">
+        <span className="text-[12px] font-bold leading-none text-white">8</span>
+      </div>
     </div>
   );
 }
 
 function MateCup() {
   return (
-    <svg viewBox="0 0 48 70" className="h-[70px] w-auto" aria-hidden="true">
-      <ellipse cx="24" cy="58" rx="16" ry="5" fill="#5C3A1E" />
+    <svg viewBox="0 0 100 110" className="h-[86px] w-auto" aria-hidden="true">
       <path
-        d="M10 28 C10 28 8 52 24 58 C40 52 38 28 38 28 Z"
+        d="M26 52 C 26 40, 36 33, 50 33 C 64 33, 74 40, 74 52
+           C 83 67, 78 92, 61 100 C 54 104, 46 104, 39 100
+           C 22 92, 17 67, 26 52 Z"
         fill="#8B5A2B"
       />
-      <ellipse cx="24" cy="28" rx="14" ry="5" fill="#6B4423" />
-      <ellipse cx="24" cy="28" rx="10" ry="3.5" fill="#3D2914" />
       <path
-        d="M28 28 L34 6"
-        stroke="#C0C0C0"
-        strokeWidth="2.5"
+        d="M24 66 C 40 75, 60 75, 76 66 L 76 75 C 60 84, 40 84, 24 75 Z"
+        fill="#5C3A1E"
+      />
+      <ellipse cx="50" cy="35" rx="24" ry="7.5" fill="#C9CDD2" />
+      <ellipse cx="50" cy="36" rx="18" ry="5" fill="#5B7C3A" />
+      <path
+        d="M57 38 L88 9"
+        stroke="#C9CDD2"
+        strokeWidth="4.5"
         strokeLinecap="round"
       />
-      <circle cx="34" cy="5" r="3" fill="#A8A8A8" />
+      <circle cx="89" cy="8" r="3.5" fill="#C9CDD2" />
     </svg>
   );
 }
@@ -173,40 +232,54 @@ function SolDeMayo() {
   );
 }
 
-function KabaCup() {
+function FootballSvg() {
   return (
-    <div className="relative h-[86px] w-[72px]">
-      <svg viewBox="0 0 72 86" className="h-full w-full" aria-hidden="true">
-        <path
-          d="M12 22 L14 78 C14 82 20 84 36 84 C52 84 58 82 58 78 L60 22 Z"
-          fill="#F5F5F5"
-          stroke="#DDD"
-          strokeWidth="1"
-        />
-        <ellipse cx="36" cy="22" rx="24" ry="7" fill="#EFEFEF" />
-        <ellipse cx="36" cy="22" rx="18" ry="5" fill="#6B4423" />
-        <path
-          d="M60 28 C70 28 72 40 72 48 C72 56 70 64 60 64"
-          fill="none"
-          stroke="#E8E8E8"
-          strokeWidth="5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M60 30 C68 30 70 40 70 48 C70 54 68 62 60 62"
-          fill="none"
-          stroke="#F5F5F5"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-      </svg>
-      <span
-        className="absolute left-1/2 top-[42%] -translate-x-1/2 -rotate-[3deg] text-[15px] leading-none text-[#E8A33D]"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        Kaba
+    <svg viewBox="0 0 100 100" className="h-[76px] w-auto" aria-hidden="true">
+      <circle
+        cx="50"
+        cy="50"
+        r="46"
+        fill="#FFFFFF"
+        stroke="#1A1A1A"
+        strokeWidth="2.5"
+      />
+      <path d="M50 22 L68 35 L61 57 L39 57 L32 35 Z" fill="#1A1A1A" />
+      <path
+        d="M50 4 L50 22 M68 35 L86 29 M61 57 L72 74 M39 57 L28 74 M32 35 L14 29"
+        stroke="#1A1A1A"
+        strokeWidth="2.5"
+      />
+      <path
+        d="M20 78 C 30 86, 45 90, 58 88"
+        stroke="#1A1A1A"
+        strokeWidth="2.5"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function Football() {
+  if (!BALL_SRC) return <FootballSvg />;
+
+  return (
+    <>
+      <img
+        src={BALL_SRC}
+        alt=""
+        className="h-[76px] w-auto object-contain"
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+          const fallback = e.currentTarget.nextElementSibling;
+          if (fallback instanceof HTMLElement) {
+            fallback.style.display = "block";
+          }
+        }}
+      />
+      <span className="hidden">
+        <FootballSvg />
       </span>
-    </div>
+    </>
   );
 }
 
@@ -235,16 +308,8 @@ function AppStoreStamp() {
         opacity="0.5"
       />
       <defs>
-        <path
-          id="stamp-top"
-          d="M16 46 A30 30 0 0 1 76 46"
-          fill="none"
-        />
-        <path
-          id="stamp-bottom"
-          d="M18 50 A28 28 0 0 0 74 50"
-          fill="none"
-        />
+        <path id="stamp-top" d="M16 46 A30 30 0 0 1 76 46" fill="none" />
+        <path id="stamp-bottom" d="M18 50 A28 28 0 0 0 74 50" fill="none" />
       </defs>
       <text
         fill="#1D9E75"
@@ -315,6 +380,25 @@ function ClickHint() {
   );
 }
 
+function HeadlineBlock({ className = "" }: { className?: string }) {
+  return (
+    <div className={className}>
+      <h1
+        className="text-4xl leading-[1.1] tracking-tight text-[#1A1A1A] md:text-5xl"
+        style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+      >
+        Bring me something
+        <br />
+        you don&apos;t know how to build.
+      </h1>
+      <p className="mt-4 text-base text-[#1A1A1A]/opacity-75">
+        Three apps of my own. I build platforms and apps for other people too —
+        that part pays.
+      </p>
+    </div>
+  );
+}
+
 export default function HomeCollage() {
   return (
     <section
@@ -355,26 +439,6 @@ export default function HomeCollage() {
         </svg>
       </div>
 
-      {/* Kaba stain — desktop only */}
-      <div
-        className="pointer-events-none absolute bottom-[14%] left-[58%] z-10 hidden rotate-[12deg] md:block"
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 120 90" className="w-[110px]">
-          <ellipse
-            cx="60"
-            cy="45"
-            rx="52"
-            ry="36"
-            fill="none"
-            stroke="#8B5E3C"
-            strokeWidth="5"
-            opacity="0.16"
-          />
-          <ellipse cx="58" cy="47" rx="40" ry="27" fill="#8B5E3C" opacity="0.07" />
-        </svg>
-      </div>
-
       {/* Berlin / BA scraps */}
       <Clickable
         label="Why Berlin?"
@@ -399,7 +463,7 @@ export default function HomeCollage() {
       </Clickable>
 
       <div
-        className="absolute bottom-[24%] left-[4%] z-10 hidden -rotate-[6deg] md:block"
+        className="absolute bottom-[24%] left-[4%] z-20 hidden -rotate-[6deg] md:block"
         aria-hidden="true"
       >
         <UBahnSign />
@@ -417,12 +481,27 @@ export default function HomeCollage() {
         <SolDeMayo />
       </div>
 
-      {/* Kaba cup — desktop only, not clickable */}
+      {/* Football — desktop */}
       <div
-        className="pointer-events-none absolute bottom-[19%] left-[62%] z-[45] hidden -rotate-[4deg] md:block"
+        className="pointer-events-none absolute bottom-[22%] left-[58%] z-[45] hidden rotate-[8deg] md:block"
         aria-hidden="true"
       >
-        <KabaCup />
+        <Football />
+      </div>
+
+      {/* TODO post-it */}
+      <div
+        className={`absolute bottom-[30%] left-[47%] z-30 hidden w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 md:block ${PAPER_SHADOW}`}
+      >
+        <Tape className="-left-1 -top-2 -rotate-[18deg]" />
+        <p
+          className="text-[15px] leading-snug text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          TODO:
+          <br />
+          find users
+        </p>
       </div>
 
       {/* Steffen — desktop */}
@@ -443,23 +522,27 @@ export default function HomeCollage() {
 
       {/* Mobile flow */}
       <div className="relative z-30 flex flex-col items-center px-6 pb-10 pt-16 md:hidden">
-        <h1
-          className="max-w-[320px] text-center text-4xl leading-[1.1] tracking-tight text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-        >
-          I build apps
-          <br />
-          nobody asked for.
-        </h1>
-        <p className="mt-4 max-w-[300px] text-center text-base text-[#1A1A1A]/opacity-75">
-          Three of them. No users yet.
-        </p>
+        <HeadlineBlock className="max-w-[340px] text-center" />
 
         <img
           src="/me-steffen.png"
           alt="Steffen"
           className="mt-6 h-[42vh] w-auto object-contain object-bottom drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
         />
+
+        <div
+          className={`relative mt-4 w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW}`}
+        >
+          <Tape className="-left-1 -top-2 -rotate-[18deg]" />
+          <p
+            className="text-[15px] leading-snug text-[#1A1A1A]"
+            style={{ fontFamily: "var(--font-hand), cursive" }}
+          >
+            TODO:
+            <br />
+            find users
+          </p>
+        </div>
 
         <div
           className={`relative mt-6 w-full max-w-[340px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
@@ -497,27 +580,23 @@ export default function HomeCollage() {
           <a href="/builds/kolibi" className="relative block w-full max-w-[200px]">
             <KolibiReceipt className="rotate-[2deg]" />
           </a>
-          <a href="/builds/peeranimo" className="relative block w-full max-w-[210px]">
+          <button
+            type="button"
+            onClick={() =>
+              document
+                .getElementById("room-04")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="relative block w-full max-w-[210px] border-0 bg-transparent p-0 text-left"
+          >
             <PeeranimoPolaroidStack />
-          </a>
+          </button>
         </div>
       </div>
 
       {/* Desktop absolute layout */}
       <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-        <div className="pointer-events-auto absolute left-[34%] top-[13%] max-w-[460px] pr-[6%]">
-          <h1
-            className="text-5xl leading-[1.1] tracking-tight text-[#1A1A1A]"
-            style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-          >
-            I build apps
-            <br />
-            nobody asked for.
-          </h1>
-          <p className="mt-4 text-base text-[#1A1A1A]/opacity-75">
-            Three of them. No users yet.
-          </p>
-        </div>
+        <HeadlineBlock className="pointer-events-auto absolute left-[34%] top-[13%] max-w-[460px] pr-[6%]" />
 
         {/* Service note */}
         <div
@@ -532,7 +611,7 @@ export default function HomeCollage() {
             className="text-[1.2rem] leading-snug text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-hand), cursive" }}
           >
-            I build apps and platforms for other people too. That part pays.
+            Ready when you are.
           </p>
           <button
             type="button"
@@ -548,7 +627,6 @@ export default function HomeCollage() {
           <TornEdge />
         </div>
 
-        {/* App objects — clickable */}
         <Clickable
           label="Orivela"
           href="/builds/orivela"
@@ -560,15 +638,15 @@ export default function HomeCollage() {
         <Clickable
           label="Kolibi"
           href="/builds/kolibi"
-          className="pointer-events-auto right-[15%] top-[24%] z-30 w-[170px] rotate-[4deg]"
+          className="pointer-events-auto right-[13%] top-[30%] z-30 w-[170px] rotate-[4deg]"
         >
           <KolibiReceipt />
         </Clickable>
 
         <Clickable
           label="Peeranimo"
-          href="/builds/peeranimo"
-          className="pointer-events-auto left-[41%] top-[52%] z-[35] w-[210px]"
+          scrollTo="#room-04"
+          className="pointer-events-auto bottom-[16%] left-[30%] z-[35] w-[210px]"
         >
           <PeeranimoPolaroidStack />
         </Clickable>
@@ -628,11 +706,11 @@ function OrivelaNote({ className = "" }: { className?: string }) {
         >
           even the ones you forgot about
         </p>
-        <div className="relative mt-4 inline-block pl-2">
-          <img
-            src="/app-logo-orivela.png"
-            alt=""
-            className="h-12 w-12 rounded-[22%] object-cover shadow-md"
+        <div className="relative mt-4 pl-2">
+          <AppRow
+            icon={ORIVELA_ICON}
+            name="Orivela"
+            platform="iOS · Android"
           />
         </div>
         <TornEdge fill="#F5F0E8" />
@@ -667,11 +745,12 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
         >
           REMAINING&nbsp;&nbsp;&nbsp;&nbsp;412 kcal
         </p>
-        <div className="mt-3 flex justify-center">
-          <img
-            src="/app-logo-kolibi.jpg"
-            alt=""
-            className="h-11 w-11 rounded-[22%] object-cover shadow-md"
+        <div className="mt-3">
+          <AppRow
+            icon={KOLIBI_ICON}
+            name="Kolibi"
+            platform="iOS"
+            compact
           />
         </div>
         <ReceiptZigzag position="bottom" />
@@ -686,21 +765,18 @@ function PeeranimoPolaroidStack() {
       src: "/peers/peeranimo_european_woman.jpg",
       color: "#7B5CF0",
       pos: "left-0 top-[8px] z-10 rotate-[-5deg] md:top-[10px] md:rotate-[-13deg]",
-      showIcon: false,
       showTape: false,
     },
     {
       src: "/peers/peeranimo_asia_woman.jpg",
       color: "#00C2A8",
       pos: "left-[42px] top-0 z-20 rotate-[-2deg] md:left-[56px]",
-      showIcon: false,
       showTape: true,
     },
     {
       src: "/peers/peeranimo_pepe_latino_woman.jpg",
       color: "#D85A30",
       pos: "left-[84px] top-[10px] z-30 rotate-[5deg] md:left-[112px] md:top-[14px] md:rotate-[9deg]",
-      showIcon: true,
       showTape: false,
     },
   ] as const;
@@ -730,23 +806,23 @@ function PeeranimoPolaroidStack() {
                 className="absolute inset-0 opacity-25 mix-blend-screen"
                 style={{ background: "#F5F0E8" }}
               />
-              {card.showIcon && (
-                <img
-                  src="/app-logo-peeranimo.webp"
-                  alt=""
-                  className="absolute bottom-1 right-1 z-10 h-[26px] w-[26px] rounded-[22%] object-cover shadow-md"
-                />
-              )}
             </div>
           </div>
         ))}
       </div>
       <p
-        className="mt-1 -rotate-[2deg] text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
+        className="mt-2 max-w-[210px] -rotate-[2deg] text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         People who get it. Without searching for years.
       </p>
+      <div className="mt-3">
+        <AppRow
+          icon={PEERANIMO_ICON}
+          name="Peeranimo"
+          platform="iOS · Web"
+        />
+      </div>
     </div>
   );
 }
