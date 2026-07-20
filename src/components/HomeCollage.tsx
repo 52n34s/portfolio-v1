@@ -357,7 +357,7 @@ export default function HomeCollage() {
 
       {/* Kaba stain — desktop only */}
       <div
-        className="pointer-events-none absolute bottom-[18%] left-[52%] z-10 hidden rotate-[12deg] md:block"
+        className="pointer-events-none absolute bottom-[14%] left-[58%] z-10 hidden rotate-[12deg] md:block"
         aria-hidden="true"
       >
         <svg viewBox="0 0 120 90" className="w-[110px]">
@@ -379,7 +379,7 @@ export default function HomeCollage() {
       <Clickable
         label="Why Berlin?"
         scrollTo="#room-02"
-        className="left-[19%] top-[5%] z-20 rotate-[2deg]"
+        className="left-[19%] top-[5%] z-10 rotate-[2deg]"
       >
         <svg
           viewBox="0 0 120 420"
@@ -399,19 +399,19 @@ export default function HomeCollage() {
       </Clickable>
 
       <div
-        className="absolute bottom-[24%] left-[4%] z-20 hidden -rotate-[6deg] md:block"
+        className="absolute bottom-[24%] left-[4%] z-10 hidden -rotate-[6deg] md:block"
         aria-hidden="true"
       >
         <UBahnSign />
       </div>
       <div
-        className="absolute left-[30%] top-[62%] z-20 rotate-[5deg]"
+        className="absolute left-[30%] top-[62%] z-10 rotate-[5deg]"
         aria-hidden="true"
       >
         <MateCup />
       </div>
       <div
-        className="absolute right-[13%] top-[24%] z-20 hidden md:block"
+        className="absolute right-[13%] top-[24%] z-10 hidden md:block"
         aria-hidden="true"
       >
         <SolDeMayo />
@@ -419,7 +419,7 @@ export default function HomeCollage() {
 
       {/* Kaba cup — desktop only, not clickable */}
       <div
-        className="pointer-events-none absolute bottom-[26%] left-[54%] z-20 hidden -rotate-[4deg] md:block"
+        className="pointer-events-none absolute bottom-[19%] left-[62%] z-[45] hidden -rotate-[4deg] md:block"
         aria-hidden="true"
       >
         <KabaCup />
@@ -521,7 +521,7 @@ export default function HomeCollage() {
 
         {/* Service note */}
         <div
-          className={`pointer-events-auto absolute left-[34%] top-[40%] max-w-[380px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+          className={`pointer-events-auto absolute left-[34%] top-[40%] z-30 max-w-[380px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
         >
           <Tape className="-left-2 -top-2 -rotate-[14deg]" />
           <div
@@ -552,7 +552,7 @@ export default function HomeCollage() {
         <Clickable
           label="Orivela"
           href="/builds/orivela"
-          className="pointer-events-auto right-[20%] top-[8%] z-30 w-[220px] -rotate-[5deg]"
+          className="pointer-events-auto right-[20%] top-[8%] z-[35] w-[220px] -rotate-[5deg]"
         >
           <OrivelaNote />
         </Clickable>
@@ -560,7 +560,7 @@ export default function HomeCollage() {
         <Clickable
           label="Kolibi"
           href="/builds/kolibi"
-          className="pointer-events-auto right-[10%] top-[46%] z-30 w-[170px] rotate-[4deg]"
+          className="pointer-events-auto right-[15%] top-[24%] z-30 w-[170px] rotate-[4deg]"
         >
           <KolibiReceipt />
         </Clickable>
@@ -568,7 +568,7 @@ export default function HomeCollage() {
         <Clickable
           label="Peeranimo"
           href="/builds/peeranimo"
-          className="pointer-events-auto bottom-[6%] left-[38%] z-30 w-[210px]"
+          className="pointer-events-auto left-[41%] top-[52%] z-[35] w-[210px]"
         >
           <PeeranimoPolaroidStack />
         </Clickable>
@@ -577,7 +577,7 @@ export default function HomeCollage() {
           label="See it live"
           href={APP_STORE_URL}
           external
-          className="pointer-events-auto right-[13%] top-[6%] z-30 -rotate-[16deg]"
+          className="pointer-events-auto right-[13%] top-[6%] z-40 -rotate-[16deg]"
         >
           <AppStoreStamp />
         </Clickable>
