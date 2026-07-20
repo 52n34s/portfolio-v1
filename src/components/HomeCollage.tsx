@@ -497,8 +497,8 @@ export default function HomeCollage() {
           <a href="/builds/kolibi" className="relative block w-full max-w-[200px]">
             <KolibiReceipt className="rotate-[2deg]" />
           </a>
-          <a href="/builds/peeranimo" className="relative block w-full max-w-[200px]">
-            <PeeranimoPolaroid className="-rotate-[3deg]" />
+          <a href="/builds/peeranimo" className="relative block w-full max-w-[210px]">
+            <PeeranimoPolaroidStack />
           </a>
         </div>
       </div>
@@ -568,9 +568,9 @@ export default function HomeCollage() {
         <Clickable
           label="Peeranimo"
           href="/builds/peeranimo"
-          className="pointer-events-auto bottom-[6%] left-[38%] z-30 w-[172px] -rotate-[7deg]"
+          className="pointer-events-auto bottom-[6%] left-[38%] z-30 w-[210px]"
         >
-          <PeeranimoPolaroid />
+          <PeeranimoPolaroidStack />
         </Clickable>
 
         <Clickable
@@ -680,34 +680,73 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
   );
 }
 
-function PeeranimoPolaroid({ className = "" }: { className?: string }) {
+function PeeranimoPolaroidStack() {
+  const cards = [
+    {
+      src: "/peers/peeranimo_european_woman.jpg",
+      color: "#7B5CF0",
+      pos: "left-0 top-[8px] z-10 rotate-[-5deg] md:top-[10px] md:rotate-[-13deg]",
+      showIcon: false,
+      showTape: false,
+    },
+    {
+      src: "/peers/peeranimo_asia_woman.jpg",
+      color: "#00C2A8",
+      pos: "left-[42px] top-0 z-20 rotate-[-2deg] md:left-[56px]",
+      showIcon: false,
+      showTape: true,
+    },
+    {
+      src: "/peers/peeranimo_pepe_latino_woman.jpg",
+      color: "#D85A30",
+      pos: "left-[84px] top-[10px] z-30 rotate-[5deg] md:left-[112px] md:top-[14px] md:rotate-[9deg]",
+      showIcon: true,
+      showTape: false,
+    },
+  ] as const;
+
   return (
-    <div className={`relative ${className}`}>
-      <Tape className="-right-2 -top-2 z-20 rotate-[34deg]" />
-      <article className={`bg-white px-2.5 pb-3 pt-2.5 ${PAPER_SHADOW}`}>
-        <div className="relative aspect-square w-full overflow-hidden">
-          <div className="relative h-full w-full overflow-hidden">
-            <img
-              src="/peers/peeranimo_european_woman.jpg"
-              alt=""
-              className="h-full w-full object-cover grayscale contrast-125 brightness-110"
-            />
-            <div className="absolute inset-0 bg-[#7B5CF0] mix-blend-color" />
-            <div className="absolute inset-0 bg-[#00C2A8] opacity-20 mix-blend-screen" />
+    <div className="relative">
+      <div className="relative h-[150px] w-[170px] md:h-[180px] md:w-[210px]">
+        {cards.map((card) => (
+          <div
+            key={card.src}
+            className={`absolute w-[78px] bg-white p-[6px] pb-[18px] md:w-[92px] ${PAPER_SHADOW} ${card.pos}`}
+          >
+            {card.showTape && (
+              <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
+            )}
+            <div className="relative aspect-square overflow-hidden">
+              <img
+                src={card.src}
+                alt=""
+                className="h-full w-full object-cover grayscale contrast-[1.7] brightness-[1.15]"
+              />
+              <div
+                className="absolute inset-0 mix-blend-color"
+                style={{ background: card.color }}
+              />
+              <div
+                className="absolute inset-0 opacity-25 mix-blend-screen"
+                style={{ background: "#F5F0E8" }}
+              />
+              {card.showIcon && (
+                <img
+                  src="/app-logo-peeranimo.webp"
+                  alt=""
+                  className="absolute bottom-1 right-1 z-10 h-[26px] w-[26px] rounded-[22%] object-cover shadow-md"
+                />
+              )}
+            </div>
           </div>
-          <img
-            src="/app-logo-peeranimo.webp"
-            alt=""
-            className="absolute bottom-2 right-2 z-10 h-10 w-10 rounded-[22%] object-cover shadow-md"
-          />
-        </div>
-        <p
-          className="mt-2.5 px-1 text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-hand), cursive" }}
-        >
-          People who get it. Without searching for years.
-        </p>
-      </article>
+        ))}
+      </div>
+      <p
+        className="mt-1 -rotate-[2deg] text-center text-[1.05rem] leading-snug text-[#1A1A1A]"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
+      >
+        People who get it. Without searching for years.
+      </p>
     </div>
   );
 }
