@@ -43,23 +43,6 @@ function ReceiptZigzag({ position }: { position: "top" | "bottom" }) {
   );
 }
 
-function Fernsehturm() {
-  return (
-    <svg
-      viewBox="0 0 40 90"
-      className="h-[90px] w-auto"
-      aria-hidden="true"
-      fill="#1A1A1A"
-    >
-      <rect x="18" y="0" width="4" height="8" />
-      <circle cx="20" cy="16" r="8" />
-      <rect x="18.5" y="24" width="3" height="52" />
-      <polygon points="12,76 28,76 32,90 8,90" />
-      <rect x="14" y="48" width="12" height="2" opacity="0.5" />
-    </svg>
-  );
-}
-
 function UBahnSign() {
   return (
     <div
@@ -174,11 +157,22 @@ export default function HomeCollage() {
       </div>
 
       {/* Berlin / BA scraps — z-20 */}
-      <div
-        className="absolute left-[26%] top-[6%] z-20 rotate-[2deg]"
-        aria-hidden="true"
-      >
-        <Fernsehturm />
+      <div className="pointer-events-none absolute left-[19%] top-[5%] z-20 rotate-[2deg]">
+        <svg
+          viewBox="0 0 120 420"
+          className="h-[130px] w-auto md:h-[230px]"
+          aria-hidden="true"
+        >
+          <path
+            d="M40 420 C46 372, 51 312, 53 240 L67 240 C69 312, 74 372, 80 420 Z"
+            fill="#1A1A1A"
+          />
+          <circle cx="60" cy="215" r="28" fill="#1A1A1A" />
+          <path d="M55 192 L65 192 L63 150 L57 150 Z" fill="#1A1A1A" />
+          <path d="M57 150 L63 150 L62 96 L58 96 Z" fill="#1A1A1A" />
+          <path d="M58 96 L62 96 L61 44 L59 44 Z" fill="#1A1A1A" />
+          <path d="M59 44 L61 44 L60 6 Z" fill="#1A1A1A" />
+        </svg>
       </div>
       <div
         className="absolute bottom-[24%] left-[4%] z-20 hidden -rotate-[6deg] md:block"
@@ -193,7 +187,7 @@ export default function HomeCollage() {
         <MateCup />
       </div>
       <div
-        className="absolute right-[4%] top-[30%] z-20 hidden md:block"
+        className="absolute right-[13%] top-[24%] z-20 hidden md:block"
         aria-hidden="true"
       >
         <SolDeMayo />
@@ -292,7 +286,7 @@ export default function HomeCollage() {
         <div className="pointer-events-auto absolute right-[10%] top-[46%] w-[170px] rotate-[4deg]">
           <KolibiReceipt />
         </div>
-        <div className="pointer-events-auto absolute bottom-[6%] left-[38%] w-[200px] -rotate-[7deg]">
+        <div className="pointer-events-auto absolute bottom-[6%] left-[38%] w-[172px] -rotate-[7deg]">
           <PeeranimoPolaroid />
         </div>
       </div>
@@ -387,12 +381,16 @@ function PeeranimoPolaroid({ className = "" }: { className?: string }) {
     <article
       className={`bg-white px-2.5 pb-3 pt-2.5 shadow-[0_14px_36px_rgba(26,26,46,0.16)] ${className}`}
     >
-      <div className="relative aspect-square w-full overflow-hidden bg-[#00C2A8]">
-        <img
-          src="/peers/peeranimo_european_woman.jpg"
-          alt=""
-          className="h-full w-full object-cover"
-        />
+      <div className="relative aspect-square w-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden">
+          <img
+            src="/peers/peeranimo_european_woman.jpg"
+            alt=""
+            className="h-full w-full object-cover grayscale contrast-125 brightness-110"
+          />
+          <div className="absolute inset-0 bg-[#7B5CF0] mix-blend-color" />
+          <div className="absolute inset-0 bg-[#00C2A8] opacity-20 mix-blend-screen" />
+        </div>
         <Link
           href="/builds/peeranimo"
           className="absolute bottom-2 right-2 z-10 inline-block transition-transform hover:scale-105"
