@@ -59,7 +59,7 @@ function AppRow({
       />
       <div className="leading-tight">
         <p className="text-[13px] font-medium text-[#1A1A1A]">{name}</p>
-        <p className="text-[11px] text-[#1A1A1A]/55">{platform}</p>
+        <p className="text-[10px] text-[#1A1A1A]/55">{platform}</p>
       </div>
       <span className="ml-auto rounded-full bg-[#1A1A1A] px-3 py-1 text-[11px] text-[#F5F0E8]">
         Open
@@ -230,38 +230,50 @@ function SolDeMayo() {
 
 function FootballSvg() {
   return (
-    <svg viewBox="0 0 120 120" className="h-[84px] w-auto" aria-hidden="true">
+    <svg viewBox="0 0 200 200" className="h-[92px] w-auto" aria-hidden="true">
       <defs>
+        <radialGradient id="ballShade" cx="34%" cy="27%" r="80%">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="55%" stopColor="#F3F0EA" />
+          <stop offset="100%" stopColor="#B9B3A6" />
+        </radialGradient>
         <clipPath id="ballClip">
-          <circle cx="60" cy="60" r="55" />
+          <circle cx="100" cy="100" r="90" />
         </clipPath>
       </defs>
-      <circle cx="60" cy="60" r="55" fill="#FFFFFF" />
+      <circle cx="100" cy="100" r="90" fill="url(#ballShade)" />
       <g clipPath="url(#ballClip)">
-        <path
-          d="M60 33 L85.7 51.7 L75.9 81.9 L44.1 81.9 L34.3 51.7 Z"
-          fill="#1A1A1A"
-        />
-        <path d="M96 10 L116 24 L108 47 L84 47 L77 24 Z" fill="#1A1A1A" />
-        <path d="M119 79 L134 98 L120 118 L98 111 L96 87 Z" fill="#1A1A1A" />
-        <path d="M60 122 L82 130 L82 154 L38 154 L38 130 Z" fill="#1A1A1A" />
-        <path d="M1 79 L24 87 L22 111 L0 118 L-14 98 Z" fill="#1A1A1A" />
-        <path d="M24 10 L43 24 L36 47 L12 47 L4 24 Z" fill="#1A1A1A" />
-        <g stroke="#1A1A1A" strokeWidth="2.5" fill="none">
-          <path d="M60 33 L60 -2" />
-          <path d="M85.7 51.7 L119 41" />
-          <path d="M75.9 81.9 L96 111" />
-          <path d="M44.1 81.9 L24 111" />
-          <path d="M34.3 51.7 L1 41" />
+        <path d="M100 62 L136 88 L122 130 L78 130 L64 88 Z" fill="#1A1A1A" />
+        <path d="M148 4 L184 30 L170 72 L126 72 L112 30 Z" fill="#1A1A1A" />
+        <path d="M52 4 L88 30 L74 72 L30 72 L16 30 Z" fill="#1A1A1A" />
+        <path d="M198 106 L214 150 L178 178 L144 152 L154 110 Z" fill="#1A1A1A" />
+        <path d="M2 106 L46 110 L56 152 L22 178 L-14 150 Z" fill="#1A1A1A" />
+        <path d="M100 170 L136 196 L122 238 L78 238 L64 196 Z" fill="#1A1A1A" />
+        <g
+          stroke="#1A1A1A"
+          strokeWidth="5"
+          fill="none"
+          strokeLinecap="round"
+        >
+          <path d="M100 62 L100 38" />
+          <path d="M136 88 L158 80" />
+          <path d="M122 130 L134 170" />
+          <path d="M78 130 L66 170" />
+          <path d="M64 88 L42 80" />
         </g>
+        <path
+          d="M100 190 A90 90 0 0 0 190 100 A122 122 0 0 1 100 190 Z"
+          fill="#1A1A1A"
+          opacity="0.13"
+        />
       </g>
       <circle
-        cx="60"
-        cy="60"
-        r="55"
+        cx="100"
+        cy="100"
+        r="90"
         fill="none"
         stroke="#1A1A1A"
-        strokeWidth="2.5"
+        strokeWidth="5"
       />
     </svg>
   );
@@ -275,7 +287,7 @@ function Football() {
       <img
         src={BALL_SRC}
         alt=""
-        className="h-[84px] w-auto object-contain"
+        className="h-[92px] w-auto object-contain"
         onError={(e) => {
           e.currentTarget.style.display = "none";
           const fallback = e.currentTarget.nextElementSibling;
@@ -420,23 +432,23 @@ function PeeranimoPolaroids() {
     {
       src: "/peers/peeranimo_asia_woman.jpg",
       color: "#00C2A8",
-      pos: "left-[42px] top-0 z-20 rotate-[-2deg] md:left-[56px]",
+      pos: "left-[40px] top-0 z-20 rotate-[-2deg] md:left-[51px]",
       showTape: true,
     },
     {
       src: "/peers/peeranimo_pepe_latino_woman.jpg",
       color: "#D85A30",
-      pos: "left-[84px] top-[10px] z-30 rotate-[5deg] md:left-[112px] md:top-[14px] md:rotate-[9deg]",
+      pos: "left-[80px] top-[10px] z-30 rotate-[5deg] md:left-[102px] md:top-[14px] md:rotate-[9deg]",
       showTape: false,
     },
   ] as const;
 
   return (
-    <div className="relative h-[150px]">
+    <div className="relative h-[132px]">
       {cards.map((card) => (
         <div
           key={card.src}
-          className={`absolute w-[78px] bg-white p-[6px] pb-[18px] md:w-[92px] ${PAPER_SHADOW} ${card.pos}`}
+          className={`absolute w-[78px] bg-white p-[6px] pb-[18px] md:w-[84px] ${PAPER_SHADOW} ${card.pos}`}
         >
           {card.showTape && (
             <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
@@ -464,19 +476,19 @@ function PeeranimoPolaroids() {
 
 function PeeranimoUnit() {
   return (
-    <div className="w-[236px]">
+    <div className="w-[216px]">
       <PeeranimoPolaroids />
       <p
-        className="mt-1 -rotate-1 text-center text-[15px] leading-snug text-[#1A1A1A]"
+        className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[14px] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         People who get it. Without searching for years.
       </p>
-      <div className="mt-2.5">
+      <div className="mt-1.5">
         <AppRow
           icon={PEERANIMO_ICON}
           name="Peeranimo"
-          platform="iOS · Web"
+          platform="Social platform · iOS · Web"
         />
       </div>
     </div>
@@ -527,11 +539,11 @@ export default function HomeCollage() {
       <Clickable
         label="Why Berlin?"
         scrollTo="#room-02"
-        className="left-[20%] top-[4%] z-10 rotate-[2deg]"
+        className="left-[20%] top-[3%] z-10 rotate-[2deg]"
       >
         <svg
           viewBox="0 0 120 420"
-          className="h-[210px] w-auto"
+          className="h-[270px] w-auto"
           aria-hidden="true"
         >
           <path
@@ -547,7 +559,7 @@ export default function HomeCollage() {
       </Clickable>
 
       <div
-        className="absolute bottom-[30%] left-[2%] z-[25] hidden -rotate-[6deg] md:block"
+        className="absolute left-[50%] top-[28%] z-[25] hidden -rotate-[6deg] md:block"
         aria-hidden="true"
       >
         <UBahnSign />
@@ -573,18 +585,18 @@ export default function HomeCollage() {
         <Football />
       </div>
 
-      {/* TODO post-it */}
+      {/* Post-it */}
       <div
-        className={`absolute bottom-[33%] left-[57%] z-30 hidden w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 md:block ${PAPER_SHADOW}`}
+        className={`absolute bottom-[13%] left-[47%] z-30 hidden w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 md:block ${PAPER_SHADOW}`}
       >
         <Tape className="-left-1 -top-2 -rotate-[18deg]" />
         <p
           className="text-[15px] leading-snug text-[#1A1A1A]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
-          TODO:
+          new idea
           <br />
-          find users
+          started already
         </p>
       </div>
 
@@ -622,9 +634,9 @@ export default function HomeCollage() {
             className="text-[15px] leading-snug text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-hand), cursive" }}
           >
-            TODO:
+            new idea
             <br />
-            find users
+            started already
           </p>
         </div>
 
@@ -674,9 +686,9 @@ export default function HomeCollage() {
       <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
         <HeadlineBlock className="pointer-events-auto absolute left-[31%] top-[11%] z-30 max-w-[440px]" />
 
-        {/* Service note — top-[52%] keeps ≥40px under 3-line headline */}
+        {/* Service note */}
         <div
-          className={`pointer-events-auto absolute left-[32%] top-[52%] z-30 w-[300px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+          className={`pointer-events-auto absolute left-[51%] top-[52%] z-30 w-[290px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
         >
           <Tape className="-left-2 -top-2 -rotate-[14deg]" />
           <div
@@ -722,7 +734,7 @@ export default function HomeCollage() {
         <Clickable
           label="Peeranimo"
           href="/builds/peeranimo"
-          className="pointer-events-auto bottom-[9%] left-[33%] z-[35]"
+          className="pointer-events-auto bottom-[8%] left-[31%] z-[35]"
         >
           <PeeranimoUnit />
         </Clickable>
