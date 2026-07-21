@@ -1,6 +1,15 @@
 "use client";
 
-import type { ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
+
+const DESIGN_W = 1440;
+const DESIGN_H = 900;
 
 const APP_STORE_URL = "https://apps.apple.com/app/orivela";
 const BALL_SRC: string | null = null;
@@ -74,6 +83,7 @@ function Clickable({
   scrollTo,
   children,
   className = "",
+  style,
   external = false,
 }: {
   label: string;
@@ -81,6 +91,7 @@ function Clickable({
   scrollTo?: string;
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   external?: boolean;
 }) {
   const handle = () => {
@@ -92,7 +103,7 @@ function Clickable({
   const content = (
     <div className="group relative cursor-pointer transition-transform duration-200 hover:scale-[1.04] hover:-rotate-1">
       {children}
-      <span className="pointer-events-none absolute -bottom-6 left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-[#1A1A1A] px-3 py-1 text-xs text-[#F5F0E8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 md:block">
+      <span className="pointer-events-none absolute -bottom-6 left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-[#1A1A1A] px-3 py-1 text-xs text-[#F5F0E8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 lg:block">
         {label}
       </span>
     </div>
@@ -103,6 +114,7 @@ function Clickable({
       <a
         href={href}
         className={`absolute ${className}`}
+        style={style}
         {...(external
           ? { target: "_blank", rel: "noopener noreferrer" }
           : {})}
@@ -113,7 +125,12 @@ function Clickable({
   }
 
   return (
-    <button type="button" onClick={handle} className={`absolute ${className}`}>
+    <button
+      type="button"
+      onClick={handle}
+      className={`absolute ${className}`}
+      style={style}
+    >
       {content}
     </button>
   );
@@ -172,7 +189,7 @@ function UBahnSign() {
 
 function MateCup() {
   return (
-    <svg viewBox="0 0 100 110" className="h-[82px] w-auto" aria-hidden="true">
+    <svg viewBox="0 0 100 110" className="h-[80px] w-auto" aria-hidden="true">
       <path
         d="M26 52 C 26 40, 36 33, 50 33 C 64 33, 74 40, 74 52
            C 83 67, 78 92, 61 100 C 54 104, 46 104, 39 100
@@ -228,21 +245,30 @@ function SolDeMayo() {
   );
 }
 
-function FootballSvg() {
+function FootballSvg({
+  className = "h-[92px] w-auto",
+  idPrefix = "ball",
+}: {
+  className?: string;
+  idPrefix?: string;
+}) {
+  const shadeId = `${idPrefix}Shade`;
+  const clipId = `${idPrefix}Clip`;
+
   return (
-    <svg viewBox="0 0 200 200" className="h-[92px] w-auto" aria-hidden="true">
+    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
       <defs>
-        <radialGradient id="ballShade" cx="34%" cy="27%" r="80%">
+        <radialGradient id={shadeId} cx="34%" cy="27%" r="80%">
           <stop offset="0%" stopColor="#FFFFFF" />
           <stop offset="55%" stopColor="#F3F0EA" />
           <stop offset="100%" stopColor="#B9B3A6" />
         </radialGradient>
-        <clipPath id="ballClip">
+        <clipPath id={clipId}>
           <circle cx="100" cy="100" r="90" />
         </clipPath>
       </defs>
-      <circle cx="100" cy="100" r="90" fill="url(#ballShade)" />
-      <g clipPath="url(#ballClip)">
+      <circle cx="100" cy="100" r="90" fill={`url(#${shadeId})`} />
+      <g clipPath={`url(#${clipId})`}>
         <path d="M100 62 L136 88 L122 130 L78 130 L64 88 Z" fill="#1A1A1A" />
         <path d="M148 4 L184 30 L170 72 L126 72 L112 30 Z" fill="#1A1A1A" />
         <path d="M52 4 L88 30 L74 72 L30 72 L16 30 Z" fill="#1A1A1A" />
@@ -279,15 +305,23 @@ function FootballSvg() {
   );
 }
 
-function Football() {
-  if (!BALL_SRC) return <FootballSvg />;
+function Football({
+  className = "h-[92px] w-auto",
+  idPrefix = "ball",
+}: {
+  className?: string;
+  idPrefix?: string;
+}) {
+  if (!BALL_SRC) {
+    return <FootballSvg className={className} idPrefix={idPrefix} />;
+  }
 
   return (
     <>
       <img
         src={BALL_SRC}
         alt=""
-        className="h-[92px] w-auto object-contain"
+        className={`${className} object-contain`}
         onError={(e) => {
           e.currentTarget.style.display = "none";
           const fallback = e.currentTarget.nextElementSibling;
@@ -297,7 +331,7 @@ function Football() {
         }}
       />
       <span className="hidden">
-        <FootballSvg />
+        <FootballSvg className={className} idPrefix={idPrefix} />
       </span>
     </>
   );
@@ -307,7 +341,7 @@ function AppStoreStamp() {
   return (
     <svg
       viewBox="0 0 92 92"
-      className="h-[92px] w-[92px] opacity-80"
+      className="h-[95px] w-[95px] opacity-80"
       aria-hidden="true"
     >
       <circle
@@ -370,7 +404,8 @@ function AppStoreStamp() {
 function ClickHint() {
   return (
     <div
-      className="pointer-events-none absolute bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-2 md:flex"
+      className="pointer-events-none absolute z-40 flex items-center gap-2"
+      style={{ left: 640, top: 855 }}
       aria-hidden="true"
     >
       <svg viewBox="0 0 28 28" className="h-6 w-6 -rotate-[25deg] opacity-50">
@@ -400,11 +435,38 @@ function ClickHint() {
   );
 }
 
-function HeadlineBlock({ className = "" }: { className?: string }) {
+function HeadlineBlock({
+  className = "",
+  variant = "desktop",
+}: {
+  className?: string;
+  variant?: "desktop" | "mobile";
+}) {
+  if (variant === "mobile") {
+    return (
+      <div className={className}>
+        <h1
+          className="font-serif text-[34px] leading-[1.12] text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+        >
+          Out-of-the-box thinker.
+          <br />
+          Creative mind.
+          <br />
+          Always building something new.
+        </h1>
+        <p className="mt-4 text-[15px] leading-relaxed text-[#1A1A1A]/75">
+          Three apps of my own — and platforms for people whose idea doesn&apos;t
+          exist yet.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className={className}>
       <h1
-        className="text-4xl leading-[1.1] tracking-tight text-[#1A1A1A] md:text-5xl"
+        className="text-[52px] leading-[1.1] tracking-tight text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
       >
         Out-of-the-box thinker.
@@ -413,7 +475,7 @@ function HeadlineBlock({ className = "" }: { className?: string }) {
         <br />
         Always building something new.
       </h1>
-      <p className="mt-3 max-w-[430px] text-base text-[#1A1A1A]/opacity-75">
+      <p className="mt-3 text-[17px] text-[#1A1A1A]/opacity-75">
         Three apps of my own — and platforms for people whose idea doesn&apos;t
         exist yet.
       </p>
@@ -421,34 +483,62 @@ function HeadlineBlock({ className = "" }: { className?: string }) {
   );
 }
 
-function PeeranimoPolaroids() {
-  const cards = [
-    {
-      src: "/peers/peeranimo_european_woman.jpg",
-      color: "#7B5CF0",
-      pos: "left-0 top-[8px] z-10 rotate-[-5deg] md:top-[10px] md:rotate-[-13deg]",
-      showTape: false,
-    },
-    {
-      src: "/peers/peeranimo_asia_woman.jpg",
-      color: "#00C2A8",
-      pos: "left-[40px] top-0 z-20 rotate-[-2deg] md:left-[51px]",
-      showTape: true,
-    },
-    {
-      src: "/peers/peeranimo_pepe_latino_woman.jpg",
-      color: "#D85A30",
-      pos: "left-[80px] top-[10px] z-30 rotate-[5deg] md:left-[102px] md:top-[14px] md:rotate-[9deg]",
-      showTape: false,
-    },
-  ] as const;
+function PeeranimoPolaroids({
+  variant = "desktop",
+}: {
+  variant?: "desktop" | "mobile";
+}) {
+  const cards =
+    variant === "mobile"
+      ? ([
+          {
+            src: "/peers/peeranimo_european_woman.jpg",
+            color: "#7B5CF0",
+            pos: "left-0 top-[8px] z-10 rotate-[-3deg]",
+            showTape: false,
+          },
+          {
+            src: "/peers/peeranimo_asia_woman.jpg",
+            color: "#00C2A8",
+            pos: "left-[40px] top-0 z-20 rotate-[-2deg]",
+            showTape: true,
+          },
+          {
+            src: "/peers/peeranimo_pepe_latino_woman.jpg",
+            color: "#D85A30",
+            pos: "left-[80px] top-[10px] z-30 rotate-[3deg]",
+            showTape: false,
+          },
+        ] as const)
+      : ([
+          {
+            src: "/peers/peeranimo_european_woman.jpg",
+            color: "#7B5CF0",
+            pos: "left-0 top-[10px] z-10 rotate-[-13deg]",
+            showTape: false,
+          },
+          {
+            src: "/peers/peeranimo_asia_woman.jpg",
+            color: "#00C2A8",
+            pos: "left-[51px] top-0 z-20 rotate-[-2deg]",
+            showTape: true,
+          },
+          {
+            src: "/peers/peeranimo_pepe_latino_woman.jpg",
+            color: "#D85A30",
+            pos: "left-[102px] top-[14px] z-30 rotate-[9deg]",
+            showTape: false,
+          },
+        ] as const);
+
+  const cardWidth = variant === "mobile" ? "w-[78px]" : "w-[84px]";
 
   return (
     <div className="relative h-[132px]">
       {cards.map((card) => (
         <div
           key={card.src}
-          className={`absolute w-[78px] bg-white p-[6px] pb-[18px] md:w-[84px] ${PAPER_SHADOW} ${card.pos}`}
+          className={`absolute bg-white p-[6px] pb-[18px] ${cardWidth} ${PAPER_SHADOW} ${card.pos}`}
         >
           {card.showTape && (
             <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
@@ -474,10 +564,14 @@ function PeeranimoPolaroids() {
   );
 }
 
-function PeeranimoUnit() {
+function PeeranimoUnit({
+  variant = "desktop",
+}: {
+  variant?: "desktop" | "mobile";
+}) {
   return (
     <div className="w-[216px]">
-      <PeeranimoPolaroids />
+      <PeeranimoPolaroids variant={variant} />
       <p
         className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[14px] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
@@ -495,262 +589,73 @@ function PeeranimoUnit() {
   );
 }
 
-export default function HomeCollage() {
+function ServiceCard({ className = "" }: { className?: string }) {
   return (
-    <section
-      id="room-01"
-      className="home-collage relative min-h-screen w-full overflow-hidden bg-[#F5F0E8] md:h-screen md:min-h-0"
+    <div
+      className={`relative bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW} ${className}`}
     >
-      {/* Torn paper planes — z-0 */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <svg
-          className="absolute left-0 top-[18%] h-[50%] w-[32%] -rotate-[4deg]"
-          viewBox="0 0 280 340"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="#7B5CF0"
-            d="M36 62 L62 54 L88 65 L116 55 L146 66 L176 56 L204 67 L232 57 L238 300 L210 310 L182 300 L154 311 L124 301 L96 312 L66 302 L40 312 Z"
-          />
-        </svg>
-        <svg
-          className="absolute right-[16%] top-[4%] h-[26%] w-[22%] -rotate-[7deg]"
-          viewBox="0 0 200 180"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="#F4D35E"
-            d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
-          />
-        </svg>
-        <svg
-          className="absolute bottom-0 right-[7%] h-[28%] w-[26%] rotate-[3deg]"
-          viewBox="0 0 260 280"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="#00C2A8"
-            d="M28 48 L54 40 L82 52 L110 42 L140 54 L168 44 L196 55 L224 46 L232 250 L204 262 L176 252 L148 263 L118 253 L90 264 L60 254 L34 265 Z"
-          />
-        </svg>
-      </div>
-
-      {/* Berlin / BA scraps */}
-      <Clickable
-        label="Why Berlin?"
-        scrollTo="#room-02"
-        className="left-[20%] top-[3%] z-10 rotate-[2deg]"
-      >
-        <svg
-          viewBox="0 0 120 420"
-          className="h-[270px] w-auto"
-          aria-hidden="true"
-        >
-          <path
-            d="M40 420 C46 372, 51 312, 53 240 L67 240 C69 312, 74 372, 80 420 Z"
-            fill="#1A1A1A"
-          />
-          <circle cx="60" cy="215" r="28" fill="#1A1A1A" />
-          <path d="M55 192 L65 192 L63 150 L57 150 Z" fill="#1A1A1A" />
-          <path d="M57 150 L63 150 L62 96 L58 96 Z" fill="#1A1A1A" />
-          <path d="M58 96 L62 96 L61 44 L59 44 Z" fill="#1A1A1A" />
-          <path d="M59 44 L61 44 L60 6 Z" fill="#1A1A1A" />
-        </svg>
-      </Clickable>
-
+      <Tape className="-left-2 -top-2 -rotate-[14deg]" />
       <div
-        className="absolute left-[50%] top-[28%] z-[25] hidden -rotate-[6deg] md:block"
+        className="pointer-events-none absolute inset-x-0 top-[46%] h-[3px] bg-gradient-to-b from-black/10 via-transparent to-white/50"
         aria-hidden="true"
+      />
+      <p
+        className="text-[1.2rem] leading-snug text-[#1A1A1A]"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
       >
-        <UBahnSign />
-      </div>
-      <div
-        className="absolute bottom-[38%] left-[25%] z-20 rotate-[5deg]"
-        aria-hidden="true"
+        Bring me something nobody has built yet.
+      </p>
+      <button
+        type="button"
+        onClick={() =>
+          document
+            .getElementById("room-05")
+            ?.scrollIntoView({ behavior: "smooth" })
+        }
+        className="mt-4 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8] transition-opacity hover:opacity-90"
       >
-        <MateCup />
-      </div>
-      <div
-        className="absolute right-[6%] top-[27%] z-10 hidden md:block"
-        aria-hidden="true"
+        Start a project →
+      </button>
+      <TornEdge />
+    </div>
+  );
+}
+
+function PostIt({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`relative w-[110px] bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW} ${className}`}
+    >
+      <Tape className="-left-1 -top-2 -rotate-[18deg]" />
+      <p
+        className="text-[15px] leading-snug text-[#1A1A1A]"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
       >
-        <SolDeMayo />
-      </div>
+        new idea
+        <br />
+        started already
+      </p>
+    </div>
+  );
+}
 
-      {/* Football — desktop */}
-      <div
-        className="pointer-events-none absolute bottom-[15%] left-[63%] z-[45] hidden rotate-[8deg] md:block"
-        aria-hidden="true"
-      >
-        <Football />
-      </div>
-
-      {/* Post-it */}
-      <div
-        className={`absolute bottom-[13%] left-[47%] z-30 hidden w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 md:block ${PAPER_SHADOW}`}
-      >
-        <Tape className="-left-1 -top-2 -rotate-[18deg]" />
-        <p
-          className="text-[15px] leading-snug text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-hand), cursive" }}
-        >
-          new idea
-          <br />
-          started already
-        </p>
-      </div>
-
-      {/* Steffen — desktop */}
-      <div className="absolute bottom-0 left-[6%] z-20 hidden h-[56vh] md:block">
-        <img
-          src="/me-steffen.png"
-          alt="Steffen"
-          className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-        />
-        <Clickable
-          label="Why I wear colors"
-          scrollTo="#room-02"
-          className="left-0 top-[45%] h-[55%] w-full"
-        >
-          <span className="block h-full w-full" aria-hidden="true" />
-        </Clickable>
-      </div>
-
-      {/* Mobile flow */}
-      <div className="relative z-30 flex flex-col items-center px-6 pb-10 pt-16 md:hidden">
-        <HeadlineBlock className="max-w-[340px] text-center" />
-
-        <img
-          src="/me-steffen.png"
-          alt="Steffen"
-          className="mt-6 h-[42vh] w-auto object-contain object-bottom drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-        />
-
-        <div
-          className={`relative mt-4 w-[110px] -rotate-[6deg] bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW}`}
-        >
-          <Tape className="-left-1 -top-2 -rotate-[18deg]" />
-          <p
-            className="text-[15px] leading-snug text-[#1A1A1A]"
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            new idea
-            <br />
-            started already
-          </p>
-        </div>
-
-        <div
-          className={`relative mt-6 w-full max-w-[340px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
-        >
-          <Tape className="-left-2 -top-2 -rotate-[14deg]" />
-          <div
-            className="pointer-events-none absolute inset-x-0 top-[46%] h-[3px] bg-gradient-to-b from-black/10 via-transparent to-white/50"
-            aria-hidden="true"
-          />
-          <p
-            className="text-[1.15rem] leading-snug text-[#1A1A1A]"
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            Bring me something nobody has built yet.
-          </p>
-          <a
-            href="#room-05"
-            onClick={(e) => {
-              e.preventDefault();
-              document
-                .getElementById("room-05")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="mt-4 inline-block rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8]"
-          >
-            Start a project →
-          </a>
-          <TornEdge />
-        </div>
-
-        <div className="mt-10 flex w-full max-w-[320px] flex-col items-center gap-8">
-          <a href="/builds/orivela" className="relative block w-full max-w-[280px]">
-            <OrivelaNote className="-rotate-[3deg]" />
-          </a>
-          <a href="/builds/kolibi" className="relative block w-full max-w-[200px]">
-            <KolibiReceipt className="rotate-[2deg]" />
-          </a>
-          <a href="/builds/peeranimo" className="relative block w-full max-w-[236px]">
-            <PeeranimoUnit />
-          </a>
-        </div>
-      </div>
-
-      {/* Desktop absolute layout */}
-      <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-        <HeadlineBlock className="pointer-events-auto absolute left-[31%] top-[11%] z-30 max-w-[440px]" />
-
-        {/* Service note */}
-        <div
-          className={`pointer-events-auto absolute left-[51%] top-[52%] z-30 w-[290px] -rotate-[2deg] bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
-        >
-          <Tape className="-left-2 -top-2 -rotate-[14deg]" />
-          <div
-            className="pointer-events-none absolute inset-x-0 top-[46%] h-[3px] bg-gradient-to-b from-black/10 via-transparent to-white/50"
-            aria-hidden="true"
-          />
-          <p
-            className="text-[1.2rem] leading-snug text-[#1A1A1A]"
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            Bring me something nobody has built yet.
-          </p>
-          <button
-            type="button"
-            onClick={() =>
-              document
-                .getElementById("room-05")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="mt-4 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8] transition-opacity hover:opacity-90"
-          >
-            Start a project →
-          </button>
-          <TornEdge />
-        </div>
-
-        <Clickable
-          label="Orivela"
-          href="/builds/orivela"
-          className="pointer-events-auto right-[16%] top-[6%] z-[35] w-[225px] -rotate-[5deg]"
-        >
-          <OrivelaNote />
-        </Clickable>
-
-        <Clickable
-          label="Kolibi"
-          href="/builds/kolibi"
-          className="pointer-events-auto right-[13%] top-[40%] z-30 w-[175px] rotate-[4deg]"
-        >
-          <KolibiReceipt />
-        </Clickable>
-
-        <Clickable
-          label="Peeranimo"
-          href="/builds/peeranimo"
-          className="pointer-events-auto bottom-[8%] left-[31%] z-[35]"
-        >
-          <PeeranimoUnit />
-        </Clickable>
-
-        <Clickable
-          label="See it live"
-          href={APP_STORE_URL}
-          external
-          className="pointer-events-auto right-[8%] top-[3%] z-40 -rotate-[16deg]"
-        >
-          <AppStoreStamp />
-        </Clickable>
-      </div>
-
-      <ClickHint />
-    </section>
+function Fernsehturm({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 120 420"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M40 420 C46 372, 51 312, 53 240 L67 240 C69 312, 74 372, 80 420 Z"
+        fill="#1A1A1A"
+      />
+      <circle cx="60" cy="215" r="28" fill="#1A1A1A" />
+      <path d="M55 192 L65 192 L63 150 L57 150 Z" fill="#1A1A1A" />
+      <path d="M57 150 L63 150 L62 96 L58 96 Z" fill="#1A1A1A" />
+      <path d="M58 96 L62 96 L61 44 L59 44 Z" fill="#1A1A1A" />
+      <path d="M59 44 L61 44 L60 6 Z" fill="#1A1A1A" />
+    </svg>
   );
 }
 
@@ -843,6 +748,239 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
         </div>
         <ReceiptZigzag position="bottom" />
       </article>
+    </div>
+  );
+}
+
+export default function HomeCollage() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const update = () => {
+      const r = el.getBoundingClientRect();
+      setScale(Math.min(r.width / DESIGN_W, r.height / DESIGN_H));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div id="room-01">
+      {/* DESKTOP + TABLET LANDSCAPE */}
+      <section
+        ref={stageRef}
+        className="relative hidden h-screen w-full overflow-hidden bg-[#F5F0E8] lg:block"
+      >
+        <div
+          className="absolute left-1/2 top-1/2"
+          style={{
+            width: DESIGN_W,
+            height: DESIGN_H,
+            transform: `translate(-50%, -50%) scale(${scale})`,
+          }}
+        >
+          {/* Lila Fläche */}
+          <svg
+            className="pointer-events-none absolute z-0 -rotate-[4deg]"
+            style={{ left: 0, top: 170, width: 430, height: 450 }}
+            viewBox="0 0 280 340"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="#7B5CF0"
+              d="M36 62 L62 54 L88 65 L116 55 L146 66 L176 56 L204 67 L232 57 L238 300 L210 310 L182 300 L154 311 L124 301 L96 312 L66 302 L40 312 Z"
+            />
+          </svg>
+
+          {/* Türkise Fläche */}
+          <svg
+            className="pointer-events-none absolute z-0 rotate-[3deg]"
+            style={{ left: 960, top: 650, width: 370, height: 250 }}
+            viewBox="0 0 260 280"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="#00C2A8"
+              d="M28 48 L54 40 L82 52 L110 42 L140 54 L168 44 L196 55 L224 46 L232 250 L204 262 L176 252 L148 263 L118 253 L90 264 L60 254 L34 265 Z"
+            />
+          </svg>
+
+          <Clickable
+            label="Why Berlin?"
+            scrollTo="#room-02"
+            className="z-10 rotate-[2deg]"
+            style={{ left: 250, top: 15 }}
+          >
+            <Fernsehturm className="h-[280px] w-auto" />
+          </Clickable>
+
+          <div
+            className="absolute z-10"
+            style={{ left: 1258, top: 210, width: 56 }}
+            aria-hidden="true"
+          >
+            <SolDeMayo />
+          </div>
+
+          <div
+            className="absolute z-20"
+            style={{ left: 55, top: 380, height: 520 }}
+          >
+            <img
+              src="/me-steffen.png"
+              alt="Steffen"
+              className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+            />
+            <Clickable
+              label="Why I wear colors"
+              scrollTo="#room-02"
+              className="left-0 top-[45%] h-[55%] w-full"
+            >
+              <span className="block h-full w-full" aria-hidden="true" />
+            </Clickable>
+          </div>
+
+          <div
+            className="absolute z-20 rotate-[5deg]"
+            style={{ left: 340, top: 500 }}
+            aria-hidden="true"
+          >
+            <MateCup />
+          </div>
+
+          <div
+            className="absolute z-[25] -rotate-[6deg]"
+            style={{ left: 640, top: 720 }}
+            aria-hidden="true"
+          >
+            <UBahnSign />
+          </div>
+
+          <div
+            className="absolute z-30 w-[420px]"
+            style={{ left: 440, top: 90 }}
+          >
+            <HeadlineBlock />
+          </div>
+
+          <div
+            className="absolute z-30 w-[290px] -rotate-[2deg]"
+            style={{ left: 810, top: 470 }}
+          >
+            <ServiceCard />
+          </div>
+
+          <div
+            className="absolute z-30 -rotate-[6deg]"
+            style={{ left: 650, top: 580 }}
+          >
+            <PostIt />
+          </div>
+
+          <Clickable
+            label="Kolibi"
+            href="/builds/kolibi"
+            className="z-30 w-[175px] rotate-[4deg]"
+            style={{ left: 1120, top: 300 }}
+          >
+            <KolibiReceipt />
+          </Clickable>
+
+          <Clickable
+            label="Orivela"
+            href="/builds/orivela"
+            className="z-[35] w-[230px] -rotate-[5deg]"
+            style={{ left: 980, top: 45 }}
+          >
+            <OrivelaNote />
+          </Clickable>
+
+          <Clickable
+            label="Peeranimo"
+            href="/builds/peeranimo"
+            className="z-[35] w-[216px]"
+            style={{ left: 390, top: 600 }}
+          >
+            <PeeranimoUnit />
+          </Clickable>
+
+          <Clickable
+            label="See it live"
+            href={APP_STORE_URL}
+            external
+            className="z-40 -rotate-[16deg]"
+            style={{ left: 1190, top: 25, width: 95 }}
+          >
+            <AppStoreStamp />
+          </Clickable>
+
+          <div
+            className="pointer-events-none absolute z-[45] rotate-[8deg]"
+            style={{ left: 930, top: 690 }}
+            aria-hidden="true"
+          >
+            <Football idPrefix="ballDesk" />
+          </div>
+
+          <ClickHint />
+        </div>
+      </section>
+
+      {/* MOBILE + TABLET PORTRAIT */}
+      <section className="bg-[#F5F0E8] px-6 py-12 lg:hidden">
+        <HeadlineBlock variant="mobile" />
+
+        <img
+          src="/me-steffen.png"
+          alt=""
+          className="mx-auto mt-8 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+        />
+
+        <div className="mx-auto mt-10 max-w-[300px]">
+          <ServiceCard className="-rotate-[2deg]" />
+        </div>
+
+        <a
+          href="/builds/orivela"
+          className="mx-auto mt-10 block max-w-[300px]"
+        >
+          <OrivelaNote className="-rotate-[3deg]" />
+        </a>
+
+        <a
+          href="/builds/kolibi"
+          className="mx-auto mt-10 block max-w-[300px]"
+        >
+          <KolibiReceipt className="rotate-[2deg]" />
+        </a>
+
+        <a
+          href="/builds/peeranimo"
+          className="mx-auto mt-10 block max-w-[300px]"
+        >
+          <div className="flex justify-center">
+            <PeeranimoUnit variant="mobile" />
+          </div>
+        </a>
+
+        <div className="mt-10 flex items-center justify-center gap-6">
+          <PostIt className="-rotate-[3deg]" />
+          <Football
+            className="h-[60px] w-auto"
+            idPrefix="ballMob"
+          />
+          <div className="scale-90" aria-hidden="true">
+            <UBahnSign />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
