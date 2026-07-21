@@ -77,6 +77,10 @@ function AppRow({
   );
 }
 
+function scrollToRoom(selector: string) {
+  document.querySelector(selector)?.scrollIntoView({ behavior: "smooth" });
+}
+
 function Clickable({
   label,
   href,
@@ -85,6 +89,7 @@ function Clickable({
   className = "",
   style,
   external = false,
+  positioned = true,
 }: {
   label: string;
   href?: string;
@@ -93,11 +98,10 @@ function Clickable({
   className?: string;
   style?: CSSProperties;
   external?: boolean;
+  positioned?: boolean;
 }) {
   const handle = () => {
-    if (scrollTo) {
-      document.querySelector(scrollTo)?.scrollIntoView({ behavior: "smooth" });
-    }
+    if (scrollTo) scrollToRoom(scrollTo);
   };
 
   const content = (
@@ -109,11 +113,13 @@ function Clickable({
     </div>
   );
 
+  const posClass = positioned ? "absolute" : "relative block w-full";
+
   if (href) {
     return (
       <a
         href={href}
-        className={`absolute ${className}`}
+        className={`${posClass} ${className}`}
         style={style}
         {...(external
           ? { target: "_blank", rel: "noopener noreferrer" }
@@ -128,7 +134,7 @@ function Clickable({
     <button
       type="button"
       onClick={handle}
-      className={`absolute ${className}`}
+      className={`${posClass} ${className}`}
       style={style}
     >
       {content}
@@ -187,9 +193,9 @@ function UBahnSign() {
   );
 }
 
-function MateCup() {
+function MateCup({ className = "h-[80px] w-auto" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 100 110" className="h-[80px] w-auto" aria-hidden="true">
+    <svg viewBox="0 0 100 110" className={className} aria-hidden="true">
       <path
         d="M26 52 C 26 40, 36 33, 50 33 C 64 33, 74 40, 74 52
            C 83 67, 78 92, 61 100 C 54 104, 46 104, 39 100
@@ -405,7 +411,7 @@ function ClickHint() {
   return (
     <div
       className="pointer-events-none absolute z-40 flex items-center gap-2"
-      style={{ left: 640, top: 855 }}
+      style={{ left: 1040, top: 840 }}
       aria-hidden="true"
     >
       <svg viewBox="0 0 28 28" className="h-6 w-6 -rotate-[25deg] opacity-50">
@@ -486,31 +492,11 @@ function HeadlineBlock({
 function PeeranimoPolaroids({
   variant = "desktop",
 }: {
-  variant?: "desktop" | "mobile";
+  variant?: "desktop" | "mobile" | "tablet";
 }) {
   const cards =
-    variant === "mobile"
+    variant === "desktop"
       ? ([
-          {
-            src: "/peers/peeranimo_european_woman.jpg",
-            color: "#7B5CF0",
-            pos: "left-0 top-[8px] z-10 rotate-[-3deg]",
-            showTape: false,
-          },
-          {
-            src: "/peers/peeranimo_asia_woman.jpg",
-            color: "#00C2A8",
-            pos: "left-[40px] top-0 z-20 rotate-[-2deg]",
-            showTape: true,
-          },
-          {
-            src: "/peers/peeranimo_pepe_latino_woman.jpg",
-            color: "#D85A30",
-            pos: "left-[80px] top-[10px] z-30 rotate-[3deg]",
-            showTape: false,
-          },
-        ] as const)
-      : ([
           {
             src: "/peers/peeranimo_european_woman.jpg",
             color: "#7B5CF0",
@@ -529,9 +515,50 @@ function PeeranimoPolaroids({
             pos: "left-[102px] top-[14px] z-30 rotate-[9deg]",
             showTape: false,
           },
-        ] as const);
+        ] as const)
+      : variant === "tablet"
+        ? ([
+            {
+              src: "/peers/peeranimo_european_woman.jpg",
+              color: "#7B5CF0",
+              pos: "left-0 top-[8px] z-10 rotate-[-4deg]",
+              showTape: false,
+            },
+            {
+              src: "/peers/peeranimo_asia_woman.jpg",
+              color: "#00C2A8",
+              pos: "left-[40px] top-0 z-20 rotate-[-2deg]",
+              showTape: true,
+            },
+            {
+              src: "/peers/peeranimo_pepe_latino_woman.jpg",
+              color: "#D85A30",
+              pos: "left-[80px] top-[10px] z-30 rotate-[4deg]",
+              showTape: false,
+            },
+          ] as const)
+        : ([
+            {
+              src: "/peers/peeranimo_european_woman.jpg",
+              color: "#7B5CF0",
+              pos: "left-0 top-[8px] z-10 rotate-[-3deg]",
+              showTape: false,
+            },
+            {
+              src: "/peers/peeranimo_asia_woman.jpg",
+              color: "#00C2A8",
+              pos: "left-[40px] top-0 z-20 rotate-[-2deg]",
+              showTape: true,
+            },
+            {
+              src: "/peers/peeranimo_pepe_latino_woman.jpg",
+              color: "#D85A30",
+              pos: "left-[80px] top-[10px] z-30 rotate-[3deg]",
+              showTape: false,
+            },
+          ] as const);
 
-  const cardWidth = variant === "mobile" ? "w-[78px]" : "w-[84px]";
+  const cardWidth = variant === "desktop" ? "w-[84px]" : "w-[78px]";
 
   return (
     <div className="relative h-[132px]">
@@ -567,10 +594,10 @@ function PeeranimoPolaroids({
 function PeeranimoUnit({
   variant = "desktop",
 }: {
-  variant?: "desktop" | "mobile";
+  variant?: "desktop" | "mobile" | "tablet";
 }) {
   return (
-    <div className="w-[216px]">
+    <div className={variant === "desktop" ? "w-[220px]" : "w-[216px]"}>
       <PeeranimoPolaroids variant={variant} />
       <p
         className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[14px] leading-snug text-[#1A1A1A]"
@@ -624,7 +651,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
 function PostIt({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative w-[110px] bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW} ${className}`}
+      className={`relative w-[115px] bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW} ${className}`}
     >
       <Tape className="-left-1 -top-2 -rotate-[18deg]" />
       <p
@@ -787,7 +814,7 @@ export default function HomeCollage() {
           {/* Lila Fläche */}
           <svg
             className="pointer-events-none absolute z-0 -rotate-[4deg]"
-            style={{ left: 0, top: 170, width: 430, height: 450 }}
+            style={{ left: 0, top: 150, width: 400, height: 430 }}
             viewBox="0 0 280 340"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -801,7 +828,7 @@ export default function HomeCollage() {
           {/* Türkise Fläche */}
           <svg
             className="pointer-events-none absolute z-0 rotate-[3deg]"
-            style={{ left: 960, top: 650, width: 370, height: 250 }}
+            style={{ left: 1000, top: 660, width: 330, height: 240 }}
             viewBox="0 0 260 280"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -816,14 +843,14 @@ export default function HomeCollage() {
             label="Why Berlin?"
             scrollTo="#room-02"
             className="z-10 rotate-[2deg]"
-            style={{ left: 250, top: 15 }}
+            style={{ left: 250, top: 10 }}
           >
             <Fernsehturm className="h-[280px] w-auto" />
           </Clickable>
 
           <div
             className="absolute z-10"
-            style={{ left: 1258, top: 210, width: 56 }}
+            style={{ left: 1265, top: 200, width: 56 }}
             aria-hidden="true"
           >
             <SolDeMayo />
@@ -831,7 +858,7 @@ export default function HomeCollage() {
 
           <div
             className="absolute z-20"
-            style={{ left: 55, top: 380, height: 520 }}
+            style={{ left: 40, top: 380, height: 520 }}
           >
             <img
               src="/me-steffen.png"
@@ -848,67 +875,19 @@ export default function HomeCollage() {
           </div>
 
           <div
-            className="absolute z-20 rotate-[5deg]"
-            style={{ left: 340, top: 500 }}
-            aria-hidden="true"
-          >
-            <MateCup />
-          </div>
-
-          <div
-            className="absolute z-[25] -rotate-[6deg]"
-            style={{ left: 640, top: 720 }}
-            aria-hidden="true"
-          >
-            <UBahnSign />
-          </div>
-
-          <div
-            className="absolute z-30 w-[420px]"
-            style={{ left: 440, top: 90 }}
+            className="absolute z-30 w-[440px]"
+            style={{ left: 430, top: 80 }}
           >
             <HeadlineBlock />
           </div>
 
-          <div
-            className="absolute z-30 w-[290px] -rotate-[2deg]"
-            style={{ left: 810, top: 470 }}
-          >
-            <ServiceCard />
-          </div>
-
-          <div
-            className="absolute z-30 -rotate-[6deg]"
-            style={{ left: 650, top: 580 }}
-          >
-            <PostIt />
-          </div>
-
-          <Clickable
-            label="Kolibi"
-            href="/builds/kolibi"
-            className="z-30 w-[175px] rotate-[4deg]"
-            style={{ left: 1120, top: 300 }}
-          >
-            <KolibiReceipt />
-          </Clickable>
-
           <Clickable
             label="Orivela"
-            href="/builds/orivela"
-            className="z-[35] w-[230px] -rotate-[5deg]"
-            style={{ left: 980, top: 45 }}
+            scrollTo="#room-03b"
+            className="z-[35] w-[235px] -rotate-[5deg]"
+            style={{ left: 960, top: 40 }}
           >
             <OrivelaNote />
-          </Clickable>
-
-          <Clickable
-            label="Peeranimo"
-            href="/builds/peeranimo"
-            className="z-[35] w-[216px]"
-            style={{ left: 390, top: 600 }}
-          >
-            <PeeranimoUnit />
           </Clickable>
 
           <Clickable
@@ -916,25 +895,155 @@ export default function HomeCollage() {
             href={APP_STORE_URL}
             external
             className="z-40 -rotate-[16deg]"
-            style={{ left: 1190, top: 25, width: 95 }}
+            style={{ left: 1180, top: 20, width: 95 }}
           >
             <AppStoreStamp />
           </Clickable>
 
+          <Clickable
+            label="Kolibi"
+            scrollTo="#room-03c"
+            className="z-30 w-[175px] rotate-[4deg]"
+            style={{ left: 1130, top: 300 }}
+          >
+            <KolibiReceipt />
+          </Clickable>
+
+          <div
+            className="absolute z-30 w-[300px] -rotate-[2deg]"
+            style={{ left: 490, top: 400 }}
+          >
+            <ServiceCard />
+          </div>
+
           <div
             className="pointer-events-none absolute z-[45] rotate-[8deg]"
-            style={{ left: 930, top: 690 }}
+            style={{ left: 930, top: 590 }}
             aria-hidden="true"
           >
             <Football idPrefix="ballDesk" />
+          </div>
+
+          <Clickable
+            label="Peeranimo"
+            scrollTo="#room-04"
+            className="z-[35] w-[220px]"
+            style={{ left: 490, top: 600 }}
+          >
+            <PeeranimoUnit />
+          </Clickable>
+
+          <div
+            className="absolute z-30 -rotate-[6deg]"
+            style={{ left: 780, top: 600 }}
+          >
+            <PostIt />
+          </div>
+
+          <div
+            className="absolute z-20 rotate-[5deg]"
+            style={{ left: 1150, top: 700 }}
+            aria-hidden="true"
+          >
+            <MateCup />
+          </div>
+
+          <div
+            className="absolute z-[25] -rotate-[6deg]"
+            style={{ left: 760, top: 730 }}
+            aria-hidden="true"
+          >
+            <UBahnSign />
           </div>
 
           <ClickHint />
         </div>
       </section>
 
-      {/* MOBILE + TABLET PORTRAIT */}
-      <section className="bg-[#F5F0E8] px-6 py-12 lg:hidden">
+      {/* TABLET PORTRAIT */}
+      <section className="hidden bg-[#F5F0E8] px-8 py-14 md:block lg:hidden">
+        <h1
+          className="font-serif text-[42px] leading-[1.1] text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+        >
+          Out-of-the-box thinker.
+          <br />
+          Creative mind.
+          <br />
+          Always building something new.
+        </h1>
+        <p className="mt-4 max-w-[520px] text-[16px] leading-relaxed text-[#1A1A1A]/75">
+          Three apps of my own — and platforms for people whose idea doesn&apos;t
+          exist yet.
+        </p>
+
+        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10">
+          <div className="flex flex-col items-center gap-10">
+            <img
+              src="/me-steffen.png"
+              alt=""
+              className="h-[340px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+            />
+            <div className="w-full max-w-[300px]">
+              <ServiceCard className="-rotate-[2deg]" />
+            </div>
+            <Clickable
+              label="Peeranimo"
+              scrollTo="#room-04"
+              positioned={false}
+              className="max-w-[220px]"
+            >
+              <PeeranimoUnit variant="tablet" />
+            </Clickable>
+          </div>
+
+          <div className="mt-16 flex flex-col items-center gap-10">
+            <div className="relative w-full max-w-[280px]">
+              <Clickable
+                label="Orivela"
+                scrollTo="#room-03b"
+                positioned={false}
+              >
+                <OrivelaNote className="-rotate-[4deg]" />
+              </Clickable>
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute -right-2 -top-3 z-10 -rotate-[12deg]"
+                aria-label="See it live"
+              >
+                <AppStoreStamp />
+              </a>
+            </div>
+            <Clickable
+              label="Kolibi"
+              scrollTo="#room-03c"
+              positioned={false}
+              className="max-w-[200px]"
+            >
+              <KolibiReceipt className="rotate-[3deg]" />
+            </Clickable>
+            <PostIt className="-rotate-[4deg]" />
+          </div>
+        </div>
+
+        <div className="mt-12 flex items-center justify-center gap-8">
+          <div className="scale-90 -rotate-[4deg]" aria-hidden="true">
+            <UBahnSign />
+          </div>
+          <Football
+            className="h-[70px] w-auto rotate-[4deg]"
+            idPrefix="ballTab"
+          />
+          <div className="rotate-[3deg]" aria-hidden="true">
+            <MateCup className="h-[64px] w-auto" />
+          </div>
+        </div>
+      </section>
+
+      {/* MOBILE */}
+      <section className="bg-[#F5F0E8] px-6 py-12 md:hidden">
         <HeadlineBlock variant="mobile" />
 
         <img
@@ -947,35 +1056,38 @@ export default function HomeCollage() {
           <ServiceCard className="-rotate-[2deg]" />
         </div>
 
-        <a
-          href="/builds/orivela"
-          className="mx-auto mt-10 block max-w-[300px]"
+        <Clickable
+          label="Orivela"
+          scrollTo="#room-03b"
+          positioned={false}
+          className="mx-auto mt-10 max-w-[300px]"
         >
           <OrivelaNote className="-rotate-[3deg]" />
-        </a>
+        </Clickable>
 
-        <a
-          href="/builds/kolibi"
-          className="mx-auto mt-10 block max-w-[300px]"
+        <Clickable
+          label="Kolibi"
+          scrollTo="#room-03c"
+          positioned={false}
+          className="mx-auto mt-10 max-w-[300px]"
         >
           <KolibiReceipt className="rotate-[2deg]" />
-        </a>
+        </Clickable>
 
-        <a
-          href="/builds/peeranimo"
-          className="mx-auto mt-10 block max-w-[300px]"
+        <Clickable
+          label="Peeranimo"
+          scrollTo="#room-04"
+          positioned={false}
+          className="mx-auto mt-10 max-w-[300px]"
         >
           <div className="flex justify-center">
             <PeeranimoUnit variant="mobile" />
           </div>
-        </a>
+        </Clickable>
 
         <div className="mt-10 flex items-center justify-center gap-6">
           <PostIt className="-rotate-[3deg]" />
-          <Football
-            className="h-[60px] w-auto"
-            idPrefix="ballMob"
-          />
+          <Football className="h-[60px] w-auto" idPrefix="ballMob" />
           <div className="scale-90" aria-hidden="true">
             <UBahnSign />
           </div>
