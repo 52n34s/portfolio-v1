@@ -11,7 +11,6 @@ import {
 const DESIGN_W = 1440;
 const DESIGN_H = 900;
 
-const APP_STORE_URL = "https://apps.apple.com/app/orivela";
 const BALL_SRC: string | null = null;
 
 const ORIVELA_ICON = "/app-logo-orivela.png";
@@ -19,6 +18,37 @@ const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
+
+const APP_STATUS: Record<string, [string, string, string]> = {
+  orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],
+  kolibi: ["KOLIBI", "LIVE", "ON THE APP STORE"],
+  peeranimo: ["PEERANIMO", "LIVE", "ON THE WEB"],
+};
+
+function StatusStamp({ lines }: { lines: [string, string, string] }) {
+  return (
+    <div className="flex h-[62px] w-[62px] shrink-0 -rotate-12 flex-col items-center justify-center rounded-full border-2 border-[#1D9E75] text-[#1D9E75] opacity-80">
+      <span
+        className="text-[6px] tracking-wider"
+        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+      >
+        {lines[0]}
+      </span>
+      <span
+        className="text-[12px] font-medium leading-none"
+        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+      >
+        {lines[1]}
+      </span>
+      <span
+        className="px-1 text-center text-[5px] leading-[1.15] tracking-wider"
+        style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+      >
+        {lines[2]}
+      </span>
+    </div>
+  );
+}
 
 function Tape({ className = "" }: { className?: string }) {
   return (
@@ -184,9 +214,9 @@ function UBahnSign() {
     <div
       className={`flex items-center gap-3 bg-[#0B4EA2] px-4 py-2.5 ${PAPER_SHADOW}`}
     >
-      <span className="text-[28px] font-bold leading-none text-white">U</span>
-      <div className="h-[28px] w-[2px] bg-white/85" />
-      <span className="whitespace-nowrap text-[20px] font-medium tracking-tight text-white">
+      <span className="text-[27px] font-bold leading-none text-white">U</span>
+      <div className="h-[27px] w-[2px] bg-white/85" />
+      <span className="whitespace-nowrap text-[19px] font-medium tracking-tight text-white">
         Rosenthaler Platz
       </span>
     </div>
@@ -340,108 +370,6 @@ function Football({
         <FootballSvg className={className} idPrefix={idPrefix} />
       </span>
     </>
-  );
-}
-
-function AppStoreStamp({
-  className = "h-[95px] w-[95px] opacity-80",
-}: {
-  className?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 92 92"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle
-        cx="46"
-        cy="46"
-        r="43"
-        fill="none"
-        stroke="#1D9E75"
-        strokeWidth="3"
-      />
-      <circle
-        cx="46"
-        cy="46"
-        r="38"
-        fill="none"
-        stroke="#1D9E75"
-        strokeWidth="0.75"
-        opacity="0.5"
-      />
-      <defs>
-        <path id="stamp-top" d="M16 46 A30 30 0 0 1 76 46" fill="none" />
-        <path id="stamp-bottom" d="M18 50 A28 28 0 0 0 74 50" fill="none" />
-      </defs>
-      <text
-        fill="#1D9E75"
-        fontSize="9"
-        fontFamily="var(--font-jetbrains-mono), monospace"
-        letterSpacing="1.5"
-      >
-        <textPath href="#stamp-top" startOffset="50%" textAnchor="middle">
-          ORIVELA
-        </textPath>
-      </text>
-      <text
-        x="46"
-        y="50"
-        textAnchor="middle"
-        fill="#1D9E75"
-        fontSize="13"
-        fontWeight="700"
-        fontFamily="var(--font-jetbrains-mono), monospace"
-        letterSpacing="2"
-      >
-        LIVE
-      </text>
-      <text
-        fill="#1D9E75"
-        fontSize="6.5"
-        fontFamily="var(--font-jetbrains-mono), monospace"
-        letterSpacing="0.8"
-      >
-        <textPath href="#stamp-bottom" startOffset="50%" textAnchor="middle">
-          ON THE APP STORE
-        </textPath>
-      </text>
-    </svg>
-  );
-}
-
-function ClickHint() {
-  return (
-    <div
-      className="pointer-events-none absolute z-40 flex items-center gap-2"
-      style={{ left: 700, top: 868 }}
-      aria-hidden="true"
-    >
-      <svg viewBox="0 0 28 28" className="h-6 w-6 -rotate-[25deg] opacity-50">
-        <path
-          d="M6 22 C10 14, 14 10, 22 6"
-          fill="none"
-          stroke="#1A1A1A"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M16 5 L22 6 L20 12"
-          fill="none"
-          stroke="#1A1A1A"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <span
-        className="text-base text-[#1A1A1A]/50"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        click the things
-      </span>
-    </div>
   );
 }
 
@@ -626,7 +554,12 @@ function PeeranimoUnit({
   variant?: "desktop" | "mobile" | "tablet";
 }) {
   return (
-    <div className={variant === "desktop" ? "w-[225px]" : "w-[216px]"}>
+    <div
+      className={`relative ${variant === "desktop" ? "w-[225px]" : "w-[216px]"}`}
+    >
+      <div className="absolute -right-4 -top-4 z-40">
+        <StatusStamp lines={APP_STATUS.peeranimo} />
+      </div>
       <PeeranimoPolaroids variant={variant} />
       <p
         className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[15px] leading-snug text-[#1A1A1A]"
@@ -638,7 +571,7 @@ function PeeranimoUnit({
         <AppRow
           icon={PEERANIMO_ICON}
           name="Peeranimo"
-          platform="Social platform · iOS · Web"
+          platform="Social platform · Web"
         />
       </div>
     </div>
@@ -724,6 +657,9 @@ function Fernsehturm({ className = "" }: { className?: string }) {
 function OrivelaNote({ className = "" }: { className?: string }) {
   return (
     <div className={`relative ${className}`}>
+      <div className="absolute -right-4 -top-4 z-40">
+        <StatusStamp lines={APP_STATUS.orivela} />
+      </div>
       <Tape className="-left-2 -top-2 z-20 -rotate-[28deg]" />
       <div
         className="absolute bottom-0 right-0 z-10 h-9 w-9 bg-[#EDE2B0]"
@@ -762,11 +698,7 @@ function OrivelaNote({ className = "" }: { className?: string }) {
           even the ones you forgot about
         </p>
         <div className="relative mt-4 pl-2">
-          <AppRow
-            icon={ORIVELA_ICON}
-            name="Orivela"
-            platform="iOS · Android"
-          />
+          <AppRow icon={ORIVELA_ICON} name="Orivela" platform="iOS" />
         </div>
         <TornEdge fill="#F5F0E8" />
       </article>
@@ -775,36 +707,52 @@ function OrivelaNote({ className = "" }: { className?: string }) {
 }
 
 function KolibiReceipt({ className = "" }: { className?: string }) {
+  const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
+
   return (
     <div className={`relative ${className}`}>
+      <div className="absolute -right-4 -top-4 z-40">
+        <StatusStamp lines={APP_STATUS.kolibi} />
+      </div>
       <Tape className="left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
       <article className={`relative bg-white px-4 pb-5 pt-5 ${PAPER_SHADOW}`}>
         <ReceiptZigzag position="top" />
         <p
-          className="text-center text-[10px] font-medium uppercase tracking-[0.2em] text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+          className="text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
+          style={mono}
         >
           KOLIBI
         </p>
         <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
-        <p
-          className="text-[13px] leading-relaxed text-[#333]"
-          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
-        >
+        <p className="text-[11px] leading-snug text-[#333]" style={mono}>
           One photo. You know what&apos;s left for today.
         </p>
         <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
+        <div className="space-y-0.5 text-[10px] text-[#1A1A1A]" style={mono}>
+          <div className="flex justify-between gap-2">
+            <span>BOWL &amp; EGGS</span>
+            <span>438</span>
+          </div>
+          <div className="flex justify-between gap-2">
+            <span>FLAT WHITE</span>
+            <span>84</span>
+          </div>
+        </div>
+        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
         <p
-          className="text-right text-[10px] text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
+          className="text-[11px] font-medium text-[#1A1A1A]"
+          style={mono}
         >
-          REMAINING&nbsp;&nbsp;&nbsp;&nbsp;412 kcal
+          <span className="flex justify-between gap-2">
+            <span>REMAINING</span>
+            <span>412 kcal</span>
+          </span>
         </p>
         <div className="mt-3">
           <AppRow
             icon={KOLIBI_ICON}
             name="Kolibi"
-            platform="iOS"
+            platform="iOS · Android"
             compact
           />
         </div>
@@ -874,6 +822,20 @@ export default function HomeCollage() {
             />
           </svg>
 
+          {/* Gelbe Fläche — Anker oben rechts */}
+          <svg
+            className="pointer-events-none absolute z-0 -rotate-[3deg]"
+            style={{ left: 1020, top: 25, width: 300, height: 265 }}
+            viewBox="0 0 200 180"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="#F4D35E"
+              d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
+            />
+          </svg>
+
           {/* BAND 1: Text */}
           <div
             className="absolute z-30 w-[820px]"
@@ -882,22 +844,38 @@ export default function HomeCollage() {
             <HeadlineBlock />
           </div>
 
-          {/* BAND 1: Deko rechts neben Text */}
+          {/* BAND 1: Deko auf gelber Fläche */}
           <Clickable
             label="Why Berlin?"
             scrollTo="#room-02"
             className="z-10 rotate-[2deg]"
-            style={{ left: 1150, top: 30 }}
+            style={{ left: 1150, top: 15 }}
           >
-            <Fernsehturm className="h-[260px] w-auto" />
+            <Fernsehturm className="h-[265px] w-auto" />
           </Clickable>
 
           <div
             className="absolute z-10"
-            style={{ left: 1270, top: 110, width: 50 }}
+            style={{ left: 1268, top: 95, width: 48 }}
             aria-hidden="true"
           >
-            <SolDeMayo className="h-[50px] w-[50px] opacity-80" />
+            <SolDeMayo className="h-[48px] w-[48px] opacity-80" />
+          </div>
+
+          <div
+            className="pointer-events-none absolute z-[15] rotate-[5deg]"
+            style={{ left: 1045, top: 195 }}
+            aria-hidden="true"
+          >
+            <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
+          </div>
+
+          <div
+            className="absolute z-[25] -rotate-[5deg]"
+            style={{ left: 1010, top: 285 }}
+            aria-hidden="true"
+          >
+            <UBahnSign />
           </div>
 
           {/* BAND 2: Steffen + Apps — shared top edge y=380 */}
@@ -929,19 +907,9 @@ export default function HomeCollage() {
           </Clickable>
 
           <Clickable
-            label="See it live"
-            href={APP_STORE_URL}
-            external
-            className="z-40 -rotate-[12deg]"
-            style={{ left: 660, top: 358, width: 88 }}
-          >
-            <AppStoreStamp className="h-[88px] w-[88px] opacity-80" />
-          </Clickable>
-
-          <Clickable
             label="Kolibi"
             scrollTo="#room-03c"
-            className="z-30 w-[180px] rotate-[4deg]"
+            className="z-30 w-[190px] rotate-[4deg]"
             style={{ left: 760, top: 380 }}
           >
             <KolibiReceipt />
@@ -965,26 +933,10 @@ export default function HomeCollage() {
           </div>
 
           <div
-            className="absolute z-[25] -rotate-[5deg]"
-            style={{ left: 800, top: 720 }}
-            aria-hidden="true"
-          >
-            <UBahnSign />
-          </div>
-
-          <div
-            className="pointer-events-none absolute z-[45] rotate-[5deg]"
-            style={{ left: 800, top: 790 }}
-            aria-hidden="true"
-          >
-            <Football className="h-[68px] w-auto" idPrefix="ballDesk" />
-          </div>
-
-          <div
             className="absolute z-30 -rotate-[5deg]"
-            style={{ left: 920, top: 780 }}
+            style={{ left: 800, top: 730 }}
           >
-            <PostIt widthClass="w-[105px]" />
+            <PostIt />
           </div>
 
           <div
@@ -994,8 +946,6 @@ export default function HomeCollage() {
           >
             <MateCup className="h-[70px] w-auto" />
           </div>
-
-          <ClickHint />
         </div>
       </section>
 
@@ -1018,15 +968,6 @@ export default function HomeCollage() {
               >
                 <OrivelaNote className="-rotate-[4deg]" />
               </Clickable>
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute -right-2 -top-3 z-10 -rotate-[12deg]"
-                aria-label="See it live"
-              >
-                <AppStoreStamp />
-              </a>
             </div>
             <Clickable
               label="Peeranimo"
