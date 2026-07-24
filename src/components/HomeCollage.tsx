@@ -414,20 +414,11 @@ function AppStoreStamp({
 function ClickHint() {
   return (
     <div
-      className="pointer-events-none absolute z-40 flex flex-col items-start gap-1"
-      style={{ left: 1180, top: 330 }}
+      className="pointer-events-none absolute z-40 flex items-center gap-2"
+      style={{ left: 700, top: 868 }}
       aria-hidden="true"
     >
-      <span
-        className="text-base text-[#1A1A1A]/50"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        click the things
-      </span>
-      <svg
-        viewBox="0 0 28 28"
-        className="h-6 w-6 rotate-[140deg] opacity-50"
-      >
+      <svg viewBox="0 0 28 28" className="h-6 w-6 -rotate-[25deg] opacity-50">
         <path
           d="M6 22 C10 14, 14 10, 22 6"
           fill="none"
@@ -444,6 +435,12 @@ function ClickHint() {
           strokeLinejoin="round"
         />
       </svg>
+      <span
+        className="text-base text-[#1A1A1A]/50"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
+      >
+        click the things
+      </span>
     </div>
   );
 }
@@ -511,12 +508,12 @@ function HeadlineBlock({
   return (
     <div className={className}>
       <h1
-        className="text-[52px] leading-[1.1] tracking-tight text-[#1A1A1A]"
+        className="text-[48px] leading-[1.1] tracking-tight text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
       >
         {headline}
       </h1>
-      <SubtitleLines className="mt-6 max-w-[560px] text-[17px]" />
+      <SubtitleLines className="mt-6 max-w-[700px] text-[17px]" />
     </div>
   );
 }
@@ -629,7 +626,7 @@ function PeeranimoUnit({
   variant?: "desktop" | "mobile" | "tablet";
 }) {
   return (
-    <div className={variant === "desktop" ? "w-[230px]" : "w-[216px]"}>
+    <div className={variant === "desktop" ? "w-[225px]" : "w-[216px]"}>
       <PeeranimoPolaroids variant={variant} />
       <p
         className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[15px] leading-snug text-[#1A1A1A]"
@@ -680,10 +677,16 @@ function ServiceCard({ className = "" }: { className?: string }) {
   );
 }
 
-function PostIt({ className = "" }: { className?: string }) {
+function PostIt({
+  className = "",
+  widthClass = "w-[110px]",
+}: {
+  className?: string;
+  widthClass?: string;
+}) {
   return (
     <div
-      className={`relative w-[110px] bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW} ${className}`}
+      className={`relative bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW} ${widthClass} ${className}`}
     >
       <Tape className="-left-1 -top-2 -rotate-[18deg]" />
       <p
@@ -846,7 +849,7 @@ export default function HomeCollage() {
           {/* Lila Fläche */}
           <svg
             className="pointer-events-none absolute z-0 -rotate-[4deg]"
-            style={{ left: 0, top: 380, width: 380, height: 420 }}
+            style={{ left: 0, top: 350, width: 360, height: 400 }}
             viewBox="0 0 280 340"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -860,7 +863,7 @@ export default function HomeCollage() {
           {/* Türkise Fläche */}
           <svg
             className="pointer-events-none absolute z-0 rotate-[3deg]"
-            style={{ left: 1090, top: 750, width: 230, height: 150 }}
+            style={{ left: 1120, top: 730, width: 210, height: 150 }}
             viewBox="0 0 260 280"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -871,18 +874,36 @@ export default function HomeCollage() {
             />
           </svg>
 
-          {/* Zone 1: Text */}
+          {/* BAND 1: Text */}
           <div
-            className="absolute z-30 w-[660px]"
-            style={{ left: 70, top: 60 }}
+            className="absolute z-30 w-[820px]"
+            style={{ left: 70, top: 50 }}
           >
             <HeadlineBlock />
           </div>
 
-          {/* Zone 2: Steffen */}
+          {/* BAND 1: Deko rechts neben Text */}
+          <Clickable
+            label="Why Berlin?"
+            scrollTo="#room-02"
+            className="z-10 rotate-[2deg]"
+            style={{ left: 1150, top: 30 }}
+          >
+            <Fernsehturm className="h-[260px] w-auto" />
+          </Clickable>
+
+          <div
+            className="absolute z-10"
+            style={{ left: 1270, top: 110, width: 50 }}
+            aria-hidden="true"
+          >
+            <SolDeMayo className="h-[50px] w-[50px] opacity-80" />
+          </div>
+
+          {/* BAND 2: Steffen + Apps — shared top edge y=380 */}
           <div
             className="absolute z-20"
-            style={{ left: 50, top: 400, height: 480 }}
+            style={{ left: 50, top: 380, height: 440 }}
           >
             <img
               src="/me-steffen.png"
@@ -898,12 +919,11 @@ export default function HomeCollage() {
             </Clickable>
           </div>
 
-          {/* Zone 3: Apps — shared top edge y=410 */}
           <Clickable
             label="Orivela"
             scrollTo="#room-03b"
-            className="z-[35] w-[250px] -rotate-[5deg]"
-            style={{ left: 500, top: 410 }}
+            className="z-[35] w-[240px] -rotate-[5deg]"
+            style={{ left: 470, top: 380 }}
           >
             <OrivelaNote />
           </Clickable>
@@ -913,16 +933,16 @@ export default function HomeCollage() {
             href={APP_STORE_URL}
             external
             className="z-40 -rotate-[12deg]"
-            style={{ left: 700, top: 385, width: 90 }}
+            style={{ left: 660, top: 358, width: 88 }}
           >
-            <AppStoreStamp className="h-[90px] w-[90px] opacity-80" />
+            <AppStoreStamp className="h-[88px] w-[88px] opacity-80" />
           </Clickable>
 
           <Clickable
             label="Kolibi"
             scrollTo="#room-03c"
-            className="z-[35] w-[180px] rotate-[4deg]"
-            style={{ left: 810, top: 410 }}
+            className="z-30 w-[180px] rotate-[4deg]"
+            style={{ left: 760, top: 380 }}
           >
             <KolibiReceipt />
           </Clickable>
@@ -930,67 +950,49 @@ export default function HomeCollage() {
           <Clickable
             label="Peeranimo"
             scrollTo="#room-04"
-            className="z-[35] w-[230px]"
-            style={{ left: 1060, top: 410 }}
+            className="z-[35] w-[225px]"
+            style={{ left: 990, top: 380 }}
           >
             <PeeranimoUnit />
           </Clickable>
 
-          {/* Zone 4: lower band */}
+          {/* BAND 3: unteres Band */}
           <div
             className="absolute z-30 w-[285px] -rotate-[2deg]"
-            style={{ left: 500, top: 730 }}
+            style={{ left: 470, top: 700 }}
           >
             <ServiceCard />
           </div>
 
           <div
             className="absolute z-[25] -rotate-[5deg]"
-            style={{ left: 840, top: 745 }}
+            style={{ left: 800, top: 720 }}
             aria-hidden="true"
           >
             <UBahnSign />
           </div>
 
           <div
-            className="pointer-events-none absolute z-30 rotate-[5deg]"
-            style={{ left: 840, top: 815 }}
+            className="pointer-events-none absolute z-[45] rotate-[5deg]"
+            style={{ left: 800, top: 790 }}
             aria-hidden="true"
           >
-            <Football className="h-[70px] w-auto" idPrefix="ballDesk" />
+            <Football className="h-[68px] w-auto" idPrefix="ballDesk" />
           </div>
 
           <div
             className="absolute z-30 -rotate-[5deg]"
-            style={{ left: 960, top: 805 }}
+            style={{ left: 920, top: 780 }}
           >
-            <PostIt />
+            <PostIt widthClass="w-[105px]" />
           </div>
 
           <div
             className="absolute z-20 rotate-[5deg]"
-            style={{ left: 1130, top: 790 }}
+            style={{ left: 1150, top: 750 }}
             aria-hidden="true"
           >
-            <MateCup className="h-[75px] w-auto" />
-          </div>
-
-          {/* Deko oben rechts */}
-          <Clickable
-            label="Why Berlin?"
-            scrollTo="#room-02"
-            className="z-10 rotate-[2deg]"
-            style={{ left: 1120, top: 30 }}
-          >
-            <Fernsehturm className="h-[260px] w-auto" />
-          </Clickable>
-
-          <div
-            className="absolute z-10"
-            style={{ left: 1250, top: 120, width: 50 }}
-            aria-hidden="true"
-          >
-            <SolDeMayo className="h-[50px] w-[50px] opacity-80" />
+            <MateCup className="h-[70px] w-auto" />
           </div>
 
           <ClickHint />
