@@ -47,7 +47,7 @@ function AppRow({
         <img
           src={icon}
           alt=""
-          className="h-[46px] w-[46px] rounded-[11px] border border-black/10"
+          className="h-[54px] w-[54px] rounded-[11px] border border-black/10"
         />
         <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
           {name}
@@ -64,13 +64,13 @@ function AppRow({
       <img
         src={icon}
         alt=""
-        className="h-[54px] w-[54px] rounded-[13px] border border-black/10"
+        className="h-[62px] w-[62px] rounded-[13px] border border-black/10"
       />
       <div className="leading-tight">
-        <p className="text-[13px] font-medium text-[#1A1A1A]">{name}</p>
-        <p className="text-[10px] text-[#1A1A1A]/55">{platform}</p>
+        <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
+        <p className="text-[12px] text-[#1A1A1A]/55">{platform}</p>
       </div>
-      <span className="ml-auto rounded-full bg-[#1A1A1A] px-3 py-1 text-[11px] text-[#F5F0E8]">
+      <span className="ml-auto rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8]">
         Open
       </span>
     </div>
@@ -252,7 +252,7 @@ function SolDeMayo() {
 }
 
 function FootballSvg({
-  className = "h-[92px] w-auto",
+  className = "h-[85px] w-auto",
   idPrefix = "ball",
 }: {
   className?: string;
@@ -312,7 +312,7 @@ function FootballSvg({
 }
 
 function Football({
-  className = "h-[92px] w-auto",
+  className = "h-[85px] w-auto",
   idPrefix = "ball",
 }: {
   className?: string;
@@ -411,7 +411,7 @@ function ClickHint() {
   return (
     <div
       className="pointer-events-none absolute z-40 flex items-center gap-2"
-      style={{ left: 1040, top: 840 }}
+      style={{ left: 900, top: 860 }}
       aria-hidden="true"
     >
       <svg viewBox="0 0 28 28" className="h-6 w-6 -rotate-[25deg] opacity-50">
@@ -441,12 +441,28 @@ function ClickHint() {
   );
 }
 
+function SubtitleLines({ className = "" }: { className?: string }) {
+  return (
+    <div className={`leading-[1.6] text-[#1A1A1A]/75 ${className}`}>
+      <p>
+        I build my own apps. Three so far — a vault, a tracker, a place to find
+        people who get it.
+      </p>
+      <p>None of them fit the same box. That&apos;s the point.</p>
+      <p>
+        I&apos;ve made most of the mistakes myself. Which makes me a good
+        sparring partner for someone else&apos;s idea.
+      </p>
+    </div>
+  );
+}
+
 function HeadlineBlock({
   className = "",
   variant = "desktop",
 }: {
   className?: string;
-  variant?: "desktop" | "mobile";
+  variant?: "desktop" | "mobile" | "tablet";
 }) {
   if (variant === "mobile") {
     return (
@@ -456,15 +472,22 @@ function HeadlineBlock({
           style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
         >
           Out-of-the-box thinker.
-          <br />
-          Creative mind.
-          <br />
-          Always building something new.
         </h1>
-        <p className="mt-4 text-[15px] leading-relaxed text-[#1A1A1A]/75">
-          Three apps of my own — and platforms for people whose idea doesn&apos;t
-          exist yet.
-        </p>
+        <SubtitleLines className="mt-4 text-[15px]" />
+      </div>
+    );
+  }
+
+  if (variant === "tablet") {
+    return (
+      <div className={className}>
+        <h1
+          className="font-serif text-[42px] leading-[1.1] text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+        >
+          Out-of-the-box thinker.
+        </h1>
+        <SubtitleLines className="mt-4 max-w-[520px] text-[16px]" />
       </div>
     );
   }
@@ -476,15 +499,8 @@ function HeadlineBlock({
         style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
       >
         Out-of-the-box thinker.
-        <br />
-        Creative mind.
-        <br />
-        Always building something new.
       </h1>
-      <p className="mt-3 text-[17px] text-[#1A1A1A]/opacity-75">
-        Three apps of my own — and platforms for people whose idea doesn&apos;t
-        exist yet.
-      </p>
+      <SubtitleLines className="mt-3 text-[17px]" />
     </div>
   );
 }
@@ -597,10 +613,10 @@ function PeeranimoUnit({
   variant?: "desktop" | "mobile" | "tablet";
 }) {
   return (
-    <div className={variant === "desktop" ? "w-[220px]" : "w-[216px]"}>
+    <div className={variant === "desktop" ? "w-[235px]" : "w-[216px]"}>
       <PeeranimoPolaroids variant={variant} />
       <p
-        className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[14px] leading-snug text-[#1A1A1A]"
+        className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[15px] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         People who get it. Without searching for years.
@@ -627,7 +643,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
         aria-hidden="true"
       />
       <p
-        className="text-[1.2rem] leading-snug text-[#1A1A1A]"
+        className="text-[14px] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         Bring me something nobody has built yet.
@@ -715,13 +731,13 @@ function OrivelaNote({ className = "" }: { className?: string }) {
           aria-hidden="true"
         />
         <p
-          className="relative pl-2 text-[1.2rem] leading-snug text-[#1A2E5A]"
+          className="relative pl-2 text-[20px] leading-snug text-[#1A2E5A]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           Every contract, every subscription. The answer in seconds.
         </p>
         <p
-          className="relative mt-1 -rotate-[1.5deg] pl-2 text-[0.95rem] leading-snug text-[#1A3A8F]"
+          className="relative mt-1 -rotate-[1.5deg] pl-2 text-[16px] leading-snug text-[#1A3A8F]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           even the ones you forgot about
@@ -753,7 +769,7 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
         </p>
         <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
         <p
-          className="text-xs leading-relaxed text-[#333]"
+          className="text-[13px] leading-relaxed text-[#333]"
           style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
         >
           One photo. You know what&apos;s left for today.
@@ -828,7 +844,7 @@ export default function HomeCollage() {
           {/* Türkise Fläche */}
           <svg
             className="pointer-events-none absolute z-0 rotate-[3deg]"
-            style={{ left: 1000, top: 660, width: 330, height: 240 }}
+            style={{ left: 1120, top: 620, width: 230, height: 250 }}
             viewBox="0 0 260 280"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -858,7 +874,7 @@ export default function HomeCollage() {
 
           <div
             className="absolute z-20"
-            style={{ left: 40, top: 380, height: 520 }}
+            style={{ left: 30, top: 400, height: 500 }}
           >
             <img
               src="/me-steffen.png"
@@ -875,7 +891,7 @@ export default function HomeCollage() {
           </div>
 
           <div
-            className="absolute z-30 w-[440px]"
+            className="absolute z-30 w-[460px]"
             style={{ left: 430, top: 80 }}
           >
             <HeadlineBlock />
@@ -884,8 +900,8 @@ export default function HomeCollage() {
           <Clickable
             label="Orivela"
             scrollTo="#room-03b"
-            className="z-[35] w-[235px] -rotate-[5deg]"
-            style={{ left: 960, top: 40 }}
+            className="z-[35] w-[260px] -rotate-[5deg]"
+            style={{ left: 900, top: 55 }}
           >
             <OrivelaNote />
           </Clickable>
@@ -895,7 +911,7 @@ export default function HomeCollage() {
             href={APP_STORE_URL}
             external
             className="z-40 -rotate-[16deg]"
-            style={{ left: 1180, top: 20, width: 95 }}
+            style={{ left: 1130, top: 30, width: 95 }}
           >
             <AppStoreStamp />
           </Clickable>
@@ -903,57 +919,57 @@ export default function HomeCollage() {
           <Clickable
             label="Kolibi"
             scrollTo="#room-03c"
-            className="z-30 w-[175px] rotate-[4deg]"
-            style={{ left: 1130, top: 300 }}
+            className="z-30 w-[185px] rotate-[4deg]"
+            style={{ left: 1130, top: 290 }}
           >
             <KolibiReceipt />
           </Clickable>
 
           <div
-            className="absolute z-30 w-[300px] -rotate-[2deg]"
-            style={{ left: 490, top: 400 }}
-          >
-            <ServiceCard />
-          </div>
-
-          <div
             className="pointer-events-none absolute z-[45] rotate-[8deg]"
-            style={{ left: 930, top: 590 }}
+            style={{ left: 780, top: 415 }}
             aria-hidden="true"
           >
             <Football idPrefix="ballDesk" />
           </div>
 
+          <div
+            className="absolute z-30 -rotate-[6deg]"
+            style={{ left: 600, top: 480 }}
+          >
+            <PostIt />
+          </div>
+
           <Clickable
             label="Peeranimo"
             scrollTo="#room-04"
-            className="z-[35] w-[220px]"
-            style={{ left: 490, top: 600 }}
+            className="z-[35] w-[235px]"
+            style={{ left: 870, top: 580 }}
           >
             <PeeranimoUnit />
           </Clickable>
 
           <div
-            className="absolute z-30 -rotate-[6deg]"
-            style={{ left: 780, top: 600 }}
+            className="absolute z-30 w-[285px] -rotate-[2deg]"
+            style={{ left: 450, top: 620 }}
           >
-            <PostIt />
-          </div>
-
-          <div
-            className="absolute z-20 rotate-[5deg]"
-            style={{ left: 1150, top: 700 }}
-            aria-hidden="true"
-          >
-            <MateCup />
+            <ServiceCard />
           </div>
 
           <div
             className="absolute z-[25] -rotate-[6deg]"
-            style={{ left: 760, top: 730 }}
+            style={{ left: 450, top: 830 }}
             aria-hidden="true"
           >
             <UBahnSign />
+          </div>
+
+          <div
+            className="absolute z-20 rotate-[5deg]"
+            style={{ left: 1180, top: 645 }}
+            aria-hidden="true"
+          >
+            <MateCup />
           </div>
 
           <ClickHint />
@@ -962,20 +978,7 @@ export default function HomeCollage() {
 
       {/* TABLET PORTRAIT */}
       <section className="hidden bg-[#F5F0E8] px-8 py-14 md:block lg:hidden">
-        <h1
-          className="font-serif text-[42px] leading-[1.1] text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-        >
-          Out-of-the-box thinker.
-          <br />
-          Creative mind.
-          <br />
-          Always building something new.
-        </h1>
-        <p className="mt-4 max-w-[520px] text-[16px] leading-relaxed text-[#1A1A1A]/75">
-          Three apps of my own — and platforms for people whose idea doesn&apos;t
-          exist yet.
-        </p>
+        <HeadlineBlock variant="tablet" />
 
         <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10">
           <div className="flex flex-col items-center gap-10">
@@ -984,20 +987,6 @@ export default function HomeCollage() {
               alt=""
               className="h-[340px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
             />
-            <div className="w-full max-w-[300px]">
-              <ServiceCard className="-rotate-[2deg]" />
-            </div>
-            <Clickable
-              label="Peeranimo"
-              scrollTo="#room-04"
-              positioned={false}
-              className="max-w-[220px]"
-            >
-              <PeeranimoUnit variant="tablet" />
-            </Clickable>
-          </div>
-
-          <div className="mt-16 flex flex-col items-center gap-10">
             <div className="relative w-full max-w-[280px]">
               <Clickable
                 label="Orivela"
@@ -1017,6 +1006,17 @@ export default function HomeCollage() {
               </a>
             </div>
             <Clickable
+              label="Peeranimo"
+              scrollTo="#room-04"
+              positioned={false}
+              className="max-w-[235px]"
+            >
+              <PeeranimoUnit variant="tablet" />
+            </Clickable>
+          </div>
+
+          <div className="mt-16 flex flex-col items-center gap-10">
+            <Clickable
               label="Kolibi"
               scrollTo="#room-03c"
               positioned={false}
@@ -1025,6 +1025,9 @@ export default function HomeCollage() {
               <KolibiReceipt className="rotate-[3deg]" />
             </Clickable>
             <PostIt className="-rotate-[4deg]" />
+            <div className="w-full max-w-[285px]">
+              <ServiceCard className="-rotate-[2deg]" />
+            </div>
           </div>
         </div>
 
@@ -1051,10 +1054,6 @@ export default function HomeCollage() {
           alt=""
           className="mx-auto mt-8 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
         />
-
-        <div className="mx-auto mt-10 max-w-[300px]">
-          <ServiceCard className="-rotate-[2deg]" />
-        </div>
 
         <Clickable
           label="Orivela"
@@ -1085,12 +1084,17 @@ export default function HomeCollage() {
           </div>
         </Clickable>
 
+        <div className="mx-auto mt-10 max-w-[285px]">
+          <ServiceCard className="-rotate-[2deg]" />
+        </div>
+
         <div className="mt-10 flex items-center justify-center gap-6">
           <PostIt className="-rotate-[3deg]" />
           <Football className="h-[60px] w-auto" idPrefix="ballMob" />
           <div className="scale-90" aria-hidden="true">
             <UBahnSign />
           </div>
+          <MateCup className="h-[56px] w-auto" />
         </div>
       </section>
     </div>
