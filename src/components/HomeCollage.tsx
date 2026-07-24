@@ -578,7 +578,24 @@ function PeeranimoUnit({
   );
 }
 
-function ServiceCard({ className = "" }: { className?: string }) {
+function ServiceCard({
+  className = "",
+  variant = "desktop",
+}: {
+  className?: string;
+  variant?: "desktop" | "mobile" | "tablet";
+}) {
+  const copySize =
+    variant === "mobile"
+      ? "text-[18px]"
+      : variant === "tablet"
+        ? "text-[19px]"
+        : "text-[20px]";
+  const buttonSize =
+    variant === "mobile"
+      ? "px-5 py-2.5 text-[14px]"
+      : "px-5 py-2.5 text-[15px]";
+
   return (
     <div
       className={`relative bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW} ${className}`}
@@ -589,7 +606,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
         aria-hidden="true"
       />
       <p
-        className="text-[14px] leading-snug text-[#1A1A1A]"
+        className={`${copySize} leading-snug text-[#1A1A1A]`}
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         Pitch me your idea. We&apos;ll take it apart together.
@@ -601,7 +618,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
             .getElementById("room-05")
             ?.scrollIntoView({ behavior: "smooth" })
         }
-        className="mt-4 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8] transition-opacity hover:opacity-90"
+        className={`mt-4 rounded-full bg-[#1A1A1A] font-medium text-[#F5F0E8] transition-opacity hover:opacity-90 ${buttonSize}`}
       >
         Let&apos;s think it through →
       </button>
@@ -926,7 +943,7 @@ export default function HomeCollage() {
 
           {/* BAND 3: unteres Band */}
           <div
-            className="absolute z-30 w-[285px] -rotate-[2deg]"
+            className="absolute z-30 w-[310px] -rotate-[2deg]"
             style={{ left: 470, top: 700 }}
           >
             <ServiceCard />
@@ -990,7 +1007,7 @@ export default function HomeCollage() {
             </Clickable>
             <PostIt className="-rotate-[4deg]" />
             <div className="w-full max-w-[285px]">
-              <ServiceCard className="-rotate-[2deg]" />
+              <ServiceCard className="-rotate-[2deg]" variant="tablet" />
             </div>
           </div>
         </div>
@@ -1049,7 +1066,7 @@ export default function HomeCollage() {
         </Clickable>
 
         <div className="mx-auto mt-10 max-w-[285px]">
-          <ServiceCard className="-rotate-[2deg]" />
+          <ServiceCard className="-rotate-[2deg]" variant="mobile" />
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-6">
