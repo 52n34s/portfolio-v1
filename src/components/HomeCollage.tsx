@@ -445,13 +445,12 @@ function SubtitleLines({ className = "" }: { className?: string }) {
   return (
     <div className={`leading-[1.6] text-[#1A1A1A]/75 ${className}`}>
       <p>
-        I build my own apps. Three so far — a vault, a tracker, a place to find
-        people who get it.
+        Hi, I&apos;m Steffen. Curious by default, happiest when nothing exists
+        yet, and rarely convinced that the obvious way is the right one.
       </p>
-      <p>None of them fit the same box. That&apos;s the point.</p>
-      <p>
-        I&apos;ve made most of the mistakes myself. Which makes me a good
-        sparring partner for someone else&apos;s idea.
+      <p className="mt-3">
+        Three apps of my own, plus platforms for people who came with an idea
+        and no map.
       </p>
     </div>
   );
@@ -464,16 +463,26 @@ function HeadlineBlock({
   className?: string;
   variant?: "desktop" | "mobile" | "tablet";
 }) {
+  const headline = (
+    <>
+      Start before you can.
+      <br />
+      Find the way while walking.
+      <br />
+      Something always works.
+    </>
+  );
+
   if (variant === "mobile") {
     return (
       <div className={className}>
         <h1
-          className="font-serif text-[34px] leading-[1.12] text-[#1A1A1A]"
+          className="font-serif text-[32px] leading-[1.1] text-[#1A1A1A]"
           style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
         >
-          Out-of-the-box thinker.
+          {headline}
         </h1>
-        <SubtitleLines className="mt-4 text-[15px]" />
+        <SubtitleLines className="mt-5 text-[15px]" />
       </div>
     );
   }
@@ -485,9 +494,9 @@ function HeadlineBlock({
           className="font-serif text-[42px] leading-[1.1] text-[#1A1A1A]"
           style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
         >
-          Out-of-the-box thinker.
+          {headline}
         </h1>
-        <SubtitleLines className="mt-4 max-w-[520px] text-[16px]" />
+        <SubtitleLines className="mt-5 max-w-[520px] text-[16px]" />
       </div>
     );
   }
@@ -498,9 +507,9 @@ function HeadlineBlock({
         className="text-[52px] leading-[1.1] tracking-tight text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
       >
-        Out-of-the-box thinker.
+        {headline}
       </h1>
-      <SubtitleLines className="mt-3 text-[17px]" />
+      <SubtitleLines className="mt-5 max-w-[490px] text-[17px]" />
     </div>
   );
 }
@@ -646,7 +655,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
         className="text-[14px] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
-        Bring me something nobody has built yet.
+        Pitch me your idea. We&apos;ll take it apart together.
       </p>
       <button
         type="button"
@@ -657,7 +666,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
         }
         className="mt-4 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-[#F5F0E8] transition-opacity hover:opacity-90"
       >
-        Start a project →
+        Let&apos;s think it through →
       </button>
       <TornEdge />
     </div>
@@ -891,7 +900,7 @@ export default function HomeCollage() {
           </div>
 
           <div
-            className="absolute z-30 w-[460px]"
+            className="absolute z-30 w-[490px]"
             style={{ left: 430, top: 80 }}
           >
             <HeadlineBlock />
@@ -927,7 +936,7 @@ export default function HomeCollage() {
 
           <div
             className="pointer-events-none absolute z-[45] rotate-[8deg]"
-            style={{ left: 780, top: 415 }}
+            style={{ left: 780, top: 470 }}
             aria-hidden="true"
           >
             <Football idPrefix="ballDesk" />
