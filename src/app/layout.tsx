@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Caveat,
-  DM_Sans,
-  Inter,
-  JetBrains_Mono,
-  Lora,
-  Syne,
-} from "next/font/google";
+import { Caveat, Inter, JetBrains_Mono, Lora } from "next/font/google";
 import NavBubbles from "@/components/NavBubbles";
 import "./globals.css";
 
@@ -32,18 +25,6 @@ const caveat = Caveat({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-hand",
-});
-
-const syne = Syne({
-  weight: ["800"],
-  subsets: ["latin"],
-  variable: "--font-syne",
-});
-
-const dmSans = DM_Sans({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
@@ -129,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${lora.variable} ${caveat.variable} ${syne.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${lora.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <link

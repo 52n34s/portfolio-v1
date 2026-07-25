@@ -165,7 +165,7 @@ function OrivelaCard() {
             Play Store (beta) →
           </a>
         </div>
-        <p className="relative mt-2 pl-2 font-dm-sans text-[11px] text-[#1A1A1A]/50">
+        <p className="relative mt-2 pl-2 font-inter text-[11px] text-[#1A1A1A]/50">
           Android is in closed testing — request access after tapping Play
           Store.
         </p>
@@ -213,7 +213,7 @@ function KolibiCard() {
         <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
         <a
           href="https://kolibi.app/"
-          className="mt-3 inline-block rounded-full bg-[#EF9F27] px-5 py-2 font-dm-sans text-[13px] font-medium text-white"
+          className="mt-3 inline-block rounded-full bg-[#EF9F27] px-5 py-2 font-inter text-[13px] font-medium text-white"
         >
           Join the waitlist →
         </a>
@@ -299,7 +299,7 @@ function PeeranimoCard() {
           href="https://peeranimo.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-full bg-[#1D9E75] px-5 py-2 font-dm-sans text-[13px] font-medium text-white"
+          className="inline-block rounded-full bg-[#1D9E75] px-5 py-2 font-inter text-[13px] font-medium text-white"
         >
           Try it now →
         </a>
@@ -310,41 +310,23 @@ function PeeranimoCard() {
 
 export default function AppsPage() {
   return (
-    <main className="relative flex min-h-screen flex-col overflow-hidden bg-[#F5F0E8]">
-      {/* Background scraps */}
-      <svg
-        className="pointer-events-none absolute top-[18%] left-[-4%] z-0 h-[42%] w-[38%] -rotate-[4deg] md:top-[22%] md:left-0 md:h-[50%] md:w-[28%]"
-        viewBox="0 0 280 340"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          fill="#7B5CF0"
-          d="M36 62 L62 54 L88 65 L116 55 L146 66 L176 56 L204 67 L232 57 L238 300 L210 310 L182 300 L154 311 L124 301 L96 312 L66 302 L40 312 Z"
-        />
-      </svg>
-      <svg
-        className="pointer-events-none absolute right-[-2%] bottom-[8%] z-0 h-[28%] w-[42%] rotate-[3deg] md:right-[4%] md:bottom-[6%] md:h-[32%] md:w-[24%]"
-        viewBox="0 0 260 280"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          fill="#00C2A8"
-          d="M28 48 L54 40 L82 52 L110 42 L140 54 L168 44 L196 55 L224 46 L232 250 L204 262 L176 252 L148 263 L118 253 L90 264 L60 254 L34 265 Z"
-        />
-      </svg>
-
-      <header className="relative z-10 px-6 pt-10 pb-6 md:px-12 md:pt-16">
-        <h1 className="font-syne text-[28px] font-extrabold leading-tight text-[#1A1A1A] md:text-[36px]">
+    <main className="relative flex min-h-screen flex-col bg-[#F5F0E8]">
+      <header className="px-6 pt-10 pb-6 md:px-12 md:pt-16">
+        <h1
+          className="text-[28px] font-extrabold leading-tight text-[#1A1A1A] md:text-[36px]"
+          style={{ fontFamily: "var(--font-display), sans-serif" }}
+        >
           Apps — built by Steffen.
         </h1>
-        <p className="mt-2 font-dm-sans text-[15px] text-[#1A1A1A]/70 md:text-[17px]">
+        <p
+          className="mt-2 text-[15px] text-[#1A1A1A]/70 md:text-[17px]"
+          style={{ fontFamily: "var(--font-inter), sans-serif" }}
+        >
           Three products. Three different problems.
         </p>
       </header>
 
-      <section className="relative z-10 flex flex-1 flex-col items-center gap-14 px-6 pb-10 md:flex-row md:items-start md:justify-center md:gap-10 md:px-12 md:pb-12 lg:gap-14">
+      <section className="flex flex-1 flex-col items-center gap-14 px-6 pb-10 md:flex-row md:items-start md:justify-center md:gap-10 md:px-12 md:pb-12 lg:gap-14">
         <div className="w-full max-w-[300px] md:mt-0 md:w-auto">
           <OrivelaCard />
         </div>
@@ -356,16 +338,27 @@ export default function AppsPage() {
         </div>
       </section>
 
-      <footer className="relative z-10 flex flex-col items-center justify-between gap-4 px-6 pb-8 md:flex-row md:px-12 md:pb-10">
-        <a
-          href="/#room-02"
-          className="font-dm-sans text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
-        >
-          Curious who&apos;s behind these? → About Steffen
-        </a>
+      <footer className="flex flex-col items-center justify-between gap-3 px-6 pb-8 md:flex-row md:px-12 md:pb-10">
+        <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
+          <a
+            href="/#room-02"
+            className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
+            style={{ fontFamily: "var(--font-inter), sans-serif" }}
+          >
+            Curious who&apos;s behind these? → About Steffen
+          </a>
+          <a
+            href="/#room-05"
+            className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
+            style={{ fontFamily: "var(--font-inter), sans-serif" }}
+          >
+            Have your own idea? → Work with Steffen
+          </a>
+        </div>
         <a
           href="/"
-          className="rounded-full border border-[#1A1A1A] px-5 py-2 font-dm-sans text-[14px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#1A1A1A] hover:text-[#F5F0E8]"
+          className="rounded-full border border-[#1A1A1A] px-5 py-2 text-[14px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#1A1A1A] hover:text-[#F5F0E8]"
+          style={{ fontFamily: "var(--font-inter), sans-serif" }}
         >
           ← Home
         </a>
