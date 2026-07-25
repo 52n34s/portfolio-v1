@@ -179,7 +179,7 @@ function KolibiCard() {
   const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
 
   return (
-    <div className="relative w-full max-w-[220px] rotate-[3deg]">
+    <div className="relative w-full max-w-[300px] rotate-[3deg]">
       <Tape className="left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
       <article className={`relative bg-white px-4 pb-5 pt-5 ${PAPER_SHADOW}`}>
         <ReceiptZigzag position="top" />
@@ -192,6 +192,24 @@ function KolibiCard() {
         <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
         <p className="text-[11px] leading-snug text-[#333]" style={mono}>
           One photo. Know what&apos;s left for today.
+        </p>
+        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
+        <div className="space-y-0.5 text-[10px] text-[#1A1A1A]" style={mono}>
+          <div className="flex justify-between gap-2">
+            <span>BOWL &amp; EGGS</span>
+            <span>438</span>
+          </div>
+          <div className="flex justify-between gap-2">
+            <span>FLAT WHITE</span>
+            <span>84</span>
+          </div>
+        </div>
+        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
+        <p className="text-[11px] font-medium text-[#1A1A1A]" style={mono}>
+          <span className="flex justify-between gap-2">
+            <span>REMAINING</span>
+            <span>412 kcal</span>
+          </span>
         </p>
         <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
         <div className="flex items-center gap-2">
@@ -210,7 +228,6 @@ function KolibiCard() {
           <span>STATUS</span>
           <span>COMING SOON</span>
         </p>
-        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
         <a
           href="https://kolibi.app/"
           className="mt-3 inline-block rounded-full bg-[#EF9F27] px-5 py-2 font-inter text-[13px] font-medium text-white"
@@ -311,26 +328,23 @@ function PeeranimoCard() {
 export default function AppsPage() {
   return (
     <main className="relative flex min-h-screen flex-col bg-[#F5F0E8]">
-      <header className="px-6 pt-10 pb-6 md:px-12 md:pt-16">
+      <header className="px-6 pt-10 pb-6 text-center md:px-12 md:pt-16">
         <h1
-          className="text-[28px] font-extrabold leading-tight text-[#1A1A1A] md:text-[36px]"
-          style={{ fontFamily: "var(--font-display), sans-serif" }}
+          className="text-[32px] leading-[1.1] tracking-tight text-[#1A1A1A] md:text-[42px] lg:text-[48px]"
+          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
         >
           Apps — built by Steffen.
         </h1>
-        <p
-          className="mt-2 text-[15px] text-[#1A1A1A]/70 md:text-[17px]"
-          style={{ fontFamily: "var(--font-inter), sans-serif" }}
-        >
+        <p className="mx-auto mt-2 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[16px] lg:mt-6 lg:text-[17px]">
           Three products. Three different problems.
         </p>
       </header>
 
-      <section className="flex flex-1 flex-col items-center gap-14 px-6 pb-10 md:flex-row md:items-start md:justify-center md:gap-10 md:px-12 md:pb-12 lg:gap-14">
+      <section className="flex flex-1 flex-wrap items-start justify-center gap-8 px-6 pb-6 md:gap-10 md:px-12 md:pb-12">
         <div className="w-full max-w-[300px] md:mt-0 md:w-auto">
           <OrivelaCard />
         </div>
-        <div className="w-full max-w-[220px] md:mt-8 md:w-auto">
+        <div className="w-full max-w-[300px] md:mt-8 md:w-auto">
           <KolibiCard />
         </div>
         <div className="w-full max-w-[240px] md:mt-3 md:w-auto">
@@ -338,7 +352,7 @@ export default function AppsPage() {
         </div>
       </section>
 
-      <footer className="flex flex-col items-center justify-between gap-3 px-6 pb-8 md:flex-row md:px-12 md:pb-10">
+      <footer className="flex flex-col items-center gap-4 px-6 pb-8 md:px-12 md:pb-10">
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
           <a
             href="/#room-02"
