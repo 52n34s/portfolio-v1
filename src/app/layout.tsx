@@ -47,7 +47,9 @@ export const metadata: Metadata = {
     canonical: "https://52n34s.app",
   },
   icons: {
-    icon: "/favicon.png",
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
   openGraph: {
     title: "Steffen — Founder · Developer · Berlin Mitte",
