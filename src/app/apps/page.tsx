@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Apps — built by Steffen",
-  description: "Three products. Three different problems. Orivela, Kolibi, Peeranimo.",
+  description:
+    "Four products. Four different problems. Orivela, Kolibi, Peeranimo, Carpincho.",
   alternates: {
     canonical: "https://52n34s.app/apps",
   },
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const ORIVELA_ICON = "/app-logo-orivela.png";
 const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
+const CARPINCHO_ICON = "/carpincho.png";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
@@ -325,6 +327,52 @@ function PeeranimoCard() {
   );
 }
 
+function CarpinchoCard() {
+  return (
+    <div className="relative w-full max-w-[300px] rotate-[4deg]">
+      <div className="absolute -right-3 -top-3 z-40">
+        <StatusStamp lines={["CARPINCHO", "COMING SOON", "JOIN WAITLIST"]} />
+      </div>
+      <Tape className="-left-2 -top-2 z-20 -rotate-[22deg]" />
+      <article
+        className={`relative bg-[#FFFDF5] px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+      >
+        <p
+          className="text-[20px] leading-snug text-[#D6156F]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          830 words.
+        </p>
+        <p
+          className="mt-1 text-[17px] leading-snug text-[#D6156F]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          Enough to never get switched to English.
+        </p>
+        <div className="mt-4 flex items-center gap-2.5">
+          <img
+            src={CARPINCHO_ICON}
+            alt=""
+            className="h-[54px] w-[54px] rounded-[13px] object-cover"
+          />
+          <div className="leading-tight">
+            <p className="text-[15px] font-medium text-[#1A1A1A]">Carpincho</p>
+            <p className="text-[12px] text-[#1A1A1A]/55">Rioplatense Spanish</p>
+          </div>
+        </div>
+        <a
+          href="https://carpincho.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-block rounded-full bg-[#D6156F] px-5 py-2 font-inter text-[13px] font-medium text-white"
+        >
+          Join the waitlist →
+        </a>
+      </article>
+    </div>
+  );
+}
+
 export default function AppsPage() {
   return (
     <main className="relative flex min-h-screen flex-col bg-[#F5F0E8]">
@@ -336,7 +384,7 @@ export default function AppsPage() {
           Apps — built by Steffen.
         </h1>
         <p className="mx-auto mt-2 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[16px] lg:mt-6 lg:text-[17px]">
-          Three products. Three different problems.
+          Four products. Four different problems.
         </p>
       </header>
 
@@ -349,6 +397,9 @@ export default function AppsPage() {
         </div>
         <div className="w-full max-w-[240px] md:mt-3 md:w-auto">
           <PeeranimoCard />
+        </div>
+        <div className="w-full max-w-[300px] md:mt-6 md:w-auto">
+          <CarpinchoCard />
         </div>
       </section>
 

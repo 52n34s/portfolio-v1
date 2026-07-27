@@ -16,7 +16,7 @@ const BALL_SRC: string | null = null;
 const ORIVELA_ICON = "/app-logo-orivela.png";
 const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
-const CARPINCHO_ICON = "/app-logo-carpincho.png";
+const CARPINCHO_ICON = "/carpincho.png";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
@@ -68,12 +68,14 @@ function AppRow({
   platform,
   compact = false,
   cta = true,
+  iconClassName,
 }: {
   icon: string;
   name: string;
   platform: string;
   compact?: boolean;
   cta?: boolean;
+  iconClassName?: string;
 }) {
   if (compact) {
     return (
@@ -81,7 +83,10 @@ function AppRow({
         <img
           src={icon}
           alt=""
-          className="h-[54px] w-[54px] rounded-[11px] border border-black/10"
+          className={
+            iconClassName ??
+            "h-[54px] w-[54px] rounded-[11px] border border-black/10"
+          }
         />
         <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
           {name}
@@ -102,7 +107,10 @@ function AppRow({
       <img
         src={icon}
         alt=""
-        className="h-[62px] w-[62px] rounded-[13px] border border-black/10"
+        className={
+          iconClassName ??
+          "h-[62px] w-[62px] rounded-[13px] border border-black/10"
+        }
       />
       <div className="leading-tight">
         <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
@@ -675,6 +683,7 @@ function CarpinchoCard({ className = "" }: { className?: string }) {
             name="Carpincho"
             platform="Rioplatense Spanish"
             cta={false}
+            iconClassName="h-[54px] w-[54px] rounded-[13px] object-cover"
           />
         </div>
       </article>
