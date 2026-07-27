@@ -24,7 +24,7 @@ const APP_STATUS: Record<string, [string, string, string]> = {
   orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],
   kolibi: ["KOLIBI", "LIVE", "ON THE APP STORE"],
   peeranimo: ["PEERANIMO", "LIVE", "ON THE WEB"],
-  carpincho: ["CARPINCHO", "COMING SOON", "JOIN WAITLIST"],
+  carpincho: ["CARPINCHO", "SOON", "JOIN WAITLIST"],
 };
 
 function StatusStamp({ lines }: { lines: [string, string, string] }) {
@@ -67,14 +67,12 @@ function AppRow({
   name,
   platform,
   compact = false,
-  cta = true,
   iconClassName,
 }: {
   icon: string;
   name: string;
   platform: string;
   compact?: boolean;
-  cta?: boolean;
   iconClassName?: string;
 }) {
   if (compact) {
@@ -91,13 +89,9 @@ function AppRow({
         <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
           {name}
         </p>
-        {cta ? (
-          <span className="rounded-full bg-[#1A1A1A] px-2.5 py-[3px] text-[10px] text-[#F5F0E8]">
-            Open
-          </span>
-        ) : (
-          <p className="text-center text-[10px] text-[#1A1A1A]/55">{platform}</p>
-        )}
+        <span className="rounded-full bg-[#1A1A1A] px-2.5 py-[3px] text-[10px] text-[#F5F0E8]">
+          Open
+        </span>
       </div>
     );
   }
@@ -116,11 +110,9 @@ function AppRow({
         <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
         <p className="text-[12px] text-[#1A1A1A]/55">{platform}</p>
       </div>
-      {cta ? (
-        <span className="ml-auto rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8]">
-          Open
-        </span>
-      ) : null}
+      <span className="ml-auto rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8]">
+        Open
+      </span>
     </div>
   );
 }
@@ -223,32 +215,6 @@ function ReceiptZigzag({ position }: { position: "top" | "bottom" }) {
             : "M0 0 L8.5 10 L17 0 L25.5 10 L34 0 L42.5 10 L51 0 L59.5 10 L68 0 L76.5 10 L85 0 L93.5 10 L102 0 L110.5 10 L119 0 L127.5 10 L136 0 L144.5 10 L153 0 L161.5 10 L170 0 Z"
         }
       />
-    </svg>
-  );
-}
-
-function MateCup({ className = "h-[80px] w-auto" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 110" className={className} aria-hidden="true">
-      <path
-        d="M26 52 C 26 40, 36 33, 50 33 C 64 33, 74 40, 74 52
-           C 83 67, 78 92, 61 100 C 54 104, 46 104, 39 100
-           C 22 92, 17 67, 26 52 Z"
-        fill="#8B5A2B"
-      />
-      <path
-        d="M24 66 C 40 75, 60 75, 76 66 L 76 75 C 60 84, 40 84, 24 75 Z"
-        fill="#5C3A1E"
-      />
-      <ellipse cx="50" cy="35" rx="24" ry="7.5" fill="#C9CDD2" />
-      <ellipse cx="50" cy="36" rx="18" ry="5" fill="#5B7C3A" />
-      <path
-        d="M57 38 L88 9"
-        stroke="#C9CDD2"
-        strokeWidth="4.5"
-        strokeLinecap="round"
-      />
-      <circle cx="89" cy="8" r="3.5" fill="#C9CDD2" />
     </svg>
   );
 }
@@ -631,34 +597,10 @@ function ServiceCard({
   );
 }
 
-function PostIt({
-  className = "",
-  widthClass = "w-[110px]",
-}: {
-  className?: string;
-  widthClass?: string;
-}) {
-  return (
-    <div
-      className={`relative bg-[#F4D35E] px-3 py-3 ${PAPER_SHADOW} ${widthClass} ${className}`}
-    >
-      <Tape className="-left-1 -top-2 -rotate-[18deg]" />
-      <p
-        className="text-[15px] leading-snug text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        new idea
-        <br />
-        started already
-      </p>
-    </div>
-  );
-}
-
 function CarpinchoCard({ className = "" }: { className?: string }) {
   return (
     <div className={`relative ${className}`}>
-      <div className="absolute -right-3 -top-3 z-40">
+      <div className="absolute -right-4 -top-4 z-40">
         <StatusStamp lines={APP_STATUS.carpincho} />
       </div>
       <Tape className="-left-2 -top-2 z-20 -rotate-[22deg]" />
@@ -682,8 +624,6 @@ function CarpinchoCard({ className = "" }: { className?: string }) {
             icon={CARPINCHO_ICON}
             name="Carpincho"
             platform="Rioplatense Spanish"
-            cta={false}
-            iconClassName="h-[54px] w-[54px] rounded-[13px] object-cover"
           />
         </div>
       </article>
@@ -985,26 +925,11 @@ export default function HomeCollage() {
             label="Carpincho"
             href="https://carpincho.app/"
             external
-            className="z-[32] w-[160px] rotate-[4deg]"
-            style={{ left: 800, top: 560 }}
+            className="z-[32] w-[175px] rotate-[4deg]"
+            style={{ left: 1160, top: 600 }}
           >
             <CarpinchoCard />
           </Clickable>
-
-          <div
-            className="absolute z-30 -rotate-[5deg]"
-            style={{ left: 790, top: 700 }}
-          >
-            <PostIt />
-          </div>
-
-          <div
-            className="absolute z-20 rotate-[5deg]"
-            style={{ left: 1150, top: 750 }}
-            aria-hidden="true"
-          >
-            <MateCup className="h-[70px] w-auto" />
-          </div>
         </div>
       </section>
 
@@ -1047,20 +972,16 @@ export default function HomeCollage() {
             >
               <KolibiReceipt className="rotate-[3deg]" />
             </Clickable>
-            <div className="relative w-full max-w-[180px]">
-              <Clickable
-                label="Carpincho"
-                href="https://carpincho.app/"
-                external
-                positioned={false}
-              >
-                <CarpinchoCard className="rotate-[3deg]" />
-              </Clickable>
-              <div className="absolute -bottom-3 left-2 z-10">
-                <PostIt className="-rotate-[4deg]" />
-              </div>
-            </div>
-            <div className="mt-8 w-full max-w-[285px]">
+            <Clickable
+              label="Carpincho"
+              href="https://carpincho.app/"
+              external
+              positioned={false}
+              className="max-w-[200px]"
+            >
+              <CarpinchoCard className="rotate-[3deg]" />
+            </Clickable>
+            <div className="w-full max-w-[285px]">
               <ServiceCard className="-rotate-[2deg]" variant="tablet" />
             </div>
           </div>
@@ -1071,9 +992,6 @@ export default function HomeCollage() {
             className="h-[70px] w-auto rotate-[4deg]"
             idPrefix="ballTab"
           />
-          <div className="rotate-[3deg]" aria-hidden="true">
-            <MateCup className="h-[64px] w-auto" />
-          </div>
         </div>
       </section>
 
@@ -1116,19 +1034,15 @@ export default function HomeCollage() {
           </div>
         </Clickable>
 
-        <div className="relative mx-auto mt-10 max-w-[180px]">
-          <Clickable
-            label="Carpincho"
-            href="https://carpincho.app/"
-            external
-            positioned={false}
-          >
-            <CarpinchoCard className="rotate-[3deg]" />
-          </Clickable>
-          <div className="mt-2 flex justify-center">
-            <PostIt className="-rotate-[3deg]" />
-          </div>
-        </div>
+        <Clickable
+          label="Carpincho"
+          href="https://carpincho.app/"
+          external
+          positioned={false}
+          className="mx-auto mt-10 max-w-[300px]"
+        >
+          <CarpinchoCard className="rotate-[3deg]" />
+        </Clickable>
 
         <div className="mx-auto mt-10 max-w-[285px]">
           <ServiceCard className="-rotate-[2deg]" variant="mobile" />
@@ -1136,7 +1050,6 @@ export default function HomeCollage() {
 
         <div className="mt-10 flex items-center justify-center gap-6">
           <Football className="h-[60px] w-auto" idPrefix="ballMob" />
-          <MateCup className="h-[56px] w-auto" />
         </div>
       </section>
     </div>
