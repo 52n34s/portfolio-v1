@@ -376,7 +376,7 @@ function CarpinchoCard() {
 export default function AppsPage() {
   return (
     <main className="relative flex min-h-screen flex-col bg-[#F5F0E8]">
-      <header className="px-6 pt-10 pb-6 text-center md:px-12 md:pt-16">
+      <header className="px-6 pt-10 pb-16 text-center md:px-12 md:pt-16">
         <h1
           className="text-[32px] leading-[1.1] tracking-tight text-[#1A1A1A] md:text-[42px] lg:text-[48px]"
           style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
@@ -388,22 +388,22 @@ export default function AppsPage() {
         </p>
       </header>
 
-      <section className="flex flex-1 flex-wrap items-start justify-center gap-8 px-6 pb-6 md:gap-10 md:px-12 md:pb-12">
-        <div className="w-full max-w-[300px] md:mt-0 md:w-auto">
+      <section className="mx-auto grid max-w-[1100px] flex-1 grid-cols-1 gap-16 px-6 py-16 md:grid-cols-2 md:gap-x-20 md:gap-y-24">
+        <div className="flex justify-center">
           <OrivelaCard />
         </div>
-        <div className="w-full max-w-[300px] md:mt-8 md:w-auto">
+        <div className="flex justify-center">
           <KolibiCard />
         </div>
-        <div className="w-full max-w-[240px] md:mt-3 md:w-auto">
+        <div className="flex justify-center">
           <PeeranimoCard />
         </div>
-        <div className="w-full max-w-[300px] md:mt-6 md:w-auto">
+        <div className="flex justify-center">
           <CarpinchoCard />
         </div>
       </section>
 
-      <footer className="flex flex-col items-center gap-4 px-6 pb-8 md:px-12 md:pb-10">
+      <footer className="flex flex-col items-center gap-4 px-6 pt-16 pb-8 md:px-12 md:pb-10">
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
           <a
             href="/#room-02"
