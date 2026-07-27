@@ -16,6 +16,7 @@ const BALL_SRC: string | null = null;
 const ORIVELA_ICON = "/app-logo-orivela.png";
 const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
+const CARPINCHO_ICON = "/app-logo-carpincho.png";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
@@ -23,6 +24,7 @@ const APP_STATUS: Record<string, [string, string, string]> = {
   orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],
   kolibi: ["KOLIBI", "LIVE", "ON THE APP STORE"],
   peeranimo: ["PEERANIMO", "LIVE", "ON THE WEB"],
+  carpincho: ["CARPINCHO", "COMING SOON", "JOIN WAITLIST"],
 };
 
 function StatusStamp({ lines }: { lines: [string, string, string] }) {
@@ -65,11 +67,13 @@ function AppRow({
   name,
   platform,
   compact = false,
+  cta = true,
 }: {
   icon: string;
   name: string;
   platform: string;
   compact?: boolean;
+  cta?: boolean;
 }) {
   if (compact) {
     return (
@@ -82,9 +86,13 @@ function AppRow({
         <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
           {name}
         </p>
-        <span className="rounded-full bg-[#1A1A1A] px-2.5 py-[3px] text-[10px] text-[#F5F0E8]">
-          Open
-        </span>
+        {cta ? (
+          <span className="rounded-full bg-[#1A1A1A] px-2.5 py-[3px] text-[10px] text-[#F5F0E8]">
+            Open
+          </span>
+        ) : (
+          <p className="text-center text-[10px] text-[#1A1A1A]/55">{platform}</p>
+        )}
       </div>
     );
   }
@@ -100,9 +108,11 @@ function AppRow({
         <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
         <p className="text-[12px] text-[#1A1A1A]/55">{platform}</p>
       </div>
-      <span className="ml-auto rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8]">
-        Open
-      </span>
+      {cta ? (
+        <span className="ml-auto rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8]">
+          Open
+        </span>
+      ) : null}
     </div>
   );
 }
@@ -206,20 +216,6 @@ function ReceiptZigzag({ position }: { position: "top" | "bottom" }) {
         }
       />
     </svg>
-  );
-}
-
-function UBahnSign() {
-  return (
-    <div
-      className={`flex items-center gap-3 bg-[#0B4EA2] px-4 py-2.5 ${PAPER_SHADOW}`}
-    >
-      <span className="text-[27px] font-bold leading-none text-white">U</span>
-      <div className="h-[27px] w-[2px] bg-white/85" />
-      <span className="whitespace-nowrap text-[19px] font-medium tracking-tight text-white">
-        Rosenthaler Platz
-      </span>
-    </div>
   );
 }
 
@@ -381,7 +377,7 @@ function SubtitleLines({ className = "" }: { className?: string }) {
         yet, and rarely convinced that the obvious way is the right one.
       </p>
       <p className="mt-3">
-        Three apps of my own, plus platforms for people who came with an idea
+        Four apps of my own, plus platforms for people who came with an idea
         and no map.
       </p>
     </div>
@@ -651,6 +647,41 @@ function PostIt({
   );
 }
 
+function CarpinchoCard({ className = "" }: { className?: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      <div className="absolute -right-3 -top-3 z-40">
+        <StatusStamp lines={APP_STATUS.carpincho} />
+      </div>
+      <Tape className="-left-2 -top-2 z-20 -rotate-[22deg]" />
+      <article
+        className={`relative bg-[#FFFDF5] px-3.5 pb-4 pt-4 ${PAPER_SHADOW}`}
+      >
+        <p
+          className="text-[18px] leading-snug text-[#D6156F]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          830 words.
+        </p>
+        <p
+          className="mt-1 text-[15px] leading-snug text-[#D6156F]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          Enough to never get switched to English.
+        </p>
+        <div className="mt-3">
+          <AppRow
+            icon={CARPINCHO_ICON}
+            name="Carpincho"
+            platform="Rioplatense Spanish"
+            cta={false}
+          />
+        </div>
+      </article>
+    </div>
+  );
+}
+
 function Fernsehturm({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -887,14 +918,6 @@ export default function HomeCollage() {
             <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
           </div>
 
-          <div
-            className="absolute z-[25] -rotate-[5deg]"
-            style={{ left: 1010, top: 285 }}
-            aria-hidden="true"
-          >
-            <UBahnSign />
-          </div>
-
           {/* BAND 2: Steffen + Apps — shared top edge y=380 */}
           <div
             className="absolute z-20"
@@ -949,9 +972,19 @@ export default function HomeCollage() {
             <ServiceCard />
           </div>
 
+          <Clickable
+            label="Carpincho"
+            href="https://carpincho.app/"
+            external
+            className="z-[32] w-[160px] rotate-[4deg]"
+            style={{ left: 800, top: 560 }}
+          >
+            <CarpinchoCard />
+          </Clickable>
+
           <div
             className="absolute z-30 -rotate-[5deg]"
-            style={{ left: 800, top: 730 }}
+            style={{ left: 790, top: 700 }}
           >
             <PostIt />
           </div>
@@ -1005,17 +1038,26 @@ export default function HomeCollage() {
             >
               <KolibiReceipt className="rotate-[3deg]" />
             </Clickable>
-            <PostIt className="-rotate-[4deg]" />
-            <div className="w-full max-w-[285px]">
+            <div className="relative w-full max-w-[180px]">
+              <Clickable
+                label="Carpincho"
+                href="https://carpincho.app/"
+                external
+                positioned={false}
+              >
+                <CarpinchoCard className="rotate-[3deg]" />
+              </Clickable>
+              <div className="absolute -bottom-3 left-2 z-10">
+                <PostIt className="-rotate-[4deg]" />
+              </div>
+            </div>
+            <div className="mt-8 w-full max-w-[285px]">
               <ServiceCard className="-rotate-[2deg]" variant="tablet" />
             </div>
           </div>
         </div>
 
         <div className="mt-12 flex items-center justify-center gap-8">
-          <div className="scale-90 -rotate-[4deg]" aria-hidden="true">
-            <UBahnSign />
-          </div>
           <Football
             className="h-[70px] w-auto rotate-[4deg]"
             idPrefix="ballTab"
@@ -1065,16 +1107,26 @@ export default function HomeCollage() {
           </div>
         </Clickable>
 
+        <div className="relative mx-auto mt-10 max-w-[180px]">
+          <Clickable
+            label="Carpincho"
+            href="https://carpincho.app/"
+            external
+            positioned={false}
+          >
+            <CarpinchoCard className="rotate-[3deg]" />
+          </Clickable>
+          <div className="mt-2 flex justify-center">
+            <PostIt className="-rotate-[3deg]" />
+          </div>
+        </div>
+
         <div className="mx-auto mt-10 max-w-[285px]">
           <ServiceCard className="-rotate-[2deg]" variant="mobile" />
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-6">
-          <PostIt className="-rotate-[3deg]" />
           <Football className="h-[60px] w-auto" idPrefix="ballMob" />
-          <div className="scale-90" aria-hidden="true">
-            <UBahnSign />
-          </div>
           <MateCup className="h-[56px] w-auto" />
         </div>
       </section>
