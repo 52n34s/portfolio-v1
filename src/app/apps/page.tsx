@@ -14,6 +14,13 @@ const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
 const CARPINCHO_ICON = "/carpincho.png";
 
+const APP_STATUS: Record<string, [string, string, string]> = {
+  orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],
+  kolibi: ["KOLIBI", "LIVE", "ON THE APP STORE"],
+  peeranimo: ["PEERANIMO", "LIVE", "ON THE WEB"],
+  carpincho: ["CARPINCHO", "SOON", "JOIN WAITLIST"],
+};
+
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
 function Tape({ className = "" }: { className?: string }) {
@@ -111,7 +118,7 @@ function OrivelaCard() {
   return (
     <div className="relative w-full max-w-[300px] -rotate-[3deg] md:-rotate-[3deg]">
       <div className="absolute -right-4 -top-4 z-40">
-        <StatusStamp lines={["ORIVELA", "LIVE", "ON THE APP STORE"]} />
+        <StatusStamp lines={APP_STATUS.orivela} />
       </div>
       <Tape className="-left-2 -top-2 z-20 -rotate-[28deg]" />
       <div
@@ -182,6 +189,9 @@ function KolibiCard() {
 
   return (
     <div className="relative w-full max-w-[300px] rotate-[3deg]">
+      <div className="absolute -right-4 -top-4 z-40">
+        <StatusStamp lines={APP_STATUS.kolibi} />
+      </div>
       <Tape className="left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
       <article className={`relative bg-white px-4 pb-5 pt-5 ${PAPER_SHADOW}`}>
         <ReceiptZigzag position="top" />
@@ -299,7 +309,7 @@ function PeeranimoCard() {
   return (
     <div className="relative w-full max-w-[240px] -rotate-[3deg] md:-rotate-[7deg]">
       <div className="absolute -right-2 -top-2 z-40 md:-right-4 md:-top-4">
-        <StatusStamp lines={["PEERANIMO", "LIVE", "ON THE WEB"]} />
+        <StatusStamp lines={APP_STATUS.peeranimo} />
       </div>
       <PeeranimoPolaroids />
       <p
@@ -330,8 +340,8 @@ function PeeranimoCard() {
 function CarpinchoCard() {
   return (
     <div className="relative w-full max-w-[300px] rotate-[4deg]">
-      <div className="absolute -right-3 -top-3 z-40">
-        <StatusStamp lines={["CARPINCHO", "COMING SOON", "JOIN WAITLIST"]} />
+      <div className="absolute -right-4 -top-4 z-40">
+        <StatusStamp lines={APP_STATUS.carpincho} />
       </div>
       <Tape className="-left-2 -top-2 z-20 -rotate-[22deg]" />
       <article
