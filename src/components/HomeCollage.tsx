@@ -371,7 +371,7 @@ function HeadlineBlock({
       <br />
       Find the way while walking.
       <br />
-      Something always works.
+      Trust the process.
     </>
   );
 
