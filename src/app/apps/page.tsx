@@ -232,19 +232,13 @@ function KolibiCard() {
           />
           <p className="text-[12px] font-medium text-[#1A1A1A]">Kolibi</p>
         </div>
-        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
-        <p
-          className="flex justify-between gap-2 text-[10px] text-[#1A1A1A]"
-          style={mono}
-        >
-          <span>STATUS</span>
-          <span>COMING SOON</span>
-        </p>
         <a
-          href="https://kolibi.app/"
-          className="mt-3 inline-block rounded-full bg-[#EF9F27] px-5 py-2 font-inter text-[13px] font-medium text-white"
+          href="https://apps.apple.com/us/app/kolibi/id6790129149"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-block rounded-full bg-[#1D9E75] px-5 py-2 font-inter text-[13px] font-medium text-white"
         >
-          Join the waitlist →
+          Get the app →
         </a>
         <ReceiptZigzag position="bottom" />
       </article>

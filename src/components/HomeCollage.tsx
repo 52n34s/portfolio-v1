@@ -897,7 +897,8 @@ export default function HomeCollage() {
 
           <Clickable
             label="Kolibi"
-            scrollTo="#room-03c"
+            href="https://apps.apple.com/us/app/kolibi/id6790129149"
+            external
             className="z-30 w-[190px] rotate-[4deg]"
             style={{ left: 760, top: 380 }}
           >
@@ -966,7 +967,8 @@ export default function HomeCollage() {
           <div className="mt-16 flex flex-col items-center gap-10">
             <Clickable
               label="Kolibi"
-              scrollTo="#room-03c"
+              href="https://apps.apple.com/us/app/kolibi/id6790129149"
+              external
               positioned={false}
               className="max-w-[200px]"
             >
@@ -1016,7 +1018,8 @@ export default function HomeCollage() {
 
         <Clickable
           label="Kolibi"
-          scrollTo="#room-03c"
+          href="https://apps.apple.com/us/app/kolibi/id6790129149"
+          external
           positioned={false}
           className="mx-auto mt-10 max-w-[300px]"
         >
