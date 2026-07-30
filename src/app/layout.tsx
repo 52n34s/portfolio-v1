@@ -30,7 +30,7 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "Steffen — Founder · Developer · Berlin Mitte",
   description:
-    "I build businesses, not just software. Founder of Peeranimo and Orivela. Based in Berlin Mitte. 10+ platforms self-built and shipped.",
+    "Start before you can. Find the way while walking. Trust the process.",
   keywords: [
     "Steffen",
     "Founder Berlin",
@@ -49,17 +49,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Steffen — Founder · Developer · Berlin Mitte",
     description:
-      "I build businesses, not just software. Founder of Peeranimo and Orivela.",
+      "Start before you can. Find the way while walking. Trust the process.",
     url: "https://52n34s.app",
-    siteName: "Steffen — 52N34S",
-    locale: "en_US",
+    siteName: "52n34s",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Steffen — Founder · Developer · Berlin Mitte",
     description:
-      "I build businesses, not just software. Founder of Peeranimo and Orivela.",
+      "Start before you can. Find the way while walking. Trust the process.",
   },
   robots: {
     index: true,
