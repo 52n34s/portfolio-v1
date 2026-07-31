@@ -87,6 +87,7 @@ export default function NavBubbles() {
   const rawPathname = usePathname();
   const [pathname, setPathname] = useState("/");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [overlayMounted, setOverlayMounted] = useState(false);
   const [scrollActiveRoom, setScrollActiveRoom] = useState("room-01");
   const router = useRouter();
 
@@ -121,6 +122,15 @@ export default function NavBubbles() {
 
     return () => observer.disconnect();
   }, [path]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      setOverlayMounted(true);
+      return;
+    }
+    const t = window.setTimeout(() => setOverlayMounted(false), 200);
+    return () => window.clearTimeout(t);
+  }, [menuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -181,22 +191,28 @@ export default function NavBubbles() {
         )}
       </button>
 
-      {menuOpen && (
-        <nav className="nav-hamburger-overlay" aria-label="Room navigation">
+      {overlayMounted && (
+        <nav
+          className={`nav-hamburger-overlay ${menuOpen ? "is-open" : "is-closing"}`}
+          aria-label="Room navigation"
+        >
           <ul className="nav-hamburger-list">
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const active = isNavItemActive(item, activeLabel, activeRoom);
               const key =
                 item.kind === "link" ? item.href : `${item.id}-${item.label}`;
 
               return (
-                <li key={key}>
+                <li
+                  key={key}
+                  className="nav-hamburger-pill-wrap"
+                  style={{ ["--pill-delay" as string]: `${index * 40}ms` }}
+                >
                   <button
                     type="button"
                     onClick={() => handleSelect(item)}
-                    className="nav-hamburger-item"
+                    className={`nav-hamburger-pill${active ? " is-active" : ""}`}
                     aria-current={active ? "page" : undefined}
-                    style={{ color: active ? "#7B5CF0" : "#1A1A1A" }}
                   >
                     {item.label}
                   </button>

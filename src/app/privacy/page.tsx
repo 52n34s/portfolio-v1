@@ -49,12 +49,20 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-[#F5F0E8] px-6 py-20 md:px-10">
       <div className="mx-auto w-full max-w-[680px]">
-        <Link
-          href="/"
-          className="font-mono text-sm text-[#7B5CF0] hover:underline"
-        >
-          ← 52n34s.app
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="font-mono text-sm text-[#7B5CF0] hover:underline"
+          >
+            ← 52n34s.app
+          </Link>
+          <Link
+            href="/privacy/de"
+            className="font-mono text-sm text-[#1A1A1A]/50 hover:underline"
+          >
+            Deutsch
+          </Link>
+        </div>
 
         <h1 className="font-display text-4xl md:text-5xl text-[#1A1A1A] mt-8">
           Privacy Policy

@@ -33,7 +33,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
+      url: "https://52n34s.app/imprint/en",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
       url: "https://52n34s.app/privacy",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: "https://52n34s.app/privacy/de",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
