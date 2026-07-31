@@ -62,18 +62,30 @@ function Tape({ className = "" }: { className?: string }) {
   );
 }
 
+function OpenPill({ className = "" }: { className?: string }) {
+  return (
+    <span
+      className={`rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8] ${className}`}
+    >
+      Open
+    </span>
+  );
+}
+
 function AppRow({
   icon,
   name,
   platform,
   compact = false,
   iconClassName,
+  showOpen = true,
 }: {
   icon: string;
   name: string;
   platform: string;
   compact?: boolean;
   iconClassName?: string;
+  showOpen?: boolean;
 }) {
   if (compact) {
     return (
@@ -89,9 +101,7 @@ function AppRow({
         <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
           {name}
         </p>
-        <span className="rounded-full bg-[#1A1A1A] px-2.5 py-[3px] text-[10px] text-[#F5F0E8]">
-          Open
-        </span>
+        {showOpen && <OpenPill className="px-2.5 py-[3px] text-[10px]" />}
       </div>
     );
   }
@@ -110,9 +120,7 @@ function AppRow({
         <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
         <p className="text-[12px] text-[#1A1A1A]/55">{platform}</p>
       </div>
-      <span className="ml-auto rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8]">
-        Open
-      </span>
+      {showOpen && <OpenPill className="ml-auto" />}
     </div>
   );
 }
@@ -145,7 +153,7 @@ function Clickable({
   };
 
   const content = (
-    <div className="group relative cursor-pointer transition-transform duration-200 hover:scale-[1.04] hover:-rotate-1">
+    <div className="group relative h-full w-full cursor-pointer transition-transform duration-200 hover:scale-[1.04] hover:-rotate-1">
       {children}
       <span className="pointer-events-none absolute -bottom-6 left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-[#1A1A1A] px-3 py-1 text-xs text-[#F5F0E8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 lg:block">
         {label}
@@ -358,6 +366,34 @@ function SubtitleLines({ className = "" }: { className?: string }) {
   );
 }
 
+function HeadlineOnly({
+  className = "",
+  size = "desktop",
+}: {
+  className?: string;
+  size?: "desktop" | "mobile" | "tablet";
+}) {
+  const sizeClass =
+    size === "mobile"
+      ? "text-[32px]"
+      : size === "tablet"
+        ? "text-[42px]"
+        : "text-[48px]";
+
+  return (
+    <h1
+      className={`leading-[1.1] tracking-tight text-[#1A1A1A] ${sizeClass} ${className}`}
+      style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+    >
+      Start before you can.
+      <br />
+      Find the way while walking.
+      <br />
+      Trust the process.
+    </h1>
+  );
+}
+
 function HeadlineBlock({
   className = "",
   variant = "desktop",
@@ -365,25 +401,10 @@ function HeadlineBlock({
   className?: string;
   variant?: "desktop" | "mobile" | "tablet";
 }) {
-  const headline = (
-    <>
-      Start before you can.
-      <br />
-      Find the way while walking.
-      <br />
-      Trust the process.
-    </>
-  );
-
   if (variant === "mobile") {
     return (
       <div className={className}>
-        <h1
-          className="font-serif text-[32px] leading-[1.1] text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-        >
-          {headline}
-        </h1>
+        <HeadlineOnly size="mobile" />
         <SubtitleLines className="mt-5 text-[15px]" />
       </div>
     );
@@ -392,12 +413,7 @@ function HeadlineBlock({
   if (variant === "tablet") {
     return (
       <div className={className}>
-        <h1
-          className="font-serif text-[42px] leading-[1.1] text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-        >
-          {headline}
-        </h1>
+        <HeadlineOnly size="tablet" />
         <SubtitleLines className="mt-5 max-w-[520px] text-[16px]" />
       </div>
     );
@@ -405,12 +421,7 @@ function HeadlineBlock({
 
   return (
     <div className={className}>
-      <h1
-        className="text-[48px] leading-[1.1] tracking-tight text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-      >
-        {headline}
-      </h1>
+      <HeadlineOnly />
       <SubtitleLines className="mt-6 max-w-[700px] text-[17px]" />
     </div>
   );
@@ -419,10 +430,10 @@ function HeadlineBlock({
 function PeeranimoPolaroids({
   variant = "desktop",
 }: {
-  variant?: "desktop" | "mobile" | "tablet";
+  variant?: "desktop" | "mobile" | "tablet" | "grid";
 }) {
   const cards =
-    variant === "desktop"
+    variant === "desktop" || variant === "grid"
       ? ([
           {
             src: "/peers/peeranimo_european_woman.jpg",
@@ -485,10 +496,16 @@ function PeeranimoPolaroids({
             },
           ] as const);
 
-  const cardWidth = variant === "desktop" ? "w-[84px]" : "w-[78px]";
+  const cardWidth =
+    variant === "grid"
+      ? "w-[72px]"
+      : variant === "desktop"
+        ? "w-[84px]"
+        : "w-[78px]";
+  const frameHeight = variant === "grid" ? "h-[112px]" : "h-[132px]";
 
   return (
-    <div className="relative h-[132px]">
+    <div className={`relative ${frameHeight}`}>
       {cards.map((card) => (
         <div
           key={card.src}
@@ -520,30 +537,51 @@ function PeeranimoPolaroids({
 
 function PeeranimoUnit({
   variant = "desktop",
+  grid = false,
 }: {
   variant?: "desktop" | "mobile" | "tablet";
+  grid?: boolean;
 }) {
   return (
     <div
-      className={`relative ${variant === "desktop" ? "w-[225px]" : "w-[216px]"}`}
+      className={`relative ${grid ? "w-full pb-10" : variant === "desktop" ? "w-[225px]" : "w-[216px]"}`}
     >
-      <div className="absolute -right-4 -top-4 z-40">
+      <div
+        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
+      >
         <StatusStamp lines={APP_STATUS.peeranimo} />
       </div>
-      <PeeranimoPolaroids variant={variant} />
+      <PeeranimoPolaroids variant={grid ? "grid" : variant} />
       <p
-        className="mt-0.5 max-w-[210px] -rotate-[2deg] text-center text-[15px] leading-snug text-[#1A1A1A]"
+        className={`mt-0.5 max-w-[210px] -rotate-[2deg] text-center leading-snug text-[#1A1A1A] ${grid ? "text-[13px]" : "text-[15px]"}`}
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         People who get it. Without searching for years.
       </p>
-      <div className="mt-1.5">
-        <AppRow
-          icon={PEERANIMO_ICON}
-          name="Peeranimo"
-          platform="Social platform · Web"
-        />
-      </div>
+      {!grid && (
+        <div className="mt-1.5">
+          <AppRow
+            icon={PEERANIMO_ICON}
+            name="Peeranimo"
+            platform="Social platform · Web"
+          />
+        </div>
+      )}
+      {grid && (
+        <div className="mt-1.5 flex items-center gap-2 px-1">
+          <img
+            src={PEERANIMO_ICON}
+            alt=""
+            className="h-[42px] w-[42px] rounded-[10px] border border-black/10"
+          />
+          <div className="leading-tight">
+            <p className="text-[13px] font-medium text-[#1A1A1A]">Peeranimo</p>
+            <p className="text-[11px] text-[#1A1A1A]/55">
+              Social platform · Web
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -560,15 +598,15 @@ function ServiceCard({
       ? "text-[18px]"
       : variant === "tablet"
         ? "text-[19px]"
-        : "text-[20px]";
+        : "text-[18px]";
   const buttonSize =
     variant === "mobile"
       ? "px-5 py-2.5 text-[14px]"
-      : "px-5 py-2.5 text-[15px]";
+      : "px-4 py-2 text-[13px]";
 
   return (
     <div
-      className={`relative bg-white px-5 pb-6 pt-5 ${PAPER_SHADOW} ${className}`}
+      className={`relative bg-white px-4 pb-5 pt-4 ${PAPER_SHADOW} ${className}`}
     >
       <Tape className="-left-2 -top-2 -rotate-[14deg]" />
       <div
@@ -588,7 +626,7 @@ function ServiceCard({
             .getElementById("room-05")
             ?.scrollIntoView({ behavior: "smooth" })
         }
-        className={`mt-4 rounded-full bg-[#1A1A1A] font-medium text-[#F5F0E8] transition-opacity hover:opacity-90 ${buttonSize}`}
+        className={`mt-3 rounded-full bg-[#1A1A1A] font-medium text-[#F5F0E8] transition-opacity hover:opacity-90 ${buttonSize}`}
       >
         Let&apos;s think it through →
       </button>
@@ -597,33 +635,47 @@ function ServiceCard({
   );
 }
 
-function CarpinchoCard({ className = "" }: { className?: string }) {
+function CarpinchoCard({
+  className = "",
+  grid = false,
+}: {
+  className?: string;
+  grid?: boolean;
+}) {
   return (
-    <div className={`relative ${className}`}>
-      <div className="absolute -right-4 -top-4 z-40">
+    <div className={`relative ${grid ? "w-full" : ""} ${className}`}>
+      <div
+        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
+      >
         <StatusStamp lines={APP_STATUS.carpincho} />
       </div>
       <Tape className="-left-2 -top-2 z-20 -rotate-[22deg]" />
       <article
-        className={`relative bg-[#FFFDF5] px-3.5 pb-4 pt-4 ${PAPER_SHADOW}`}
+        className={`relative bg-[#FFFDF5] ${grid ? "px-3 pb-10 pt-3.5" : "px-3.5 pb-4 pt-4"} ${PAPER_SHADOW}`}
       >
         <p
-          className="text-[18px] leading-snug text-[#D6156F]"
+          className={`${grid ? "text-[16px]" : "text-[18px]"} leading-snug text-[#D6156F]`}
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
-          830 words.
+          Don&apos;t be a tourist.
         </p>
         <p
-          className="mt-1 text-[15px] leading-snug text-[#D6156F]"
+          className={`mt-1 ${grid ? "text-[13px]" : "text-[15px]"} leading-snug text-[#D6156F]`}
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
-          Enough to never get switched to English.
+          1,000 words is enough.
         </p>
-        <div className="mt-3">
+        <div className={grid ? "mt-2" : "mt-3"}>
           <AppRow
             icon={CARPINCHO_ICON}
             name="Carpincho"
-            platform="Rioplatense Spanish"
+            platform="Spanish that sounds local"
+            showOpen={!grid}
+            iconClassName={
+              grid
+                ? "h-[48px] w-[48px] rounded-[11px] border border-black/10"
+                : undefined
+            }
           />
         </div>
       </article>
@@ -651,10 +703,18 @@ function Fernsehturm({ className = "" }: { className?: string }) {
   );
 }
 
-function OrivelaNote({ className = "" }: { className?: string }) {
+function OrivelaNote({
+  className = "",
+  grid = false,
+}: {
+  className?: string;
+  grid?: boolean;
+}) {
   return (
-    <div className={`relative ${className}`}>
-      <div className="absolute -right-4 -top-4 z-40">
+    <div className={`relative ${grid ? "w-full" : ""} ${className}`}>
+      <div
+        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
+      >
         <StatusStamp lines={APP_STATUS.orivela} />
       </div>
       <Tape className="-left-2 -top-2 z-20 -rotate-[28deg]" />
@@ -664,7 +724,7 @@ function OrivelaNote({ className = "" }: { className?: string }) {
         aria-hidden="true"
       />
       <article
-        className={`relative bg-[#FCF3C8] px-5 pb-7 pt-5 ${PAPER_SHADOW}`}
+        className={`relative bg-[#FCF3C8] ${grid ? "px-4 pb-10 pt-4" : "px-5 pb-7 pt-5"} ${PAPER_SHADOW}`}
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
         }}
@@ -683,19 +743,25 @@ function OrivelaNote({ className = "" }: { className?: string }) {
           aria-hidden="true"
         />
         <p
-          className="relative pl-2 text-[20px] leading-snug text-[#1A2E5A]"
+          className={`relative w-[78%] pl-2 pr-4 ${grid ? "text-[17px]" : "text-[20px]"} leading-snug text-[#1A2E5A]`}
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
-          Every contract, every subscription. The answer in seconds.
+          Every document you&apos;ll need someday.
+          <br />
+          Found in seconds.
         </p>
-        <p
-          className="relative mt-1 -rotate-[1.5deg] pl-2 text-[16px] leading-snug text-[#1A3A8F]"
-          style={{ fontFamily: "var(--font-hand), cursive" }}
-        >
-          even the ones you forgot about
-        </p>
-        <div className="relative mt-4 pl-2">
-          <AppRow icon={ORIVELA_ICON} name="Orivela" platform="iOS" />
+        <div className={`relative pl-2 ${grid ? "mt-3" : "mt-4"}`}>
+          <AppRow
+            icon={ORIVELA_ICON}
+            name="Orivela"
+            platform="iOS"
+            showOpen={!grid}
+            iconClassName={
+              grid
+                ? "h-[48px] w-[48px] rounded-[11px] border border-black/10"
+                : undefined
+            }
+          />
         </div>
         <TornEdge fill="#F5F0E8" />
       </article>
@@ -703,16 +769,26 @@ function OrivelaNote({ className = "" }: { className?: string }) {
   );
 }
 
-function KolibiReceipt({ className = "" }: { className?: string }) {
+function KolibiReceipt({
+  className = "",
+  grid = false,
+}: {
+  className?: string;
+  grid?: boolean;
+}) {
   const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
 
   return (
-    <div className={`relative ${className}`}>
-      <div className="absolute -right-4 -top-4 z-40">
+    <div className={`relative ${grid ? "w-full" : ""} ${className}`}>
+      <div
+        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
+      >
         <StatusStamp lines={APP_STATUS.kolibi} />
       </div>
       <Tape className="left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
-      <article className={`relative bg-white px-4 pb-5 pt-5 ${PAPER_SHADOW}`}>
+      <article
+        className={`relative bg-white ${grid ? "px-3.5 pb-10 pt-4" : "px-4 pb-5 pt-5"} ${PAPER_SHADOW}`}
+      >
         <ReceiptZigzag position="top" />
         <p
           className="text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
@@ -745,12 +821,18 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
             <span>412 kcal</span>
           </span>
         </p>
-        <div className="mt-3">
+        <div className={grid ? "mt-2" : "mt-3"}>
           <AppRow
             icon={KOLIBI_ICON}
             name="Kolibi"
             platform="iOS · Android"
-            compact
+            compact={!grid}
+            showOpen={!grid}
+            iconClassName={
+              grid
+                ? "h-[42px] w-[42px] rounded-[10px] border border-black/10"
+                : undefined
+            }
           />
         </div>
         <ReceiptZigzag position="bottom" />
@@ -791,10 +873,10 @@ export default function HomeCollage() {
             transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
-          {/* Lila Fläche */}
+          {/* Lila Fläche — under portrait */}
           <svg
             className="pointer-events-none absolute z-0 -rotate-[4deg]"
-            style={{ left: 0, top: 350, width: 360, height: 400 }}
+            style={{ left: 0, top: 450, width: 360, height: 400 }}
             viewBox="0 0 280 340"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -805,10 +887,10 @@ export default function HomeCollage() {
             />
           </svg>
 
-          {/* Türkise Fläche */}
+          {/* Türkise Fläche — bottom edge, clear of grid + pitch */}
           <svg
             className="pointer-events-none absolute z-0 rotate-[3deg]"
-            style={{ left: 1120, top: 730, width: 210, height: 150 }}
+            style={{ left: 40, top: 830, width: 160, height: 100 }}
             viewBox="0 0 260 280"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -819,58 +901,69 @@ export default function HomeCollage() {
             />
           </svg>
 
-          {/* Gelbe Fläche — Anker oben rechts */}
-          <svg
-            className="pointer-events-none absolute z-0 -rotate-[3deg]"
-            style={{ left: 1020, top: 25, width: 300, height: 265 }}
-            viewBox="0 0 200 180"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              fill="#F4D35E"
-              d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
-            />
-          </svg>
-
-          {/* BAND 1: Text */}
+          {/* Headline */}
           <div
-            className="absolute z-30 w-[820px]"
-            style={{ left: 70, top: 50 }}
+            className="absolute z-30"
+            style={{ left: 80, top: 80, width: 780, height: 220 }}
           >
-            <HeadlineBlock />
+            <HeadlineOnly />
           </div>
 
-          {/* BAND 1: Deko auf gelber Fläche */}
+          {/* Berlin-Collage — Fernsehturm + Karte + Fußball @ 75% */}
           <Clickable
             label="Why Berlin?"
             scrollTo="#room-02"
-            className="z-10 rotate-[2deg]"
-            style={{ left: 1150, top: 15 }}
+            className="z-10"
+            style={{ left: 1000, top: 60, width: 300, height: 240 }}
           >
-            <Fernsehturm className="h-[265px] w-auto" />
+            <div
+              className="relative origin-top-left"
+              style={{
+                width: 400,
+                height: 320,
+                transform: "scale(0.75)",
+              }}
+            >
+              <svg
+                className="pointer-events-none absolute z-0 -rotate-[3deg]"
+                style={{ left: 0, top: 10, width: 300, height: 265 }}
+                viewBox="0 0 200 180"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  fill="#F4D35E"
+                  d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
+                />
+              </svg>
+              <Fernsehturm className="absolute left-[105px] top-0 z-10 h-[265px] w-auto rotate-[2deg]" />
+              <div
+                className="absolute left-[223px] top-[80px] z-10"
+                aria-hidden="true"
+              >
+                <SolDeMayo className="h-[48px] w-[48px] opacity-80" />
+              </div>
+              <div
+                className="pointer-events-none absolute left-0 top-[180px] z-[15] rotate-[5deg]"
+                aria-hidden="true"
+              >
+                <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
+              </div>
+            </div>
           </Clickable>
 
+          {/* Subhead */}
           <div
-            className="absolute z-10"
-            style={{ left: 1268, top: 95, width: 48 }}
-            aria-hidden="true"
+            className="absolute z-30"
+            style={{ left: 80, top: 330, width: 480, height: 100 }}
           >
-            <SolDeMayo className="h-[48px] w-[48px] opacity-80" />
+            <SubtitleLines className="text-[15px] leading-[1.45]" />
           </div>
 
-          <div
-            className="pointer-events-none absolute z-[15] rotate-[5deg]"
-            style={{ left: 1045, top: 195 }}
-            aria-hidden="true"
-          >
-            <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
-          </div>
-
-          {/* BAND 2: Steffen + Apps — shared top edge y=380 */}
+          {/* Portrait + Fläche */}
           <div
             className="absolute z-20"
-            style={{ left: 50, top: 380, height: 440 }}
+            style={{ left: 80, top: 460, width: 300, height: 410 }}
           >
             <img
               src="/me-steffen.png"
@@ -886,106 +979,117 @@ export default function HomeCollage() {
             </Clickable>
           </div>
 
-          <Clickable
-            label="Orivela"
-            scrollTo="#room-03b"
-            className="z-[35] w-[240px] -rotate-[5deg]"
-            style={{ left: 470, top: 380 }}
+          {/* Pitch-Karte */}
+          <div
+            className="absolute z-30 -rotate-[1deg]"
+            style={{ left: 400, top: 600, width: 220, height: 270 }}
           >
-            <OrivelaNote />
-          </Clickable>
+            <ServiceCard />
+          </div>
 
+          {/* 2×2 App Grid — cell 285×235, gap 50 / 40
+              Rotations belong to cells, not objects */}
           <Clickable
             label="Kolibi"
             href="https://apps.apple.com/us/app/kolibi/id6790129149"
             external
-            className="z-30 w-[190px] rotate-[4deg]"
-            style={{ left: 760, top: 380 }}
+            className="z-30 -rotate-[1.5deg]"
+            style={{ left: 660, top: 330, width: 285, height: 235 }}
           >
-            <KolibiReceipt />
+            <div className="relative h-full w-full">
+              <KolibiReceipt grid />
+              <OpenPill className="absolute bottom-2 left-2 z-50" />
+            </div>
           </Clickable>
-
-          <Clickable
-            label="Peeranimo"
-            scrollTo="#room-04"
-            className="z-[35] w-[225px]"
-            style={{ left: 990, top: 380 }}
-          >
-            <PeeranimoUnit />
-          </Clickable>
-
-          {/* BAND 3: unteres Band */}
-          <div
-            className="absolute z-30 w-[310px] -rotate-[2deg]"
-            style={{ left: 470, top: 700 }}
-          >
-            <ServiceCard />
-          </div>
 
           <Clickable
             label="Carpincho"
             href="https://carpincho.app/"
             external
-            className="z-[32] w-[175px] rotate-[4deg]"
-            style={{ left: 1160, top: 600 }}
+            className="z-[32] rotate-[1.2deg]"
+            style={{ left: 995, top: 330, width: 285, height: 235 }}
           >
-            <CarpinchoCard />
+            <div className="relative h-full w-full">
+              <CarpinchoCard grid />
+              <OpenPill className="absolute bottom-2 left-2 z-50" />
+            </div>
+          </Clickable>
+
+          <Clickable
+            label="Orivela"
+            scrollTo="#room-03b"
+            className="z-[35] -rotate-[0.8deg]"
+            style={{ left: 660, top: 605, width: 285, height: 235 }}
+          >
+            <div className="relative h-full w-full">
+              <OrivelaNote grid />
+              <OpenPill className="absolute bottom-2 left-2 z-50" />
+            </div>
+          </Clickable>
+
+          <Clickable
+            label="Peeranimo"
+            scrollTo="#room-04"
+            className="z-[35] rotate-[1.5deg]"
+            style={{ left: 995, top: 605, width: 285, height: 235 }}
+          >
+            <div className="relative h-full w-full">
+              <PeeranimoUnit grid />
+              <OpenPill className="absolute bottom-2 left-2 z-50" />
+            </div>
           </Clickable>
         </div>
       </section>
 
-      {/* TABLET PORTRAIT */}
+      {/* TABLET PORTRAIT — single column */}
       <section className="hidden bg-[#F5F0E8] px-8 py-14 md:block lg:hidden">
         <HeadlineBlock variant="tablet" />
 
-        <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10">
-          <div className="flex flex-col items-center gap-10">
-            <img
-              src="/me-steffen.png"
-              alt=""
-              className="h-[340px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-            />
-            <div className="relative w-full max-w-[280px]">
-              <Clickable
-                label="Orivela"
-                scrollTo="#room-03b"
-                positioned={false}
-              >
-                <OrivelaNote className="-rotate-[4deg]" />
-              </Clickable>
-            </div>
-            <Clickable
-              label="Peeranimo"
-              scrollTo="#room-04"
-              positioned={false}
-              className="max-w-[235px]"
-            >
-              <PeeranimoUnit variant="tablet" />
-            </Clickable>
-          </div>
+        <img
+          src="/me-steffen.png"
+          alt=""
+          className="mx-auto mt-12 h-[340px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+        />
 
-          <div className="mt-16 flex flex-col items-center gap-10">
-            <Clickable
-              label="Kolibi"
-              href="https://apps.apple.com/us/app/kolibi/id6790129149"
-              external
-              positioned={false}
-              className="max-w-[200px]"
-            >
-              <KolibiReceipt className="rotate-[3deg]" />
-            </Clickable>
-            <Clickable
-              label="Carpincho"
-              href="https://carpincho.app/"
-              external
-              positioned={false}
-              className="max-w-[200px]"
-            >
-              <CarpinchoCard className="rotate-[3deg]" />
-            </Clickable>
-            <div className="w-full max-w-[285px]">
-              <ServiceCard className="-rotate-[2deg]" variant="tablet" />
+        <div className="mx-auto mt-12 flex max-w-[340px] flex-col items-center gap-10">
+          <Clickable
+            label="Kolibi"
+            href="https://apps.apple.com/us/app/kolibi/id6790129149"
+            external
+            positioned={false}
+            className="w-full max-w-[280px]"
+          >
+            <KolibiReceipt className="-rotate-[1.5deg]" />
+          </Clickable>
+          <Clickable
+            label="Carpincho"
+            href="https://carpincho.app/"
+            external
+            positioned={false}
+            className="w-full max-w-[280px]"
+          >
+            <CarpinchoCard className="rotate-[1.2deg]" />
+          </Clickable>
+          <Clickable
+            label="Orivela"
+            scrollTo="#room-03b"
+            positioned={false}
+            className="w-full max-w-[300px]"
+          >
+            <OrivelaNote className="-rotate-[0.8deg]" />
+          </Clickable>
+          <Clickable
+            label="Peeranimo"
+            scrollTo="#room-04"
+            positioned={false}
+            className="w-full max-w-[235px]"
+          >
+            <div className="rotate-[1.5deg]">
+              <PeeranimoUnit variant="tablet" />
             </div>
+          </Clickable>
+          <div className="w-full max-w-[285px]">
+            <ServiceCard className="-rotate-[1deg]" variant="tablet" />
           </div>
         </div>
 
@@ -997,7 +1101,7 @@ export default function HomeCollage() {
         </div>
       </section>
 
-      {/* MOBILE */}
+      {/* MOBILE — single column, same order */}
       <section className="bg-[#F5F0E8] px-6 py-12 md:hidden">
         <HeadlineBlock variant="mobile" />
 
@@ -1008,33 +1112,13 @@ export default function HomeCollage() {
         />
 
         <Clickable
-          label="Orivela"
-          scrollTo="#room-03b"
-          positioned={false}
-          className="mx-auto mt-10 max-w-[300px]"
-        >
-          <OrivelaNote className="-rotate-[3deg]" />
-        </Clickable>
-
-        <Clickable
           label="Kolibi"
           href="https://apps.apple.com/us/app/kolibi/id6790129149"
           external
           positioned={false}
           className="mx-auto mt-10 max-w-[300px]"
         >
-          <KolibiReceipt className="rotate-[2deg]" />
-        </Clickable>
-
-        <Clickable
-          label="Peeranimo"
-          scrollTo="#room-04"
-          positioned={false}
-          className="mx-auto mt-10 max-w-[300px]"
-        >
-          <div className="flex justify-center">
-            <PeeranimoUnit variant="mobile" />
-          </div>
+          <KolibiReceipt className="-rotate-[1.5deg]" />
         </Clickable>
 
         <Clickable
@@ -1044,11 +1128,31 @@ export default function HomeCollage() {
           positioned={false}
           className="mx-auto mt-10 max-w-[300px]"
         >
-          <CarpinchoCard className="rotate-[3deg]" />
+          <CarpinchoCard className="rotate-[1.2deg]" />
+        </Clickable>
+
+        <Clickable
+          label="Orivela"
+          scrollTo="#room-03b"
+          positioned={false}
+          className="mx-auto mt-10 max-w-[300px]"
+        >
+          <OrivelaNote className="-rotate-[0.8deg]" />
+        </Clickable>
+
+        <Clickable
+          label="Peeranimo"
+          scrollTo="#room-04"
+          positioned={false}
+          className="mx-auto mt-10 max-w-[300px]"
+        >
+          <div className="flex justify-center rotate-[1.5deg]">
+            <PeeranimoUnit variant="mobile" />
+          </div>
         </Clickable>
 
         <div className="mx-auto mt-10 max-w-[285px]">
-          <ServiceCard className="-rotate-[2deg]" variant="mobile" />
+          <ServiceCard className="-rotate-[1deg]" variant="mobile" />
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-6">

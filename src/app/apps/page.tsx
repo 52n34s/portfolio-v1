@@ -146,7 +146,7 @@ function OrivelaCard() {
           aria-hidden="true"
         />
         <p
-          className="relative pl-2 text-[20px] leading-snug text-[#1A2E5A]"
+          className="relative w-[78%] py-0 pl-2 pr-4 text-[20px] leading-snug text-[#1A2E5A]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           Every document you&apos;ll need someday.
@@ -345,13 +345,13 @@ function CarpinchoCard() {
           className="text-[20px] leading-snug text-[#D6156F]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
-          830 words.
+          Don&apos;t be a tourist.
         </p>
         <p
           className="mt-1 text-[17px] leading-snug text-[#D6156F]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
-          Enough to never get switched to English.
+          1,000 words is enough.
         </p>
         <div className="mt-4 flex items-center gap-2.5">
           <img
@@ -361,7 +361,9 @@ function CarpinchoCard() {
           />
           <div className="leading-tight">
             <p className="text-[15px] font-medium text-[#1A1A1A]">Carpincho</p>
-            <p className="text-[12px] text-[#1A1A1A]/55">Rioplatense Spanish</p>
+            <p className="text-[12px] text-[#1A1A1A]/55">
+              Spanish that sounds local
+            </p>
           </div>
         </div>
         <a
@@ -394,16 +396,16 @@ export default function AppsPage() {
 
       <section className="mx-auto grid max-w-[1100px] flex-1 grid-cols-1 gap-16 px-6 py-16 md:grid-cols-2 md:gap-x-20 md:gap-y-24">
         <div className="flex justify-center">
-          <OrivelaCard />
-        </div>
-        <div className="flex justify-center">
           <KolibiCard />
         </div>
         <div className="flex justify-center">
-          <PeeranimoCard />
+          <CarpinchoCard />
         </div>
         <div className="flex justify-center">
-          <CarpinchoCard />
+          <OrivelaCard />
+        </div>
+        <div className="flex justify-center">
+          <PeeranimoCard />
         </div>
       </section>
 
