@@ -1,0 +1,23 @@
+# 52N34S — Steffen Giebler
+
+> Solo founder and software developer in Berlin Mitte. Builds own
+> apps and turns founders' ideas into shipped products.
+
+## Products
+- [Orivela](https://orivela.app): Personal records vault for iOS
+  and Android. Documents, contracts and subscriptions, searchable
+  in plain language.
+- [Kolibi](https://kolibi.app): AI photo calorie tracker for iOS
+  and Android. One photo per meal.
+- [Peeranimo](https://peeranimo.com): Peer-matching social
+  platform on the web.
+- [Carpincho](https://carpincho.app): Spanish learning app,
+  1,000 high-frequency words, three regional variants. Waitlist.
+
+## Services
+- [Work with me](https://52n34s.app/#room-05): Freelance product
+  development, software architecture, product partnerships.
+
+## Contact
+- [Contact form](https://52n34s.app/#room-06)
+- Email: steffen@52n34s.com

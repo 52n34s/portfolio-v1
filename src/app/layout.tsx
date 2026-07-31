@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Caveat, Inter, JetBrains_Mono, Lora } from "next/font/google";
 import NavBubbles from "@/components/NavBubbles";
+import SiteFooter from "@/components/SiteFooter";
+import StructuredData from "@/components/StructuredData";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,38 +29,31 @@ const caveat = Caveat({
   variable: "--font-hand",
 });
 
+const TITLE =
+  "Steffen Giebler — Product Developer & Indie Founder, Berlin";
+const DESCRIPTION =
+  "Solo founder and developer in Berlin Mitte. I build my own apps — Orivela, Kolibi, Peeranimo, Carpincho — and turn other people's ideas into shipped products. From concept to App Store.";
+
 export const metadata: Metadata = {
-  title: "Steffen — Founder · Developer · Berlin Mitte",
-  description:
-    "Start before you can. Find the way while walking. Trust the process.",
-  keywords: [
-    "Steffen",
-    "Founder Berlin",
-    "Developer Berlin Mitte",
-    "Peeranimo",
-    "Orivela",
-    "Indie Founder",
-    "Software Developer Berlin",
-  ],
-  authors: [{ name: "Steffen" }],
-  creator: "Steffen",
+  title: TITLE,
+  description: DESCRIPTION,
+  authors: [{ name: "Steffen Giebler" }],
+  creator: "Steffen Giebler",
   metadataBase: new URL("https://52n34s.app"),
   alternates: {
     canonical: "https://52n34s.app",
   },
   openGraph: {
-    title: "Steffen — Founder · Developer · Berlin Mitte",
-    description:
-      "Start before you can. Find the way while walking. Trust the process.",
+    title: TITLE,
+    description: DESCRIPTION,
     url: "https://52n34s.app",
     siteName: "52n34s",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Steffen — Founder · Developer · Berlin Mitte",
-    description:
-      "Start before you can. Find the way while walking. Trust the process.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
@@ -68,34 +63,6 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-};
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Steffen",
-  jobTitle: "Founder & Developer",
-  description:
-    "I build businesses, not just software. Indie founder and developer based in Berlin Mitte. Creator of Peeranimo and Orivela.",
-  url: "https://52n34s.app",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Berlin Mitte",
-    addressCountry: "DE",
-  },
-  sameAs: [
-    "https://orivela.app",
-    "https://peeranimo.com",
-    "https://github.com/52n34s",
-    "https://instagram.com/steffenletsdoit",
-  ],
-  knowsAbout: [
-    "Software Development",
-    "Product Design",
-    "Indie Hacking",
-    "iOS Development",
-    "Community Building",
-  ],
 };
 
 export default function RootLayout({
@@ -115,12 +82,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
+        <StructuredData />
         <NavBubbles />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

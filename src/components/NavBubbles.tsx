@@ -83,64 +83,6 @@ function isNavItemActive(
   return item.kind === "scroll" && activeRoom === item.id;
 }
 
-const labelStyle = {
-  fontFamily: "var(--font-jetbrains-mono), monospace",
-  fontSize: "11px",
-};
-
-function NavRoomItems({
-  activeLabel,
-  activeRoom,
-  onSelect,
-}: {
-  activeLabel: string | null;
-  activeRoom: string;
-  onSelect: (item: NavItem) => void;
-}) {
-  return (
-    <>
-      <div
-        className="absolute top-4 bottom-4 left-4 w-px -translate-x-1/2"
-        style={{ background: "#CCC" }}
-      />
-
-      {navItems.map((item) => {
-        const active = isNavItemActive(item, activeLabel, activeRoom);
-        const key = item.kind === "link" ? item.href : `${item.id}-${item.label}`;
-
-        return (
-          <button
-            key={key}
-            type="button"
-            onClick={() => onSelect(item)}
-            className="group flex w-full cursor-pointer items-center gap-3 border-none bg-transparent py-1 text-left"
-            aria-current={active ? "page" : undefined}
-          >
-            <span
-              className="relative z-10 h-8 w-8 shrink-0 rounded-full transition-transform group-hover:scale-110"
-              style={{
-                background: active ? "var(--orange)" : "transparent",
-                border: active ? "none" : "1px solid #CCC",
-              }}
-              aria-hidden="true"
-            />
-
-            <span
-              className="whitespace-nowrap"
-              style={{
-                ...labelStyle,
-                color: active ? "var(--orange)" : "#888",
-              }}
-            >
-              {active ? `${item.label} ← aktiv` : item.label}
-            </span>
-          </button>
-        );
-      })}
-    </>
-  );
-}
-
 export default function NavBubbles() {
   const rawPathname = usePathname();
   const [pathname, setPathname] = useState("/");
@@ -180,6 +122,15 @@ export default function NavBubbles() {
     return () => observer.disconnect();
   }, [path]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
   const activeRoom = path === "/" ? scrollActiveRoom : "";
 
   const handleSelect = (item: NavItem) => {
@@ -202,45 +153,59 @@ export default function NavBubbles() {
 
   return (
     <>
-      <nav
-        className="nav-bubbles-desktop fixed right-6 top-1/2 z-50 -translate-y-1/2"
-        aria-label="Room navigation"
+      <button
+        type="button"
+        className="nav-hamburger-trigger"
+        onClick={() => setMenuOpen((open) => !open)}
+        aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={menuOpen}
       >
-        <div className="relative flex flex-col">
-          <NavRoomItems
-            activeLabel={activeLabel}
-            activeRoom={activeRoom}
-            onSelect={handleSelect}
-          />
-        </div>
-      </nav>
-
-      <div className="nav-mobile">
-        <button
-          type="button"
-          className="nav-mobile-trigger"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={menuOpen}
-        >
-          {">_"}
-        </button>
-
-        {menuOpen && (
-          <nav
-            className="nav-mobile-dropdown"
-            aria-label="Mobile room navigation"
-          >
-            <div className="relative flex flex-col">
-              <NavRoomItems
-                activeLabel={activeLabel}
-                activeRoom={activeRoom}
-                onSelect={handleSelect}
-              />
-            </div>
-          </nav>
+        {menuOpen ? (
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+            <path
+              d="M3 3L15 15M15 3L3 15"
+              stroke="#1A1A1A"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+            />
+          </svg>
+        ) : (
+          <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true">
+            <path
+              d="M1 1H17M1 7H17M1 13H17"
+              stroke="#1A1A1A"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+            />
+          </svg>
         )}
-      </div>
+      </button>
+
+      {menuOpen && (
+        <nav className="nav-hamburger-overlay" aria-label="Room navigation">
+          <ul className="nav-hamburger-list">
+            {navItems.map((item) => {
+              const active = isNavItemActive(item, activeLabel, activeRoom);
+              const key =
+                item.kind === "link" ? item.href : `${item.id}-${item.label}`;
+
+              return (
+                <li key={key}>
+                  <button
+                    type="button"
+                    onClick={() => handleSelect(item)}
+                    className="nav-hamburger-item"
+                    aria-current={active ? "page" : undefined}
+                    style={{ color: active ? "#7B5CF0" : "#1A1A1A" }}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      )}
     </>
   );
 }

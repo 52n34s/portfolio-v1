@@ -62,65 +62,72 @@ function Tape({ className = "" }: { className?: string }) {
   );
 }
 
-function OpenPill({ className = "" }: { className?: string }) {
+const CELL_W = 330;
+const CELL_H = 255;
+
+function OpenPill({
+  className = "",
+  style,
+}: {
+  className?: string;
+  style?: CSSProperties;
+}) {
   return (
     <span
-      className={`rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] text-[#F5F0E8] ${className}`}
+      className={`rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[12px] leading-none text-[#F5F0E8] ${className}`}
+      style={style}
     >
       Open
     </span>
   );
 }
 
-function AppRow({
+function AppIdentity({
   icon,
   name,
   platform,
-  compact = false,
-  iconClassName,
-  showOpen = true,
 }: {
   icon: string;
   name: string;
   platform: string;
-  compact?: boolean;
-  iconClassName?: string;
-  showOpen?: boolean;
 }) {
-  if (compact) {
-    return (
-      <div className="flex flex-col items-center gap-1">
-        <img
-          src={icon}
-          alt=""
-          className={
-            iconClassName ??
-            "h-[54px] w-[54px] rounded-[11px] border border-black/10"
-          }
-        />
-        <p className="text-[12px] font-medium leading-none text-[#1A1A1A]">
-          {name}
-        </p>
-        {showOpen && <OpenPill className="px-2.5 py-[3px] text-[10px]" />}
-      </div>
-    );
-  }
-
   return (
     <div className="flex items-center gap-2.5">
       <img
         src={icon}
-        alt=""
-        className={
-          iconClassName ??
-          "h-[62px] w-[62px] rounded-[13px] border border-black/10"
-        }
+        alt={`${name} app icon`}
+        className="h-[48px] w-[48px] rounded-[11px] border border-black/10 object-cover"
       />
       <div className="leading-tight">
-        <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
-        <p className="text-[12px] text-[#1A1A1A]/55">{platform}</p>
+        <p className="text-[14px] font-medium text-[#1A1A1A]">{name}</p>
+        <p className="text-[11px] text-[#1A1A1A]/55">{platform}</p>
       </div>
-      {showOpen && <OpenPill className="ml-auto" />}
+    </div>
+  );
+}
+
+/** Self-contained app cell: stamp + paper + open all live inside this wrapper. */
+function AppObjectShell({
+  stamp,
+  children,
+  className = "",
+  style,
+}: {
+  stamp: [string, string, string];
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  return (
+    <div
+      className={`relative max-w-full ${className}`}
+      style={{ width: CELL_W, height: CELL_H, ...style }}
+    >
+      <div className="absolute z-40" style={{ top: -14, right: -14 }}>
+        <StatusStamp lines={stamp} />
+      </div>
+      {children}
+      <OpenPill className="absolute z-50" style={{ bottom: 20, left: 20 }} />
     </div>
   );
 }
@@ -405,7 +412,7 @@ function HeadlineBlock({
     return (
       <div className={className}>
         <HeadlineOnly size="mobile" />
-        <SubtitleLines className="mt-5 text-[15px]" />
+        <SubtitleLines className="mt-10 max-w-[560px] text-[15px]" />
       </div>
     );
   }
@@ -414,7 +421,7 @@ function HeadlineBlock({
     return (
       <div className={className}>
         <HeadlineOnly size="tablet" />
-        <SubtitleLines className="mt-5 max-w-[520px] text-[16px]" />
+        <SubtitleLines className="mt-10 max-w-[560px] text-[16px]" />
       </div>
     );
   }
@@ -422,94 +429,42 @@ function HeadlineBlock({
   return (
     <div className={className}>
       <HeadlineOnly />
-      <SubtitleLines className="mt-6 max-w-[700px] text-[17px]" />
+      <SubtitleLines className="mt-10 max-w-[560px] text-[17px]" />
     </div>
   );
 }
 
-function PeeranimoPolaroids({
-  variant = "desktop",
-}: {
-  variant?: "desktop" | "mobile" | "tablet" | "grid";
-}) {
-  const cards =
-    variant === "desktop" || variant === "grid"
-      ? ([
-          {
-            src: "/peers/peeranimo_european_woman.jpg",
-            color: "#7B5CF0",
-            pos: "left-0 top-[10px] z-10 rotate-[-13deg]",
-            showTape: false,
-          },
-          {
-            src: "/peers/peeranimo_asia_woman.jpg",
-            color: "#00C2A8",
-            pos: "left-[51px] top-0 z-20 rotate-[-2deg]",
-            showTape: true,
-          },
-          {
-            src: "/peers/peeranimo_pepe_latino_woman.jpg",
-            color: "#D85A30",
-            pos: "left-[102px] top-[14px] z-30 rotate-[9deg]",
-            showTape: false,
-          },
-        ] as const)
-      : variant === "tablet"
-        ? ([
-            {
-              src: "/peers/peeranimo_european_woman.jpg",
-              color: "#7B5CF0",
-              pos: "left-0 top-[8px] z-10 rotate-[-4deg]",
-              showTape: false,
-            },
-            {
-              src: "/peers/peeranimo_asia_woman.jpg",
-              color: "#00C2A8",
-              pos: "left-[40px] top-0 z-20 rotate-[-2deg]",
-              showTape: true,
-            },
-            {
-              src: "/peers/peeranimo_pepe_latino_woman.jpg",
-              color: "#D85A30",
-              pos: "left-[80px] top-[10px] z-30 rotate-[4deg]",
-              showTape: false,
-            },
-          ] as const)
-        : ([
-            {
-              src: "/peers/peeranimo_european_woman.jpg",
-              color: "#7B5CF0",
-              pos: "left-0 top-[8px] z-10 rotate-[-3deg]",
-              showTape: false,
-            },
-            {
-              src: "/peers/peeranimo_asia_woman.jpg",
-              color: "#00C2A8",
-              pos: "left-[40px] top-0 z-20 rotate-[-2deg]",
-              showTape: true,
-            },
-            {
-              src: "/peers/peeranimo_pepe_latino_woman.jpg",
-              color: "#D85A30",
-              pos: "left-[80px] top-[10px] z-30 rotate-[3deg]",
-              showTape: false,
-            },
-          ] as const);
-
-  const cardWidth =
-    variant === "grid"
-      ? "w-[72px]"
-      : variant === "desktop"
-        ? "w-[84px]"
-        : "w-[78px]";
-  const frameHeight = variant === "grid" ? "h-[112px]" : "h-[132px]";
+function PeeranimoPolaroids() {
+  const cards = [
+    {
+      src: "/peers/peeranimo_european_woman.jpg",
+      alt: "Peer portrait — woman with light brown hair",
+      color: "#7B5CF0",
+      pos: "left-0 top-[8px] z-10 rotate-[-10deg]",
+      showTape: false,
+    },
+    {
+      src: "/peers/peeranimo_asia_woman.jpg",
+      alt: "Peer portrait — woman with dark hair",
+      color: "#00C2A8",
+      pos: "left-[48px] top-0 z-20 rotate-[-2deg]",
+      showTape: true,
+    },
+    {
+      src: "/peers/peeranimo_pepe_latino_woman.jpg",
+      alt: "Peer portrait — woman with curly hair",
+      color: "#D85A30",
+      pos: "left-[96px] top-[10px] z-30 rotate-[8deg]",
+      showTape: false,
+    },
+  ] as const;
 
   return (
-    <div className={`relative ${frameHeight}`}>
+    <div className="relative h-[108px]">
       {cards.map((card) => (
         <div
           key={card.src}
-          className={`absolute bg-white p-[6px] pb-[18px] ${cardWidth} ${PAPER_SHADOW} ${card.pos}`}
+          className={`absolute w-[72px] bg-white p-[5px] pb-[14px] ${PAPER_SHADOW} ${card.pos}`}
         >
           {card.showTape && (
             <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
@@ -517,7 +472,7 @@ function PeeranimoPolaroids({
           <div className="relative aspect-square overflow-hidden">
             <img
               src={card.src}
-              alt=""
+              alt={card.alt}
               className="h-full w-full object-cover grayscale contrast-[1.7] brightness-[1.15]"
             />
             <div
@@ -535,54 +490,26 @@ function PeeranimoPolaroids({
   );
 }
 
-function PeeranimoUnit({
-  variant = "desktop",
-  grid = false,
-}: {
-  variant?: "desktop" | "mobile" | "tablet";
-  grid?: boolean;
-}) {
+function PeeranimoUnit({ className = "" }: { className?: string }) {
   return (
-    <div
-      className={`relative ${grid ? "w-full pb-10" : variant === "desktop" ? "w-[225px]" : "w-[216px]"}`}
-    >
-      <div
-        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
-      >
-        <StatusStamp lines={APP_STATUS.peeranimo} />
-      </div>
-      <PeeranimoPolaroids variant={grid ? "grid" : variant} />
-      <p
-        className={`mt-0.5 max-w-[210px] -rotate-[2deg] text-center leading-snug text-[#1A1A1A] ${grid ? "text-[13px]" : "text-[15px]"}`}
-        style={{ fontFamily: "var(--font-hand), cursive" }}
-      >
-        People who get it. Without searching for years.
-      </p>
-      {!grid && (
-        <div className="mt-1.5">
-          <AppRow
+    <AppObjectShell stamp={APP_STATUS.peeranimo} className={className}>
+      <div className="absolute inset-0 px-3 pb-16 pt-3">
+        <PeeranimoPolaroids />
+        <p
+          className="mt-1 pr-[90px] text-center text-[14px] leading-snug text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          People who get it. Without searching for years.
+        </p>
+        <div className="absolute bottom-[56px] left-3 right-3">
+          <AppIdentity
             icon={PEERANIMO_ICON}
             name="Peeranimo"
             platform="Social platform · Web"
           />
         </div>
-      )}
-      {grid && (
-        <div className="mt-1.5 flex items-center gap-2 px-1">
-          <img
-            src={PEERANIMO_ICON}
-            alt=""
-            className="h-[42px] w-[42px] rounded-[10px] border border-black/10"
-          />
-          <div className="leading-tight">
-            <p className="text-[13px] font-medium text-[#1A1A1A]">Peeranimo</p>
-            <p className="text-[11px] text-[#1A1A1A]/55">
-              Social platform · Web
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
+      </div>
+    </AppObjectShell>
   );
 }
 
@@ -635,51 +562,34 @@ function ServiceCard({
   );
 }
 
-function CarpinchoCard({
-  className = "",
-  grid = false,
-}: {
-  className?: string;
-  grid?: boolean;
-}) {
+function CarpinchoCard({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative ${grid ? "w-full" : ""} ${className}`}>
-      <div
-        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
-      >
-        <StatusStamp lines={APP_STATUS.carpincho} />
-      </div>
-      <Tape className="-left-2 -top-2 z-20 -rotate-[22deg]" />
+    <AppObjectShell stamp={APP_STATUS.carpincho} className={className}>
+      <Tape className="absolute -left-2 -top-2 z-20 -rotate-[22deg]" />
       <article
-        className={`relative bg-[#FFFDF5] ${grid ? "px-3 pb-10 pt-3.5" : "px-3.5 pb-4 pt-4"} ${PAPER_SHADOW}`}
+        className={`absolute inset-0 bg-[#FFFDF5] px-4 pb-16 pt-4 ${PAPER_SHADOW}`}
       >
         <p
-          className={`${grid ? "text-[16px]" : "text-[18px]"} leading-snug text-[#D6156F]`}
+          className="pr-[90px] text-[17px] leading-snug text-[#D6156F]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           Don&apos;t be a tourist.
         </p>
         <p
-          className={`mt-1 ${grid ? "text-[13px]" : "text-[15px]"} leading-snug text-[#D6156F]`}
+          className="mt-1 pr-[90px] text-[14px] leading-snug text-[#D6156F]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           1,000 words is enough.
         </p>
-        <div className={grid ? "mt-2" : "mt-3"}>
-          <AppRow
+        <div className="absolute bottom-[56px] left-4 right-4">
+          <AppIdentity
             icon={CARPINCHO_ICON}
             name="Carpincho"
             platform="Spanish that sounds local"
-            showOpen={!grid}
-            iconClassName={
-              grid
-                ? "h-[48px] w-[48px] rounded-[11px] border border-black/10"
-                : undefined
-            }
           />
         </div>
       </article>
-    </div>
+    </AppObjectShell>
   );
 }
 
@@ -703,28 +613,17 @@ function Fernsehturm({ className = "" }: { className?: string }) {
   );
 }
 
-function OrivelaNote({
-  className = "",
-  grid = false,
-}: {
-  className?: string;
-  grid?: boolean;
-}) {
+function OrivelaNote({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative ${grid ? "w-full" : ""} ${className}`}>
-      <div
-        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
-      >
-        <StatusStamp lines={APP_STATUS.orivela} />
-      </div>
-      <Tape className="-left-2 -top-2 z-20 -rotate-[28deg]" />
+    <AppObjectShell stamp={APP_STATUS.orivela} className={className}>
+      <Tape className="absolute -left-2 -top-2 z-20 -rotate-[28deg]" />
       <div
         className="absolute bottom-0 right-0 z-10 h-9 w-9 bg-[#EDE2B0]"
         style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }}
         aria-hidden="true"
       />
       <article
-        className={`relative bg-[#FCF3C8] ${grid ? "px-4 pb-10 pt-4" : "px-5 pb-7 pt-5"} ${PAPER_SHADOW}`}
+        className={`absolute inset-0 bg-[#FCF3C8] px-4 pb-16 pt-4 ${PAPER_SHADOW}`}
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
         }}
@@ -743,65 +642,47 @@ function OrivelaNote({
           aria-hidden="true"
         />
         <p
-          className={`relative w-[78%] pl-2 pr-4 ${grid ? "text-[17px]" : "text-[20px]"} leading-snug text-[#1A2E5A]`}
+          className="relative pl-2 pr-[90px] text-[17px] leading-snug text-[#1A2E5A]"
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           Every document you&apos;ll need someday.
           <br />
           Found in seconds.
         </p>
-        <div className={`relative pl-2 ${grid ? "mt-3" : "mt-4"}`}>
-          <AppRow
-            icon={ORIVELA_ICON}
-            name="Orivela"
-            platform="iOS"
-            showOpen={!grid}
-            iconClassName={
-              grid
-                ? "h-[48px] w-[48px] rounded-[11px] border border-black/10"
-                : undefined
-            }
-          />
+        <div className="absolute bottom-[56px] left-4 right-4 pl-2">
+          <AppIdentity icon={ORIVELA_ICON} name="Orivela" platform="iOS" />
         </div>
         <TornEdge fill="#F5F0E8" />
       </article>
-    </div>
+    </AppObjectShell>
   );
 }
 
-function KolibiReceipt({
-  className = "",
-  grid = false,
-}: {
-  className?: string;
-  grid?: boolean;
-}) {
+function KolibiReceipt({ className = "" }: { className?: string }) {
   const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
 
   return (
-    <div className={`relative ${grid ? "w-full" : ""} ${className}`}>
-      <div
-        className={`absolute z-40 ${grid ? "right-0 top-0" : "-right-4 -top-4"}`}
-      >
-        <StatusStamp lines={APP_STATUS.kolibi} />
-      </div>
-      <Tape className="left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
+    <AppObjectShell stamp={APP_STATUS.kolibi} className={className}>
+      <Tape className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
       <article
-        className={`relative bg-white ${grid ? "px-3.5 pb-10 pt-4" : "px-4 pb-5 pt-5"} ${PAPER_SHADOW}`}
+        className={`absolute inset-0 bg-white px-3.5 pb-16 pt-5 ${PAPER_SHADOW}`}
       >
         <ReceiptZigzag position="top" />
         <p
-          className="text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
+          className="pr-[90px] text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
           style={mono}
         >
           KOLIBI
         </p>
-        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
-        <p className="text-[11px] leading-snug text-[#333]" style={mono}>
+        <div className="my-1.5 border-t border-dashed border-[#1A1A1A]/30" />
+        <p
+          className="pr-[90px] text-[11px] leading-snug text-[#333]"
+          style={mono}
+        >
           One photo. You know what&apos;s left for today.
         </p>
-        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
-        <div className="space-y-0.5 text-[10px] text-[#1A1A1A]" style={mono}>
+        <div className="my-1.5 border-t border-dashed border-[#1A1A1A]/30" />
+        <div className="space-y-0.5 pr-[90px] text-[10px] text-[#1A1A1A]" style={mono}>
           <div className="flex justify-between gap-2">
             <span>BOWL &amp; EGGS</span>
             <span>438</span>
@@ -811,9 +692,9 @@ function KolibiReceipt({
             <span>84</span>
           </div>
         </div>
-        <div className="my-2 border-t border-dashed border-[#1A1A1A]/30" />
+        <div className="my-1.5 border-t border-dashed border-[#1A1A1A]/30" />
         <p
-          className="text-[11px] font-medium text-[#1A1A1A]"
+          className="pr-[90px] text-[11px] font-medium text-[#1A1A1A]"
           style={mono}
         >
           <span className="flex justify-between gap-2">
@@ -821,31 +702,45 @@ function KolibiReceipt({
             <span>412 kcal</span>
           </span>
         </p>
-        <div className={grid ? "mt-2" : "mt-3"}>
-          <AppRow
+        <div className="absolute bottom-[56px] left-3.5 right-3.5">
+          <AppIdentity
             icon={KOLIBI_ICON}
             name="Kolibi"
             platform="iOS · Android"
-            compact={!grid}
-            showOpen={!grid}
-            iconClassName={
-              grid
-                ? "h-[42px] w-[42px] rounded-[10px] border border-black/10"
-                : undefined
-            }
           />
         </div>
         <ReceiptZigzag position="bottom" />
       </article>
-    </div>
+    </AppObjectShell>
   );
 }
 
 export default function HomeCollage() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [layout, setLayout] = useState<"desktop" | "tablet" | "mobile">(
+    "desktop",
+  );
 
   useEffect(() => {
+    const mqDesktop = window.matchMedia("(min-width: 1024px)");
+    const mqTablet = window.matchMedia("(min-width: 768px)");
+    const update = () => {
+      if (mqDesktop.matches) setLayout("desktop");
+      else if (mqTablet.matches) setLayout("tablet");
+      else setLayout("mobile");
+    };
+    update();
+    mqDesktop.addEventListener("change", update);
+    mqTablet.addEventListener("change", update);
+    return () => {
+      mqDesktop.removeEventListener("change", update);
+      mqTablet.removeEventListener("change", update);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (layout !== "desktop") return;
     const el = stageRef.current;
     if (!el) return;
     const update = () => {
@@ -856,309 +751,262 @@ export default function HomeCollage() {
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [layout]);
 
   return (
     <div id="room-01">
-      {/* DESKTOP + TABLET LANDSCAPE */}
-      <section
-        ref={stageRef}
-        className="relative hidden h-screen w-full overflow-hidden bg-[#F5F0E8] lg:block"
-      >
-        <div
-          className="absolute left-1/2 top-1/2"
-          style={{
-            width: DESIGN_W,
-            height: DESIGN_H,
-            transform: `translate(-50%, -50%) scale(${scale})`,
-          }}
+      {layout === "desktop" && (
+        <section
+          ref={stageRef}
+          className="relative h-screen w-full overflow-hidden bg-[#F5F0E8]"
         >
-          {/* Lila Fläche — under portrait */}
-          <svg
-            className="pointer-events-none absolute z-0 -rotate-[4deg]"
-            style={{ left: 0, top: 450, width: 360, height: 400 }}
-            viewBox="0 0 280 340"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              fill="#7B5CF0"
-              d="M36 62 L62 54 L88 65 L116 55 L146 66 L176 56 L204 67 L232 57 L238 300 L210 310 L182 300 L154 311 L124 301 L96 312 L66 302 L40 312 Z"
-            />
-          </svg>
-
-          {/* Türkise Fläche — bottom edge, clear of grid + pitch */}
-          <svg
-            className="pointer-events-none absolute z-0 rotate-[3deg]"
-            style={{ left: 40, top: 830, width: 160, height: 100 }}
-            viewBox="0 0 260 280"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              fill="#00C2A8"
-              d="M28 48 L54 40 L82 52 L110 42 L140 54 L168 44 L196 55 L224 46 L232 250 L204 262 L176 252 L148 263 L118 253 L90 264 L60 254 L34 265 Z"
-            />
-          </svg>
-
-          {/* Headline */}
           <div
-            className="absolute z-30"
-            style={{ left: 80, top: 80, width: 780, height: 220 }}
+            className="absolute left-1/2 top-1/2"
+            style={{
+              width: DESIGN_W,
+              height: DESIGN_H,
+              transform: `translate(-50%, -50%) scale(${scale})`,
+            }}
           >
-            <HeadlineOnly />
-          </div>
+            <svg
+              className="pointer-events-none absolute z-0 -rotate-[4deg]"
+              style={{ left: 0, top: 480, width: 300, height: 380 }}
+              viewBox="0 0 280 340"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path
+                fill="#7B5CF0"
+                d="M36 62 L62 54 L88 65 L116 55 L146 66 L176 56 L204 67 L232 57 L238 300 L210 310 L182 300 L154 311 L124 301 L96 312 L66 302 L40 312 Z"
+              />
+            </svg>
 
-          {/* Berlin-Collage — Fernsehturm + Karte + Fußball @ 75% */}
-          <Clickable
-            label="Why Berlin?"
-            scrollTo="#room-02"
-            className="z-10"
-            style={{ left: 1000, top: 60, width: 300, height: 240 }}
-          >
             <div
-              className="relative origin-top-left"
-              style={{
-                width: 400,
-                height: 320,
-                transform: "scale(0.75)",
-              }}
+              className="absolute z-30"
+              style={{ left: 80, top: 90, width: 780 }}
             >
-              <svg
-                className="pointer-events-none absolute z-0 -rotate-[3deg]"
-                style={{ left: 0, top: 10, width: 300, height: 265 }}
-                viewBox="0 0 200 180"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <path
-                  fill="#F4D35E"
-                  d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
-                />
-              </svg>
-              <Fernsehturm className="absolute left-[105px] top-0 z-10 h-[265px] w-auto rotate-[2deg]" />
-              <div
-                className="absolute left-[223px] top-[80px] z-10"
-                aria-hidden="true"
-              >
-                <SolDeMayo className="h-[48px] w-[48px] opacity-80" />
-              </div>
-              <div
-                className="pointer-events-none absolute left-0 top-[180px] z-[15] rotate-[5deg]"
-                aria-hidden="true"
-              >
-                <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
-              </div>
+              <HeadlineOnly />
+              <SubtitleLines className="mt-10 max-w-[560px] text-[15px]" />
             </div>
-          </Clickable>
 
-          {/* Subhead */}
-          <div
-            className="absolute z-30"
-            style={{ left: 80, top: 330, width: 480, height: 100 }}
-          >
-            <SubtitleLines className="text-[15px] leading-[1.45]" />
-          </div>
-
-          {/* Portrait + Fläche */}
-          <div
-            className="absolute z-20"
-            style={{ left: 80, top: 460, width: 300, height: 410 }}
-          >
-            <img
-              src="/me-steffen.png"
-              alt="Steffen"
-              className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-            />
             <Clickable
-              label="Why I wear colors"
+              label="Why Berlin?"
               scrollTo="#room-02"
-              className="left-0 top-[45%] h-[55%] w-full"
+              className="z-10"
+              style={{ left: 1010, top: 60, width: 300, height: 240 }}
             >
-              <span className="block h-full w-full" aria-hidden="true" />
+              <div
+                className="relative origin-top-left"
+                style={{
+                  width: 400,
+                  height: 320,
+                  transform: "scale(0.75)",
+                }}
+              >
+                <svg
+                  className="pointer-events-none absolute z-0 -rotate-[3deg]"
+                  style={{ left: 0, top: 10, width: 300, height: 265 }}
+                  viewBox="0 0 200 180"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="#F4D35E"
+                    d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
+                  />
+                </svg>
+                <Fernsehturm className="absolute left-[105px] top-0 z-10 h-[265px] w-auto rotate-[2deg]" />
+                <div
+                  className="absolute left-[223px] top-[80px] z-10"
+                  aria-hidden="true"
+                >
+                  <SolDeMayo className="h-[48px] w-[48px] opacity-80" />
+                </div>
+                <div
+                  className="pointer-events-none absolute left-0 top-[180px] z-[15] rotate-[5deg]"
+                  aria-hidden="true"
+                >
+                  <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
+                </div>
+              </div>
+            </Clickable>
+
+            <div
+              className="absolute z-20"
+              style={{ left: 80, top: 500, width: 250, height: 370 }}
+            >
+              <img
+                src="/me-steffen.png"
+                alt="Steffen Giebler, founder and developer, Berlin"
+                className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+              />
+              <Clickable
+                label="Why I wear colors"
+                scrollTo="#room-02"
+                className="left-0 top-[45%] h-[55%] w-full"
+              >
+                <span className="block h-full w-full" aria-hidden="true" />
+              </Clickable>
+            </div>
+
+            <div
+              className="absolute z-30 -rotate-[1deg]"
+              style={{ left: 360, top: 620, width: 230, height: 250 }}
+            >
+              <ServiceCard />
+            </div>
+
+            <Clickable
+              label="Kolibi"
+              href="https://apps.apple.com/us/app/kolibi/id6790129149"
+              external
+              className="z-30 -rotate-[1.5deg]"
+              style={{ left: 640, top: 320 }}
+            >
+              <KolibiReceipt />
+            </Clickable>
+
+            <Clickable
+              label="Carpincho"
+              href="https://carpincho.app/"
+              external
+              className="z-[32] rotate-[1.2deg]"
+              style={{ left: 1030, top: 320 }}
+            >
+              <CarpinchoCard />
+            </Clickable>
+
+            <Clickable
+              label="Orivela"
+              scrollTo="#room-03b"
+              className="z-[35] -rotate-[0.8deg]"
+              style={{ left: 640, top: 615 }}
+            >
+              <OrivelaNote />
+            </Clickable>
+
+            <Clickable
+              label="Peeranimo"
+              scrollTo="#room-04"
+              className="z-[35] rotate-[1.5deg]"
+              style={{ left: 1030, top: 615 }}
+            >
+              <PeeranimoUnit />
             </Clickable>
           </div>
+        </section>
+      )}
 
-          {/* Pitch-Karte */}
-          <div
-            className="absolute z-30 -rotate-[1deg]"
-            style={{ left: 400, top: 600, width: 220, height: 270 }}
-          >
-            <ServiceCard />
-          </div>
+      {layout === "tablet" && (
+        <section className="bg-[#F5F0E8] px-8 py-14">
+          <HeadlineBlock variant="tablet" />
 
-          {/* 2×2 App Grid — cell 285×235, gap 50 / 40
-              Rotations belong to cells, not objects */}
-          <Clickable
-            label="Kolibi"
-            href="https://apps.apple.com/us/app/kolibi/id6790129149"
-            external
-            className="z-30 -rotate-[1.5deg]"
-            style={{ left: 660, top: 330, width: 285, height: 235 }}
-          >
-            <div className="relative h-full w-full">
-              <KolibiReceipt grid />
-              <OpenPill className="absolute bottom-2 left-2 z-50" />
-            </div>
-          </Clickable>
-
-          <Clickable
-            label="Carpincho"
-            href="https://carpincho.app/"
-            external
-            className="z-[32] rotate-[1.2deg]"
-            style={{ left: 995, top: 330, width: 285, height: 235 }}
-          >
-            <div className="relative h-full w-full">
-              <CarpinchoCard grid />
-              <OpenPill className="absolute bottom-2 left-2 z-50" />
-            </div>
-          </Clickable>
-
-          <Clickable
-            label="Orivela"
-            scrollTo="#room-03b"
-            className="z-[35] -rotate-[0.8deg]"
-            style={{ left: 660, top: 605, width: 285, height: 235 }}
-          >
-            <div className="relative h-full w-full">
-              <OrivelaNote grid />
-              <OpenPill className="absolute bottom-2 left-2 z-50" />
-            </div>
-          </Clickable>
-
-          <Clickable
-            label="Peeranimo"
-            scrollTo="#room-04"
-            className="z-[35] rotate-[1.5deg]"
-            style={{ left: 995, top: 605, width: 285, height: 235 }}
-          >
-            <div className="relative h-full w-full">
-              <PeeranimoUnit grid />
-              <OpenPill className="absolute bottom-2 left-2 z-50" />
-            </div>
-          </Clickable>
-        </div>
-      </section>
-
-      {/* TABLET PORTRAIT — single column */}
-      <section className="hidden bg-[#F5F0E8] px-8 py-14 md:block lg:hidden">
-        <HeadlineBlock variant="tablet" />
-
-        <img
-          src="/me-steffen.png"
-          alt=""
-          className="mx-auto mt-12 h-[340px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-        />
-
-        <div className="mx-auto mt-12 flex max-w-[340px] flex-col items-center gap-10">
-          <Clickable
-            label="Kolibi"
-            href="https://apps.apple.com/us/app/kolibi/id6790129149"
-            external
-            positioned={false}
-            className="w-full max-w-[280px]"
-          >
-            <KolibiReceipt className="-rotate-[1.5deg]" />
-          </Clickable>
-          <Clickable
-            label="Carpincho"
-            href="https://carpincho.app/"
-            external
-            positioned={false}
-            className="w-full max-w-[280px]"
-          >
-            <CarpinchoCard className="rotate-[1.2deg]" />
-          </Clickable>
-          <Clickable
-            label="Orivela"
-            scrollTo="#room-03b"
-            positioned={false}
-            className="w-full max-w-[300px]"
-          >
-            <OrivelaNote className="-rotate-[0.8deg]" />
-          </Clickable>
-          <Clickable
-            label="Peeranimo"
-            scrollTo="#room-04"
-            positioned={false}
-            className="w-full max-w-[235px]"
-          >
-            <div className="rotate-[1.5deg]">
-              <PeeranimoUnit variant="tablet" />
-            </div>
-          </Clickable>
-          <div className="w-full max-w-[285px]">
-            <ServiceCard className="-rotate-[1deg]" variant="tablet" />
-          </div>
-        </div>
-
-        <div className="mt-12 flex items-center justify-center gap-8">
-          <Football
-            className="h-[70px] w-auto rotate-[4deg]"
-            idPrefix="ballTab"
+          <img
+            src="/me-steffen.png"
+            alt="Steffen Giebler, founder and developer, Berlin"
+            className="mx-auto mt-12 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
-        </div>
-      </section>
 
-      {/* MOBILE — single column, same order */}
-      <section className="bg-[#F5F0E8] px-6 py-12 md:hidden">
-        <HeadlineBlock variant="mobile" />
-
-        <img
-          src="/me-steffen.png"
-          alt=""
-          className="mx-auto mt-8 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-        />
-
-        <Clickable
-          label="Kolibi"
-          href="https://apps.apple.com/us/app/kolibi/id6790129149"
-          external
-          positioned={false}
-          className="mx-auto mt-10 max-w-[300px]"
-        >
-          <KolibiReceipt className="-rotate-[1.5deg]" />
-        </Clickable>
-
-        <Clickable
-          label="Carpincho"
-          href="https://carpincho.app/"
-          external
-          positioned={false}
-          className="mx-auto mt-10 max-w-[300px]"
-        >
-          <CarpinchoCard className="rotate-[1.2deg]" />
-        </Clickable>
-
-        <Clickable
-          label="Orivela"
-          scrollTo="#room-03b"
-          positioned={false}
-          className="mx-auto mt-10 max-w-[300px]"
-        >
-          <OrivelaNote className="-rotate-[0.8deg]" />
-        </Clickable>
-
-        <Clickable
-          label="Peeranimo"
-          scrollTo="#room-04"
-          positioned={false}
-          className="mx-auto mt-10 max-w-[300px]"
-        >
-          <div className="flex justify-center rotate-[1.5deg]">
-            <PeeranimoUnit variant="mobile" />
+          <div className="mx-auto mt-12 flex max-w-[330px] flex-col items-center gap-8">
+            <Clickable
+              label="Kolibi"
+              href="https://apps.apple.com/us/app/kolibi/id6790129149"
+              external
+              positioned={false}
+            >
+              <KolibiReceipt className="-rotate-[1.5deg]" />
+            </Clickable>
+            <Clickable
+              label="Carpincho"
+              href="https://carpincho.app/"
+              external
+              positioned={false}
+            >
+              <CarpinchoCard className="rotate-[1.2deg]" />
+            </Clickable>
+            <Clickable
+              label="Orivela"
+              scrollTo="#room-03b"
+              positioned={false}
+            >
+              <OrivelaNote className="-rotate-[0.8deg]" />
+            </Clickable>
+            <Clickable
+              label="Peeranimo"
+              scrollTo="#room-04"
+              positioned={false}
+            >
+              <PeeranimoUnit className="rotate-[1.5deg]" />
+            </Clickable>
+            <div className="w-full max-w-[285px]">
+              <ServiceCard className="-rotate-[1deg]" variant="tablet" />
+            </div>
           </div>
-        </Clickable>
 
-        <div className="mx-auto mt-10 max-w-[285px]">
-          <ServiceCard className="-rotate-[1deg]" variant="mobile" />
-        </div>
+          <div className="mt-12 flex items-center justify-center gap-8">
+            <Football
+              className="h-[70px] w-auto rotate-[4deg]"
+              idPrefix="ballTab"
+            />
+          </div>
+        </section>
+      )}
 
-        <div className="mt-10 flex items-center justify-center gap-6">
-          <Football className="h-[60px] w-auto" idPrefix="ballMob" />
-        </div>
-      </section>
+      {layout === "mobile" && (
+        <section className="bg-[#F5F0E8] px-6 py-12">
+          <HeadlineBlock variant="mobile" />
+
+          <img
+            src="/me-steffen.png"
+            alt="Steffen Giebler, founder and developer, Berlin"
+            className="mx-auto mt-8 h-[280px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+          />
+
+          <div className="mx-auto mt-10 flex max-w-[330px] flex-col items-center gap-8">
+            <Clickable
+              label="Kolibi"
+              href="https://apps.apple.com/us/app/kolibi/id6790129149"
+              external
+              positioned={false}
+            >
+              <KolibiReceipt className="-rotate-[1.5deg]" />
+            </Clickable>
+
+            <Clickable
+              label="Carpincho"
+              href="https://carpincho.app/"
+              external
+              positioned={false}
+            >
+              <CarpinchoCard className="rotate-[1.2deg]" />
+            </Clickable>
+
+            <Clickable
+              label="Orivela"
+              scrollTo="#room-03b"
+              positioned={false}
+            >
+              <OrivelaNote className="-rotate-[0.8deg]" />
+            </Clickable>
+
+            <Clickable
+              label="Peeranimo"
+              scrollTo="#room-04"
+              positioned={false}
+            >
+              <PeeranimoUnit className="rotate-[1.5deg]" />
+            </Clickable>
+
+            <div className="w-full max-w-[285px]">
+              <ServiceCard className="-rotate-[1deg]" variant="mobile" />
+            </div>
+          </div>
+
+          <div className="mt-10 flex items-center justify-center gap-6">
+            <Football className="h-[60px] w-auto" idPrefix="ballMob" />
+          </div>
+        </section>
+      )}
     </div>
   );
 }

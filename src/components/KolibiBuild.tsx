@@ -176,7 +176,14 @@ function KolibiEditMealMockup() {
   );
 }
 
-export default function KolibiBuild() {
+export default function KolibiBuild({
+  headingLevel = "h1",
+}: {
+  headingLevel?: "h1" | "h2";
+}) {
+  const HeadlineTag = headingLevel;
+  const SubTag = headingLevel === "h1" ? "h2" : "h3";
+
   return (
     <main className="kolibi-room">
       <section className="kolibi-room-hero">
@@ -193,8 +200,8 @@ export default function KolibiBuild() {
           <div className="kolibi-room-content">
             <span className="kolibi-room-badge">AI PHOTO CALORIE TRACKER</span>
 
-            <h1 className="kolibi-room-headline">Snap a photo.</h1>
-            <h2 className="kolibi-room-headline-sub">Done in seconds.</h2>
+            <HeadlineTag className="kolibi-room-headline">Snap a photo.</HeadlineTag>
+            <SubTag className="kolibi-room-headline-sub">Done in seconds.</SubTag>
 
             <p className="kolibi-room-intro">
               Point. Shoot. Done. Kolibi reads every ingredient on your plate in

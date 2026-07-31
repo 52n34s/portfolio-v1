@@ -68,7 +68,13 @@ const RECORDS = [
 const UPWORK_URL =
   "https://www.upwork.com/freelancers/~01984538d26b3fcb98?viewMode=1";
 
-export default function OrivelaBuild() {
+export default function OrivelaBuild({
+  headingLevel = "h1",
+}: {
+  headingLevel?: "h1" | "h2";
+}) {
+  const HeadlineTag = headingLevel;
+
   return (
     <main className="orivela-room">
       <div className="orivela-room-blob orivela-room-blob-purple" aria-hidden="true" />
@@ -83,12 +89,12 @@ export default function OrivelaBuild() {
               Shipped to App Store
             </span>
 
-            <h1 className="orivela-room-headline">
+            <HeadlineTag className="orivela-room-headline">
               Your records,
               <br />
               <span className="orivela-room-headline-accent">always at hand</span>
               <span className="orivela-room-dot">.</span>
-            </h1>
+            </HeadlineTag>
 
             <p className="orivela-room-intro">
               A personal records vault for iOS. Store insurance PDFs, subscription

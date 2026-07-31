@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Apps — built by Steffen",
+  title:
+    "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho",
   description:
-    "Four products. Four different problems. Orivela, Kolibi, Peeranimo, Carpincho.",
+    "Four apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, and a Spanish course. Live on iOS, Android and web.",
   alternates: {
     canonical: "https://52n34s.app/apps",
   },
@@ -106,7 +107,7 @@ function AppIdentity({
     <div className="flex items-center gap-2.5">
       <img
         src={icon}
-        alt=""
+        alt={`${name} app icon`}
         className="h-[54px] w-[54px] rounded-[13px] border border-black/10"
       />
       <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
@@ -227,7 +228,7 @@ function KolibiCard() {
         <div className="flex items-center gap-2">
           <img
             src={KOLIBI_ICON}
-            alt=""
+            alt="Kolibi app icon"
             className="h-[46px] w-[46px] rounded-[11px] border border-black/10"
           />
           <p className="text-[12px] font-medium text-[#1A1A1A]">Kolibi</p>
@@ -250,18 +251,21 @@ function PeeranimoPolaroids() {
   const cards = [
     {
       src: "/peers/peeranimo_european_woman.jpg",
+      alt: "Peer portrait — woman with light brown hair",
       color: "#7B5CF0",
       pos: "left-0 top-[10px] z-10 -rotate-[7deg] md:-rotate-[13deg]",
       showTape: false,
     },
     {
       src: "/peers/peeranimo_asia_woman.jpg",
+      alt: "Peer portrait — woman with dark hair",
       color: "#00C2A8",
       pos: "left-[40px] top-0 z-20 -rotate-[2deg] md:left-[51px]",
       showTape: true,
     },
     {
       src: "/peers/peeranimo_pepe_latino_woman.jpg",
+      alt: "Peer portrait — woman with curly hair",
       color: "#D85A30",
       pos: "left-[80px] top-[10px] z-30 rotate-[3deg] md:left-[102px] md:top-[14px] md:rotate-[9deg]",
       showTape: false,
@@ -281,7 +285,7 @@ function PeeranimoPolaroids() {
           <div className="relative aspect-square overflow-hidden">
             <img
               src={card.src}
-              alt=""
+              alt={card.alt}
               className="h-full w-full object-cover grayscale contrast-[1.7] brightness-[1.15]"
             />
             <div
@@ -356,7 +360,7 @@ function CarpinchoCard() {
         <div className="mt-4 flex items-center gap-2.5">
           <img
             src={CARPINCHO_ICON}
-            alt=""
+            alt="Carpincho app icon"
             className="h-[54px] w-[54px] rounded-[13px] object-cover"
           />
           <div className="leading-tight">

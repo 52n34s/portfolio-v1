@@ -241,12 +241,21 @@ export default function Home() {
   return (
     <>
       <div className="sr-only">
-        Steffen is a Founder and Developer based in Berlin Mitte, Germany. He
-        builds software products and businesses. He is the founder of Peeranimo,
-        a peer-to-peer community platform for people with unfulfilled dreams,
-        and Orivela, a personal records vault for iOS. His work spans 10+
-        platforms, self-built and shipped to production. He thinks in systems
-        and ships products end to end.
+        Steffen Giebler is a solo founder and software developer based in
+        Berlin Mitte, Germany, working under the studio name 52N34S Group. He
+        builds and ships his own mobile and web applications, and works with
+        founders to turn early ideas into production products. His own products
+        are: Orivela, a personal records vault for iOS and Android that stores
+        documents, contracts and subscriptions and answers questions about them
+        in plain language. Kolibi, an AI photo calorie tracker for iOS and
+        Android that reads a meal from a single photo. Peeranimo, a
+        peer-matching social platform on the web that connects people who are in
+        the same chapter of life. Carpincho, a Spanish learning app focused on
+        1,000 high-frequency words in Rioplatense, neutral Latin American and
+        Spanish variants, currently in waitlist. He has built more than ten
+        platforms, both self-founded and for clients, and is available for
+        freelance product development, software architecture and long-term
+        product partnerships.
       </div>
 
       <HomeCollage />
@@ -349,11 +358,11 @@ export default function Home() {
       <Room03 visible={room03Visible} />
 
       <section id="room-03b" className="room-03b">
-        <OrivelaBuild />
+        <OrivelaBuild headingLevel="h2" />
       </section>
 
       <section id="room-03c" className="room-03c">
-        <KolibiBuild />
+        <KolibiBuild headingLevel="h2" />
       </section>
 
       <Room04 visible={room04Visible} />

@@ -94,7 +94,7 @@ export default function Room02({ visible }: Room02Props) {
 
       {/* Headline */}
       <div className="room-02-headline-block">
-        <h1 className="room-02-headline">STEFFEN</h1>
+        <h2 className="room-02-headline">STEFFEN</h2>
         <p className="room-02-subtitle">Founder · Developer · Berlin Mitte</p>
       </div>
 
