@@ -31,7 +31,7 @@ export const legal = {
 
   // TODO: USt-IdNr. eintragen. Pflichtangabe nach § 5 Abs. 1 Nr. 6 DDG,
   // sobald eine vorhanden ist. Format: "DE123456789"
-  vatId: "",
+  vatId: "DE325956096",
 
   // --- Aufsichtsbehörde Datenschutz ---
   dpaName: "Berliner Beauftragte für Datenschutz und Informationsfreiheit",
