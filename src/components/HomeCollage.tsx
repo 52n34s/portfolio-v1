@@ -11,7 +11,6 @@ import {
 const DESIGN_W = 1440;
 const DESIGN_H = 900;
 
-const BALL_SRC: string | null = null;
 
 const ORIVELA_ICON = "/app-logo-orivela.png";
 const KOLIBI_ICON = "/app-logo-kolibi.jpg";
@@ -64,6 +63,15 @@ function Tape({ className = "" }: { className?: string }) {
 
 const CELL_W = 330;
 const CELL_H = 255;
+const CARPINCHO_H = Math.round(CELL_H * 0.85);
+const CARD_PAD = 24;
+const HAND_COPY = "pr-[90px] text-[17px] leading-snug";
+
+/** Grid positions — 64px from subhead, 64px cell gap, 48px row gap */
+const GRID_X = 704;
+const GRID_Y = 280;
+const GRID_GAP_X = 64;
+const GRID_GAP_Y = 48;
 
 function OpenPill({
   className = "",
@@ -106,28 +114,43 @@ function AppIdentity({
   );
 }
 
-/** Self-contained app cell: stamp + paper + open all live inside this wrapper. */
+/** Self-contained app cell: stamp + paper + identity + open all inside. */
 function AppObjectShell({
   stamp,
   children,
+  footer,
   className = "",
   style,
+  height = CELL_H,
 }: {
   stamp: [string, string, string];
   children: ReactNode;
+  footer: ReactNode;
   className?: string;
   style?: CSSProperties;
+  height?: number;
 }) {
   return (
     <div
       className={`relative max-w-full ${className}`}
-      style={{ width: CELL_W, height: CELL_H, ...style }}
+      style={{ width: CELL_W, height, ...style }}
     >
       <div className="absolute z-40" style={{ top: -14, right: -14 }}>
         <StatusStamp lines={stamp} />
       </div>
       {children}
-      <OpenPill className="absolute z-50" style={{ bottom: 20, left: 20 }} />
+      <div
+        className="absolute z-50 flex flex-col items-start"
+        style={{
+          left: CARD_PAD,
+          right: CARD_PAD,
+          bottom: CARD_PAD,
+          gap: CARD_PAD,
+        }}
+      >
+        {footer}
+        <OpenPill />
+      </div>
     </div>
   );
 }
@@ -231,130 +254,6 @@ function ReceiptZigzag({ position }: { position: "top" | "bottom" }) {
         }
       />
     </svg>
-  );
-}
-
-function SolDeMayo({ className = "h-14 w-14 opacity-80" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 56 56"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="28" cy="28" r="12" fill="#F4D35E" />
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i * 22.5 * Math.PI) / 180;
-        const x1 = 28 + Math.cos(angle) * 14;
-        const y1 = 28 + Math.sin(angle) * 14;
-        const x2 = 28 + Math.cos(angle) * 26;
-        const y2 = 28 + Math.sin(angle) * 26;
-        return (
-          <line
-            key={i}
-            x1={x1}
-            y1={y1}
-            x2={x2}
-            y2={y2}
-            stroke="#F4D35E"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        );
-      })}
-      <circle cx="28" cy="28" r="7" fill="#E8B923" />
-    </svg>
-  );
-}
-
-function FootballSvg({
-  className = "h-[85px] w-auto",
-  idPrefix = "ball",
-}: {
-  className?: string;
-  idPrefix?: string;
-}) {
-  const shadeId = `${idPrefix}Shade`;
-  const clipId = `${idPrefix}Clip`;
-
-  return (
-    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
-      <defs>
-        <radialGradient id={shadeId} cx="34%" cy="27%" r="80%">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="55%" stopColor="#F3F0EA" />
-          <stop offset="100%" stopColor="#B9B3A6" />
-        </radialGradient>
-        <clipPath id={clipId}>
-          <circle cx="100" cy="100" r="90" />
-        </clipPath>
-      </defs>
-      <circle cx="100" cy="100" r="90" fill={`url(#${shadeId})`} />
-      <g clipPath={`url(#${clipId})`}>
-        <path d="M100 62 L136 88 L122 130 L78 130 L64 88 Z" fill="#1A1A1A" />
-        <path d="M148 4 L184 30 L170 72 L126 72 L112 30 Z" fill="#1A1A1A" />
-        <path d="M52 4 L88 30 L74 72 L30 72 L16 30 Z" fill="#1A1A1A" />
-        <path d="M198 106 L214 150 L178 178 L144 152 L154 110 Z" fill="#1A1A1A" />
-        <path d="M2 106 L46 110 L56 152 L22 178 L-14 150 Z" fill="#1A1A1A" />
-        <path d="M100 170 L136 196 L122 238 L78 238 L64 196 Z" fill="#1A1A1A" />
-        <g
-          stroke="#1A1A1A"
-          strokeWidth="5"
-          fill="none"
-          strokeLinecap="round"
-        >
-          <path d="M100 62 L100 38" />
-          <path d="M136 88 L158 80" />
-          <path d="M122 130 L134 170" />
-          <path d="M78 130 L66 170" />
-          <path d="M64 88 L42 80" />
-        </g>
-        <path
-          d="M100 190 A90 90 0 0 0 190 100 A122 122 0 0 1 100 190 Z"
-          fill="#1A1A1A"
-          opacity="0.13"
-        />
-      </g>
-      <circle
-        cx="100"
-        cy="100"
-        r="90"
-        fill="none"
-        stroke="#1A1A1A"
-        strokeWidth="5"
-      />
-    </svg>
-  );
-}
-
-function Football({
-  className = "h-[85px] w-auto",
-  idPrefix = "ball",
-}: {
-  className?: string;
-  idPrefix?: string;
-}) {
-  if (!BALL_SRC) {
-    return <FootballSvg className={className} idPrefix={idPrefix} />;
-  }
-
-  return (
-    <>
-      <img
-        src={BALL_SRC}
-        alt=""
-        className={`${className} object-contain`}
-        onError={(e) => {
-          e.currentTarget.style.display = "none";
-          const fallback = e.currentTarget.nextElementSibling;
-          if (fallback instanceof HTMLElement) {
-            fallback.style.display = "block";
-          }
-        }}
-      />
-      <span className="hidden">
-        <FootballSvg className={className} idPrefix={idPrefix} />
-      </span>
-    </>
   );
 }
 
@@ -492,22 +391,28 @@ function PeeranimoPolaroids() {
 
 function PeeranimoUnit({ className = "" }: { className?: string }) {
   return (
-    <AppObjectShell stamp={APP_STATUS.peeranimo} className={className}>
-      <div className="absolute inset-0 px-3 pb-16 pt-3">
+    <AppObjectShell
+      stamp={APP_STATUS.peeranimo}
+      className={className}
+      footer={
+        <AppIdentity
+          icon={PEERANIMO_ICON}
+          name="Peeranimo"
+          platform="Social platform · Web"
+        />
+      }
+    >
+      <div
+        className="absolute inset-0"
+        style={{ padding: CARD_PAD, paddingBottom: 120 }}
+      >
         <PeeranimoPolaroids />
         <p
-          className="mt-1 pr-[90px] text-center text-[14px] leading-snug text-[#1A1A1A]"
+          className={`mt-1 text-center text-[#1A1A1A] ${HAND_COPY}`}
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           People who get it. Without searching for years.
         </p>
-        <div className="absolute bottom-[56px] left-3 right-3">
-          <AppIdentity
-            icon={PEERANIMO_ICON}
-            name="Peeranimo"
-            platform="Social platform · Web"
-          />
-        </div>
       </div>
     </AppObjectShell>
   );
@@ -564,58 +469,51 @@ function ServiceCard({
 
 function CarpinchoCard({ className = "" }: { className?: string }) {
   return (
-    <AppObjectShell stamp={APP_STATUS.carpincho} className={className}>
+    <AppObjectShell
+      stamp={APP_STATUS.carpincho}
+      className={className}
+      height={CARPINCHO_H}
+      footer={
+        <AppIdentity
+          icon={CARPINCHO_ICON}
+          name="Carpincho"
+          platform="Spanish that sounds local"
+        />
+      }
+    >
       <Tape className="absolute -left-2 -top-2 z-20 -rotate-[22deg]" />
       <article
-        className={`absolute inset-0 bg-[#FFFDF5] px-4 pb-16 pt-4 ${PAPER_SHADOW}`}
+        className={`absolute inset-0 flex flex-col justify-between bg-[#FFFDF5] ${PAPER_SHADOW}`}
+        style={{ padding: CARD_PAD, paddingBottom: 120 }}
       >
-        <p
-          className="pr-[90px] text-[17px] leading-snug text-[#D6156F]"
-          style={{ fontFamily: "var(--font-hand), cursive" }}
-        >
-          Don&apos;t be a tourist.
-        </p>
-        <p
-          className="mt-1 pr-[90px] text-[14px] leading-snug text-[#D6156F]"
-          style={{ fontFamily: "var(--font-hand), cursive" }}
-        >
-          1,000 words is enough.
-        </p>
-        <div className="absolute bottom-[56px] left-4 right-4">
-          <AppIdentity
-            icon={CARPINCHO_ICON}
-            name="Carpincho"
-            platform="Spanish that sounds local"
-          />
+        <div>
+          <p
+            className={`text-[#D6156F] ${HAND_COPY}`}
+            style={{ fontFamily: "var(--font-hand), cursive" }}
+          >
+            Don&apos;t be a tourist.
+          </p>
+          <p
+            className={`mt-1 text-[#D6156F] ${HAND_COPY}`}
+            style={{ fontFamily: "var(--font-hand), cursive" }}
+          >
+            1,000 words is enough.
+          </p>
         </div>
       </article>
     </AppObjectShell>
   );
 }
 
-function Fernsehturm({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 120 420"
-      className={className}
-      aria-hidden="true"
-    >
-      <path
-        d="M40 420 C46 372, 51 312, 53 240 L67 240 C69 312, 74 372, 80 420 Z"
-        fill="#1A1A1A"
-      />
-      <circle cx="60" cy="215" r="28" fill="#1A1A1A" />
-      <path d="M55 192 L65 192 L63 150 L57 150 Z" fill="#1A1A1A" />
-      <path d="M57 150 L63 150 L62 96 L58 96 Z" fill="#1A1A1A" />
-      <path d="M58 96 L62 96 L61 44 L59 44 Z" fill="#1A1A1A" />
-      <path d="M59 44 L61 44 L60 6 Z" fill="#1A1A1A" />
-    </svg>
-  );
-}
-
 function OrivelaNote({ className = "" }: { className?: string }) {
   return (
-    <AppObjectShell stamp={APP_STATUS.orivela} className={className}>
+    <AppObjectShell
+      stamp={APP_STATUS.orivela}
+      className={className}
+      footer={
+        <AppIdentity icon={ORIVELA_ICON} name="Orivela" platform="iOS" />
+      }
+    >
       <Tape className="absolute -left-2 -top-2 z-20 -rotate-[28deg]" />
       <div
         className="absolute bottom-0 right-0 z-10 h-9 w-9 bg-[#EDE2B0]"
@@ -623,9 +521,11 @@ function OrivelaNote({ className = "" }: { className?: string }) {
         aria-hidden="true"
       />
       <article
-        className={`absolute inset-0 bg-[#FCF3C8] px-4 pb-16 pt-4 ${PAPER_SHADOW}`}
+        className={`absolute inset-0 bg-[#FCF3C8] ${PAPER_SHADOW}`}
         style={{
           clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
+          padding: CARD_PAD,
+          paddingBottom: 120,
         }}
       >
         <div
@@ -642,16 +542,13 @@ function OrivelaNote({ className = "" }: { className?: string }) {
           aria-hidden="true"
         />
         <p
-          className="relative pl-2 pr-[90px] text-[17px] leading-snug text-[#1A2E5A]"
+          className={`relative pl-2 text-[#1A2E5A] ${HAND_COPY}`}
           style={{ fontFamily: "var(--font-hand), cursive" }}
         >
           Every document you&apos;ll need someday.
           <br />
           Found in seconds.
         </p>
-        <div className="absolute bottom-[56px] left-4 right-4 pl-2">
-          <AppIdentity icon={ORIVELA_ICON} name="Orivela" platform="iOS" />
-        </div>
         <TornEdge fill="#F5F0E8" />
       </article>
     </AppObjectShell>
@@ -662,10 +559,21 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
   const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
 
   return (
-    <AppObjectShell stamp={APP_STATUS.kolibi} className={className}>
+    <AppObjectShell
+      stamp={APP_STATUS.kolibi}
+      className={className}
+      footer={
+        <AppIdentity
+          icon={KOLIBI_ICON}
+          name="Kolibi"
+          platform="iOS · Android"
+        />
+      }
+    >
       <Tape className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
       <article
-        className={`absolute inset-0 bg-white px-3.5 pb-16 pt-5 ${PAPER_SHADOW}`}
+        className={`absolute inset-0 bg-white ${PAPER_SHADOW}`}
+        style={{ padding: CARD_PAD, paddingBottom: 120 }}
       >
         <ReceiptZigzag position="top" />
         <p
@@ -682,7 +590,10 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
           One photo. You know what&apos;s left for today.
         </p>
         <div className="my-1.5 border-t border-dashed border-[#1A1A1A]/30" />
-        <div className="space-y-0.5 pr-[90px] text-[10px] text-[#1A1A1A]" style={mono}>
+        <div
+          className="space-y-0.5 pr-[90px] text-[10px] text-[#1A1A1A]"
+          style={mono}
+        >
           <div className="flex justify-between gap-2">
             <span>BOWL &amp; EGGS</span>
             <span>438</span>
@@ -702,13 +613,6 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
             <span>412 kcal</span>
           </span>
         </p>
-        <div className="absolute bottom-[56px] left-3.5 right-3.5">
-          <AppIdentity
-            icon={KOLIBI_ICON}
-            name="Kolibi"
-            platform="iOS · Android"
-          />
-        </div>
         <ReceiptZigzag position="bottom" />
       </article>
     </AppObjectShell>
@@ -753,6 +657,9 @@ export default function HomeCollage() {
     return () => ro.disconnect();
   }, [layout]);
 
+  const gridCol2 = GRID_X + CELL_W + GRID_GAP_X;
+  const gridRow2 = GRID_Y + CELL_H + GRID_GAP_Y;
+
   return (
     <div id="room-01">
       {layout === "desktop" && (
@@ -789,48 +696,6 @@ export default function HomeCollage() {
               <SubtitleLines className="mt-10 max-w-[560px] text-[15px]" />
             </div>
 
-            <Clickable
-              label="Why Berlin?"
-              scrollTo="#room-02"
-              className="z-10"
-              style={{ left: 1010, top: 60, width: 300, height: 240 }}
-            >
-              <div
-                className="relative origin-top-left"
-                style={{
-                  width: 400,
-                  height: 320,
-                  transform: "scale(0.75)",
-                }}
-              >
-                <svg
-                  className="pointer-events-none absolute z-0 -rotate-[3deg]"
-                  style={{ left: 0, top: 10, width: 300, height: 265 }}
-                  viewBox="0 0 200 180"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill="#F4D35E"
-                    d="M22 34 L46 26 L72 38 L98 28 L124 39 L150 29 L172 40 L178 150 L152 160 L126 150 L100 161 L74 151 L48 162 L26 152 Z"
-                  />
-                </svg>
-                <Fernsehturm className="absolute left-[105px] top-0 z-10 h-[265px] w-auto rotate-[2deg]" />
-                <div
-                  className="absolute left-[223px] top-[80px] z-10"
-                  aria-hidden="true"
-                >
-                  <SolDeMayo className="h-[48px] w-[48px] opacity-80" />
-                </div>
-                <div
-                  className="pointer-events-none absolute left-0 top-[180px] z-[15] rotate-[5deg]"
-                  aria-hidden="true"
-                >
-                  <Football className="h-[66px] w-auto" idPrefix="ballDesk" />
-                </div>
-              </div>
-            </Clickable>
-
             <div
               className="absolute z-20"
               style={{ left: 80, top: 500, width: 250, height: 370 }}
@@ -861,7 +726,7 @@ export default function HomeCollage() {
               href="https://apps.apple.com/us/app/kolibi/id6790129149"
               external
               className="z-30 -rotate-[1.5deg]"
-              style={{ left: 640, top: 320 }}
+              style={{ left: GRID_X, top: GRID_Y }}
             >
               <KolibiReceipt />
             </Clickable>
@@ -871,7 +736,7 @@ export default function HomeCollage() {
               href="https://carpincho.app/"
               external
               className="z-[32] rotate-[1.2deg]"
-              style={{ left: 1030, top: 320 }}
+              style={{ left: gridCol2, top: GRID_Y }}
             >
               <CarpinchoCard />
             </Clickable>
@@ -880,7 +745,7 @@ export default function HomeCollage() {
               label="Orivela"
               scrollTo="#room-03b"
               className="z-[35] -rotate-[0.8deg]"
-              style={{ left: 640, top: 615 }}
+              style={{ left: GRID_X, top: gridRow2 }}
             >
               <OrivelaNote />
             </Clickable>
@@ -889,7 +754,7 @@ export default function HomeCollage() {
               label="Peeranimo"
               scrollTo="#room-04"
               className="z-[35] rotate-[1.5deg]"
-              style={{ left: 1030, top: 615 }}
+              style={{ left: gridCol2, top: gridRow2 }}
             >
               <PeeranimoUnit />
             </Clickable>
@@ -942,13 +807,6 @@ export default function HomeCollage() {
               <ServiceCard className="-rotate-[1deg]" variant="tablet" />
             </div>
           </div>
-
-          <div className="mt-12 flex items-center justify-center gap-8">
-            <Football
-              className="h-[70px] w-auto rotate-[4deg]"
-              idPrefix="ballTab"
-            />
-          </div>
         </section>
       )}
 
@@ -1000,10 +858,6 @@ export default function HomeCollage() {
             <div className="w-full max-w-[285px]">
               <ServiceCard className="-rotate-[1deg]" variant="mobile" />
             </div>
-          </div>
-
-          <div className="mt-10 flex items-center justify-center gap-6">
-            <Football className="h-[60px] w-auto" idPrefix="ballMob" />
           </div>
         </section>
       )}
