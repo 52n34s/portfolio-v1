@@ -132,15 +132,6 @@ export default function NavBubbles() {
     return () => window.clearTimeout(t);
   }, [menuOpen]);
 
-  useEffect(() => {
-    if (!menuOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [menuOpen]);
-
   const activeRoom = path === "/" ? scrollActiveRoom : "";
 
   const handleSelect = (item: NavItem) => {

@@ -1874,7 +1874,7 @@ body {
   color: var(--orange);
 }
 
-/* Site navigation — glass hamburger on all breakpoints */
+/* Site navigation — floating pills, right-aligned, no backdrop */
 .nav-hamburger-trigger {
   position: fixed;
   top: 40px;
@@ -1894,22 +1894,24 @@ body {
 
 .nav-hamburger-overlay {
   position: fixed;
-  inset: 0;
+  top: 100px;
+  right: 60px;
   z-index: 99;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  background: rgba(245, 240, 232, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 280px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  pointer-events: none;
   opacity: 1;
   transition: opacity 200ms ease-out;
 }
 
 .nav-hamburger-overlay.is-closing {
   opacity: 0;
-  pointer-events: none;
 }
 
 .nav-hamburger-list {
@@ -1918,14 +1920,15 @@ body {
   padding: 0;
   display: flex;
   width: 100%;
-  max-width: 320px;
   flex-direction: column;
   align-items: stretch;
   gap: 16px;
+  pointer-events: none;
 }
 
 .nav-hamburger-pill-wrap {
   width: 100%;
+  pointer-events: none;
 }
 
 .nav-hamburger-overlay.is-open .nav-hamburger-pill-wrap {
@@ -1936,9 +1939,10 @@ body {
 .nav-hamburger-pill {
   display: block;
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  pointer-events: auto;
+  border: 1px solid rgba(123, 92, 240, 0.25);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(123, 92, 240, 0.12);
   padding: 16px 32px;
   cursor: pointer;
   font-family: var(--font-display), sans-serif;
@@ -1948,6 +1952,7 @@ body {
   line-height: 1.2;
   color: #1a1a1a;
   text-align: center;
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.08);
   transition:
     background 150ms ease-out,
     transform 150ms ease-out,
@@ -1956,19 +1961,20 @@ body {
 
 .nav-hamburger-pill:hover,
 .nav-hamburger-pill:focus-visible {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(123, 92, 240, 0.22);
   transform: scale(1.02);
   outline: none;
 }
 
 .nav-hamburger-pill.is-active {
-  background: rgba(123, 92, 240, 0.2);
+  background: rgba(123, 92, 240, 0.35);
   color: #7b5cf0;
+  font-weight: 500;
 }
 
 .nav-hamburger-pill.is-active:hover,
 .nav-hamburger-pill.is-active:focus-visible {
-  background: rgba(123, 92, 240, 0.28);
+  background: rgba(123, 92, 240, 0.42);
 }
 
 @keyframes nav-pill-in {
@@ -2007,14 +2013,23 @@ body {
   }
 }
 
+@media (max-width: 1023px) {
+  .nav-hamburger-overlay {
+    right: 40px;
+    max-width: 260px;
+  }
+}
+
 @media (max-width: 640px) {
   .nav-hamburger-trigger {
     top: 20px;
     right: 20px;
   }
 
-  .nav-hamburger-list {
-    max-width: none;
+  .nav-hamburger-overlay {
+    top: 80px;
+    right: 24px;
+    max-width: calc(100vw - 48px);
   }
 }
 
