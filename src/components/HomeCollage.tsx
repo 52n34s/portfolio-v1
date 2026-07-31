@@ -63,7 +63,8 @@ function Tape({ className = "" }: { className?: string }) {
 
 const CELL_W = 330;
 const CELL_H = 255;
-const CARPINCHO_H = Math.round(CELL_H * 0.85);
+/** Vertical clearance for the tallest top-row card before the second row. */
+const GRID_ROW_SPAN = 320;
 const CARD_PAD = 24;
 const HAND_COPY = "pr-[90px] text-[17px] leading-snug";
 
@@ -114,43 +115,40 @@ function AppIdentity({
   );
 }
 
-/** Self-contained app cell: stamp + paper + identity + open all inside. */
+/** Self-contained app cell: flex flow; only the stamp stays absolute. */
 function AppObjectShell({
   stamp,
   children,
   footer,
   className = "",
   style,
-  height = CELL_H,
+  minHeight = CELL_H,
 }: {
   stamp: [string, string, string];
   children: ReactNode;
   footer: ReactNode;
   className?: string;
   style?: CSSProperties;
-  height?: number;
+  minHeight?: number;
 }) {
   return (
     <div
-      className={`relative max-w-full ${className}`}
-      style={{ width: CELL_W, height, ...style }}
+      className={`relative flex max-w-full flex-col ${className}`}
+      style={{
+        width: CELL_W,
+        minHeight,
+        height: "auto",
+        padding: CARD_PAD,
+        gap: 16,
+        ...style,
+      }}
     >
       <div className="absolute z-40" style={{ top: -14, right: -14 }}>
         <StatusStamp lines={stamp} />
       </div>
       {children}
-      <div
-        className="absolute z-50 flex flex-col items-start"
-        style={{
-          left: CARD_PAD,
-          right: CARD_PAD,
-          bottom: CARD_PAD,
-          gap: CARD_PAD,
-        }}
-      >
-        {footer}
-        <OpenPill />
-      </div>
+      <div className="relative z-10">{footer}</div>
+      <OpenPill className="relative z-10 mt-auto self-start" />
     </div>
   );
 }
@@ -402,10 +400,7 @@ function PeeranimoUnit({ className = "" }: { className?: string }) {
         />
       }
     >
-      <div
-        className="absolute inset-0"
-        style={{ padding: CARD_PAD, paddingBottom: 120 }}
-      >
+      <div className="relative z-10">
         <PeeranimoPolaroids />
         <p
           className={`mt-1 text-center text-[#1A1A1A] ${HAND_COPY}`}
@@ -471,8 +466,8 @@ function CarpinchoCard({ className = "" }: { className?: string }) {
   return (
     <AppObjectShell
       stamp={APP_STATUS.carpincho}
-      className={className}
-      height={CARPINCHO_H}
+      className={`bg-[#FFFDF5] ${PAPER_SHADOW} ${className}`}
+      minHeight={Math.round(CELL_H * 0.85)}
       footer={
         <AppIdentity
           icon={CARPINCHO_ICON}
@@ -482,25 +477,20 @@ function CarpinchoCard({ className = "" }: { className?: string }) {
       }
     >
       <Tape className="absolute -left-2 -top-2 z-20 -rotate-[22deg]" />
-      <article
-        className={`absolute inset-0 flex flex-col justify-between bg-[#FFFDF5] ${PAPER_SHADOW}`}
-        style={{ padding: CARD_PAD, paddingBottom: 120 }}
-      >
-        <div>
-          <p
-            className={`text-[#D6156F] ${HAND_COPY}`}
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            Don&apos;t be a tourist.
-          </p>
-          <p
-            className={`mt-1 text-[#D6156F] ${HAND_COPY}`}
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            1,000 words is enough.
-          </p>
-        </div>
-      </article>
+      <div className="relative z-10">
+        <p
+          className={`text-[#D6156F] ${HAND_COPY}`}
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          Don&apos;t be a tourist.
+        </p>
+        <p
+          className={`mt-1 text-[#D6156F] ${HAND_COPY}`}
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          1,000 words is enough.
+        </p>
+      </div>
     </AppObjectShell>
   );
 }
@@ -509,7 +499,10 @@ function OrivelaNote({ className = "" }: { className?: string }) {
   return (
     <AppObjectShell
       stamp={APP_STATUS.orivela}
-      className={className}
+      className={`bg-[#FCF3C8] ${PAPER_SHADOW} ${className}`}
+      style={{
+        clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
+      }}
       footer={
         <AppIdentity icon={ORIVELA_ICON} name="Orivela" platform="iOS" />
       }
@@ -520,37 +513,28 @@ function OrivelaNote({ className = "" }: { className?: string }) {
         style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }}
         aria-hidden="true"
       />
-      <article
-        className={`absolute inset-0 bg-[#FCF3C8] ${PAPER_SHADOW}`}
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-[3px] bg-[#E85A4F]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
         style={{
-          clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
-          padding: CARD_PAD,
-          paddingBottom: 120,
+          backgroundImage:
+            "repeating-linear-gradient(transparent, transparent 26px, rgba(55,138,221,0.22) 26px, rgba(55,138,221,0.22) 27px)",
+          backgroundPosition: "0 10px",
         }}
+        aria-hidden="true"
+      />
+      <p
+        className={`relative z-10 pl-2 text-[#1A2E5A] ${HAND_COPY}`}
+        style={{ fontFamily: "var(--font-hand), cursive" }}
       >
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-[3px] bg-[#E85A4F]"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(transparent, transparent 26px, rgba(55,138,221,0.22) 26px, rgba(55,138,221,0.22) 27px)",
-            backgroundPosition: "0 10px",
-          }}
-          aria-hidden="true"
-        />
-        <p
-          className={`relative pl-2 text-[#1A2E5A] ${HAND_COPY}`}
-          style={{ fontFamily: "var(--font-hand), cursive" }}
-        >
-          Every document you&apos;ll need someday.
-          <br />
-          Found in seconds.
-        </p>
-        <TornEdge fill="#F5F0E8" />
-      </article>
+        Every document you&apos;ll need someday.
+        <br />
+        Found in seconds.
+      </p>
+      <TornEdge fill="#F5F0E8" />
     </AppObjectShell>
   );
 }
@@ -561,7 +545,7 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
   return (
     <AppObjectShell
       stamp={APP_STATUS.kolibi}
-      className={className}
+      className={`bg-white ${PAPER_SHADOW} ${className}`}
       footer={
         <AppIdentity
           icon={KOLIBI_ICON}
@@ -571,11 +555,8 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
       }
     >
       <Tape className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
-      <article
-        className={`absolute inset-0 bg-white ${PAPER_SHADOW}`}
-        style={{ padding: CARD_PAD, paddingBottom: 120 }}
-      >
-        <ReceiptZigzag position="top" />
+      <ReceiptZigzag position="top" />
+      <div className="relative z-10">
         <p
           className="pr-[90px] text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
           style={mono}
@@ -613,8 +594,8 @@ function KolibiReceipt({ className = "" }: { className?: string }) {
             <span>412 kcal</span>
           </span>
         </p>
-        <ReceiptZigzag position="bottom" />
-      </article>
+      </div>
+      <ReceiptZigzag position="bottom" />
     </AppObjectShell>
   );
 }
@@ -658,7 +639,7 @@ export default function HomeCollage() {
   }, [layout]);
 
   const gridCol2 = GRID_X + CELL_W + GRID_GAP_X;
-  const gridRow2 = GRID_Y + CELL_H + GRID_GAP_Y;
+  const gridRow2 = GRID_Y + GRID_ROW_SPAN + GRID_GAP_Y;
 
   return (
     <div id="room-01">
