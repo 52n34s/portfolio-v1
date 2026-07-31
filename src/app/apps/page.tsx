@@ -366,7 +366,7 @@ function CarpinchoCard() {
           <div className="leading-tight">
             <p className="text-[15px] font-medium text-[#1A1A1A]">Carpincho</p>
             <p className="text-[12px] text-[#1A1A1A]/55">
-              Spanish that sounds local
+              The fastest way to speak Spanish
             </p>
           </div>
         </div>

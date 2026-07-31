@@ -472,7 +472,7 @@ function CarpinchoCard({ className = "" }: { className?: string }) {
         <AppIdentity
           icon={CARPINCHO_ICON}
           name="Carpincho"
-          platform="Spanish that sounds local"
+          platform="The fastest way to speak Spanish"
         />
       }
     >
