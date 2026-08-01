@@ -9,7 +9,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://52n34s.app/builds",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: "https://52n34s.app/builds/orivela",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://52n34s.app/apps",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

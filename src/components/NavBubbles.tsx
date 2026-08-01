@@ -31,7 +31,7 @@ const ROUTE_ACTIVE_LABEL: Record<string, string> = {
 const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: ">_ boot" },
   { kind: "scroll", id: "room-02", label: "~/home" },
-  { kind: "scroll", id: "room-03", label: "./builds", href: "/builds" },
+  { kind: "link", label: "./builds", href: "/builds" },
   {
     kind: "external",
     label: "./orivela",
@@ -69,13 +69,7 @@ const PILL_ROTATIONS = [
   "0.6deg",
 ] as const;
 
-const ROOM_IDS = [
-  "room-01",
-  "room-02",
-  "room-03",
-  "room-05",
-  "room-06",
-];
+const ROOM_IDS = ["room-01", "room-02", "room-05", "room-06"];
 
 function normalizePathname(pathname: string): string {
   if (!pathname || pathname === "/") return "/";

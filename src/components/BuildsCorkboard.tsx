@@ -77,7 +77,6 @@ function DetailCard({
             {project.isNda ? "NDA Project" : "Project"}
           </p>
           <h2 className="builds-cork-detail-title">{project.title}</h2>
-          <p className="builds-cork-detail-role">{project.role}</p>
         </div>
         {project.isNda ? <NdaBadge size="md" /> : null}
       </div>
@@ -85,18 +84,30 @@ function DetailCard({
       <StackTags items={project.stack} />
 
       <div className="builds-cork-detail-body">
-        <div>
-          <p className="builds-cork-label">Problem</p>
-          <p className="builds-cork-copy">{project.problem}</p>
-        </div>
-        <div>
-          <p className="builds-cork-label">Approach</p>
-          <p className="builds-cork-copy">{project.approach}</p>
-        </div>
-        <div>
-          <p className="builds-cork-label">Timeline</p>
-          <p className="builds-cork-copy">{project.timeline}</p>
-        </div>
+        {project.role ? (
+          <div>
+            <p className="builds-cork-label">Role</p>
+            <p className="builds-cork-copy">{project.role}</p>
+          </div>
+        ) : null}
+        {project.problem ? (
+          <div>
+            <p className="builds-cork-label">Problem</p>
+            <p className="builds-cork-copy">{project.problem}</p>
+          </div>
+        ) : null}
+        {project.approach ? (
+          <div>
+            <p className="builds-cork-label">Approach</p>
+            <p className="builds-cork-copy">{project.approach}</p>
+          </div>
+        ) : null}
+        {project.timeline ? (
+          <div>
+            <p className="builds-cork-label">Timeline</p>
+            <p className="builds-cork-copy">{project.timeline}</p>
+          </div>
+        ) : null}
         {project.outcome ? (
           <div>
             <p className="builds-cork-label">Outcome</p>

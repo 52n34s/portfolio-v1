@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface Room02Props {
@@ -19,14 +20,14 @@ const LABELS = [
     text: "./builds →",
     left: "44%",
     top: "52%",
-    action: "room-03" as const,
+    action: "builds" as const,
   },
   {
     id: "works",
     text: "./works →",
     left: "63%",
     top: "40%",
-    action: "room-03" as const,
+    action: "builds" as const,
   },
   {
     id: "plant",
@@ -68,6 +69,7 @@ function MouseIcon() {
 }
 
 export default function Room02({ visible }: Room02Props) {
+  const router = useRouter();
   const [whoamiOpen, setWhoamiOpen] = useState(true);
   const [plantHover, setPlantHover] = useState(false);
 
@@ -76,8 +78,8 @@ export default function Room02({ visible }: Room02Props) {
       setWhoamiOpen(true);
       return;
     }
-    if (action === "room-03") {
-      document.getElementById("room-03")?.scrollIntoView({ behavior: "smooth" });
+    if (action === "builds") {
+      router.push("/builds");
       return;
     }
   };
