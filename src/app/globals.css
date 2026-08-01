@@ -2294,8 +2294,8 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid #c2410c;
-  color: #c2410c;
+  border: 2px solid #7b5cf0;
+  color: #7b5cf0;
   opacity: 0.85;
   transform: rotate(-12deg);
 }
@@ -2368,6 +2368,11 @@ body {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: rgba(26, 26, 26, 0.45);
+}
+
+.builds-cork-detail-eyebrow.is-nda {
+  color: #7b5cf0;
+  opacity: 0.9;
 }
 
 .builds-cork-detail-title {
@@ -2473,7 +2478,7 @@ body {
   bottom: 6px;
   height: 2px;
   border-radius: 1px;
-  background: #c2410c;
+  background: #7b5cf0;
 }
 
 .builds-cork-tab-nda {
@@ -2481,7 +2486,7 @@ body {
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #c2410c;
+  color: #7b5cf0;
 }
 
 .builds-cork-mobile .builds-cork-detail {
@@ -2578,17 +2583,24 @@ body {
   position: relative;
   width: 140px;
   flex-shrink: 0;
-  border: none;
+  border: 1.5px solid transparent;
   border-radius: 12px;
   background: #ffffff;
   padding: 14px 12px 12px;
   cursor: pointer;
   text-align: left;
-  transition: box-shadow 150ms ease-out, transform 150ms ease-out;
+  transition:
+    box-shadow 150ms ease-out,
+    transform 150ms ease-out,
+    border-color 150ms ease-out;
 }
 
 .builds-cork-pin:hover {
   box-shadow: 3px 8px 18px rgba(26, 26, 26, 0.18) !important;
+}
+
+.builds-cork-pin.is-active {
+  border-color: #7b5cf0;
 }
 
 .builds-cork-pin-nda-wrap {
@@ -2613,7 +2625,7 @@ body {
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #c2410c;
+  color: #7b5cf0;
   margin-bottom: 2px;
 }
 

@@ -12,7 +12,7 @@ import {
 } from "react";
 import { projects, type Project } from "@/data/projects";
 
-const THREAD = "#C2410C";
+const THREAD = "#7B5CF0";
 const PAPER_SHADOW = "2px 5px 14px rgba(26, 26, 26, 0.13)";
 const PAPER_SHADOW_ACTIVE = "3px 8px 20px rgba(26, 26, 26, 0.2)";
 
@@ -78,7 +78,11 @@ function DetailCard({
     >
       <div className="builds-cork-detail-top">
         <div>
-          <p className="builds-cork-detail-eyebrow">
+          <p
+            className={`builds-cork-detail-eyebrow${
+              project.isNda ? " is-nda" : ""
+            }`}
+          >
             {project.isNda ? "NDA Project" : "Project"}
           </p>
           <h2 className="builds-cork-detail-title">{project.title}</h2>
