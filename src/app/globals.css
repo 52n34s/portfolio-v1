@@ -1430,7 +1430,8 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: -145px;
+  /* Sockel auf der Naht — gesamtes SVG im Cream (groundOffset = 0) */
+  top: -200px;
   height: 200px;
   z-index: 2;
   background-image: url("/skyline-tile.svg");
@@ -1442,7 +1443,7 @@ body {
 
 @media (max-width: 768px) {
   .skyline-seam {
-    top: -84px;
+    top: -116px;
     height: 116px;
   }
 }
