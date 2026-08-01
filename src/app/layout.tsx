@@ -18,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const lora = Lora({
-  weight: ["600"],
+  weight: ["400", "600"],
   subsets: ["latin"],
   variable: "--font-lora",
 });

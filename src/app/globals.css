@@ -4393,10 +4393,11 @@ body {
 
 .work-h1 {
   margin: 0;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 700;
+  /* Match homepage HeadlineOnly: Lora + tracking-tight */
+  font-family: var(--font-lora), Georgia, serif;
+  font-weight: 400;
   font-size: clamp(28px, 5.5vw, 44px);
-  letter-spacing: normal;
+  letter-spacing: -0.025em;
   line-height: 1.12;
   color: #f5f0e8;
 }
@@ -4424,10 +4425,10 @@ body {
 
 .work-h2 {
   margin: 0 0 1rem;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
+  font-family: var(--font-lora), Georgia, serif;
+  font-weight: 400;
   font-size: clamp(20px, 3vw, 26px);
-  letter-spacing: normal;
+  letter-spacing: -0.025em;
   line-height: 1.2;
   color: #f5f0e8;
 }
@@ -4541,10 +4542,10 @@ body {
 
 .work-faq-q {
   margin: 0 0 0.5rem;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
+  font-family: var(--font-lora), Georgia, serif;
+  font-weight: 400;
   font-size: 17px;
-  letter-spacing: normal;
+  letter-spacing: -0.025em;
   color: #f5f0e8;
 }
 
@@ -4558,10 +4559,10 @@ body {
 
 .work-cta-lead {
   margin: 0 0 1rem;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
+  font-family: var(--font-lora), Georgia, serif;
+  font-weight: 400;
   font-size: clamp(20px, 3vw, 24px);
-  letter-spacing: normal;
+  letter-spacing: -0.025em;
   line-height: 1.25;
   color: #f5f0e8;
 }
@@ -4652,10 +4653,10 @@ body {
 }
 
 .work-index-h1 {
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
+  font-family: var(--font-lora), Georgia, serif;
+  font-weight: 400;
   font-size: clamp(17px, 3vw, 20px);
-  letter-spacing: normal;
+  letter-spacing: -0.025em;
   line-height: 1.25;
   color: #f5f0e8;
 }
