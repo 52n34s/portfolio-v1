@@ -17,6 +17,46 @@ export type Project = {
  */
 export const projects: Project[] = [
   {
+    id: "life-roads",
+    title: "Live Financial Literacy Platform",
+    isNda: true,
+    role: "Senior Architect & Solo Developer",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Realtime Subscriptions",
+      "AI Avatar Integration",
+      "OpenAI",
+      "Vercel",
+    ],
+    problem:
+      "A financial education program needed a live, group-based " +
+      "simulation for community workshops with 30–50 simultaneous " +
+      "participants. Each person tracks their own evolving profile " +
+      "(cash, debt, credit score, housing) while the group votes " +
+      "collectively on financial decisions — and an AI avatar " +
+      "reacts live on a shared screen to the outcome, in real time.",
+    approach:
+      "Chose Next.js and Supabase over no-code tools for precise " +
+      "latency control and pixel-accurate large-screen layout. " +
+      "Built a concurrency-safe state engine using atomic guarded " +
+      "updates to prevent race conditions when dozens of " +
+      "participants vote at once, with self-healing error handling " +
+      "instead of silent failures during a live event. The AI " +
+      "avatar layer uses a reconnect-per-reaction pattern to avoid " +
+      "idle-time costs and connection races. Content and " +
+      "simulation logic are fully separated, so the entire " +
+      "narrative layer can be swapped via a single toggle without " +
+      "touching the underlying engine.",
+    timeline: "Idea to launch in under 2 months",
+    outcome:
+      "Proven under real live conditions with dozens of " +
+      "simultaneous participants; a concurrency edge case " +
+      "surfaced in the first live session was root-caused via " +
+      "database analysis and resolved.",
+  },
+  {
     id: "orivela",
     title: "Orivela",
     isNda: false,
