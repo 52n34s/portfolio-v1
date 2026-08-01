@@ -50,7 +50,7 @@ const projects: Project[] = [
     ],
     description:
       "A community platform to help people find others in the same chapter of life — not by interest tag, but by shared context, values, and direction. Built on Next.js, TypeScript, and Supabase with custom auth, group architecture, and RLS throughout.",
-    url: "https://peeranimo.com",
+    url: "https://peeranimo.app",
     featured: true,
     accentColor: "#5B4FCF",
   },

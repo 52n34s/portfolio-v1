@@ -55,7 +55,7 @@ export default function StructuredData() {
       name: "Peeranimo",
       applicationCategory: "WebApplication",
       operatingSystem: "Web",
-      url: "https://peeranimo.com",
+      url: "https://peeranimo.app",
       author: { "@type": "Person", name: "Steffen Giebler" },
       description:
         "Peer-matching social platform that connects people who are in the same chapter of life.",

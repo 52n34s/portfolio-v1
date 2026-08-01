@@ -38,7 +38,7 @@ const personSchema = {
   ],
   sameAs: [
     "https://orivela.app",
-    "https://peeranimo.com",
+    "https://peeranimo.app",
     "https://github.com/52n34s",
     "https://instagram.com/steffenletsdoit",
   ],

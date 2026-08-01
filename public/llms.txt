@@ -9,7 +9,7 @@
   in plain language.
 - [Kolibi](https://kolibi.app): AI photo calorie tracker for iOS
   and Android. One photo per meal.
-- [Peeranimo](https://peeranimo.com): Peer-matching social
+- [Peeranimo](https://peeranimo.app): Peer-matching social
   platform on the web.
 - [Carpincho](https://carpincho.app): Spanish learning app,
   1,000 high-frequency words, three regional variants. Waitlist.

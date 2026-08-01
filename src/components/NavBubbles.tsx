@@ -16,11 +16,16 @@ type LinkNavItem = {
   label: string;
 };
 
-type NavItem = ScrollNavItem | LinkNavItem;
+type ExternalNavItem = {
+  kind: "external";
+  href: string;
+  label: string;
+};
+
+type NavItem = ScrollNavItem | LinkNavItem | ExternalNavItem;
 
 const ROUTE_ACTIVE_LABEL: Record<string, string> = {
   "/builds/orivela": "./orivela",
-  "/builds/kolibi": "./kolibi",
   "/builds/peeranimo": "~/peeranimo",
   "/builds": "./builds",
 };
@@ -36,9 +41,14 @@ const navItems: NavItem[] = [
     href: "/builds/orivela",
   },
   {
-    kind: "link",
+    kind: "external",
     label: "./kolibi",
-    href: "/builds/kolibi",
+    href: "https://kolibi.app/",
+  },
+  {
+    kind: "external",
+    label: "./carpincho",
+    href: "https://carpincho.app/",
   },
   {
     kind: "scroll",
@@ -135,7 +145,9 @@ export default function NavBubbles() {
   const activeRoom = path === "/" ? scrollActiveRoom : "";
 
   const handleSelect = (item: NavItem) => {
-    if (item.kind === "link") {
+    if (item.kind === "external") {
+      window.open(item.href, "_blank", "noopener,noreferrer");
+    } else if (item.kind === "link") {
       router.push(item.href);
     } else if (path === "/") {
       document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
@@ -191,7 +203,9 @@ export default function NavBubbles() {
             {navItems.map((item, index) => {
               const active = isNavItemActive(item, activeLabel, activeRoom);
               const key =
-                item.kind === "link" ? item.href : `${item.id}-${item.label}`;
+                item.kind === "scroll"
+                  ? `${item.id}-${item.label}`
+                  : `${item.kind}-${item.href}`;
 
               return (
                 <li
@@ -199,14 +213,26 @@ export default function NavBubbles() {
                   className="nav-hamburger-pill-wrap"
                   style={{ ["--pill-delay" as string]: `${index * 40}ms` }}
                 >
-                  <button
-                    type="button"
-                    onClick={() => handleSelect(item)}
-                    className={`nav-hamburger-pill${active ? " is-active" : ""}`}
-                    aria-current={active ? "page" : undefined}
-                  >
-                    {item.label}
-                  </button>
+                  {item.kind === "external" ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMenuOpen(false)}
+                      className="nav-hamburger-pill"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleSelect(item)}
+                      className={`nav-hamburger-pill${active ? " is-active" : ""}`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {item.label}
+                    </button>
+                  )}
                 </li>
               );
             })}

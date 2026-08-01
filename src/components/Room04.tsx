@@ -108,7 +108,7 @@ export default function Room04({ visible }: Room04Props) {
 
           <div className="room-04-actions">
             <a
-              href="https://peeranimo.com"
+              href="https://peeranimo.app"
               target="_blank"
               rel="noopener noreferrer"
               className="room-04-btn-primary"
