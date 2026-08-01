@@ -42,29 +42,28 @@ export const workCases: WorkCase[] = [
       "From Idea to MVP — App Development for Non-Technical Founders | 52N34S",
     description:
       "You have an idea and no technical co-founder. I take it apart, find the smallest version that proves the business, and ship it to the App Store. Berlin-based, remote worldwide.",
-    h1: "You have an idea. You can't build it yourself.",
-    summary:
-      "From raw idea to a shipped product in the hands of real users.",
+    h1: "Your idea, shipped.",
+    summary: "From spark to product, in your users' hands.",
     serviceName:
       "From Idea to MVP — App Development for Non-Technical Founders",
     sections: [
       {
         type: "paragraphs",
         body: [
-          "That's the most common message in my inbox, and it's the one I like most.",
-          "You've been carrying this thing around for months. You've explained it to friends. Maybe you've sketched screens in Figma or clicked something together in a no-code tool. But there's a gap between the thing in your head and something real that people can download, and you don't have the vocabulary to cross it.",
-          "The instinct is to find someone who can code and hand them the idea. That's usually the wrong first move, because the idea in your head isn't a spec yet — and if you hand an unfinished idea to a developer, you get an expensive, well-built version of something nobody wants.",
+          "That's the message I like most in my inbox: an idea, and the will to make it real.",
+          "You've carried this thing around for months. You've explained it to friends, sketched screens, maybe clicked something together in a no-code tool. The product in your head is ready. Now it wants to exist.",
+          "The fastest path there starts with a sharp definition, and that's exactly where we begin.",
         ],
       },
       {
         type: "bullets",
         heading: "This is you if",
         items: [
-          "You've described your idea ten times and it comes out slightly different every time",
-          "You don't know whether you need an app, a web platform, or neither",
-          "You've been quoted €40k by an agency and have no idea if that's fair",
-          "You're not sure which parts of your idea are essential and which are decoration",
-          'Someone told you to "just build an MVP" and you don\'t know what that means for your idea',
+          "Your idea comes out slightly different every time you explain it",
+          "App, web platform, or both: still an open question",
+          "An agency quoted €40k and you want a second opinion",
+          "The essential features and the nice-to-haves are still one big list",
+          '"Just build an MVP" sounds right, and you want to know what that means for your idea',
         ],
       },
       {
@@ -72,20 +71,20 @@ export const workCases: WorkCase[] = [
         heading: "How it works",
         steps: [
           {
-            title: "We take the idea apart.",
-            body: "One long conversation, no slides. I ask uncomfortable questions: who pays, why now, what happens if nobody shows up. Most ideas shrink by half in this step, and that's the point. The half that survives is the one worth building.",
+            title: "We sharpen the idea.",
+            body: "One long conversation. Who pays, why now, what makes people come back. The idea gets smaller and stronger in this step. What survives is the part worth building.",
           },
           {
             title: "I write the shape of it.",
-            body: "Not a 40-page spec — a short document with the data model, the core user flows, the stack, and an honest list of what we are deliberately not building in version one. You'll understand every line of it.",
+            body: "A short document: data model, core flows, stack, and a clear line around version one. You'll understand every word of it.",
           },
           {
-            title: "We build in visible increments.",
-            body: "You see something running within the first two weeks. Not a mockup — something on your phone. Every week after that, it does more.",
+            title: "You see it grow, week by week.",
+            body: "Something runs on your phone within two weeks. Real, tappable, yours. Every week after, it does more.",
           },
           {
             title: "It ships.",
-            body: "App Store submission, review, the boring parts. I've been through Apple review enough times to know where it bites.",
+            body: "App Store submission, review, launch. I've been through Apple review often enough to keep it smooth.",
           },
         ],
       },
@@ -93,14 +92,14 @@ export const workCases: WorkCase[] = [
         type: "heading-block",
         heading: "What you get",
         body: [
-          "A working product in the hands of real users. Source code you own, in a repo you control. A data model that doesn't collapse when you add the second feature. And a clear-eyed view of whether the business underneath it actually works — which is sometimes the more valuable output.",
+          "A working product in the hands of real users. Source code you own, in a repo you control. A data model built to carry feature two, three, and ten. And a clear view of the business underneath, which is often the most valuable output of all.",
         ],
       },
       {
         type: "heading-block",
-        heading: "What I don't do",
+        heading: "Where I draw the line",
         body: [
-          "I don't build the full vision in one go. If your idea only works with all fourteen features, it isn't an MVP, it's a bet — and I'll tell you that before you spend the money rather than after.",
+          "Version one stays focused. If an idea only works with all fourteen features at once, I'll say so before you spend the money. That honesty is part of the service.",
         ],
       },
       {
@@ -115,22 +114,22 @@ export const workCases: WorkCase[] = [
       {
         question: "How much does it cost to build an MVP?",
         answer:
-          "It depends almost entirely on scope, and scope is what we settle in the first conversation. A focused MVP with one core loop, authentication and a payment flow is a very different project from a two-sided marketplace. I give a fixed number after we've defined scope, not before — a quote given before scope is a guess dressed up as a number.",
+          "Scope decides the price, and scope is what we settle in the first conversation. A focused MVP with one core loop, authentication and payments is a very different project from a two-sided marketplace. You get a fixed number after we've defined scope. A quote before scope is a guess dressed up as a number.",
       },
       {
         question: "Do I need a technical co-founder?",
         answer:
-          "Not to get to a working product and first users. You need one when the product has traction and the technical decisions become daily rather than occasional. Plenty of founders reach a funded seed round without one.",
+          "A working product and first users are fully reachable without one. The moment for a co-founder comes later, when technical decisions become daily rather than occasional. Plenty of founders reach a funded seed round solo.",
       },
       {
         question: "Should I build for iOS, Android, or web first?",
         answer:
-          "Whichever platform your first hundred users are already on. If you don't know who those hundred people are, that's the question to answer before the platform question.",
+          "Whichever platform your first hundred users are already on. Knowing who those hundred people are is the real question, and we answer it together.",
       },
       {
         question: "What happens after launch?",
         answer:
-          "You own the code and can take it anywhere. If you'd rather not, I stay on — see technical partner.",
+          "You own the code and can take it anywhere. If you'd rather keep building together, that's what a technical counterpart is for.",
       },
     ],
     cta: {
@@ -148,27 +147,26 @@ export const workCases: WorkCase[] = [
       "Technical Blueprint & Product Architecture Before You Hire | 52N34S",
     description:
       "A written architecture, data model and scope document you can hand to any developer or agency. Know what you're buying before you spend the budget.",
-    h1: "You need to know what you're buying before you buy it.",
-    summary:
-      "A written architecture you can hand to any developer or agency.",
+    h1: "Know what you're building.",
+    summary: "The architecture, mapped before a line of code.",
     serviceName: "Technical Blueprint & Product Architecture Before You Hire",
     sections: [
       {
         type: "paragraphs",
         body: [
-          "You're about to spend a lot of money on development. Maybe you've got quotes from three agencies and they're €20k apart, and you can't tell why. Maybe you've got budget approved and a deadline, and the only thing missing is a clear description of the thing itself.",
-          "This is the cheapest possible moment to get it right. Every ambiguity you leave in the brief becomes a change request later, at ten times the price.",
+          "You're about to invest serious money in development. Three agency quotes sit on your desk, €20k apart, and comparing them feels like comparing three different languages.",
+          "This is the cheapest moment in the whole project to get clarity. Every ambiguity you resolve now saves you a change request later, at a tenth of the price.",
         ],
       },
       {
         type: "bullets",
         heading: "This is you if",
         items: [
-          "You have three quotes with wildly different numbers and no way to compare them",
-          "You have budget but no technical person to sanity-check what you're being sold",
-          "You're hiring your first developer and don't know what to ask for",
-          "An agency handed you a proposal full of words you'd have to Google",
-          "You want to build in-house but nobody has mapped the system yet",
+          "Three quotes, wildly different numbers, and you want to compare them on equal terms",
+          "Budget is approved, and a technical sanity-check would help you sleep better",
+          "Your first developer hire deserves a clear brief",
+          "An agency proposal landed on your desk full of words you'd have to Google",
+          "The in-house build starts soon and the system map is still in someone's head",
         ],
       },
       {
@@ -177,15 +175,15 @@ export const workCases: WorkCase[] = [
         steps: [
           {
             title: "Discovery.",
-            body: "Two to three sessions. I learn the business, not just the feature list — what makes money, what has to scale, what's actually fixed versus what everyone assumes is fixed.",
+            body: "Two to three sessions. I learn the business behind the feature list: what makes money, what has to scale, what's truly fixed.",
           },
           {
             title: "I write the blueprint.",
-            body: "A document that covers: the data model, system architecture, third-party services and what they'll cost monthly, the build sequence in phases, the risks nobody mentioned, and a scope boundary that says explicitly what is out.",
+            body: "Data model, system architecture, third-party services with their monthly costs, the build sequence in phases, the risks worth knowing, and a clear scope boundary.",
           },
           {
-            title: "We walk through it.",
-            body: "You need to be able to defend every decision in it to a developer who pushes back. So we go through it until you can.",
+            title: "We walk through it together.",
+            body: "Until you can defend every decision in it to a developer who pushes back.",
           },
         ],
       },
@@ -193,14 +191,14 @@ export const workCases: WorkCase[] = [
         type: "heading-block",
         heading: "What you get",
         body: [
-          "A document you own and can hand to anyone. Use it to brief an agency, to compare quotes on equal terms, to onboard your first hire, or to build it yourself. It's vendor-neutral — nothing in it assumes I'm the one who builds it.",
+          "A document you own and can hand to anyone. Brief an agency with it, compare quotes on equal terms, onboard your first hire, or build it yourself. It's vendor-neutral by design: nothing in it assumes I'm the one who builds it.",
         ],
       },
       {
         type: "heading-block",
         heading: "Why this saves money",
         body: [
-          "A quote against a vague brief is priced for risk. The agency doesn't know what you'll ask for in month three, so they pad. A quote against a precise blueprint is priced for work. In my experience the blueprint pays for itself in the delta between those two numbers, before a single line of code is written.",
+          "A quote against a vague brief is priced for risk. The agency pads it, because month three is a mystery to them. A quote against a precise blueprint is priced for work. The difference between those two numbers usually pays for the blueprint before a single line of code exists.",
         ],
       },
       {
@@ -213,7 +211,7 @@ export const workCases: WorkCase[] = [
       {
         question: "What's the difference between a blueprint and a spec?",
         answer:
-          "A spec lists features. A blueprint explains the system: how data is structured, why those structures, what breaks at scale, what each decision costs you later. A spec tells a developer what to build. A blueprint tells you what you're buying.",
+          "A spec lists features. A blueprint explains the system: how data is structured, why, what breaks at scale, what each decision costs later. A spec tells a developer what to build. A blueprint tells you what you're buying.",
       },
       {
         question: "Can I use this to get quotes from other developers?",
@@ -222,12 +220,12 @@ export const workCases: WorkCase[] = [
       {
         question: "What if I decide to build it in-house?",
         answer:
-          "Then you have a document your team can work from on day one instead of spending their first month discovering it.",
+          "Then your team works from a clear document on day one instead of spending their first month discovering the system.",
       },
       {
         question: "Do you review existing quotes or proposals?",
         answer:
-          "Yes. Send me what you've got and I'll tell you what's missing, what's padded, and what's a red flag. It's the fastest version of this engagement.",
+          "Yes. Send me what you've got and I'll tell you what's solid, what's padded, and what's missing. It's the fastest version of this engagement.",
       },
     ],
     cta: {
@@ -245,29 +243,28 @@ export const workCases: WorkCase[] = [
       "Rescue a Broken Build — Take Over a Failed Development Project | 52N34S",
     description:
       "Your agency disappeared, your freelancer ghosted, or the codebase you paid for doesn't work. I audit what's there, tell you honestly what's salvageable, and take it forward.",
-    h1: "You paid for something. It doesn't work.",
-    summary:
-      "Audit what's there, salvage what's worth it, take it forward.",
+    h1: "Bring it back to life.",
+    summary: "A clear audit, then a working product.",
     serviceName:
       "Rescue a Broken Build — Take Over a Failed Development Project",
     sections: [
       {
         type: "paragraphs",
         body: [
-          "Maybe the freelancer stopped answering. Maybe the agency delivered on the invoice but not on the product. Maybe it technically runs but crashes on real users, or nobody can add a feature without breaking three others.",
-          "This is more common than anyone admits publicly, and it is not a reflection on you. It's what happens when the person paying can't evaluate the work being done.",
-          "The first thing you need isn't a developer. It's an honest answer to one question: is this worth saving?",
+          "The freelancer went quiet. The agency delivered on the invoice, less so on the product. Or it runs in demos and stumbles with real users.",
+          "This happens far more often than anyone admits publicly, and it says nothing about you. It's what happens when the person paying has no way to evaluate the work.",
+          "The path forward starts with one honest answer: what's worth saving?",
         ],
       },
       {
         type: "bullets",
         heading: "This is you if",
         items: [
-          "Your developer stopped responding and you don't know what you actually own",
-          "The app works in demos and falls over with real users",
+          "Your developer went quiet and you want clarity on what you actually own",
+          "The app shines in demos and struggles with real users",
           "Every new feature breaks something that used to work",
-          'You\'ve been told "we need to rebuild from scratch" and you don\'t know if that\'s true or convenient',
-          "Nobody can tell you where the code is, who has access, or what's in the database",
+          '"We have to rebuild from scratch" landed on the table, and a second opinion would be worth a lot',
+          "Repo, database, App Store account: someone else holds the keys",
         ],
       },
       {
@@ -276,19 +273,19 @@ export const workCases: WorkCase[] = [
         steps: [
           {
             title: "The audit.",
-            body: "I go through the codebase, the infrastructure, the database and the deployment. Three to five days. At the end you get a written verdict: what's solid, what's broken, what's dangerous, and what it would cost to fix versus rebuild.",
+            body: "Codebase, infrastructure, database, deployment. Three to five days. You get a written verdict: what's solid, what's broken, what it costs to fix versus rebuild.",
           },
           {
             title: "The honest recommendation.",
-            body: "Sometimes the answer is that 70% is fine and the problem is three specific things. Sometimes the answer is that the data model is unsalvageable and rebuilding is genuinely cheaper. I've said both. I'll say whichever is true, including when it means less work for me.",
+            body: "Sometimes 70% is fine and three specific things are the problem. Sometimes rebuilding is genuinely cheaper. You get whichever is true, including when it means less work for me.",
           },
           {
-            title: "Stabilise first.",
-            body: "If we go forward: security holes, data integrity, deployment. Nothing new gets built on a foundation that's still moving.",
+            title: "Stabilise.",
+            body: "Security, data integrity, deployment. The foundation gets solid before anything new goes on top.",
           },
           {
-            title: "Then forward.",
-            body: "Once it's stable, we get back to the roadmap.",
+            title: "Forward.",
+            body: "With stable ground under it, the roadmap comes back to life.",
           },
         ],
       },
@@ -296,14 +293,14 @@ export const workCases: WorkCase[] = [
         type: "heading-block",
         heading: "What you get",
         body: [
-          "The audit is a standalone deliverable. Even if you never work with me again, you'll know exactly what you own, what it's worth, and what it needs. Founders have used it to renegotiate with the original developer and to justify pulling the plug.",
+          "The audit stands on its own. Even as a one-off, you'll know exactly what you own, what it's worth, and what it needs. Founders have used it to renegotiate with the original developer, and to make the pull-the-plug decision with confidence.",
         ],
       },
       {
         type: "heading-block",
         heading: "First: get control of your own assets",
         body: [
-          "Before anything else you need control of the repo, the hosting, the domain, the database and the App Store account. If a former developer holds any of these, that's the first thing we fix. I'll walk you through recovering each one.",
+          "Repo, hosting, domain, database, App Store account. If a former developer holds any of these, that's step one, and I'll walk you through recovering each.",
         ],
       },
     ],
@@ -311,17 +308,17 @@ export const workCases: WorkCase[] = [
       {
         question: "Can you take over code written by someone else?",
         answer:
-          "Usually yes. Bad code is still readable code. The genuinely hard cases are missing access credentials and undocumented production data — not messy code.",
+          "Usually yes. Bad code is still readable code. The genuinely hard cases are missing credentials and undocumented production data, rarely the code itself.",
       },
       {
         question: "How do I know if it should be rebuilt?",
         answer:
-          "The data model is the deciding factor, not the code quality. Messy code on a sound data model is a cleanup. Clean code on a broken data model is a rebuild. That's what the audit determines.",
+          "The data model decides, more than code quality. Messy code on a sound data model is a cleanup. Clean code on a broken data model is a rebuild. The audit settles it.",
       },
       {
         question: "What if my developer still has access to everything?",
         answer:
-          "Then we lock it down first. Repo access, deployment keys, database credentials, DNS, App Store. This is standard, it's not an accusation, and it should happen the moment a working relationship ends.",
+          "Then we lock it down first. Repo, deployment keys, database, DNS, App Store. This is standard practice the moment a working relationship ends, and it protects everyone involved.",
       },
       {
         question: "Do you do the audit without taking over the project?",
@@ -342,27 +339,26 @@ export const workCases: WorkCase[] = [
     title: "Technical Partner & Fractional CTO for Founders | 52N34S",
     description:
       "Long-term product partnership for founders who need a technical counterpart, not a contractor. Architecture, delivery and business thinking on retainer.",
-    h1: "You don't need a contractor. You need a counterpart.",
-    summary:
-      "A technical counterpart on retainer — not a contractor.",
+    h1: "Your technical counterpart.",
+    summary: "Someone who builds the business with you, for years.",
     serviceName: "Technical Partner & Fractional CTO for Founders",
     sections: [
       {
         type: "paragraphs",
         body: [
-          "Some products aren't a project with an end date. They're a thing you're going to build for years, and what you're missing isn't a pair of hands for eight weeks — it's someone who holds the technical side of the business with you.",
-          "That's a different relationship. A contractor executes decisions. A partner argues with you before the decision gets made.",
+          "Some products are a project. Yours is a company. What it's missing is someone who holds the technical side of the business with you, for years, not weeks.",
+          "That's a different relationship. A contractor executes decisions. A counterpart argues with you before the decision gets made.",
         ],
       },
       {
         type: "bullets",
         heading: "This is you if",
         items: [
-          "You're non-technical and every technical decision currently rests on hope",
-          "You have developers, but nobody who decides what they should build",
-          "You're raising and need someone who can answer technical due diligence",
-          'You want someone who says "that\'s a bad idea" before you spend three months on it',
-          "Your product is live and the roadmap decisions are getting expensive",
+          "Every technical decision currently rests on hope, and you'd rather it rested on experience",
+          "Developers are on board, and someone still has to decide what they build",
+          "Investors are asking technical due diligence questions, and you want solid answers",
+          '"That\'s a bad idea" said early would save you three months, and you want someone who says it',
+          "The product is live and every roadmap decision now moves real money",
         ],
       },
       {
@@ -373,38 +369,38 @@ export const workCases: WorkCase[] = [
         items: [
           {
             title: "Architecture and decisions.",
-            body: "Stack, data model, build-versus-buy, what to fix now and what to leave. Documented, so you're never dependent on remembering a conversation.",
+            body: "Stack, data model, build versus buy, fix now versus later. Documented, so decisions outlive conversations.",
           },
           {
             title: "Hands-on building.",
-            body: "I'm not a strategist who stopped writing code. The features I specify, I can build.",
+            body: "The features I specify, I build. Strategy and keyboard, same person.",
           },
           {
             title: "Managing developers.",
-            body: "Reviewing work, setting standards, doing the technical part of hiring. If you have or want a team, I'm the person they can be honest with.",
+            body: "Reviewing work, setting standards, running the technical side of hiring. Your team gets someone they can be honest with.",
           },
           {
             title: "Business thinking.",
-            body: 'Pricing, retention, what the numbers mean, which feature actually moves revenue. This is the part most technical people leave out, and it\'s why the positioning on this site is "I build businesses, not just software."',
+            body: 'Pricing, retention, which feature actually moves revenue. This is the part most technical people skip, and it\'s why this site says "I build businesses, not just software."',
           },
           {
             title: "Investor conversations.",
-            body: "Technical diligence, architecture questions, why the stack is what it is.",
+            body: "Technical diligence, architecture questions, the story behind the stack.",
           },
         ],
       },
       {
         type: "heading-block",
-        heading: "What I bring that a hired CTO doesn't",
+        heading: "What I bring",
         body: [
-          "I've shipped my own products end to end — App Store, Google Play, paying users, the whole unglamorous middle. I know what breaks after launch because it broke on mine. And I've done it four times over, which means I've made the expensive mistakes on my own money rather than yours.",
+          "Products of my own, shipped end to end: App Store, Google Play, paying users, the whole unglamorous middle. I know what breaks after launch because it broke on mine first. The expensive mistakes are already made, on my own money.",
         ],
       },
       {
         type: "heading-block",
-        heading: "What I need from you",
+        heading: "What makes it work",
         body: [
-          "Real decision-making access, honest numbers, and a willingness to be told no. This arrangement only works if I can disagree with you.",
+          "Real decision-making access, honest numbers, and room to disagree. The whole value of a counterpart is that he can tell you no.",
         ],
       },
     ],
@@ -413,22 +409,22 @@ export const workCases: WorkCase[] = [
         question:
           "What's the difference between this and hiring a freelancer?",
         answer:
-          "A freelancer takes your decisions and executes them. A partner is accountable for whether the decisions were right. Different work, different relationship, different price.",
+          "A freelancer takes your decisions and executes them. A counterpart is accountable for whether the decisions were right. Different work, different relationship, different price.",
       },
       {
         question: "Are you available full-time or exclusive?",
         answer:
-          "No. I run my own products, and that's precisely what makes this useful — you get someone who's currently shipping, not someone who did once. I take a small number of partnerships at a time.",
+          "I run my own products alongside, and that's precisely what makes this valuable: you get someone who's currently shipping. I take a small number of partnerships at a time.",
       },
       {
         question: "Can this convert into a co-founder arrangement?",
         answer:
-          "It's happened. It's not the default and I won't discuss equity in a first conversation — it should follow from working together, not precede it.",
+          "It's happened. Equity follows from working together well, so the first conversation stays about the work.",
       },
       {
         question: "Can I start smaller?",
         answer:
-          "Yes. Most partnerships start as a blueprint or a single build. That's the sensible way to find out whether we work well together.",
+          "Yes. Most partnerships start as a blueprint or a single build. That's the sensible way to find out how we work together.",
       },
     ],
     cta: {
@@ -446,27 +442,26 @@ export const workCases: WorkCase[] = [
       "Feature Development — Add One Thing to an Existing Product | 52N34S",
     description:
       "You have a working product and need one specific thing built: payments, auth, an AI feature, an integration. Scoped, priced, shipped.",
-    h1: "You have a product. It needs one more thing.",
-    summary:
-      "One well-defined feature, scoped, priced, and shipped.",
+    h1: "One feature, done right.",
+    summary: "Scoped, built, shipped, fast.",
     serviceName: "Feature Development — Add One Thing to an Existing Product",
     sections: [
       {
         type: "paragraphs",
         body: [
-          "Payments. Authentication. An AI feature everyone's asking for. An integration with the tool your customers already use. A migration you've been putting off.",
-          "The product works. You don't need a partner or a rebuild. You need one well-defined thing built properly by someone who won't leave a mess in your codebase.",
+          "Payments. Authentication. The AI feature everyone's asking for. The integration your customers already expect.",
+          "The product works. What it wants is one well-defined thing, built properly, by someone who leaves your codebase cleaner than he found it.",
         ],
       },
       {
         type: "bullets",
         heading: "This is you if",
         items: [
-          "Your team is at capacity and this keeps getting pushed",
-          "It's outside your stack and hiring for it doesn't make sense",
-          "You've tried twice internally and it's still not right",
-          "You need it done in weeks, not quarters",
-          "It touches payments or auth and you'd rather it were done by someone who's done it before",
+          "The team is at capacity and this keeps sliding to next quarter",
+          "The feature sits outside your stack, and hiring for it would be overkill",
+          "Two internal attempts later, a specialist starts to look like the faster path",
+          "Weeks is the timeline, quarters is what you're being quoted",
+          "It touches payments or auth, and experience matters there",
         ],
       },
       {
@@ -479,19 +474,19 @@ export const workCases: WorkCase[] = [
           },
           {
             title: "Authentication.",
-            body: "Email, OAuth, Apple Sign-In, magic links, session handling that doesn't log people out at random.",
+            body: "Email, OAuth, Apple Sign-In, magic links, and sessions that keep people logged in.",
           },
           {
             title: "AI features.",
-            body: "Not a chatbot bolted onto a sidebar — features where a model does something specific and useful. I've shipped photo-to-calorie recognition (Kolibi) and natural-language document search (Orivela). I know where these break: cost, latency, and what happens on the bad response.",
+            body: "Features where a model does something specific and useful. Photo-to-calorie recognition and natural-language document search are both live in my own products. Cost, latency, and the bad response are solved problems here.",
           },
           {
             title: "Integrations.",
-            body: "Third-party APIs, webhooks, the retry logic and idempotency nobody budgets for.",
+            body: "Third-party APIs, webhooks, and the retry logic nobody budgets for.",
           },
           {
             title: "Data migrations.",
-            body: "Moving off the schema that made sense at the start, without losing anything.",
+            body: "Moving off the schema that made sense at the start, with every record intact.",
           },
         ],
       },
@@ -499,14 +494,14 @@ export const workCases: WorkCase[] = [
         type: "heading-block",
         heading: "How it works",
         body: [
-          "Fixed scope, fixed price, fixed date. I look at your codebase first and give you a number — if I can't scope it confidently, I say so rather than padding the quote. You get a pull request that matches your existing conventions, with tests, and a handover document your team can read.",
+          "Fixed scope, fixed price, fixed date. I look at your codebase first, then give you a number. You get a pull request that matches your conventions, with tests, and a handover document your team can read.",
         ],
       },
       {
         type: "heading-block",
-        heading: "What I won't do",
+        heading: "Built to last",
         body: [
-          "Ship something that only I can maintain. If a feature needs a pattern nobody on your team knows, either it gets built in a way they can extend, or I explain the trade-off before we start.",
+          "Everything ships in a way your team can maintain and extend. If a feature needs a pattern that's new to your team, you'll know the trade-off before we start.",
         ],
       },
     ],
@@ -514,12 +509,12 @@ export const workCases: WorkCase[] = [
       {
         question: "Can you work in our existing codebase?",
         answer:
-          "Yes. I match your conventions rather than importing mine — the goal is a change your team can maintain after I'm gone.",
+          "Yes. I match your conventions, so the change stays maintainable long after I'm gone.",
       },
       {
         question: "What stacks do you work in?",
         answer:
-          "Primarily TypeScript: Next.js, React, React Native, Node, Postgres, Supabase. Native iOS and Android where it's warranted. If your stack is far outside that, I'll tell you rather than learn it on your budget.",
+          "Primarily TypeScript: Next.js, React, React Native, Node, Postgres, Supabase. Native iOS and Android where it's warranted. If your stack is far outside that, you'll hear it from me straight away.",
       },
       {
         question: "How fast can you start?",
@@ -543,61 +538,60 @@ export const workCases: WorkCase[] = [
       "Which Tech Stack Should You Use? Independent Technical Advice | 52N34S",
     description:
       "Native or cross-platform, Supabase or Firebase, no-code or custom. An honest answer for your specific product, from someone with no vendor incentive.",
-    h1: "Everyone's told you something different.",
-    summary:
-      "An honest stack recommendation with no vendor incentive.",
+    h1: "The right stack, no guesswork.",
+    summary: "Independent advice, zero bias.",
     serviceName:
       "Which Tech Stack Should You Use? Independent Technical Advice",
     sections: [
       {
         type: "paragraphs",
         body: [
-          "One person says React Native. Someone else says native or don't bother. A no-code consultant says you don't need developers at all. Everyone sounds certain, everyone has an incentive, and you have no way to tell who's right.",
-          "Here's the uncomfortable truth: for most early products, the stack matters far less than anyone selling you a stack wants to admit. What matters is whether the data model survives contact with your second feature. That's the decision worth agonising over, and almost nobody frames it that way.",
+          "One person says React Native. Another says native or nothing. A no-code consultant promises you'll never write code at all. Everyone sounds certain, and everyone has an incentive.",
+          "Here's what a decade of shipping teaches: for most early products, the framework matters far less than the data model underneath it. That's the decision worth agonising over, and it's the one we'll get right.",
         ],
       },
       {
         type: "bullets",
         heading: "This is you if",
         items: [
-          "You've had four recommendations and they contradict each other",
-          "You're choosing between no-code and custom and can't tell where the ceiling is",
-          "You need to know if a decision is reversible before you commit",
-          "You're worried about being locked in",
-          'Someone quoted you double for "native" and you don\'t know if that\'s justified',
+          "Four recommendations so far, and they contradict each other",
+          "No-code or custom is the question, and the ceiling of each is unclear",
+          "Reversibility matters to you before you commit",
+          "Lock-in worries you, and rightly so",
+          '"Native" doubled the quote, and you want to know if that\'s justified',
         ],
       },
       {
         type: "heading-block",
         heading: "How this works",
         body: [
-          "A short engagement — a call, sometimes two, plus a written recommendation. I look at what you're building, who it's for, how fast it needs to move, and what your realistic budget is. Then I give you a specific answer, not a list of options with pros and cons.",
-          'I have no reseller relationships and no partnership with any vendor. Sometimes the honest answer is "start on Bubble, you\'ll know within six months whether you need to move."',
+          "A short engagement: a call, sometimes two, plus a written recommendation. I look at what you're building, who it's for, how fast it needs to move, and your realistic budget. You get a specific answer, tailored to your product.",
+          'Zero reseller relationships, zero vendor partnerships. Sometimes the honest answer is "start on Bubble, you\'ll know within six months whether you\'ve outgrown it."',
         ],
       },
       {
         type: "named-list",
-        heading: "Questions that actually decide it",
+        heading: "The questions that actually decide it",
         items: [
           {
-            title: "Does it need to work offline?",
+            title: "Offline requirements?",
             body: "This narrows things fast.",
           },
           {
-            title: "Are you doing anything heavy on-device?",
-            body: "Camera, audio, real-time — this is where cross-platform starts costing more than it saves.",
+            title: "Heavy on-device work?",
+            body: "Camera, audio, real-time. This is where cross-platform starts costing more than it saves.",
           },
           {
             title: "How many platforms on day one?",
-            body: "Usually the answer should be one.",
+            body: "One is usually the right answer.",
           },
           {
-            title: "What can you hire for later?",
-            body: "A stack you can't staff is a trap, however good it is.",
+            title: "Who can you hire later?",
+            body: "A stack you can staff beats a stack that benchmarks well.",
           },
           {
             title: "What's reversible?",
-            body: "The frontend framework, mostly. The data model, no. Spend your worry there.",
+            body: "The frontend, mostly. The data model, no. Spend your worry there.",
           },
         ],
       },
@@ -605,8 +599,8 @@ export const workCases: WorkCase[] = [
         type: "heading-block",
         heading: "My default, and when I break it",
         body: [
-          "For most products: TypeScript, Next.js on the web, React Native or Expo on mobile, Postgres via Supabase. It's fast, it's staffable, and almost nothing about it is a one-way door.",
-          "I break it for heavy on-device work, for anything with serious offline requirements, and when an existing team already knows something else well. A team's existing knowledge usually beats a marginally better tool.",
+          "For most products: TypeScript, Next.js on the web, React Native or Expo on mobile, Postgres via Supabase. Fast, staffable, and almost every door stays open.",
+          "I break it for heavy on-device work, serious offline requirements, and teams that already know something else well. A team's existing knowledge usually beats a marginally better tool.",
         ],
       },
     ],
@@ -614,22 +608,22 @@ export const workCases: WorkCase[] = [
       {
         question: "Is React Native good enough for a real product?",
         answer:
-          "For most products, yes. It stops being enough when you're doing heavy on-device processing, complex gestures, or need platform features at the moment they launch. Kolibi does real-time photo analysis and works fine — so the line is further out than most people assume.",
+          "For most products, yes. My own app does real-time photo analysis on React Native and runs beautifully. The line where native becomes necessary sits further out than most people assume.",
       },
       {
         question: "Supabase or Firebase?",
         answer:
-          "Supabase if you want SQL, relational data and a clean exit path. Firebase if you're deep in Google's ecosystem and your data is genuinely document-shaped. Most products I see are relational and people discover this too late.",
+          "Supabase for SQL, relational data and a clean exit path. Firebase if you're deep in Google's ecosystem and your data is genuinely document-shaped. Most products turn out relational, and it pays to know that early.",
       },
       {
         question: "Can I start with no-code and migrate later?",
         answer:
-          "Yes, and it's often the right call. The migration cost is real but it's paid later with better information — and plenty of products never need to migrate at all.",
+          "Yes, and it's often the right call. The migration cost is real, but you pay it later with better information. Plenty of products never need to migrate at all.",
       },
       {
         question: "What's the most expensive mistake at this stage?",
         answer:
-          "Not the framework. It's a data model that only fits version one. Changing the frontend is a project. Changing the data model after you have real users is surgery.",
+          "A data model that only fits version one. Changing the frontend is a project. Changing the data model with real users on it is surgery. Getting it right early is the whole game.",
       },
     ],
     cta: {

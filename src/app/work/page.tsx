@@ -58,15 +58,13 @@ export default function WorkIndexPage() {
           <p className="work-label">./work</p>
           <h1 className="work-h1">What&apos;s your situation?</h1>
           <p className="work-intro">
-            Most people who write to me are in one of six places. Find yours.
+            Six starting points. Find yours.
           </p>
           <div className="work-prose work-intro-block">
             <p>
-              I&apos;m Steffen — solo founder and developer in Berlin Mitte.
-              I&apos;ve shipped four apps of my own (Orivela, Kolibi, Peeranimo,
-              Carpincho) and built more than ten platforms for other people. I
-              don&apos;t take briefs and execute them. I take ideas apart, find
-              the actual business underneath, and then build that.
+              I&apos;m Steffen, a Berlin-based founder and developer. Four
+              products of my own are live today. A decade of shipped platforms
+              sits behind everything I build for you.
             </p>
           </div>
         </header>
