@@ -73,9 +73,6 @@ const ROOM_IDS = [
   "room-01",
   "room-02",
   "room-03",
-  "room-03b",
-  "room-03c",
-  "room-04",
   "room-05",
   "room-06",
 ];

@@ -65,8 +65,7 @@ interface Room04Props {
 
 export default function Room04({ visible }: Room04Props) {
   return (
-    <section
-      id="room-04"
+      <section
       className={`room-04 ${visible ? "room-04-visible" : ""}`}
     >
       <div className="room-04-blob room-04-blob-purple" aria-hidden="true" />

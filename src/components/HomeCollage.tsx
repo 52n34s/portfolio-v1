@@ -759,7 +759,8 @@ export default function HomeCollage() {
 
             <Clickable
               label="Orivela"
-              scrollTo="#room-03b"
+              href="https://www.orivela.app/"
+              external
               className="z-[35] -rotate-[0.8deg]"
               style={{ left: GRID_X, top: gridRow2, width: CELL_W }}
             >
@@ -768,7 +769,8 @@ export default function HomeCollage() {
 
             <Clickable
               label="Peeranimo"
-              scrollTo="#room-04"
+              href="https://peeranimo.app/"
+              external
               className="z-[35] rotate-[1.5deg]"
               style={{ left: gridCol2, top: gridRow2, width: CELL_W }}
             >
@@ -807,14 +809,16 @@ export default function HomeCollage() {
             </Clickable>
             <Clickable
               label="Orivela"
-              scrollTo="#room-03b"
+              href="https://www.orivela.app/"
+              external
               positioned={false}
             >
               <OrivelaNote className="-rotate-[0.8deg]" />
             </Clickable>
             <Clickable
               label="Peeranimo"
-              scrollTo="#room-04"
+              href="https://peeranimo.app/"
+              external
               positioned={false}
             >
               <PeeranimoUnit className="rotate-[1.5deg]" />
@@ -858,7 +862,8 @@ export default function HomeCollage() {
 
             <Clickable
               label="Orivela"
-              scrollTo="#room-03b"
+              href="https://www.orivela.app/"
+              external
               positioned={false}
             >
               <OrivelaNote className="-rotate-[0.8deg]" />
@@ -866,7 +871,8 @@ export default function HomeCollage() {
 
             <Clickable
               label="Peeranimo"
-              scrollTo="#room-04"
+              href="https://peeranimo.app/"
+              external
               positioned={false}
             >
               <PeeranimoUnit className="rotate-[1.5deg]" />

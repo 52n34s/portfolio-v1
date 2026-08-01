@@ -38,24 +38,6 @@ type BootAppIcon =
 
 const BOOT_APPS: BootAppIcon[] = [
   {
-    name: "Orivela",
-    sectionId: "room-03b",
-    kind: "image",
-    src: "/app-logo-orivela.png",
-  },
-  {
-    name: "Peeranimo",
-    sectionId: "room-04",
-    kind: "image",
-    src: "/app-logo-peeranimo.webp",
-  },
-  {
-    name: "Kolibi",
-    sectionId: "room-03c",
-    kind: "image",
-    src: "/app-logo-kolibi.jpg",
-  },
-  {
     name: "Builds",
     sectionId: "room-03",
     kind: "builds",
@@ -93,10 +75,8 @@ export default function Home() {
   const [showCursor, setShowCursor] = useState(false);
   const [showAppIcons, setShowAppIcons] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
-  const [activeRoom, setActiveRoom] = useState("room-01");
   const [room02Visible, setRoom02Visible] = useState(false);
   const [room03Visible, setRoom03Visible] = useState(false);
-  const [room04Visible, setRoom04Visible] = useState(false);
 
   const navigateToRoom = useCallback((roomId: string) => {
     document.getElementById(roomId)?.scrollIntoView({ behavior: "smooth" });
@@ -197,15 +177,11 @@ export default function Home() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveRoom(entry.target.id);
             if (entry.target.id === "room-02") {
               setRoom02Visible(true);
             }
             if (entry.target.id === "room-03") {
               setRoom03Visible(true);
-            }
-            if (entry.target.id === "room-04") {
-              setRoom04Visible(true);
             }
           }
         });
@@ -217,9 +193,6 @@ export default function Home() {
       "room-01",
       "room-02",
       "room-03",
-      "room-03b",
-      "room-03c",
-      "room-04",
       "room-05",
       "room-06",
     ];
@@ -357,15 +330,15 @@ export default function Home() {
       <Room02 visible={room02Visible} />
       <Room03 visible={room03Visible} />
 
-      <section id="room-03b" className="room-03b">
+      <section className="room-03b">
         <OrivelaBuild headingLevel="h2" />
       </section>
 
-      <section id="room-03c" className="room-03c">
+      <section className="room-03c">
         <KolibiBuild headingLevel="h2" />
       </section>
 
-      <Room04 visible={room04Visible} />
+      <Room04 visible />
       <Room05 />
       <Room06 />
     </>
