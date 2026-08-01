@@ -1422,15 +1422,16 @@ body {
   background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
 }
 
-/* Berlin skyline on the HomeCollage → Room05 seam */
+/* Berlin skyline on the HomeCollage → Room05 seam
+   Formula: top = -(renderedHeight - groundOffsetIntoDark)
+   Desktop: height 200, ground 55 → top -145
+   Mobile:  height 116, ground 32 → top -84 */
 .skyline-seam {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
-  /* 130px → tile width ≈ 709px at 1200:220 → ≥2 tiles on 1440px */
-  height: 130px;
-  transform: translateY(-40%);
+  top: -145px;
+  height: 200px;
   z-index: 2;
   background-image: url("/skyline-tile.svg");
   background-repeat: repeat-x;
@@ -1441,8 +1442,8 @@ body {
 
 @media (max-width: 768px) {
   .skyline-seam {
-    height: 76px;
-    transform: translateY(-36%);
+    top: -84px;
+    height: 116px;
   }
 }
 

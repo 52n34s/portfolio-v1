@@ -29,15 +29,15 @@
     <rect x="368" y="168" width="30" height="52"/>
     <rect x="402" y="150" width="24" height="70"/>
 
-    <!-- Brandenburger Tor -->
-    <rect x="430" y="170" width="130" height="50"/>
-    <rect x="438" y="140" width="14" height="30"/>
-    <rect x="460" y="140" width="14" height="30"/>
-    <rect x="482" y="140" width="14" height="30"/>
-    <rect x="504" y="140" width="14" height="30"/>
-    <rect x="526" y="140" width="14" height="30"/>
+    <!-- Brandenburger Tor: Säulen bis Sockel; 16px / 10px-Lücke für Lesbarkeit bei kleiner Skalierung -->
+    <rect x="435" y="140" width="16" height="55"/>
+    <rect x="461" y="140" width="16" height="55"/>
+    <rect x="487" y="140" width="16" height="55"/>
+    <rect x="513" y="140" width="16" height="55"/>
+    <rect x="539" y="140" width="16" height="55"/>
     <rect x="430" y="128" width="130" height="12"/>
-    <polygon points="430,128 560,128 495,98"/>
+    <rect x="440" y="108" width="110" height="20"/>
+    <rect x="478" y="98" width="34" height="10"/>
 
     <!-- verbindende niedrige Blöcke -->
     <rect x="564" y="160" width="28" height="60"/>
