@@ -785,18 +785,13 @@ export default function HomeCollage() {
             </Clickable>
           </div>
           </div>
-          {/*
-            Skyline cream overhang 145px + ~96px clear gap to tips.
-            Extra allowance because absolute cards overflow the scaled
-            stage box into the spacer (~87px observed).
-            145 + 96 + 87 ≈ 328px.
-          */}
-          <div className="h-[328px]" aria-hidden="true" />
+          {/* Card→skyline breathing room (desktop) */}
+          <div className="h-[220px]" aria-hidden="true" />
         </section>
       )}
 
       {layout === "tablet" && (
-        <section className="overflow-visible bg-[#F5F0E8] px-8 pt-14 pb-[328px]">
+        <section className="overflow-visible bg-[#F5F0E8] px-8 pt-14 pb-[220px]">
           <HeadlineBlock variant="tablet" />
 
           <img
@@ -847,8 +842,7 @@ export default function HomeCollage() {
       )}
 
       {layout === "mobile" && (
-        <section className="overflow-visible bg-[#F5F0E8] px-6 pt-12 pb-[190px]">
-          {/* Mobile: skyline overhang 84px + ~56px gap + overflow allowance */}
+        <section className="overflow-visible bg-[#F5F0E8] px-6 pt-12 pb-[128px]">
           <HeadlineBlock variant="mobile" />
 
           <img
