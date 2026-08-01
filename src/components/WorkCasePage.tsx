@@ -120,9 +120,15 @@ export function WorkCaseContent({ workCase }: { workCase: WorkCase }) {
         <h1 className="work-h1">{workCase.h1}</h1>
       </header>
 
-      {workCase.sections.map((section, index) => (
-        <SectionBlock key={`${section.type}-${index}`} section={section} />
-      ))}
+      {workCase.sections.map((section, index) => {
+        // Keep "This is you if" data in work-cases.ts; hide from render for now.
+        if (section.type === "bullets" && section.heading === "This is you if") {
+          return null;
+        }
+        return (
+          <SectionBlock key={`${section.type}-${index}`} section={section} />
+        );
+      })}
 
       <section className="work-section" aria-labelledby="work-faq-heading">
         <h2 id="work-faq-heading" className="work-h2">
