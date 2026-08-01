@@ -65,6 +65,13 @@ function DetailCard({
   fading: boolean;
   cardRef?: RefObject<HTMLElement | null>;
 }) {
+  const hasBody =
+    Boolean(project.role?.trim()) ||
+    Boolean(project.problem?.trim()) ||
+    Boolean(project.approach?.trim()) ||
+    Boolean(project.timeline?.trim()) ||
+    Boolean(project.outcome?.trim());
+
   return (
     <article
       ref={cardRef}
@@ -83,38 +90,44 @@ function DetailCard({
 
       <StackTags items={project.stack} />
 
-      <div className="builds-cork-detail-body">
-        {project.role ? (
-          <div>
-            <p className="builds-cork-label">Role</p>
-            <p className="builds-cork-copy">{project.role}</p>
-          </div>
-        ) : null}
-        {project.problem ? (
-          <div>
-            <p className="builds-cork-label">Problem</p>
-            <p className="builds-cork-copy">{project.problem}</p>
-          </div>
-        ) : null}
-        {project.approach ? (
-          <div>
-            <p className="builds-cork-label">Approach</p>
-            <p className="builds-cork-copy">{project.approach}</p>
-          </div>
-        ) : null}
-        {project.timeline ? (
-          <div>
-            <p className="builds-cork-label">Timeline</p>
-            <p className="builds-cork-copy">{project.timeline}</p>
-          </div>
-        ) : null}
-        {project.outcome ? (
-          <div>
-            <p className="builds-cork-label">Outcome</p>
-            <p className="builds-cork-copy">{project.outcome}</p>
-          </div>
-        ) : null}
-      </div>
+      {hasBody ? (
+        <div className="builds-cork-detail-body">
+          {project.role?.trim() ? (
+            <div>
+              <p className="builds-cork-label">Role</p>
+              <p className="builds-cork-copy">{project.role}</p>
+            </div>
+          ) : null}
+          {project.problem?.trim() ? (
+            <div>
+              <p className="builds-cork-label">The Challenge</p>
+              <p className="builds-cork-copy">{project.problem}</p>
+            </div>
+          ) : null}
+          {project.approach?.trim() ? (
+            <div>
+              <p className="builds-cork-label">The Approach</p>
+              <p className="builds-cork-copy">{project.approach}</p>
+            </div>
+          ) : null}
+          {project.timeline?.trim() ? (
+            <div>
+              <p className="builds-cork-label">Timeline</p>
+              <p className="builds-cork-copy">{project.timeline}</p>
+            </div>
+          ) : null}
+          {project.outcome?.trim() ? (
+            <div>
+              <p className="builds-cork-label">Outcome</p>
+              <p className="builds-cork-copy">{project.outcome}</p>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      <p className="builds-cork-detail-footnote">
+        Full-cycle build — architecture, planning &amp; complete implementation.
+      </p>
     </article>
   );
 }
