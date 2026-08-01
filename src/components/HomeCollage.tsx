@@ -66,6 +66,8 @@ const CELL_H = 255;
 /** Vertical clearance for the tallest top-row card before the second row. */
 const GRID_ROW_SPAN = 320;
 const CARD_PAD = 24;
+/** Extra bottom inset so Open pill clears the paper edge (Tailwind spacing 12 = 3rem). */
+const CARD_PAD_BOTTOM = 48;
 const HAND_COPY = "pr-[90px] text-[17px] leading-snug";
 
 /** Grid positions — 64px from subhead, 64px cell gap, 48px row gap */
@@ -139,7 +141,7 @@ function AppObjectShell({
         maxWidth: CELL_W,
         minHeight,
         height: "auto",
-        padding: CARD_PAD,
+        padding: `${CARD_PAD}px ${CARD_PAD}px ${CARD_PAD_BOTTOM}px`,
         gap: 16,
         ...style,
       }}
