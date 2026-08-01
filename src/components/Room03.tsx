@@ -56,7 +56,7 @@ const projects: Project[] = [
   },
   {
     id: "getabite",
-    name: "GetaBite",
+    name: "Food Delivery Platform",
     year: "2025",
     tagline:
       "Multi-location hospitality SaaS with reservation infrastructure and operator dashboards.",
@@ -75,7 +75,7 @@ const projects: Project[] = [
   },
   {
     id: "applento",
-    name: "Applento",
+    name: "SaaS Product",
     year: "2025",
     tagline:
       "Real estate applicant screening and workflow platform for agents, companies, and applicants.",
@@ -113,7 +113,7 @@ const projects: Project[] = [
   },
   {
     id: "faroutmedx",
-    name: "Far Out MedX",
+    name: "Healthcare Platform",
     year: "2025",
     tagline:
       "Credential tracking platform for high-stakes professionals with GPT-4o OCR and smart alerts.",
@@ -170,7 +170,7 @@ const projects: Project[] = [
   },
   {
     id: "watertesting",
-    name: "Water Testing Lab",
+    name: "Industry Testing Tool",
     year: "2025",
     tagline:
       "Multi-tenant compliance SaaS for water testing labs with five user roles and audit logging.",
@@ -189,7 +189,7 @@ const projects: Project[] = [
   },
   {
     id: "coursehub",
-    name: "CourseHub",
+    name: "Education Platform",
     year: "2025",
     tagline:
       "Full platform architecture and Blueprint for a sports courses marketplace — designed before a single line was built.",
@@ -208,7 +208,7 @@ const projects: Project[] = [
   },
   {
     id: "seeingtree",
-    name: "FamilySpace",
+    name: "Family/Social App",
     year: "2025",
     tagline:
       "Full system audit and takeover strategy for a live Bubble SaaS — assessed, diagnosed, and restructured for production readiness.",
