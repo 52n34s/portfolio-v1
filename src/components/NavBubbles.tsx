@@ -25,8 +25,6 @@ type ExternalNavItem = {
 type NavItem = ScrollNavItem | LinkNavItem | ExternalNavItem;
 
 const ROUTE_ACTIVE_LABEL: Record<string, string> = {
-  "/builds/orivela": "./orivela",
-  "/builds/peeranimo": "~/peeranimo",
   "/builds": "./builds",
 };
 
@@ -35,10 +33,9 @@ const navItems: NavItem[] = [
   { kind: "scroll", id: "room-02", label: "~/home" },
   { kind: "scroll", id: "room-03", label: "./builds", href: "/builds" },
   {
-    kind: "scroll",
-    id: "room-03b",
+    kind: "external",
     label: "./orivela",
-    href: "/builds/orivela",
+    href: "https://www.orivela.app/",
   },
   {
     kind: "external",
@@ -51,10 +48,9 @@ const navItems: NavItem[] = [
     href: "https://carpincho.app/",
   },
   {
-    kind: "scroll",
-    id: "room-04",
+    kind: "external",
     label: "~/peeranimo",
-    href: "/builds/peeranimo",
+    href: "https://peeranimo.app/",
   },
   { kind: "scroll", id: "room-05", label: "./work-with-me" },
   { kind: "scroll", id: "room-06", label: ">_ contact" },
