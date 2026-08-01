@@ -2514,12 +2514,14 @@ body {
 
 .builds-cork-detail {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   max-width: 480px;
   height: auto;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 2px 6px 18px rgba(26, 26, 26, 0.16);
+  padding: 32px;
   transition: opacity 200ms ease-out;
 }
 
@@ -2666,6 +2668,7 @@ body {
   max-width: none;
   max-height: none;
   overflow: visible;
+  padding: 20px;
   transform: none !important;
 }
 
@@ -2812,8 +2815,15 @@ body {
 
 .builds-cork-board-wrap .builds-cork-detail {
   max-height: min(620px, 72vh);
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .builds-cork-detail {
+    padding: 24px;
+  }
 }
 
 @media (min-width: 768px) {
