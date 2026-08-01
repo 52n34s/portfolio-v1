@@ -13,8 +13,8 @@ import {
 import { projects, type Project } from "@/data/projects";
 
 const THREAD = "#7B5CF0";
-const PAPER_SHADOW = "2px 5px 14px rgba(26, 26, 26, 0.13)";
-const PAPER_SHADOW_ACTIVE = "3px 8px 20px rgba(26, 26, 26, 0.2)";
+const PAPER_SHADOW = "2px 6px 18px rgba(26, 26, 26, 0.16)";
+const PAPER_SHADOW_ACTIVE = "3px 8px 20px rgba(26, 26, 26, 0.22)";
 
 /** Fixed organic tilt per stable project index — not re-randomized. */
 const PIN_ROTATIONS = [

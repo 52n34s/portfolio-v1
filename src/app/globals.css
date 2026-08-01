@@ -2385,7 +2385,34 @@ body {
 /* Builds corkboard */
 .builds-cork-page {
   min-height: 100vh;
-  background: #f5f0e8;
+  background-color: #f5f0e8;
+  background-image:
+    repeating-linear-gradient(
+      61deg,
+      rgba(0, 0, 0, 0.02) 0px,
+      rgba(0, 0, 0, 0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      151deg,
+      rgba(0, 0, 0, 0.016) 0px,
+      rgba(0, 0, 0, 0.016) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    radial-gradient(ellipse at 50% 42%, #faf6ef 0%, #efe9de 100%);
+}
+
+@media (max-width: 768px) {
+  .builds-cork-page {
+    /* Fine fiber lines can moiré on mobile — soft radial only */
+    background-image: radial-gradient(
+      ellipse at 50% 42%,
+      #faf6ef 0%,
+      #efe9de 100%
+    );
+  }
 }
 
 .builds-cork {
@@ -2492,8 +2519,7 @@ body {
   height: auto;
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
-  padding: 28px 28px 24px;
+  box-shadow: 2px 6px 18px rgba(26, 26, 26, 0.16);
   transition: opacity 200ms ease-out;
 }
 
@@ -2601,7 +2627,7 @@ body {
   border: none;
   border-radius: 12px;
   background: #ffffff;
-  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  box-shadow: 2px 6px 18px rgba(26, 26, 26, 0.16);
   padding: 12px 16px;
   cursor: pointer;
   font-family: var(--font-display), sans-serif;
