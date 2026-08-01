@@ -462,6 +462,35 @@ function ServiceCard({
   );
 }
 
+function CarpinchoVariantFlags({ className = "" }: { className?: string }) {
+  const flags = [
+    { emoji: "🇦🇷", label: "Argentina" },
+    { emoji: "🇺🇾", label: "Uruguay" },
+    { emoji: "🇲🇽", label: "Mexico" },
+    { emoji: "🇨🇴", label: "Colombia" },
+    { emoji: "🇵🇪", label: "Peru" },
+    { emoji: "🇪🇸", label: "Spain" },
+  ] as const;
+
+  return (
+    <div
+      className={`flex items-center gap-1.5 ${className}`}
+      aria-label="Language variants: Rioplatense, Neutral Latin America, Spain"
+    >
+      {flags.map((flag) => (
+        <span
+          key={flag.label}
+          className="text-[14px] leading-none"
+          role="img"
+          aria-label={flag.label}
+        >
+          {flag.emoji}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function CarpinchoCard({ className = "" }: { className?: string }) {
   return (
     <AppObjectShell
@@ -469,11 +498,14 @@ function CarpinchoCard({ className = "" }: { className?: string }) {
       className={`bg-[#FFFDF5] ${PAPER_SHADOW} ${className}`}
       minHeight={Math.round(CELL_H * 0.85)}
       footer={
-        <AppIdentity
-          icon={CARPINCHO_ICON}
-          name="Carpincho"
-          platform="The fastest way to speak Spanish"
-        />
+        <div>
+          <AppIdentity
+            icon={CARPINCHO_ICON}
+            name="Carpincho"
+            platform="Spanish with the least effort possible"
+          />
+          <CarpinchoVariantFlags className="mt-2" />
+        </div>
       }
     >
       <Tape className="absolute -left-2 -top-2 z-20 -rotate-[22deg]" />

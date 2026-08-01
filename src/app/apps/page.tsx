@@ -335,6 +335,35 @@ function PeeranimoCard() {
   );
 }
 
+function CarpinchoVariantFlags({ className = "" }: { className?: string }) {
+  const flags = [
+    { emoji: "🇦🇷", label: "Argentina" },
+    { emoji: "🇺🇾", label: "Uruguay" },
+    { emoji: "🇲🇽", label: "Mexico" },
+    { emoji: "🇨🇴", label: "Colombia" },
+    { emoji: "🇵🇪", label: "Peru" },
+    { emoji: "🇪🇸", label: "Spain" },
+  ] as const;
+
+  return (
+    <div
+      className={`flex items-center gap-1.5 ${className}`}
+      aria-label="Language variants: Rioplatense, Neutral Latin America, Spain"
+    >
+      {flags.map((flag) => (
+        <span
+          key={flag.label}
+          className="text-[14px] leading-none"
+          role="img"
+          aria-label={flag.label}
+        >
+          {flag.emoji}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function CarpinchoCard() {
   return (
     <div className="relative w-full max-w-[300px] rotate-[4deg]">
@@ -366,10 +395,11 @@ function CarpinchoCard() {
           <div className="leading-tight">
             <p className="text-[15px] font-medium text-[#1A1A1A]">Carpincho</p>
             <p className="text-[12px] text-[#1A1A1A]/55">
-              The fastest way to speak Spanish
+              Spanish with the least effort possible
             </p>
           </div>
         </div>
+        <CarpinchoVariantFlags className="mt-2" />
         <a
           href="https://carpincho.app/"
           target="_blank"
