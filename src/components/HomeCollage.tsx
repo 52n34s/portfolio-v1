@@ -133,9 +133,10 @@ function AppObjectShell({
 }) {
   return (
     <div
-      className={`relative flex max-w-full flex-col ${className}`}
+      className={`relative flex w-full max-w-full flex-col overflow-visible ${className}`}
       style={{
-        width: CELL_W,
+        width: "100%",
+        maxWidth: CELL_W,
         minHeight,
         height: "auto",
         padding: CARD_PAD,
@@ -189,7 +190,9 @@ function Clickable({
     </div>
   );
 
-  const posClass = positioned ? "absolute" : "relative block w-full";
+  const posClass = positioned
+    ? "absolute overflow-visible"
+    : "relative block w-full min-w-0 overflow-visible";
 
   if (href) {
     return (
@@ -739,7 +742,7 @@ export default function HomeCollage() {
               href="https://apps.apple.com/us/app/kolibi/id6790129149"
               external
               className="z-30 -rotate-[1.5deg]"
-              style={{ left: GRID_X, top: GRID_Y }}
+              style={{ left: GRID_X, top: GRID_Y, width: CELL_W }}
             >
               <KolibiReceipt />
             </Clickable>
@@ -749,7 +752,7 @@ export default function HomeCollage() {
               href="https://carpincho.app/"
               external
               className="z-[32] rotate-[1.2deg]"
-              style={{ left: gridCol2, top: GRID_Y }}
+              style={{ left: gridCol2, top: GRID_Y, width: CELL_W }}
             >
               <CarpinchoCard />
             </Clickable>
@@ -758,7 +761,7 @@ export default function HomeCollage() {
               label="Orivela"
               scrollTo="#room-03b"
               className="z-[35] -rotate-[0.8deg]"
-              style={{ left: GRID_X, top: gridRow2 }}
+              style={{ left: GRID_X, top: gridRow2, width: CELL_W }}
             >
               <OrivelaNote />
             </Clickable>
@@ -767,7 +770,7 @@ export default function HomeCollage() {
               label="Peeranimo"
               scrollTo="#room-04"
               className="z-[35] rotate-[1.5deg]"
-              style={{ left: gridCol2, top: gridRow2 }}
+              style={{ left: gridCol2, top: gridRow2, width: CELL_W }}
             >
               <PeeranimoUnit />
             </Clickable>
@@ -776,7 +779,7 @@ export default function HomeCollage() {
       )}
 
       {layout === "tablet" && (
-        <section className="bg-[#F5F0E8] px-8 py-14">
+        <section className="overflow-visible bg-[#F5F0E8] px-8 py-14">
           <HeadlineBlock variant="tablet" />
 
           <img
@@ -785,7 +788,7 @@ export default function HomeCollage() {
             className="mx-auto mt-12 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
 
-          <div className="mx-auto mt-12 flex max-w-[330px] flex-col items-center gap-8">
+          <div className="mx-auto mt-12 grid w-full max-w-[720px] grid-cols-2 items-start gap-x-4 gap-y-10 overflow-visible px-5 pt-5">
             <Clickable
               label="Kolibi"
               href="https://apps.apple.com/us/app/kolibi/id6790129149"
@@ -816,15 +819,16 @@ export default function HomeCollage() {
             >
               <PeeranimoUnit className="rotate-[1.5deg]" />
             </Clickable>
-            <div className="w-full max-w-[285px]">
-              <ServiceCard className="-rotate-[1deg]" variant="tablet" />
-            </div>
+          </div>
+
+          <div className="mx-auto mt-10 w-full max-w-[285px]">
+            <ServiceCard className="-rotate-[1deg]" variant="tablet" />
           </div>
         </section>
       )}
 
       {layout === "mobile" && (
-        <section className="bg-[#F5F0E8] px-6 py-12">
+        <section className="overflow-visible bg-[#F5F0E8] px-6 py-12">
           <HeadlineBlock variant="mobile" />
 
           <img
@@ -833,7 +837,7 @@ export default function HomeCollage() {
             className="mx-auto mt-8 h-[280px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
 
-          <div className="mx-auto mt-10 flex max-w-[330px] flex-col items-center gap-8">
+          <div className="mx-auto mt-10 flex max-w-[330px] flex-col items-center gap-8 overflow-visible px-5 pt-5">
             <Clickable
               label="Kolibi"
               href="https://apps.apple.com/us/app/kolibi/id6790129149"
