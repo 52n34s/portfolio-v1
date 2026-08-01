@@ -5,12 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 
 type CardTone =
   | "cream"
-  | "lilac"
-  | "teal"
-  | "gold"
-  | "coral"
-  | "lilac-alt"
-  | "teal-alt";
+  | "lavender"
+  | "mint"
+  | "butter"
+  | "rose"
+  | "sky"
+  | "sage"
+  | "peach";
 
 type ScrollNavItem = {
   kind: "scroll";
@@ -42,33 +43,33 @@ const ROUTE_ACTIVE_LABEL: Record<string, string> = {
 
 const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: "~/home", tone: "cream" },
-  { kind: "link", label: "./builds", href: "/builds", tone: "lilac" },
+  { kind: "link", label: "./builds", href: "/builds", tone: "lavender" },
   {
     kind: "external",
     label: "./orivela",
     href: "https://www.orivela.app/",
-    tone: "teal",
+    tone: "mint",
   },
   {
     kind: "external",
     label: "./kolibi",
     href: "https://kolibi.app/",
-    tone: "gold",
+    tone: "butter",
   },
   {
     kind: "external",
     label: "./carpincho",
     href: "https://carpincho.app/",
-    tone: "coral",
+    tone: "rose",
   },
   {
     kind: "external",
     label: "~/peeranimo",
     href: "https://peeranimo.app/",
-    tone: "lilac-alt",
+    tone: "sky",
   },
-  { kind: "scroll", id: "room-05", label: "./work-with-me", tone: "teal-alt" },
-  { kind: "scroll", id: "room-06", label: ">_ contact", tone: "cream" },
+  { kind: "scroll", id: "room-05", label: "./work-with-me", tone: "sage" },
+  { kind: "scroll", id: "room-06", label: ">_ contact", tone: "peach" },
 ];
 
 /** Fixed per-item tilt — max ±1.5deg */
