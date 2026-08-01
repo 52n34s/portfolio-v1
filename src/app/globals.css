@@ -2146,6 +2146,357 @@ body {
   font-size: 11px;
 }
 
+/* Builds corkboard */
+.builds-cork-page {
+  min-height: 100vh;
+  background: #f5f0e8;
+}
+
+.builds-cork {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 4rem;
+}
+
+.builds-cork-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.builds-cork-header-label,
+.builds-cork-empty-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  color: rgba(26, 26, 26, 0.5);
+}
+
+.builds-cork-header-title,
+.builds-cork-empty-title {
+  margin-top: 0.75rem;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 56px);
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.builds-cork-header-sub,
+.builds-cork-empty-copy {
+  margin-top: 0.75rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: rgba(26, 26, 26, 0.65);
+  line-height: 1.5;
+}
+
+.builds-cork-empty {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+  text-align: center;
+}
+
+.builds-cork-nda {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #c2410c;
+  color: #c2410c;
+  opacity: 0.85;
+  transform: rotate(-12deg);
+}
+
+.builds-cork-nda span {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.builds-cork-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.builds-cork-stack li {
+  border-radius: 999px;
+  background: rgba(26, 26, 26, 0.06);
+  padding: 4px 10px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  color: #1a1a1a;
+}
+
+.builds-cork-stack.is-compact li {
+  padding: 2px 7px;
+  font-size: 9px;
+}
+
+.builds-cork-stack-more {
+  background: transparent !important;
+  color: rgba(26, 26, 26, 0.45) !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+.builds-cork-detail {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  padding: 28px 28px 32px;
+  transition: opacity 200ms ease-out;
+}
+
+.builds-cork-detail.is-fading {
+  opacity: 0;
+}
+
+.builds-cork-detail-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.builds-cork-detail-eyebrow {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.45);
+}
+
+.builds-cork-detail-title {
+  margin-top: 4px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 30px);
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.builds-cork-detail-role {
+  margin-top: 6px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  color: rgba(26, 26, 26, 0.65);
+}
+
+.builds-cork-detail .builds-cork-stack {
+  margin-bottom: 20px;
+}
+
+.builds-cork-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.builds-cork-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.4);
+  margin-bottom: 4px;
+}
+
+.builds-cork-copy {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #1a1a1a;
+}
+
+/* Mobile tabs */
+.builds-cork-mobile {
+  display: block;
+}
+
+.builds-cork-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 16px;
+  margin-bottom: 8px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.builds-cork-tab {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: var(--font-display), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  transition: box-shadow 150ms ease-out, transform 150ms ease-out;
+}
+
+.builds-cork-tab.is-active {
+  box-shadow: 3px 8px 18px rgba(26, 26, 26, 0.18);
+  transform: translateY(-2px);
+}
+
+.builds-cork-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 1px;
+  background: #c2410c;
+}
+
+.builds-cork-tab-nda {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #c2410c;
+}
+
+.builds-cork-mobile .builds-cork-detail {
+  max-width: none;
+  transform: none !important;
+}
+
+/* Desktop corkboard */
+.builds-cork-board-wrap {
+  display: none;
+}
+
+.builds-cork-board {
+  position: relative;
+  width: 100%;
+  min-height: 720px;
+  overflow: visible;
+}
+
+.builds-cork-thread {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.builds-cork-thread-path {
+  animation: builds-cork-thread-in 200ms ease-out both;
+}
+
+@keyframes builds-cork-thread-in {
+  from {
+    opacity: 0;
+    stroke-dashoffset: 24;
+  }
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+.builds-cork-pin {
+  position: absolute;
+  width: 140px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 14px 12px 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow 150ms ease-out, transform 150ms ease-out;
+}
+
+.builds-cork-pin:hover {
+  box-shadow: 3px 8px 18px rgba(26, 26, 26, 0.18) !important;
+}
+
+.builds-cork-pin-nda-wrap {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
+}
+
+.builds-cork-pin-title {
+  font-family: var(--font-display), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.builds-cork-pin-nda-text {
+  display: block;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #c2410c;
+  margin-bottom: 2px;
+}
+
+.builds-cork-detail-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: min(480px, 58%);
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+  .builds-cork-mobile {
+    display: none;
+  }
+
+  .builds-cork-board-wrap {
+    display: block;
+  }
+
+  .builds-cork {
+    padding: 5.5rem 2rem 5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .builds-cork-detail,
+  .builds-cork-thread-path,
+  .builds-cork-tab,
+  .builds-cork-pin {
+    transition: none;
+    animation: none;
+  }
+}
+
 /* Room 03b — ./orivela */
 .room-03b {
   width: 100vw;
