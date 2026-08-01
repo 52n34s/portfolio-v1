@@ -1913,7 +1913,7 @@ body {
   color: var(--orange);
 }
 
-/* Site navigation — floating pills, right-aligned, no backdrop */
+/* Site navigation — floating pills, right-aligned, blurred backdrop */
 .nav-hamburger-trigger {
   position: fixed;
   top: 40px;
@@ -1929,6 +1929,35 @@ body {
   background: #f5f0e8;
   box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
   cursor: pointer;
+}
+
+.nav-hamburger-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 98;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: rgba(245, 240, 232, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: auto;
+}
+
+.nav-hamburger-backdrop.is-open {
+  animation: nav-backdrop-in 200ms ease-out both;
+}
+
+.nav-hamburger-backdrop.is-closing {
+  animation: nav-backdrop-out 150ms ease-out both;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .nav-hamburger-backdrop {
+    background: rgba(245, 240, 232, 0.85);
+  }
 }
 
 .nav-hamburger-overlay {
@@ -2153,9 +2182,35 @@ body {
   }
 }
 
+@keyframes nav-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nav-backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-hamburger-overlay {
     transition: opacity 150ms ease-out;
+  }
+
+  .nav-hamburger-backdrop.is-open {
+    animation: nav-backdrop-in 150ms ease-out both;
+  }
+
+  .nav-hamburger-backdrop.is-closing {
+    animation: nav-backdrop-out 150ms ease-out both;
   }
 
   .nav-hamburger-overlay.is-open .nav-hamburger-pill-wrap {

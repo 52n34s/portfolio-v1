@@ -153,6 +153,7 @@ export default function NavBubbles() {
       setOverlayMounted(true);
       return;
     }
+    /* Match longest close animation (backdrop 150ms / overlay 200ms) */
     const t = window.setTimeout(() => setOverlayMounted(false), 200);
     return () => window.clearTimeout(t);
   }, [menuOpen]);
@@ -210,56 +211,64 @@ export default function NavBubbles() {
       </button>
 
       {overlayMounted && (
-        <nav
-          className={`nav-hamburger-overlay ${menuOpen ? "is-open" : "is-closing"}`}
-          aria-label="Room navigation"
-        >
-          <ul className="nav-hamburger-list">
-            {navItems.map((item, index) => {
-              const active = isNavItemActive(item, activeLabel, activeRoom);
-              const key =
-                item.kind === "scroll"
-                  ? `${item.id}-${item.label}`
-                  : `${item.kind}-${item.href}`;
-              const pillClass = `nav-hamburger-pill nav-hamburger-pill--${item.tone}${
-                active ? " is-active" : ""
-              }`;
+        <>
+          <button
+            type="button"
+            className={`nav-hamburger-backdrop ${menuOpen ? "is-open" : "is-closing"}`}
+            aria-label="Close navigation menu"
+            onClick={() => setMenuOpen(false)}
+          />
+          <nav
+            className={`nav-hamburger-overlay ${menuOpen ? "is-open" : "is-closing"}`}
+            aria-label="Room navigation"
+          >
+            <ul className="nav-hamburger-list">
+              {navItems.map((item, index) => {
+                const active = isNavItemActive(item, activeLabel, activeRoom);
+                const key =
+                  item.kind === "scroll"
+                    ? `${item.id}-${item.label}`
+                    : `${item.kind}-${item.href}`;
+                const pillClass = `nav-hamburger-pill nav-hamburger-pill--${item.tone}${
+                  active ? " is-active" : ""
+                }`;
 
-              return (
-                <li
-                  key={key}
-                  className="nav-hamburger-pill-wrap"
-                  style={{
-                    ["--pill-delay" as string]: `${index * 40}ms`,
-                    ["--pill-rotate" as string]:
-                      PILL_ROTATIONS[index % PILL_ROTATIONS.length],
-                  }}
-                >
-                  {item.kind === "external" ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMenuOpen(false)}
-                      className={pillClass}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => handleSelect(item)}
-                      className={pillClass}
-                      aria-current={active ? "page" : undefined}
-                    >
-                      {item.label}
-                    </button>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+                return (
+                  <li
+                    key={key}
+                    className="nav-hamburger-pill-wrap"
+                    style={{
+                      ["--pill-delay" as string]: `${index * 40}ms`,
+                      ["--pill-rotate" as string]:
+                        PILL_ROTATIONS[index % PILL_ROTATIONS.length],
+                    }}
+                  >
+                    {item.kind === "external" ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMenuOpen(false)}
+                        className={pillClass}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleSelect(item)}
+                        className={pillClass}
+                        aria-current={active ? "page" : undefined}
+                      >
+                        {item.label}
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </>
       )}
     </>
   );
