@@ -56,6 +56,19 @@ const navItems: NavItem[] = [
   { kind: "scroll", id: "room-06", label: ">_ contact" },
 ];
 
+/** Fixed per-item tilt — matches app-card paper feel, max ±1.5deg */
+const PILL_ROTATIONS = [
+  "-1.2deg",
+  "0.8deg",
+  "-0.5deg",
+  "1.4deg",
+  "-1.5deg",
+  "0.3deg",
+  "1.1deg",
+  "-0.9deg",
+  "0.6deg",
+] as const;
+
 const ROOM_IDS = [
   "room-01",
   "room-02",
@@ -207,7 +220,11 @@ export default function NavBubbles() {
                 <li
                   key={key}
                   className="nav-hamburger-pill-wrap"
-                  style={{ ["--pill-delay" as string]: `${index * 40}ms` }}
+                  style={{
+                    ["--pill-delay" as string]: `${index * 40}ms`,
+                    ["--pill-rotate" as string]:
+                      PILL_ROTATIONS[index % PILL_ROTATIONS.length],
+                  }}
                 >
                   {item.kind === "external" ? (
                     <a
