@@ -1428,20 +1428,20 @@ body {
   left: 0;
   right: 0;
   top: 0;
-  height: 120px;
+  /* 130px → tile width ≈ 709px at 1200:220 → ≥2 tiles on 1440px */
+  height: 130px;
   transform: translateY(-40%);
   z-index: 2;
   background-image: url("/skyline-tile.svg");
   background-repeat: repeat-x;
   background-position: bottom left;
   background-size: auto 100%;
-  color: #0e1620;
   pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .skyline-seam {
-    height: 72px;
+    height: 76px;
     transform: translateY(-36%);
   }
 }
