@@ -2184,13 +2184,33 @@ body {
   }
 
   .nav-hamburger-overlay {
-    top: 80px;
+    top: 72px;
     right: 24px;
-    max-width: calc(100vw - 48px);
+    left: 24px;
+    width: auto;
+    max-width: none;
   }
 
   .nav-hamburger-list {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .nav-hamburger-pill {
+    /* Flat index-card strip: fill viewport without scroll, ≥44px tap target */
+    aspect-ratio: auto;
+    height: max(44px, min(52px, calc((100dvh - 72px - 70px - 16px) / 8)));
+    min-height: 44px;
+    --pill-header-y: 13px;
+    --pill-line-gap: 14px;
+    padding: calc(var(--pill-header-y) + 3px) 10px 4px 16px;
+    align-items: flex-start;
+    font-size: 16px;
+    line-height: 1.15;
+  }
+
+  .nav-hamburger-pill.is-active::before {
+    margin-top: 0.3em;
   }
 }
 
