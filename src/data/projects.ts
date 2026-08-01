@@ -31,7 +31,7 @@ export const projects: Project[] = [
       "A financial education program needed a live, group-based simulation for workshops with 30–50 simultaneous participants. The room votes collectively on money decisions, but the financial consequence has to be calculated per person from their own balance — so the same vote lands differently depending on where each participant started. Anything that breaks does so in front of a live audience, on a shared screen, with a non-technical facilitator running the room under time pressure.",
     approach:
       "Chose Next.js and Supabase over no-code tooling for precise latency control and pixel-accurate large-screen layout. Built a concurrency-safe state engine using atomic guarded updates, closing a time-of-check-to-time-of-use race condition and adding idempotency protection so a re-evaluated round can never double-apply financial effects. The AI avatar layer reconnects per reaction rather than holding a persistent session, avoiding idle-time cost and connection races. Content and simulation logic are fully separated, so the entire narrative layer swaps via a single toggle without touching the engine underneath.",
-    timeline: "Idea to launch in under 2 months",
+    timeline: "Under 2 months",
     outcome:
       "In production since July 2026 with a real cohort, running weekly sessions across a six-to-eight week curriculum. A mass-lock incident in the first live session was root-caused from production data within minutes and resolved.",
   },

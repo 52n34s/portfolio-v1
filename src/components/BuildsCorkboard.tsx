@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type MutableRefObject,
   type RefObject,
 } from "react";
 import { projects, type Project } from "@/data/projects";
@@ -15,19 +16,10 @@ const THREAD = "#C2410C";
 const PAPER_SHADOW = "2px 5px 14px rgba(26, 26, 26, 0.13)";
 const PAPER_SHADOW_ACTIVE = "3px 8px 20px rgba(26, 26, 26, 0.2)";
 
-/** Fixed organic slots around the center card — no re-randomize on render */
-const PIN_SLOTS: { top: string; left: string; rotate: number }[] = [
-  { top: "6%", left: "8%", rotate: -7 },
-  { top: "10%", left: "78%", rotate: 5 },
-  { top: "28%", left: "2%", rotate: 3 },
-  { top: "32%", left: "84%", rotate: -4 },
-  { top: "58%", left: "6%", rotate: -5 },
-  { top: "62%", left: "80%", rotate: 6 },
-  { top: "78%", left: "18%", rotate: 2 },
-  { top: "82%", left: "68%", rotate: -6 },
-  { top: "48%", left: "88%", rotate: 4 },
-  { top: "4%", left: "42%", rotate: -2 },
-];
+/** Fixed organic tilt per stable project index — not re-randomized. */
+const PIN_ROTATIONS = [
+  -1.2, 0.8, -0.5, 1.4, -1.5, 0.3, 1.1, -0.9,
+] as const;
 
 function NdaBadge({ size = "sm" }: { size?: "sm" | "md" }) {
   const dim = size === "md" ? 44 : 36;
@@ -42,7 +34,13 @@ function NdaBadge({ size = "sm" }: { size?: "sm" | "md" }) {
   );
 }
 
-function StackTags({ items, compact = false }: { items: string[]; compact?: boolean }) {
+function StackTags({
+  items,
+  compact = false,
+}: {
+  items: string[];
+  compact?: boolean;
+}) {
   const shown = compact ? items.slice(0, 2) : items;
   return (
     <ul className={`builds-cork-stack${compact ? " is-compact" : ""}`}>
@@ -166,6 +164,48 @@ function ProjectPin({
   );
 }
 
+function PinColumn({
+  items,
+  side,
+  activeId,
+  pinRefs,
+  onSelect,
+}: {
+  items: { project: Project; index: number }[];
+  side: "left" | "right";
+  activeId: string;
+  pinRefs: MutableRefObject<Map<string, HTMLButtonElement>>;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div className={`builds-cork-pins builds-cork-pins-${side}`}>
+      {items.map(({ project, index }) => {
+        const isActive = project.id === activeId;
+        const rotate = PIN_ROTATIONS[index % PIN_ROTATIONS.length];
+        return (
+          <ProjectPin
+            key={project.id}
+            project={project}
+            active={isActive}
+            pinRef={(el) => {
+              if (el) pinRefs.current.set(project.id, el);
+              else pinRefs.current.delete(project.id);
+            }}
+            onSelect={() => onSelect(project.id)}
+            style={{
+              transform: `rotate(${rotate}deg)${
+                isActive ? " translateY(-4px)" : ""
+              }`,
+              boxShadow: isActive ? PAPER_SHADOW_ACTIVE : PAPER_SHADOW,
+              zIndex: isActive ? 4 : 2,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 export default function BuildsCorkboard() {
   const [activeId, setActiveId] = useState(projects[0]?.id ?? "");
   const [fading, setFading] = useState(false);
@@ -178,6 +218,11 @@ export default function BuildsCorkboard() {
   const pinRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   const active = projects.find((p) => p.id === activeId) ?? projects[0];
+
+  // Stable column assignment by original index — positions never reshuffle.
+  const indexed = projects.map((project, index) => ({ project, index }));
+  const leftPins = indexed.filter(({ index }) => index % 2 === 0);
+  const rightPins = indexed.filter(({ index }) => index % 2 === 1);
 
   useEffect(() => {
     if (process.env.NODE_ENV === "development" && projects.length === 0) {
@@ -206,10 +251,11 @@ export default function BuildsCorkboard() {
     };
     const to = {
       x: card.left + card.width / 2 - board.left,
-      y: card.top + card.height / 2 - board.top,
+      y: card.top + Math.min(card.height / 2, 100) - board.top,
     };
     const midX = (from.x + to.x) / 2;
-    const midY = (from.y + to.y) / 2 + Math.min(56, Math.abs(to.y - from.y) * 0.25 + 28);
+    const midY =
+      (from.y + to.y) / 2 + Math.min(56, Math.abs(to.y - from.y) * 0.25 + 28);
     const d = `M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`;
     setThread({ d, key: Date.now() });
   }, [active]);
@@ -254,7 +300,6 @@ export default function BuildsCorkboard() {
         </p>
       </header>
 
-      {/* Mobile: tabs + detail */}
       <div className="builds-cork-mobile">
         <div className="builds-cork-tabs" role="tablist" aria-label="Projects">
           {projects.map((project) => {
@@ -276,12 +321,9 @@ export default function BuildsCorkboard() {
             );
           })}
         </div>
-        {active ? (
-          <DetailCard project={active} fading={fading} />
-        ) : null}
+        {active ? <DetailCard project={active} fading={fading} /> : null}
       </div>
 
-      {/* Desktop / tablet: corkboard */}
       <div className="builds-cork-board-wrap">
         <div ref={boardRef} className="builds-cork-board">
           <svg
@@ -303,31 +345,13 @@ export default function BuildsCorkboard() {
             ) : null}
           </svg>
 
-          {projects.map((project, index) => {
-            const slot = PIN_SLOTS[index % PIN_SLOTS.length];
-            const isActive = project.id === active?.id;
-            return (
-              <ProjectPin
-                key={project.id}
-                project={project}
-                active={isActive}
-                pinRef={(el) => {
-                  if (el) pinRefs.current.set(project.id, el);
-                  else pinRefs.current.delete(project.id);
-                }}
-                onSelect={() => selectProject(project.id)}
-                style={{
-                  top: slot.top,
-                  left: slot.left,
-                  transform: `rotate(${slot.rotate}deg)${
-                    isActive ? " translateY(-4px)" : ""
-                  }`,
-                  boxShadow: isActive ? PAPER_SHADOW_ACTIVE : PAPER_SHADOW,
-                  zIndex: isActive ? 4 : 2,
-                }}
-              />
-            );
-          })}
+          <PinColumn
+            items={leftPins}
+            side="left"
+            activeId={activeId}
+            pinRefs={pinRefs}
+            onSelect={selectProject}
+          />
 
           <div className="builds-cork-detail-slot">
             {active ? (
@@ -338,6 +362,14 @@ export default function BuildsCorkboard() {
               />
             ) : null}
           </div>
+
+          <PinColumn
+            items={rightPins}
+            side="right"
+            activeId={activeId}
+            pinRefs={pinRefs}
+            onSelect={selectProject}
+          />
         </div>
       </div>
     </div>
