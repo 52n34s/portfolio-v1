@@ -132,6 +132,16 @@ const CASES: CaseDef[] = [
   },
 ];
 
+/** Fixed per-note tilt — max ±1.5deg, matches app-card paper feel */
+const CASE_ROTATIONS = [
+  "-1.2deg",
+  "0.8deg",
+  "-0.5deg",
+  "1.4deg",
+  "-1.5deg",
+  "0.3deg",
+] as const;
+
 function sleep(ms: number) {
   return new Promise<void>((resolve) => setTimeout(resolve, ms));
 }
@@ -207,17 +217,22 @@ export default function Room05() {
         </header>
 
         <div className="room-05-cases">
-          {CASES.map((caseItem) => (
+          {CASES.map((caseItem, index) => (
             <button
               key={caseItem.id}
               type="button"
               className={`room-05-case-btn ${
                 activeCase === caseItem.id ? "room-05-case-btn-active" : ""
               }`}
+              style={{
+                ["--case-rotate" as string]:
+                  CASE_ROTATIONS[index % CASE_ROTATIONS.length],
+              }}
               onClick={() => handleCaseClick(caseItem.id)}
               disabled={isTyping && activeCase === caseItem.id}
             >
-              {`> ${caseItem.command}`}
+              <span className="room-05-case-prompt">&gt; </span>
+              {caseItem.command}
             </button>
           ))}
         </div>

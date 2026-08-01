@@ -1447,34 +1447,40 @@ body {
 .room-05-cases {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 16px;
   margin-top: 2.5rem;
 }
 
 .room-05-case-btn {
-  background: #111;
-  border: 0.5px solid #3a3a3a;
-  border-radius: 8px;
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
   padding: 14px 20px;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 13px;
-  color: #b0aea8;
+  color: #1a1a1a;
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s;
   width: 100%;
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  transform: rotate(var(--case-rotate, 0deg));
+  transition:
+    box-shadow 150ms ease-out,
+    transform 150ms ease-out;
+}
+
+.room-05-case-prompt {
+  color: #7b5cf0;
 }
 
 .room-05-case-btn:hover {
-  border-color: #7b5cf0;
-  color: #7b5cf0;
-  background: #7b5cf008;
+  box-shadow: 3px 8px 20px rgba(26, 26, 26, 0.2);
+  transform: rotate(var(--case-rotate, 0deg)) scale(1.02);
 }
 
 .room-05-case-btn-active {
-  border-color: #7b5cf0;
-  color: #7b5cf0;
-  background: #7b5cf012;
+  box-shadow: 3px 8px 20px rgba(26, 26, 26, 0.2);
+  transform: rotate(var(--case-rotate, 0deg)) translateY(-2px);
 }
 
 .room-05-case-btn:disabled {
@@ -1482,16 +1488,19 @@ body {
 }
 
 .room-05-terminal {
-  background: #111;
-  border: 0.5px solid #222;
+  position: relative;
+  background: #ffffff;
+  border: none;
   border-radius: 12px;
   padding: 1.5rem 2rem;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 13px;
-  color: #f5f0e8;
+  color: #1a1a1a;
   min-height: 200px;
   margin-top: 1.5rem;
   line-height: 1.8;
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  transform: rotate(0.4deg);
 }
 
 .room-05-terminal-line {
@@ -1650,11 +1659,30 @@ body {
   width: 100%;
 }
 
+.room-06-paper {
+  position: relative;
+  background: #f5f0e8;
+  border-radius: 12px;
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  transform: rotate(-0.5deg);
+  overflow: hidden;
+  padding: 2rem 2rem 2.5rem;
+}
+
+.room-06-form-torn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  display: block;
+}
+
 .room-06-form {
-  background: #111;
-  border: 0.5px solid #222;
-  border-radius: 16px;
-  padding: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .room-06-field {
@@ -1670,16 +1698,16 @@ body {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #444;
+  color: rgba(26, 26, 26, 0.45);
   margin-bottom: 0.5rem;
 }
 
 .room-06-input {
   width: 100%;
-  background: #1a1a1a;
-  border: 0.5px solid #2a2a2a;
+  background: #ffffff;
+  border: 0.5px solid rgba(26, 26, 26, 0.12);
   border-radius: 8px;
-  color: var(--text);
+  color: #1a1a1a;
   font-family: var(--font-inter), sans-serif;
   font-size: 14px;
   padding: 10px 14px;
@@ -1688,7 +1716,7 @@ body {
 }
 
 .room-06-input:focus {
-  border-color: var(--orange);
+  border-color: #7b5cf0;
 }
 
 .room-06-textarea {
@@ -1696,32 +1724,43 @@ body {
   min-height: 120px;
 }
 
-.room-06-checkboxes {
+.room-06-tags {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.room-06-checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 14px;
-  color: #888;
+.room-06-tag {
+  border: 1.5px solid #7b5cf0;
+  border-radius: 999px;
+  background: transparent;
+  color: #7b5cf0;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 7px 12px;
   cursor: pointer;
+  transition:
+    background 150ms ease-out,
+    color 150ms ease-out,
+    box-shadow 150ms ease-out;
 }
 
-.room-06-checkbox {
-  accent-color: var(--orange);
-  width: 16px;
-  height: 16px;
+.room-06-tag:hover {
+  box-shadow: 2px 4px 10px rgba(26, 26, 26, 0.1);
+}
+
+.room-06-tag.is-selected {
+  background: #7b5cf0;
+  color: #f5f0e8;
+  border-color: #7b5cf0;
 }
 
 .room-06-submit {
   width: 100%;
-  background: var(--orange);
-  color: #0d0d0d;
+  background: #7b5cf0;
+  color: #f5f0e8;
   font-family: var(--font-display), sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -1744,20 +1783,20 @@ body {
 }
 
 .room-06-success {
-  background: #111;
-  border: 0.5px solid #222;
-  border-radius: 16px;
-  padding: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 0 1rem;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 14px;
-  color: var(--teal);
+  color: #1a1a1a;
   line-height: 1.8;
 }
 
 .room-06-error {
   font-family: var(--font-inter), sans-serif;
   font-size: 14px;
-  color: #ff4d4f;
+  color: #c2410c;
   margin-bottom: 0.75rem;
 }
 
