@@ -35,7 +35,13 @@ type ExternalNavItem = {
   tone: CardTone;
 };
 
-type NavItem = ScrollNavItem | LinkNavItem | ExternalNavItem;
+type LabelNavItem = {
+  kind: "label";
+  label: string;
+};
+
+type InteractiveNavItem = ScrollNavItem | LinkNavItem | ExternalNavItem;
+type NavItem = InteractiveNavItem | LabelNavItem;
 
 const ROUTE_ACTIVE_LABEL: Record<string, string> = {
   "/builds": "./builds",
@@ -44,6 +50,9 @@ const ROUTE_ACTIVE_LABEL: Record<string, string> = {
 const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: "~/home", tone: "cream" },
   { kind: "link", label: "./builds", href: "/builds", tone: "lavender" },
+  { kind: "scroll", id: "room-05", label: "./work-with-me", tone: "sage" },
+  { kind: "scroll", id: "room-06", label: ">_ contact", tone: "peach" },
+  { kind: "label", label: "MY APPS" },
   {
     kind: "external",
     label: "./orivela",
@@ -68,8 +77,6 @@ const navItems: NavItem[] = [
     href: "https://peeranimo.app/",
     tone: "sky",
   },
-  { kind: "scroll", id: "room-05", label: "./work-with-me", tone: "sage" },
-  { kind: "scroll", id: "room-06", label: ">_ contact", tone: "peach" },
 ];
 
 /** Fixed per-item tilt — max ±1.5deg */
@@ -97,7 +104,7 @@ function shouldShowNav(pathname: string): boolean {
 }
 
 function isNavItemActive(
-  item: NavItem,
+  item: InteractiveNavItem,
   activeLabel: string | null,
   activeRoom: string,
 ): boolean {
@@ -160,7 +167,7 @@ export default function NavBubbles() {
 
   const activeRoom = path === "/" ? scrollActiveRoom : "";
 
-  const handleSelect = (item: NavItem) => {
+  const handleSelect = (item: InteractiveNavItem) => {
     if (item.kind === "external") {
       window.open(item.href, "_blank", "noopener,noreferrer");
     } else if (item.kind === "link") {
@@ -224,6 +231,25 @@ export default function NavBubbles() {
           >
             <ul className="nav-hamburger-list">
               {navItems.map((item, index) => {
+                if (item.kind === "label") {
+                  return (
+                    <li
+                      key={`label-${item.label}`}
+                      className="nav-hamburger-pill-wrap nav-hamburger-pill-wrap--label"
+                      style={{
+                        ["--pill-delay" as string]: `${index * 40}ms`,
+                        ["--pill-rotate" as string]: "0deg",
+                      }}
+                      aria-hidden="true"
+                      role="presentation"
+                    >
+                      <div className="nav-hamburger-pill nav-hamburger-pill--label">
+                        {item.label}
+                      </div>
+                    </li>
+                  );
+                }
+
                 const active = isNavItemActive(item, activeLabel, activeRoom);
                 const key =
                   item.kind === "scroll"

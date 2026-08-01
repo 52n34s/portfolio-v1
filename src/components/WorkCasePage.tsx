@@ -142,7 +142,7 @@ export function WorkCaseContent({ workCase }: { workCase: WorkCase }) {
 
       <aside className="work-cta">
         <p className="work-cta-lead">{workCase.cta.lead}</p>
-        <Link href="/#contact" className="work-cta-btn">
+        <Link href="/contact" className="work-cta-btn">
           Get in touch →
         </Link>
       </aside>

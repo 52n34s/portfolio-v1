@@ -2202,6 +2202,39 @@ body {
   --pill-bg-active: #efcfa8;
 }
 
+.nav-hamburger-pill-wrap--label {
+  grid-column: 1 / -1;
+  /* 2× list gap (16px) — clear break between menu and apps */
+  margin-top: 32px;
+}
+
+.nav-hamburger-pill--label {
+  --pill-bg: #f5f0e8;
+  --pill-line: #c9c4bc;
+  /* Half the normal 3/2 card height */
+  aspect-ratio: 3 / 1;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  cursor: default;
+  pointer-events: none;
+  font-size: clamp(10px, 1.5vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  transform: none;
+}
+
+.nav-hamburger-pill--label:hover,
+.nav-hamburger-pill--label:focus-visible {
+  box-shadow: 2px 5px 14px rgba(26, 26, 26, 0.13);
+  transform: none;
+  background-color: var(--pill-bg);
+}
+
 .nav-hamburger-pill:hover,
 .nav-hamburger-pill:focus-visible {
   box-shadow: 3px 8px 20px rgba(26, 26, 26, 0.2);
@@ -2289,6 +2322,42 @@ body {
   }
 }
 
+/* /contact — reuses work-page shell; form keeps Room06 paper card */
+.contact-form-slot {
+  margin-top: 0.5rem;
+  max-width: 28rem;
+}
+
+.contact-form-slot .room-06-paper {
+  width: 100%;
+}
+
+.contact-form-slot .room-06-form-torn path {
+  fill: #0d0d0d;
+}
+
+.contact-alt-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-alt-list a {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 14px;
+  color: #7b5cf0;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(123, 92, 240, 0.35);
+  padding-bottom: 2px;
+}
+
+.contact-alt-list a:hover {
+  border-color: #7b5cf0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-hamburger-overlay {
     transition: opacity 150ms ease-out;
@@ -2340,6 +2409,11 @@ body {
     gap: 10px;
   }
 
+  .nav-hamburger-pill-wrap--label {
+    /* 2× list gap (10px) */
+    margin-top: 20px;
+  }
+
   .nav-hamburger-pill {
     /* Flat index-card strip: fill viewport without scroll, ≥44px tap target */
     aspect-ratio: auto;
@@ -2351,6 +2425,16 @@ body {
     align-items: flex-start;
     font-size: 16px;
     line-height: 1.15;
+  }
+
+  .nav-hamburger-pill--label {
+    aspect-ratio: auto;
+    height: max(28px, min(32px, calc((100dvh - 72px - 70px - 16px) / 16)));
+    min-height: 28px;
+    padding: 6px 12px;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 0.14em;
   }
 
   .nav-hamburger-pill.is-active::before {

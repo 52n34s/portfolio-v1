@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://52n34s.app/contact",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://52n34s.app/work/idea-to-mvp",
       lastModified,
       changeFrequency: "monthly",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
@@ -484,28 +485,28 @@ export default function AppsPage() {
 
       <footer className="flex flex-col items-center gap-4 px-6 pt-16 pb-8 md:px-12 md:pb-10">
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
-          <a
+          <Link
             href="/"
             className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-inter), sans-serif" }}
           >
             Curious who&apos;s behind these? → About Steffen
-          </a>
-          <a
+          </Link>
+          <Link
             href="/#room-05"
             className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-inter), sans-serif" }}
           >
             Have your own idea? → Work with Steffen
-          </a>
+          </Link>
         </div>
-        <a
+        <Link
           href="/"
           className="rounded-full border border-[#1A1A1A] px-5 py-2 text-[14px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#1A1A1A] hover:text-[#F5F0E8]"
           style={{ fontFamily: "var(--font-inter), sans-serif" }}
         >
           ← Home
-        </a>
+        </Link>
       </footer>
     </main>
   );
