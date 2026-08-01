@@ -38,6 +38,8 @@
     <rect x="430" y="128" width="130" height="12"/>
     <rect x="440" y="108" width="110" height="20"/>
     <rect x="478" y="98" width="34" height="10"/>
+    <circle cx="486" cy="96" r="4"/>
+    <circle cx="504" cy="96" r="4"/>
 
     <!-- verbindende niedrige Blöcke -->
     <rect x="564" y="160" width="28" height="60"/>
