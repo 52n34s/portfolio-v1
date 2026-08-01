@@ -3,23 +3,35 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
+type CardTone =
+  | "cream"
+  | "lilac"
+  | "teal"
+  | "gold"
+  | "coral"
+  | "lilac-alt"
+  | "teal-alt";
+
 type ScrollNavItem = {
   kind: "scroll";
   id: string;
   label: string;
   href?: string;
+  tone: CardTone;
 };
 
 type LinkNavItem = {
   kind: "link";
   href: string;
   label: string;
+  tone: CardTone;
 };
 
 type ExternalNavItem = {
   kind: "external";
   href: string;
   label: string;
+  tone: CardTone;
 };
 
 type NavItem = ScrollNavItem | LinkNavItem | ExternalNavItem;
@@ -29,34 +41,37 @@ const ROUTE_ACTIVE_LABEL: Record<string, string> = {
 };
 
 const navItems: NavItem[] = [
-  { kind: "scroll", id: "room-01", label: ">_ boot" },
-  { kind: "scroll", id: "room-02", label: "~/home" },
-  { kind: "link", label: "./builds", href: "/builds" },
+  { kind: "scroll", id: "room-01", label: "~/home", tone: "cream" },
+  { kind: "link", label: "./builds", href: "/builds", tone: "lilac" },
   {
     kind: "external",
     label: "./orivela",
     href: "https://www.orivela.app/",
+    tone: "teal",
   },
   {
     kind: "external",
     label: "./kolibi",
     href: "https://kolibi.app/",
+    tone: "gold",
   },
   {
     kind: "external",
     label: "./carpincho",
     href: "https://carpincho.app/",
+    tone: "coral",
   },
   {
     kind: "external",
     label: "~/peeranimo",
     href: "https://peeranimo.app/",
+    tone: "lilac-alt",
   },
-  { kind: "scroll", id: "room-05", label: "./work-with-me" },
-  { kind: "scroll", id: "room-06", label: ">_ contact" },
+  { kind: "scroll", id: "room-05", label: "./work-with-me", tone: "teal-alt" },
+  { kind: "scroll", id: "room-06", label: ">_ contact", tone: "cream" },
 ];
 
-/** Fixed per-item tilt — matches app-card paper feel, max ±1.5deg */
+/** Fixed per-item tilt — max ±1.5deg */
 const PILL_ROTATIONS = [
   "-1.2deg",
   "0.8deg",
@@ -66,10 +81,9 @@ const PILL_ROTATIONS = [
   "0.3deg",
   "1.1deg",
   "-0.9deg",
-  "0.6deg",
 ] as const;
 
-const ROOM_IDS = ["room-01", "room-02", "room-05", "room-06"];
+const ROOM_IDS = ["room-01", "room-05", "room-06"];
 
 function normalizePathname(pathname: string): string {
   if (!pathname || pathname === "/") return "/";
@@ -206,6 +220,9 @@ export default function NavBubbles() {
                 item.kind === "scroll"
                   ? `${item.id}-${item.label}`
                   : `${item.kind}-${item.href}`;
+              const pillClass = `nav-hamburger-pill nav-hamburger-pill--${item.tone}${
+                active ? " is-active" : ""
+              }`;
 
               return (
                 <li
@@ -223,7 +240,7 @@ export default function NavBubbles() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setMenuOpen(false)}
-                      className="nav-hamburger-pill"
+                      className={pillClass}
                     >
                       {item.label}
                     </a>
@@ -231,7 +248,7 @@ export default function NavBubbles() {
                     <button
                       type="button"
                       onClick={() => handleSelect(item)}
-                      className={`nav-hamburger-pill${active ? " is-active" : ""}`}
+                      className={pillClass}
                       aria-current={active ? "page" : undefined}
                     >
                       {item.label}

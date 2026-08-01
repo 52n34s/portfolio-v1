@@ -723,7 +723,7 @@ export default function HomeCollage() {
               />
               <Clickable
                 label="Why I wear colors"
-                scrollTo="#room-02"
+                scrollTo="#room-05"
                 className="left-0 top-[45%] h-[55%] w-full"
               >
                 <span className="block h-full w-full" aria-hidden="true" />

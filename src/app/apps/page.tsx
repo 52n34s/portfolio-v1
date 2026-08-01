@@ -446,7 +446,7 @@ export default function AppsPage() {
       <footer className="flex flex-col items-center gap-4 px-6 pt-16 pb-8 md:px-12 md:pb-10">
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
           <a
-            href="/#room-02"
+            href="/"
             className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
             style={{ fontFamily: "var(--font-inter), sans-serif" }}
           >

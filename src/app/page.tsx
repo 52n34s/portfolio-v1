@@ -1,37 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import HomeCollage from "@/components/HomeCollage";
-import Room02 from "@/components/Room02";
-import Room04 from "@/components/Room04";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
 
 export default function Home() {
-  const [room02Visible, setRoom02Visible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.target.id === "room-02") {
-            setRoom02Visible(true);
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-
-    const roomIds = ["room-01", "room-02", "room-05", "room-06"];
-
-    roomIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <div className="sr-only">
@@ -62,8 +35,6 @@ export default function Home() {
         kann der tote Boot-Code endgültig entfernt werden.
       */}
 
-      <Room02 visible={room02Visible} />
-      <Room04 visible />
       <Room05 />
       <Room06 />
     </>
