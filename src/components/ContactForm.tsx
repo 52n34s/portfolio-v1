@@ -153,7 +153,9 @@ export default function ContactForm({
             disabled={isSubmitting}
             className="room-06-submit"
           >
-            {isSubmitting ? "Sending..." : "Send — let's build something real"}
+            {isSubmitting
+              ? "Sending..."
+              : "Send it. Let's build something real."}
           </button>
         </form>
       )}

@@ -1,18 +1,19 @@
 export const CONTACT_USPS = [
   {
     title: "From idea to launch.",
-    subtitle: "Full product thinking, not just implementation.",
+    subtitle: "Full product thinking, every step of the way.",
   },
   {
-    title: "I architect systems, not just pages.",
+    title: "I architect systems that scale.",
     subtitle: "Clean data models. Scalable from day one.",
   },
   {
     title: "Business thinking built in.",
-    subtitle: "Revenue models, retention, growth — not just features.",
+    subtitle:
+      "Revenue models, retention, growth: the business behind the build.",
   },
   {
-    title: "10+ platforms. Real products.",
+    title: "A decade of platforms. Real products.",
     subtitle: "Self-built and client projects across multiple industries.",
   },
 ] as const;

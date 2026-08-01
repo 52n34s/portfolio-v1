@@ -1409,7 +1409,7 @@ body {
 .room-05 {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  /* no min-height: cards link out; no expand panel needs viewport fill */
   /* visible y so skyline roofs can sit on the cream→dark seam above */
   overflow-x: clip;
   overflow-y: visible;
@@ -1468,7 +1468,7 @@ body {
   z-index: 1;
   max-width: 900px;
   margin: 0 auto;
-  padding: 5rem 2rem 4rem;
+  padding: 5rem 2rem 3rem;
 }
 
 .room-05-label {
@@ -1492,7 +1492,8 @@ body {
   font-family: var(--font-inter), sans-serif;
   font-weight: 300;
   font-size: 15px;
-  color: #555;
+  /* secondary cream — readable on #0e1620, quieter than H1 */
+  color: rgba(245, 240, 232, 0.72);
   line-height: 1.6;
 }
 
@@ -1619,7 +1620,7 @@ body {
   }
 
   .room-05-inner {
-    padding: 4rem 1.25rem 3rem;
+    padding: 4rem 1.25rem 2.5rem;
   }
 
   .room-05-cases {
@@ -4486,8 +4487,9 @@ body {
 }
 
 .work-bullets li {
-  position: relative;
-  padding-left: 1.15rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
   font-family: var(--font-inter), sans-serif;
   font-size: 16px;
   line-height: 1.55;
@@ -4496,12 +4498,13 @@ body {
 
 .work-bullets li::before {
   content: "→";
-  position: absolute;
-  left: 0;
+  flex-shrink: 0;
   color: #7b5cf0;
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 13px;
-  top: 0.15em;
+  line-height: 1.55;
+  /* optical align with first text line */
+  margin-top: 0.12em;
 }
 
 .work-steps {

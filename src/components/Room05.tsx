@@ -37,7 +37,7 @@ export default function Room05() {
             situation?
           </h2>
           <p className="room-05-sub">
-            Pick your case — I&apos;ll take you through how I work.
+            Pick your case. I&apos;ll take you through how I work.
           </p>
           <Link href="/work" className="room-05-all-link">
             See all six →
