@@ -4396,8 +4396,7 @@ body {
   font-family: var(--font-display), sans-serif;
   font-weight: 700;
   font-size: clamp(28px, 5.5vw, 44px);
-  /* Clash Display has tight word spaces; -0.03em made gaps look missing */
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   line-height: 1.12;
   color: #f5f0e8;
 }
@@ -4428,7 +4427,7 @@ body {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
   font-size: clamp(20px, 3vw, 26px);
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   line-height: 1.2;
   color: #f5f0e8;
 }
@@ -4545,7 +4544,7 @@ body {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
   font-size: 17px;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: #f5f0e8;
 }
 
@@ -4562,7 +4561,7 @@ body {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
   font-size: clamp(20px, 3vw, 24px);
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   line-height: 1.25;
   color: #f5f0e8;
 }
@@ -4656,7 +4655,7 @@ body {
   font-family: var(--font-display), sans-serif;
   font-weight: 600;
   font-size: clamp(17px, 3vw, 20px);
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   line-height: 1.25;
   color: #f5f0e8;
 }
