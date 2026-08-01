@@ -100,7 +100,10 @@ export default function Room06() {
   };
 
   return (
-    <section id="room-06" className="room-06" aria-labelledby="room-06-heading">
+    <section id="room-06" className="room-06">
+      <div id="contact" className="sr-only">
+        Contact
+      </div>
       <div className="room-06-inner">
         {/* Left — USPs */}
         <div className="room-06-left">

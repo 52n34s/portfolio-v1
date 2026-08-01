@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Orivela — Steffen",
   description:
     "AI-powered iOS vault for personal records — shipped to the App Store. End-to-end encrypted, plain-language search, document scanning.",
+  alternates: { canonical: "/builds/orivela" },
 };
 
 export default function OrivelaBuildPage() {

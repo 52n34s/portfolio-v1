@@ -4,6 +4,7 @@ import BuildsCorkboard from "@/components/BuildsCorkboard";
 export const metadata: Metadata = {
   title: "Builds — Steffen",
   description: "Selected projects and shipped products.",
+  alternates: { canonical: "/builds" },
 };
 
 export default function BuildsIndexPage() {

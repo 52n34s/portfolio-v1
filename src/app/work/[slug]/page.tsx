@@ -5,10 +5,7 @@ import {
   WorkJsonLd,
   WorkPageShell,
 } from "@/components/WorkCasePage";
-import {
-  getWorkCase,
-  workCaseSlugs,
-} from "@/data/work-cases";
+import { getWorkCase, workCaseSlugs } from "@/data/work-cases";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -31,12 +28,18 @@ export async function generateMetadata({
     title: workCase.title,
     description: workCase.description,
     alternates: {
-      canonical: `https://52n34s.app/work/${workCase.slug}`,
+      canonical: `/work/${workCase.slug}`,
+    },
+    openGraph: {
+      title: workCase.title,
+      description: workCase.description,
+      url: `https://52n34s.app/work/${workCase.slug}`,
+      type: "website",
     },
   };
 }
 
-export default async function WorkCasePage({ params }: PageProps) {
+export default async function WorkCaseRoute({ params }: PageProps) {
   const { slug } = await params;
   const workCase = getWorkCase(slug);
   if (!workCase) notFound();

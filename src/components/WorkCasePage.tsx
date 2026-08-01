@@ -1,4 +1,5 @@
 import Link from "next/link";
+import FaqSchema from "@/components/FaqSchema";
 import type { WorkCase, WorkSection } from "@/data/work-cases";
 
 function FaqAnswer({ text }: { text: string }) {
@@ -46,10 +47,12 @@ function SectionBlock({ section }: { section: WorkSection }) {
           <ol className="work-steps">
             {section.steps.map((step, i) => (
               <li key={step.title}>
-                <p className="work-step-title">
-                  <span className="work-step-num">{i + 1}.</span> {step.title}
+                <p className="work-step-body">
+                  <strong>
+                    {i + 1}. {step.title}
+                  </strong>{" "}
+                  {step.body}
                 </p>
-                <p className="work-step-body">{step.body}</p>
               </li>
             ))}
           </ol>
@@ -74,8 +77,9 @@ function SectionBlock({ section }: { section: WorkSection }) {
           <ul className="work-named-list">
             {section.items.map((item) => (
               <li key={item.title}>
-                <p className="work-named-title">{item.title}</p>
-                <p className="work-named-body">{item.body}</p>
+                <p className="work-named-body">
+                  <strong>{item.title}</strong> {item.body}
+                </p>
               </li>
             ))}
           </ul>
@@ -86,9 +90,31 @@ function SectionBlock({ section }: { section: WorkSection }) {
   }
 }
 
+export function WorkBreadcrumb({
+  pageLabel,
+}: {
+  pageLabel: string;
+}) {
+  return (
+    <nav className="work-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/work">Work</Link>
+        </li>
+        <li aria-current="page">{pageLabel}</li>
+      </ol>
+    </nav>
+  );
+}
+
 export function WorkCaseContent({ workCase }: { workCase: WorkCase }) {
   return (
     <article className="work-article">
+      <WorkBreadcrumb pageLabel={workCase.h1} />
+
       <header className="work-header">
         <p className="work-label">{workCase.command}</p>
         <h1 className="work-h1">{workCase.h1}</h1>
@@ -116,8 +142,8 @@ export function WorkCaseContent({ workCase }: { workCase: WorkCase }) {
 
       <aside className="work-cta">
         <p className="work-cta-lead">{workCase.cta.lead}</p>
-        <Link href="/#room-06" className="work-cta-btn">
-          {workCase.cta.label} →
+        <Link href="/#contact" className="work-cta-btn">
+          Get in touch →
         </Link>
       </aside>
 
@@ -172,46 +198,53 @@ export function WorkPageShell({
 export function WorkJsonLd({ workCase }: { workCase: WorkCase }) {
   const pageUrl = `https://52n34s.app/work/${workCase.slug}`;
 
-  const faqPage = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: workCase.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${pageUrl}#service`,
     name: workCase.serviceName,
     description: workCase.description,
     url: pageUrl,
-    provider: {
-      "@type": "ProfessionalService",
-      name: "52N34S Group",
-      url: "https://52n34s.app",
-      provider: {
-        "@type": "Person",
-        name: "Steffen Giebler",
+    provider: { "@id": "https://52n34s.app/#steffen" },
+    areaServed: { "@type": "Place", name: "Worldwide" },
+    availableLanguage: ["en", "de", "es"],
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://52n34s.app",
       },
-    },
-    areaServed: "Worldwide",
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Work",
+        item: "https://52n34s.app/work",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: workCase.h1,
+        item: pageUrl,
+      },
+    ],
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
-      />
+      <FaqSchema questions={workCase.faqs} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
     </>
   );

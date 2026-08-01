@@ -21,18 +21,16 @@ export type WorkSection =
 
 export type WorkCase = {
   slug: string;
-  /** Homepage / Room05 terminal-style label — unchanged visually */
   command: string;
   title: string;
   description: string;
   h1: string;
-  /** One-line summary for /work index cards */
   summary: string;
-  /** Service schema name */
+  /** Service schema name — page title without "| 52N34S" */
   serviceName: string;
   sections: WorkSection[];
   faqs: WorkFaq[];
-  cta: { lead: string; label: string };
+  cta: { lead: string };
   related: { slug: string; label: string }[];
 };
 
@@ -47,7 +45,8 @@ export const workCases: WorkCase[] = [
     h1: "You have an idea. You can't build it yourself.",
     summary:
       "From raw idea to a shipped product in the hands of real users.",
-    serviceName: "Idea to MVP — App Development",
+    serviceName:
+      "From Idea to MVP — App Development for Non-Technical Founders",
     sections: [
       {
         type: "paragraphs",
@@ -136,7 +135,6 @@ export const workCases: WorkCase[] = [
     ],
     cta: {
       lead: "Pitch me your idea. We'll take it apart together.",
-      label: "Get in touch",
     },
     related: [
       { slug: "choose-tech-stack", label: "Which tech stack?" },
@@ -153,7 +151,7 @@ export const workCases: WorkCase[] = [
     h1: "You need to know what you're buying before you buy it.",
     summary:
       "A written architecture you can hand to any developer or agency.",
-    serviceName: "Technical Blueprint & Product Architecture",
+    serviceName: "Technical Blueprint & Product Architecture Before You Hire",
     sections: [
       {
         type: "paragraphs",
@@ -234,7 +232,6 @@ export const workCases: WorkCase[] = [
     ],
     cta: {
       lead: "Send me what you have. I'll tell you what's missing.",
-      label: "Get in touch",
     },
     related: [
       { slug: "idea-to-mvp", label: "Idea to MVP" },
@@ -251,7 +248,8 @@ export const workCases: WorkCase[] = [
     h1: "You paid for something. It doesn't work.",
     summary:
       "Audit what's there, salvage what's worth it, take it forward.",
-    serviceName: "Rescue a Broken Build",
+    serviceName:
+      "Rescue a Broken Build — Take Over a Failed Development Project",
     sections: [
       {
         type: "paragraphs",
@@ -303,9 +301,9 @@ export const workCases: WorkCase[] = [
       },
       {
         type: "heading-block",
-        heading: "On access",
+        heading: "First: get control of your own assets",
         body: [
-          "Before anything else you need control of your own assets: the repo, the hosting, the domain, the database, the App Store account. If a former developer holds any of these, that's the first thing we fix. I'll walk you through recovering each one.",
+          "Before anything else you need control of the repo, the hosting, the domain, the database and the App Store account. If a former developer holds any of these, that's the first thing we fix. I'll walk you through recovering each one.",
         ],
       },
     ],
@@ -332,7 +330,6 @@ export const workCases: WorkCase[] = [
     ],
     cta: {
       lead: "Tell me what happened. I'll tell you where you stand.",
-      label: "Get in touch",
     },
     related: [
       { slug: "technical-blueprint", label: "Technical blueprint" },
@@ -348,7 +345,7 @@ export const workCases: WorkCase[] = [
     h1: "You don't need a contractor. You need a counterpart.",
     summary:
       "A technical counterpart on retainer — not a contractor.",
-    serviceName: "Technical Partner & Fractional CTO",
+    serviceName: "Technical Partner & Fractional CTO for Founders",
     sections: [
       {
         type: "paragraphs",
@@ -388,7 +385,7 @@ export const workCases: WorkCase[] = [
           },
           {
             title: "Business thinking.",
-            body: 'Pricing, retention, what the numbers mean, which feature actually moves revenue. This is the part most technical people leave out and it\'s why the positioning on this site is "I build businesses, not just software."',
+            body: 'Pricing, retention, what the numbers mean, which feature actually moves revenue. This is the part most technical people leave out, and it\'s why the positioning on this site is "I build businesses, not just software."',
           },
           {
             title: "Investor conversations.",
@@ -436,7 +433,6 @@ export const workCases: WorkCase[] = [
     ],
     cta: {
       lead: "Let's find out if this fits.",
-      label: "Get in touch",
     },
     related: [
       { slug: "idea-to-mvp", label: "Idea to MVP" },
@@ -453,7 +449,7 @@ export const workCases: WorkCase[] = [
     h1: "You have a product. It needs one more thing.",
     summary:
       "One well-defined feature, scoped, priced, and shipped.",
-    serviceName: "Feature Development",
+    serviceName: "Feature Development — Add One Thing to an Existing Product",
     sections: [
       {
         type: "paragraphs",
@@ -537,7 +533,6 @@ export const workCases: WorkCase[] = [
     ],
     cta: {
       lead: "Send me the feature. I'll send you a number.",
-      label: "Get in touch",
     },
     related: [{ slug: "technical-partner", label: "Technical partner" }],
   },
@@ -551,7 +546,8 @@ export const workCases: WorkCase[] = [
     h1: "Everyone's told you something different.",
     summary:
       "An honest stack recommendation with no vendor incentive.",
-    serviceName: "Tech Stack Advisory",
+    serviceName:
+      "Which Tech Stack Should You Use? Independent Technical Advice",
     sections: [
       {
         type: "paragraphs",
@@ -638,7 +634,6 @@ export const workCases: WorkCase[] = [
     ],
     cta: {
       lead: "Tell me what you're building. I'll tell you what to use.",
-      label: "Get in touch",
     },
     related: [
       { slug: "technical-blueprint", label: "Technical blueprint" },
