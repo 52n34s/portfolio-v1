@@ -1410,7 +1410,9 @@ body {
   position: relative;
   width: 100vw;
   min-height: 100vh;
-  overflow: hidden;
+  /* visible y so skyline roofs can sit on the cream→dark seam above */
+  overflow-x: clip;
+  overflow-y: visible;
   background-color: #0e1620;
   background-image:
     linear-gradient(rgba(123, 92, 240, 0.16) 1px, transparent 1px),
@@ -1418,6 +1420,30 @@ body {
     linear-gradient(rgba(123, 92, 240, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(123, 92, 240, 0.07) 1px, transparent 1px);
   background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+}
+
+/* Berlin skyline on the HomeCollage → Room05 seam */
+.skyline-seam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 120px;
+  transform: translateY(-40%);
+  z-index: 2;
+  background-image: url("/skyline-tile.svg");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: auto 100%;
+  color: #0e1620;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .skyline-seam {
+    height: 72px;
+    transform: translateY(-36%);
+  }
 }
 
 .room-05-ghost {

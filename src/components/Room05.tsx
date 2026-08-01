@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SkylineSeam from "@/components/SkylineSeam";
 
 const CASES = [
   { command: "./i-have-an-idea", href: "/work/idea-to-mvp" },
@@ -22,6 +23,7 @@ const CASE_ROTATIONS = [
 export default function Room05() {
   return (
     <section id="room-05" className="room-05" aria-labelledby="room-05-heading">
+      <SkylineSeam />
       <div className="room-05-ghost" aria-hidden="true">
         WORK
       </div>
