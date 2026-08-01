@@ -1940,7 +1940,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   width: 100%;
-  max-width: 280px;
+  max-width: min(400px, calc(100vw - 80px));
   margin: 0;
   padding: 0;
   background: transparent;
@@ -1957,16 +1957,16 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
+  width: 100%;
   pointer-events: none;
 }
 
 .nav-hamburger-pill-wrap {
   width: 100%;
+  min-width: 0;
   pointer-events: none;
 }
 
@@ -1976,23 +1976,42 @@ body {
 }
 
 .nav-hamburger-pill {
+  --pill-header-y: 34%;
+  --pill-line-gap: 14px;
+  position: relative;
+  z-index: 0;
   display: flex;
   width: 100%;
-  align-items: center;
+  aspect-ratio: 3 / 2;
+  align-items: flex-start;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 8px;
   pointer-events: auto;
   border: none;
   border-radius: 6px;
-  border-top: 1px solid var(--pill-rule);
-  background: var(--pill-bg);
-  padding: 16px 20px 16px 24px;
+  background-color: var(--pill-bg);
+  /* Fine ruled lines below the header band; solid cover keeps text clear */
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--pill-bg) 0,
+      var(--pill-bg) calc(var(--pill-header-y) + 8px),
+      transparent calc(var(--pill-header-y) + 8px)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--pill-line-gap) - 1px),
+      var(--pill-line) calc(var(--pill-line-gap) - 1px),
+      var(--pill-line) var(--pill-line-gap)
+    );
+  padding: calc(var(--pill-header-y) + 4px) 12px 10px 20px;
   cursor: pointer;
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(18px, 3.5vw, 22px);
+  font-size: clamp(14px, 2.6vw, 17px);
   font-weight: 500;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.15;
   color: #1a1a1a;
   text-align: left;
   text-decoration: none;
@@ -2001,48 +2020,61 @@ body {
   transition:
     box-shadow 150ms ease-out,
     transform 150ms ease-out,
-    background 150ms ease-out;
+    background-color 150ms ease-out;
+}
+
+/* Red index-card header rule — full bleed */
+.nav-hamburger-pill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--pill-header-y);
+  height: 1px;
+  background: #c25b4a;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .nav-hamburger-pill--cream {
   --pill-bg: #f5f0e8;
-  --pill-rule: #c4bfb5;
+  --pill-line: #c4bfb5;
   --pill-bg-active: #e8e0d2;
 }
 
 .nav-hamburger-pill--lilac {
   --pill-bg: #e8e0fc;
-  --pill-rule: #b8a8e0;
+  --pill-line: #b8aed4;
   --pill-bg-active: #c9b6f5;
 }
 
 .nav-hamburger-pill--teal {
   --pill-bg: #d4f5ef;
-  --pill-rule: #9fd4c8;
+  --pill-line: #a5ccc4;
   --pill-bg-active: #9ee5d6;
 }
 
 .nav-hamburger-pill--gold {
   --pill-bg: #fbf0c4;
-  --pill-rule: #e0d08a;
+  --pill-line: #d4c896;
   --pill-bg-active: #f0d978;
 }
 
 .nav-hamburger-pill--coral {
   --pill-bg: #f5d4c4;
-  --pill-rule: #d9a890;
+  --pill-line: #d0a898;
   --pill-bg-active: #e8a888;
 }
 
 .nav-hamburger-pill--lilac-alt {
   --pill-bg: #ddd4f0;
-  --pill-rule: #b0a3d4;
+  --pill-line: #b0a6c8;
   --pill-bg-active: #b8a6e0;
 }
 
 .nav-hamburger-pill--teal-alt {
   --pill-bg: #c8efe8;
-  --pill-rule: #94cfc4;
+  --pill-line: #9cc8c0;
   --pill-bg-active: #8fd9cb;
 }
 
@@ -2055,7 +2087,21 @@ body {
 }
 
 .nav-hamburger-pill.is-active {
-  background: var(--pill-bg-active);
+  background-color: var(--pill-bg-active);
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--pill-bg-active) 0,
+      var(--pill-bg-active) calc(var(--pill-header-y) + 8px),
+      transparent calc(var(--pill-header-y) + 8px)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--pill-line-gap) - 1px),
+      var(--pill-line) calc(var(--pill-line-gap) - 1px),
+      var(--pill-line) var(--pill-line-gap)
+    );
   color: #1a1a1a;
   font-weight: 500;
 }
@@ -2063,16 +2109,19 @@ body {
 .nav-hamburger-pill.is-active::before {
   content: "";
   display: block;
+  position: relative;
+  z-index: 2;
   width: 6px;
   height: 6px;
   flex-shrink: 0;
+  margin-top: 0.35em;
   border-radius: 50%;
   background: #7b5cf0;
 }
 
 .nav-hamburger-pill.is-active:hover,
 .nav-hamburger-pill.is-active:focus-visible {
-  background: var(--pill-bg-active);
+  background-color: var(--pill-bg-active);
   color: #1a1a1a;
   box-shadow: 3px 8px 20px rgba(26, 26, 26, 0.2);
   transform: rotate(var(--pill-rotate, 0deg)) scale(1.02);
@@ -2118,7 +2167,7 @@ body {
 @media (max-width: 1023px) {
   .nav-hamburger-overlay {
     right: 40px;
-    max-width: 260px;
+    max-width: min(360px, calc(100vw - 56px));
   }
 }
 
@@ -2132,6 +2181,10 @@ body {
     top: 80px;
     right: 24px;
     max-width: calc(100vw - 48px);
+  }
+
+  .nav-hamburger-list {
+    grid-template-columns: 1fr;
   }
 }
 
