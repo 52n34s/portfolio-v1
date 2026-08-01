@@ -48,7 +48,7 @@ function FormTornEdge() {
       aria-hidden="true"
     >
       <path
-        fill="#0d0d0d"
+        fill="#0E1620"
         d="M0 14 L0 6 L20 12 L40 4 L60 11 L80 3 L100 12 L120 5 L140 11 L160 2 L180 10 L200 4 L220 12 L240 3 L260 11 L280 5 L300 12 L320 6 L320 14 Z"
       />
     </svg>
