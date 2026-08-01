@@ -5,8 +5,8 @@ import { legal } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Impressum — 52N34S",
   description: "Anbieterkennzeichnung nach § 5 DDG für 52n34s.app.",
-  robots: { index: true, follow: true },
-  alternates: { canonical: "https://52n34s.app/imprint" },
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/imprint" },
 };
 
 function Section({

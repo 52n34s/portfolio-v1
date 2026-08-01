@@ -1,23 +1,26 @@
 # 52N34S — Steffen Giebler
 
-> Solo founder and software developer in Berlin Mitte. Builds own
-> apps and turns founders' ideas into shipped products.
+> Solo founder and product developer based in Berlin Mitte, Germany, operating as 52N34S Group. Builds and ships his own mobile and web applications, and works with founders to turn early ideas into production products.
+
+## About
+Steffen Giebler is a solo founder and software developer in Berlin Mitte. He has shipped four of his own apps and built more than ten platforms in total, both self-founded and for clients. He is available for freelance product development, software architecture, and long-term product partnerships. He works remotely worldwide and in English.
 
 ## Products
-- [Orivela](https://orivela.app): Personal records vault for iOS
-  and Android. Documents, contracts and subscriptions, searchable
-  in plain language.
-- [Kolibi](https://kolibi.app): AI photo calorie tracker for iOS
-  and Android. One photo per meal.
-- [Peeranimo](https://peeranimo.app): Peer-matching social
-  platform on the web.
-- [Carpincho](https://carpincho.app): Spanish learning app,
-  1,000 high-frequency words, three regional variants. Waitlist.
+- Orivela (https://www.orivela.app/): Personal records vault for iOS and Android. Stores documents, contracts and subscriptions and answers questions about them in plain language. Live on the App Store.
+- Kolibi (https://apps.apple.com/us/app/kolibi/id6790129149): AI photo calorie tracker for iOS and Android. Reads a meal from a single photo. Live on the App Store.
+- Peeranimo (https://peeranimo.app/): Peer-matching social platform on the web. Connects people who are in the same chapter of life. Live.
+- Carpincho (https://carpincho.app/): Spanish learning app focused on the 1,000 highest-frequency words, in Rioplatense, neutral Latin American and Spanish variants. Waitlist.
 
 ## Services
-- [Work with me](https://52n34s.app/#room-05): Freelance product
-  development, software architecture, product partnerships.
+- From idea to MVP: https://52n34s.app/work/idea-to-mvp
+- Technical blueprint and architecture: https://52n34s.app/work/technical-blueprint
+- Rescuing broken or abandoned builds: https://52n34s.app/work/rescue-broken-build
+- Long-term technical partnership / fractional CTO: https://52n34s.app/work/technical-partner
+- Single feature development in an existing product: https://52n34s.app/work/feature-development
+- Independent tech stack advice: https://52n34s.app/work/choose-tech-stack
+
+## Stack
+TypeScript, Next.js, React, React Native, Node, Postgres, Supabase, Vercel.
 
 ## Contact
-- [Contact form](https://52n34s.app/#room-06)
-- Email: steffen@52n34s.com
+steffen@52n34s.com — https://52n34s.app

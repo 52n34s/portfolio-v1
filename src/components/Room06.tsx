@@ -100,13 +100,13 @@ export default function Room06() {
   };
 
   return (
-    <section id="room-06" className="room-06">
+    <section id="room-06" className="room-06" aria-labelledby="room-06-heading">
       <div className="room-06-inner">
         {/* Left — USPs */}
         <div className="room-06-left">
           <p className="room-06-label">{">_ contact"}</p>
 
-          <h2 className="room-06-headline">
+          <h2 id="room-06-heading" className="room-06-headline">
             Let&apos;s build
             <br />
             something real.
@@ -123,9 +123,9 @@ export default function Room06() {
           <ul className="room-06-usps">
             {USPS.map((usp) => (
               <li key={usp.title} className="room-06-usp">
-                <p className="room-06-usp-title">
+                <h3 className="room-06-usp-title">
                   <span className="room-06-arrow">→</span> {usp.title}
-                </p>
+                </h3>
                 <p className="room-06-usp-sub">{usp.subtitle}</p>
               </li>
             ))}
@@ -137,7 +137,7 @@ export default function Room06() {
                 key={link.label}
                 href={link.href}
                 {...(link.href.startsWith("http")
-                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  ? { target: "_blank", rel: "noopener" }
                   : {})}
                 className="room-06-social-btn"
               >

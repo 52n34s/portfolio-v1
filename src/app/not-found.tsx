@@ -1,10 +1,6 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function NotFound() {
-  const router = useRouter();
-
   return (
     <main className="not-found">
       <div className="not-found-inner">
@@ -17,13 +13,17 @@ export default function NotFound() {
           </span>
         </p>
         <p className="not-found-subtext">this path doesn&apos;t exist. yet.</p>
-        <button
-          type="button"
-          className="not-found-home-btn"
-          onClick={() => router.push("/")}
-        >
-          {"> cd ~/"}
-        </button>
+        <nav className="not-found-nav" aria-label="Useful links">
+          <Link href="/" className="not-found-home-btn">
+            {"> cd ~/"}
+          </Link>
+          <Link href="/work" className="not-found-link">
+            /work
+          </Link>
+          <Link href="/apps" className="not-found-link">
+            /apps
+          </Link>
+        </nav>
       </div>
     </main>
   );

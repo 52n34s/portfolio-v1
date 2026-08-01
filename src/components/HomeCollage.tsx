@@ -108,7 +108,7 @@ function AppIdentity({
         className="h-[48px] w-[48px] rounded-[11px] border border-black/10 object-cover"
       />
       <div className="leading-tight">
-        <p className="text-[14px] font-medium text-[#1A1A1A]">{name}</p>
+        <h3 className="m-0 text-[14px] font-medium text-[#1A1A1A]">{name}</h3>
         <p className="text-[11px] text-[#1A1A1A]/55">{platform}</p>
       </div>
     </div>
@@ -132,7 +132,7 @@ function AppObjectShell({
   minHeight?: number;
 }) {
   return (
-    <div
+    <article
       className={`relative flex w-full max-w-full flex-col overflow-visible ${className}`}
       style={{
         width: "100%",
@@ -150,7 +150,7 @@ function AppObjectShell({
       {children}
       <div className="relative z-10">{footer}</div>
       <OpenPill className="relative z-10 mt-auto self-start" />
-    </div>
+    </article>
   );
 }
 
@@ -201,7 +201,7 @@ function Clickable({
         className={`${posClass} ${className}`}
         style={style}
         {...(external
-          ? { target: "_blank", rel: "noopener noreferrer" }
+          ? { target: "_blank", rel: "noopener" }
           : {})}
       >
         {content}
@@ -288,7 +288,7 @@ function HeadlineOnly({
         : "text-[48px]";
 
   return (
-    <h1
+    <p
       className={`leading-[1.1] tracking-tight text-[#1A1A1A] ${sizeClass} ${className}`}
       style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
     >
@@ -297,7 +297,7 @@ function HeadlineOnly({
       Find the way while walking.
       <br />
       Trust the process.
-    </h1>
+    </p>
   );
 }
 
@@ -678,6 +678,10 @@ export default function HomeCollage() {
 
   return (
     <div id="room-01">
+      <h1 className="sr-only">
+        Steffen Giebler — Product Developer and Indie Founder in Berlin
+      </h1>
+      <h2 className="sr-only">Apps</h2>
       {layout === "desktop" && (
         <section
           ref={stageRef}
@@ -718,7 +722,7 @@ export default function HomeCollage() {
             >
               <img
                 src="/me-steffen.png"
-                alt="Steffen Giebler, founder and developer, Berlin"
+                alt="Steffen Giebler, product developer and indie founder, Berlin"
                 className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
               />
               <Clickable
@@ -786,7 +790,7 @@ export default function HomeCollage() {
 
           <img
             src="/me-steffen.png"
-            alt="Steffen Giebler, founder and developer, Berlin"
+            alt="Steffen Giebler, product developer and indie founder, Berlin"
             className="mx-auto mt-12 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
 
@@ -837,7 +841,7 @@ export default function HomeCollage() {
 
           <img
             src="/me-steffen.png"
-            alt="Steffen Giebler, founder and developer, Berlin"
+            alt="Steffen Giebler, product developer and indie founder, Berlin"
             className="mx-auto mt-8 h-[280px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
 

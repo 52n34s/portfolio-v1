@@ -5,8 +5,8 @@ import { legal } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Imprint — 52N34S",
   description: "Legal notice for 52n34s.app under German law (§ 5 DDG).",
-  robots: { index: true, follow: true },
-  alternates: { canonical: "https://52n34s.app/imprint/en" },
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/imprint/en" },
 };
 
 function Section({

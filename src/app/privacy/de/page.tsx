@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "Datenschutzerklärung — 52N34S",
   description:
     "Wie 52n34s.app mit personenbezogenen Daten umgeht. Kein Analytics, kein Tracking, kein Cookie-Banner.",
-  robots: { index: true, follow: true },
-  alternates: { canonical: "https://52n34s.app/privacy/de" },
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/privacy/de" },
 };
 
 function Section({

@@ -37,11 +37,11 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  authors: [{ name: "Steffen Giebler" }],
+  authors: [{ name: "Steffen Giebler", url: "https://52n34s.app" }],
   creator: "Steffen Giebler",
   metadataBase: new URL("https://52n34s.app"),
   alternates: {
-    canonical: "https://52n34s.app",
+    canonical: "/",
   },
   openGraph: {
     title: TITLE,

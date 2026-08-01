@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "Privacy Policy — 52N34S",
   description:
     "How 52n34s.app handles personal data. No analytics, no tracking, no cookie banner.",
-  robots: { index: true, follow: true },
-  alternates: { canonical: "https://52n34s.app/privacy" },
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/privacy" },
 };
 
 function Section({

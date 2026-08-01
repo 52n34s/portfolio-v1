@@ -6,7 +6,14 @@ export const metadata: Metadata = {
   description:
     "Four apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, and a Spanish course. Live on iOS, Android and web.",
   alternates: {
-    canonical: "https://52n34s.app/apps",
+    canonical: "/apps",
+  },
+  openGraph: {
+    title: "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho",
+    description:
+      "Four apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, and a Spanish course. Live on iOS, Android and web.",
+    url: "https://52n34s.app/apps",
+    type: "website",
   },
 };
 
@@ -414,8 +421,40 @@ function CarpinchoCard() {
 }
 
 export default function AppsPage() {
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Apps by Steffen Giebler",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        item: { "@id": "https://52n34s.app/#orivela" },
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        item: { "@id": "https://52n34s.app/#kolibi" },
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        item: { "@id": "https://52n34s.app/#peeranimo" },
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        item: { "@id": "https://52n34s.app/#carpincho" },
+      },
+    ],
+  };
+
   return (
     <main className="relative flex min-h-screen flex-col bg-[#F5F0E8]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
+      />
       <header className="px-6 pt-10 pb-16 text-center md:px-12 md:pt-16">
         <h1
           className="text-[32px] leading-[1.1] tracking-tight text-[#1A1A1A] md:text-[42px] lg:text-[48px]"
