@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const ORIVELA_ICON = "/app-logo-orivela.png";
-const KOLIBI_ICON = "/app-logo-kolibi.jpg";
+const KOLIBI_ICON = "/app-logo-kolibi.png";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
 const CARPINCHO_ICON = "/carpincho.png";
 
@@ -116,7 +116,7 @@ function AppIdentity({
       <img
         src={icon}
         alt={`${name} app icon`}
-        className="h-[54px] w-[54px] rounded-[13px] border border-black/10"
+        className="app-store-icon app-store-icon--lg"
       />
       <p className="text-[15px] font-medium text-[#1A1A1A]">{name}</p>
     </div>
@@ -237,7 +237,7 @@ function KolibiCard() {
           <img
             src={KOLIBI_ICON}
             alt="Kolibi app icon"
-            className="h-[46px] w-[46px] rounded-[11px] border border-black/10"
+            className="app-store-icon app-store-icon--lg"
           />
           <p className="text-[12px] font-medium text-[#1A1A1A]">Kolibi</p>
         </div>
@@ -398,7 +398,7 @@ function CarpinchoCard() {
           <img
             src={CARPINCHO_ICON}
             alt="Carpincho app icon"
-            className="h-[54px] w-[54px] rounded-[13px] object-cover"
+            className="app-store-icon app-store-icon--lg"
           />
           <div className="leading-tight">
             <p className="text-[15px] font-medium text-[#1A1A1A]">Carpincho</p>

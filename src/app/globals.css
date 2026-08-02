@@ -341,6 +341,30 @@ body {
   line-height: 1.2;
 }
 
+/* Homescreen-style app icons (collage + /apps cards) */
+.app-store-icon {
+  --app-icon-size: 48px;
+  display: block;
+  flex-shrink: 0;
+  width: var(--app-icon-size);
+  height: var(--app-icon-size);
+  border-radius: 22%;
+  overflow: hidden;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 150ms ease-out;
+}
+
+.app-store-icon--lg {
+  --app-icon-size: 54px;
+}
+
+a:hover .app-store-icon,
+button:hover .app-store-icon {
+  transform: scale(1.04);
+}
+
 @keyframes buttonFadeIn {
   from {
     opacity: 0;

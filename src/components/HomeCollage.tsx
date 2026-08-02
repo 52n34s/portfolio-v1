@@ -13,7 +13,7 @@ const DESIGN_H = 900;
 
 
 const ORIVELA_ICON = "/app-logo-orivela.png";
-const KOLIBI_ICON = "/app-logo-kolibi.jpg";
+const KOLIBI_ICON = "/app-logo-kolibi.png";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
 const CARPINCHO_ICON = "/carpincho.png";
 
@@ -107,7 +107,7 @@ function AppIdentity({
       <img
         src={icon}
         alt={`${name} app icon`}
-        className="h-[48px] w-[48px] rounded-[11px] border border-black/10 object-cover"
+        className="app-store-icon"
       />
       <div className="leading-tight">
         <h3 className="m-0 text-[14px] font-medium text-[#1A1A1A]">{name}</h3>
