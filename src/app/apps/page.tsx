@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   },
 };
 
-const ORIVELA_ICON = "/app-logo-orivela.png";
-const KOLIBI_ICON = "/app-logo-kolibi.png";
+const ORIVELA_ICON = "/app-logo-orivela.jpg";
+const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
-const CARPINCHO_ICON = "/carpincho.png";
+const CARPINCHO_ICON = "/app-logo-carpincho.jpg";
 
 const APP_STATUS: Record<string, [string, string, string]> = {
   orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],

@@ -12,10 +12,10 @@ const DESIGN_W = 1440;
 const DESIGN_H = 900;
 
 
-const ORIVELA_ICON = "/app-logo-orivela.png";
-const KOLIBI_ICON = "/app-logo-kolibi.png";
+const ORIVELA_ICON = "/app-logo-orivela.jpg";
+const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
-const CARPINCHO_ICON = "/carpincho.png";
+const CARPINCHO_ICON = "/app-logo-carpincho.jpg";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
