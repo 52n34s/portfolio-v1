@@ -409,12 +409,12 @@ function CarpinchoCard() {
         </div>
         <CarpinchoVariantFlags className="mt-2" />
         <a
-          href="https://carpincho.app/"
+          href="https://apps.apple.com/de/app/carpincho-learn-less-say-more/id6795982399"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-block rounded-full bg-[#D6156F] px-5 py-2 font-inter text-[13px] font-medium text-white"
         >
-          Join the waitlist →
+          Get the app →
         </a>
       </article>
     </div>
