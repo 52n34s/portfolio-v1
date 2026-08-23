@@ -19,7 +19,7 @@ export default function Home() {
         peer-matching social platform on the web that connects people who are in
         the same chapter of life. Carpincho, a Spanish learning app focused on
         1,000 high-frequency words in Rioplatense, neutral Latin American and
-        Spanish variants, currently in waitlist. ErdiKnows, a web app for
+        Spanish variants, live on the App Store. ErdiKnows, a web app for
         developers that puts deploys, releases and incidents as markers on the
         same timeline as product metrics, so a drop can be read together with
         what shipped around it. It is not an analytics tool — it is the layer

@@ -36,6 +36,7 @@ export const APPS: AppDefinition[] = [
     href: "https://apps.apple.com/us/app/kolibi/id6790129149",
     icon: "/app-logo-kolibi.jpg",
     platform: "iOS · Android",
+    subline: "AI photo calorie tracker",
     stamp: ["KOLIBI", "LIVE", "ON THE APP STORE"],
     appsCtas: [
       {
@@ -51,7 +52,8 @@ export const APPS: AppDefinition[] = [
     href: "https://carpincho.app/",
     icon: "/app-logo-carpincho.jpg",
     platform: "Spanish with the least effort possible",
-    stamp: ["CARPINCHO", "SOON", "JOIN WAITLIST"],
+    subline: "Spanish with the least effort possible",
+    stamp: ["CARPINCHO", "LIVE", "ON THE APP STORE"],
     appsCtas: [
       {
         label: "Get the app →",
@@ -67,6 +69,7 @@ export const APPS: AppDefinition[] = [
     href: "https://www.orivela.app/",
     icon: "/app-logo-orivela.jpg",
     platform: "iOS",
+    subline: "Every document, found in seconds",
     stamp: ["ORIVELA", "LIVE", "ON THE APP STORE"],
     appsCtas: [
       {
@@ -89,6 +92,7 @@ export const APPS: AppDefinition[] = [
     href: "https://peeranimo.app/",
     icon: "/app-logo-peeranimo.webp",
     platform: "Social platform · Web",
+    subline: "Find people who get it",
     stamp: ["PEERANIMO", "LIVE", "ON THE WEB"],
     appsCtas: [
       {

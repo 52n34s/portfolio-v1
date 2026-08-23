@@ -29,7 +29,7 @@ const APP_STATUS: Record<string, [string, string, string]> = {
   orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],
   kolibi: ["KOLIBI", "LIVE", "ON THE APP STORE"],
   peeranimo: ["PEERANIMO", "LIVE", "ON THE WEB"],
-  carpincho: ["CARPINCHO", "SOON", "JOIN WAITLIST"],
+  carpincho: ["CARPINCHO", "LIVE", "ON THE APP STORE"],
   erdiknows: ["ERDIKNOWS", "LIVE", "ON THE WEB"],
 };
 

@@ -21,8 +21,8 @@ export type CardVariant = "home" | "apps";
 
 const CELL_W = 330;
 const CELL_H = 255;
-const STACK_W = 252;
-const STACK_H = 168;
+const STACK_W = 278;
+const STACK_H = 176;
 const STACK_OX = 22;
 const STACK_OY = 72;
 const STACK_GAP = 36;
@@ -235,11 +235,17 @@ function AppIdentity({
         <h3 className="m-0 truncate text-[14px] font-medium text-[#1A1A1A]">
           {app.name}
         </h3>
-        {!compact && (
-          <p className="text-[11px] text-[#1A1A1A]/55">{app.platform}</p>
-        )}
-        {!compact && app.subline && (
-          <p className="text-[11px] text-[#1A1A1A]/55">{app.subline}</p>
+        {compact ? (
+          <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+            {app.subline ?? app.platform}
+          </p>
+        ) : (
+          <>
+            <p className="text-[11px] text-[#1A1A1A]/55">{app.platform}</p>
+            {app.subline && app.subline !== app.platform && (
+              <p className="text-[11px] text-[#1A1A1A]/55">{app.subline}</p>
+            )}
+          </>
         )}
       </div>
     </div>
@@ -360,65 +366,53 @@ function AppObjectShell({
   );
 }
 
-function PeeranimoPolaroids({ compact }: { compact: boolean }) {
-  const cards = [
-    {
-      src: "/peers/peeranimo_european_woman.jpg",
-      alt: "Peer portrait — woman with light brown hair",
-      color: "#7B5CF0",
-      pos: compact
-        ? "left-0 top-[6px] z-10 rotate-[-8deg]"
-        : "left-0 top-[8px] z-10 rotate-[-10deg]",
-      showTape: false,
-    },
-    {
-      src: "/peers/peeranimo_asia_woman.jpg",
-      alt: "Peer portrait — woman with dark hair",
-      color: "#00C2A8",
-      pos: compact
-        ? "left-[36px] top-0 z-20 rotate-[-2deg]"
-        : "left-[48px] top-0 z-20 rotate-[-2deg]",
-      showTape: true,
-    },
-    {
-      src: "/peers/peeranimo_pepe_latino_woman.jpg",
-      alt: "Peer portrait — woman with curly hair",
-      color: "#D85A30",
-      pos: compact
-        ? "left-[72px] top-[8px] z-30 rotate-[6deg]"
-        : "left-[96px] top-[10px] z-30 rotate-[8deg]",
-      showTape: false,
-    },
-  ] as const;
+function PeeranimoBadgeChrome({ compact }: { compact: boolean }) {
+  const barH = compact ? 20 : 28;
+  const hole = compact ? 9 : 12;
 
   return (
-    <div className={`relative ${compact ? "h-[72px]" : "h-[108px]"}`}>
-      {cards.map((card) => (
-        <div
-          key={card.src}
-          className={`absolute bg-white p-[5px] pb-[14px] ${PAPER_SHADOW} ${card.pos} ${compact ? "w-[54px]" : "w-[72px]"}`}
+    <>
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[6] flex items-center justify-center"
+        style={{ height: barH, background: "#7B5CF0" }}
+        aria-hidden="true"
+      >
+        <span
+          className="tracking-[0.35em] text-white"
+          style={{
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            fontSize: compact ? 8 : 10,
+          }}
         >
-          {card.showTape && (
-            <Tape className="-right-1 -top-1 z-20 rotate-[28deg]" />
-          )}
-          <div className="relative aspect-square overflow-hidden">
-            <img
-              src={card.src}
-              alt={card.alt}
-              className="h-full w-full object-cover grayscale contrast-[1.7] brightness-[1.15]"
-            />
-            <div
-              className="absolute inset-0 mix-blend-color"
-              style={{ background: card.color }}
-            />
-            <div
-              className="absolute inset-0 opacity-25 mix-blend-screen"
-              style={{ background: "#F5F0E8" }}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
+          HELLO
+        </span>
+      </div>
+      <div
+        className="pointer-events-none absolute bottom-[8px] left-1/2 z-[6] -translate-x-1/2 rounded-full border-[1.5px] border-[#1A1A1A]/25 bg-[#EDEAE3]"
+        style={{ width: hole, height: hole }}
+        aria-hidden="true"
+      />
+      <svg
+        className="pointer-events-none absolute bottom-0 left-0 z-[6] w-full"
+        height={compact ? 6 : 8}
+        viewBox="0 0 280 8"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        {Array.from({ length: 22 }, (_, i) => (
+          <rect
+            key={i}
+            x={5 + i * 12.4}
+            y="2.4"
+            width="5.5"
+            height="1.5"
+            rx="0.75"
+            fill="#1A1A1A"
+            opacity="0.16"
+          />
+        ))}
+      </svg>
+    </>
   );
 }
 
@@ -492,13 +486,13 @@ function KolibiFace({
       <Tape className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-2 rotate-[6deg]" />
       <ReceiptZigzag position="top" />
       <div className="relative z-10">
-        <p
-          className="pr-[90px] text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
-          style={mono}
-        >
-          KOLIBI
-        </p>
         <Expand compact={compact}>
+          <p
+            className="pr-[90px] text-center text-[11px] font-medium uppercase tracking-wider text-[#1A1A1A]"
+            style={mono}
+          >
+            KOLIBI
+          </p>
           <div className="my-1.5 border-t border-dashed border-[#1A1A1A]/30" />
           <p
             className="pr-[90px] text-[11px] leading-snug text-[#333]"
@@ -639,18 +633,25 @@ function PeeranimoFace({
   variant: CardVariant;
 }) {
   return (
-    <AppObjectShell app={app} compact={compact} variant={variant}>
-      <div className="relative z-10">
-        <PeeranimoPolaroids compact={compact} />
-        <Expand compact={compact}>
-          <p
-            className={`mt-1 text-center text-[#1A1A1A] ${HAND_COPY}`}
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            People who get it. Without searching for years.
-          </p>
-        </Expand>
-      </div>
+    <AppObjectShell
+      app={app}
+      compact={compact}
+      variant={variant}
+      className={`bg-white ${PAPER_SHADOW}`}
+      style={{
+        paddingTop: compact ? 36 : 56,
+        paddingBottom: compact ? 26 : CARD_PAD_BOTTOM,
+      }}
+    >
+      <PeeranimoBadgeChrome compact={compact} />
+      <Expand compact={compact}>
+        <p
+          className={`mt-1 text-center text-[#1A1A1A] ${HAND_COPY}`}
+          style={{ fontFamily: "var(--font-hand), cursive" }}
+        >
+          People who get it. Without searching for years.
+        </p>
+      </Expand>
     </AppObjectShell>
   );
 }

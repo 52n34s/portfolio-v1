@@ -118,7 +118,7 @@ function SubtitleLines({ className = "" }: { className?: string }) {
         yet, and rarely convinced that the obvious way is the right one.
       </p>
       <p className="mt-3">
-        Four apps of my own, plus platforms for people who came with an idea
+        Five apps of my own, plus platforms for people who came with an idea
         and no map.
       </p>
     </div>
