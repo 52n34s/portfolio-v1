@@ -66,7 +66,7 @@ export default function AppsPage() {
         </p>
       </header>
 
-      <section className="flex w-full flex-1 justify-center overflow-x-auto px-4 py-8 md:px-12 md:py-12">
+      <section className="flex w-full flex-1 justify-center overflow-x-auto px-5 py-8 md:px-12 md:py-12">
         <AppsGallery />
       </section>
 

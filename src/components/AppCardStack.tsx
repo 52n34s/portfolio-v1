@@ -35,6 +35,14 @@ const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 const DURATION_MS = 400;
 const STACK_ROTATIONS = [-1.8, 1.6, -0.9, 1.9, -1.3, 0.7];
 const FEATURED_ROTATE = -0.6;
+const MOBILE_ORDER: AppId[] = [
+  "kolibi",
+  "carpincho",
+  "erdiknows",
+  "orivela",
+  "peeranimo",
+];
+const MOBILE_TILTS = [-0.8, 0.7, -1, 0.9, -0.6];
 
 type Slot = {
   left: number;
@@ -236,9 +244,22 @@ function AppIdentity({
           {app.name}
         </h3>
         {compact ? (
-          <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
-            {app.subline ?? app.platform}
-          </p>
+          app.id === "erdiknows" ? (
+            <>
+              <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+                {app.platform}
+              </p>
+              {app.subline && (
+                <p className="truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+                  {app.subline}
+                </p>
+              )}
+            </>
+          ) : (
+            <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+              {app.subline ?? app.platform}
+            </p>
+          )
         ) : (
           <>
             <p className="text-[11px] text-[#1A1A1A]/55">{app.platform}</p>
@@ -764,26 +785,30 @@ function SlotCard({
   variant,
   tilt,
   onPromote,
+  listed = false,
 }: {
   app: AppDefinition;
   featured: boolean;
   variant: CardVariant;
   tilt: number;
   onPromote: (id: AppId) => void;
+  listed?: boolean;
 }) {
   const face = (
     <div
-      className="origin-top-left transition-transform duration-200 group-hover:[--lift:-4px]"
+      className={`${listed ? "origin-center" : "origin-top-left"} transition-transform duration-200 ${listed ? "" : "group-hover:[--lift:-4px]"}`}
       style={{
-        transform: `rotate(${tilt}deg) translateY(var(--lift, 0px))`,
+        transform: listed
+          ? `rotate(${tilt}deg)`
+          : `rotate(${tilt}deg) translateY(var(--lift, 0px))`,
       }}
     >
-      <AppFace app={app} compact={!featured} variant={variant} />
+      <AppFace app={app} compact={!featured && !listed} variant={variant} />
     </div>
   );
   const flipProps = { "data-app-card": app.id };
 
-  if (!featured) {
+  if (!featured && !listed) {
     return (
       <button
         type="button"
@@ -804,7 +829,7 @@ function SlotCard({
         {...flipProps}
         target="_blank"
         rel="noopener noreferrer"
-        aria-current="true"
+        aria-current={listed ? undefined : "true"}
         className="group block w-full"
       >
         {face}
@@ -813,7 +838,11 @@ function SlotCard({
   }
 
   return (
-    <div {...flipProps} aria-current="true" className="group w-full">
+    <div
+      {...flipProps}
+      aria-current={listed ? undefined : "true"}
+      className="group w-full"
+    >
       {face}
     </div>
   );
@@ -951,42 +980,23 @@ export default function AppCardStack({
       : undefined;
 
   if (placement === "row") {
-    const featuredApp = APP_BY_ID[order[0]];
-    const stackIds = order.slice(1);
     return (
       <div
         ref={rootRef}
-        className={`flex flex-col items-center gap-8 ${className}`}
+        className={`flex w-full flex-col ${className}`}
+        style={{ gap: 28 }}
       >
-        <div
-          className="relative w-full max-w-[330px] shrink-0"
-          style={{ minHeight: featuredMinH }}
-        >
+        {MOBILE_ORDER.map((id, index) => (
           <SlotCard
-            app={featuredApp}
+            key={id}
+            app={APP_BY_ID[id]}
             featured
+            listed
             variant={variant}
-            tilt={FEATURED_ROTATE}
+            tilt={MOBILE_TILTS[index] ?? 0}
             onPromote={promote}
           />
-        </div>
-        <div className="-mx-2 flex w-full gap-4 overflow-x-auto px-2 py-5">
-          {stackIds.map((id, index) => (
-            <div
-              key={id}
-              className="shrink-0"
-              style={{ width: STACK_W }}
-            >
-              <SlotCard
-                app={APP_BY_ID[id]}
-                featured={false}
-                variant={variant}
-                tilt={stackRotate(index)}
-                onPromote={promote}
-              />
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
     );
   }

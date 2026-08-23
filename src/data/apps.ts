@@ -107,7 +107,7 @@ export const APPS: AppDefinition[] = [
     name: "ErdiKnows",
     href: "https://erdiknows.com",
     icon: "/erdiknows.png",
-    platform: "Web",
+    platform: "Web · for developers",
     subline: "Event timeline for product metrics",
     handwriting: ["Numbers moved.", "Erdi was watching."],
     stamp: ["ERDIKNOWS", "LIVE", "ON THE WEB"],

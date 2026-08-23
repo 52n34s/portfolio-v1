@@ -381,7 +381,7 @@ export default function HomeCollage() {
       )}
 
       {layout === "mobile" && (
-        <section className="overflow-visible bg-[#F5F0E8] px-6 pt-12 pb-[128px]">
+        <section className="overflow-visible bg-[#F5F0E8] px-5 pt-12 pb-[128px]">
           <HeadlineBlock variant="mobile" />
 
           <img
