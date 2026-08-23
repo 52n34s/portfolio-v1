@@ -22,12 +22,15 @@ const ORIVELA_ICON = "/app-logo-orivela.jpg";
 const KOLIBI_ICON = "/app-logo-kolibi.jpg";
 const PEERANIMO_ICON = "/app-logo-peeranimo.webp";
 const CARPINCHO_ICON = "/app-logo-carpincho.jpg";
+const ERDIKNOWS_ICON = "/erdiknows.png";
+const ERDI_MAGENTA = "#FC2E70";
 
 const APP_STATUS: Record<string, [string, string, string]> = {
   orivela: ["ORIVELA", "LIVE", "ON THE APP STORE"],
   kolibi: ["KOLIBI", "LIVE", "ON THE APP STORE"],
   peeranimo: ["PEERANIMO", "LIVE", "ON THE WEB"],
   carpincho: ["CARPINCHO", "SOON", "JOIN WAITLIST"],
+  erdiknows: ["ERDIKNOWS", "LIVE", "ON THE WEB"],
 };
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
@@ -421,6 +424,109 @@ function CarpinchoCard() {
   );
 }
 
+function ErdiKnowsCard() {
+  return (
+    <div className="relative w-full max-w-[300px] -rotate-[2deg]">
+      <div className="absolute -right-4 -top-4 z-40">
+        <StatusStamp lines={APP_STATUS.erdiknows} />
+      </div>
+      <Tape className="-right-2 top-3 z-20 rotate-[18deg]" />
+      <article
+        className={`relative overflow-hidden px-5 pb-6 pt-5 ${PAPER_SHADOW}`}
+        style={{ backgroundColor: "#F4EBD4" }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(
+                to right,
+                rgba(252, 46, 112, 0.11) 0,
+                rgba(252, 46, 112, 0.11) 1px,
+                transparent 1px,
+                transparent 8px
+              ),
+              repeating-linear-gradient(
+                to bottom,
+                rgba(252, 46, 112, 0.11) 0,
+                rgba(252, 46, 112, 0.11) 1px,
+                transparent 1px,
+                transparent 8px
+              ),
+              repeating-linear-gradient(
+                to right,
+                rgba(252, 46, 112, 0.28) 0,
+                rgba(252, 46, 112, 0.28) 1.5px,
+                transparent 1.5px,
+                transparent 40px
+              ),
+              repeating-linear-gradient(
+                to bottom,
+                rgba(252, 46, 112, 0.28) 0,
+                rgba(252, 46, 112, 0.28) 1.5px,
+                transparent 1.5px,
+                transparent 40px
+              )
+            `,
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-[3px]"
+          style={{ background: ERDI_MAGENTA, opacity: 0.55 }}
+          aria-hidden="true"
+        />
+        <svg
+          viewBox="0 0 280 72"
+          className="relative z-10 mt-1 h-[72px] w-full"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M6 60 C 42 58, 54 42, 86 38 C 118 34, 128 56, 158 24 C 178 6, 198 20, 228 14 C 248 10, 262 8, 274 10"
+            fill="none"
+            stroke={ERDI_MAGENTA}
+            strokeWidth="1.15"
+            strokeLinecap="round"
+          />
+          <circle cx="158" cy="24" r="3.25" fill={ERDI_MAGENTA} />
+        </svg>
+        <p
+          className="relative z-10 mt-1 pr-[72px] text-[20px] leading-snug"
+          style={{ fontFamily: "var(--font-hand), cursive", color: ERDI_MAGENTA }}
+        >
+          Numbers moved.
+          <br />
+          Erdi was watching.
+        </p>
+        <div className="relative z-10 mt-4 flex items-center gap-2.5">
+          <img
+            src={ERDIKNOWS_ICON}
+            alt="ErdiKnows app icon"
+            className="app-store-icon app-store-icon--lg"
+          />
+          <div className="leading-tight">
+            <p className="text-[15px] font-medium text-[#1A1A1A]">ErdiKnows</p>
+            <p className="text-[12px] text-[#1A1A1A]/55">Web</p>
+            <p className="text-[12px] text-[#1A1A1A]/55">
+              Event timeline for product metrics
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://erdiknows.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative z-10 mt-4 inline-block rounded-full px-5 py-2 font-inter text-[13px] font-medium text-white"
+          style={{ backgroundColor: ERDI_MAGENTA }}
+        >
+          Open on the web →
+        </a>
+      </article>
+    </div>
+  );
+}
+
 export default function AppsPage() {
   const itemList = {
     "@context": "https://schema.org",
@@ -480,6 +586,9 @@ export default function AppsPage() {
         </div>
         <div className="flex justify-center">
           <PeeranimoCard />
+        </div>
+        <div className="flex justify-center">
+          <ErdiKnowsCard />
         </div>
       </section>
 
