@@ -141,6 +141,18 @@ export default function StructuredData() {
         author: { "@id": "https://52n34s.app/#steffen" },
         publisher: { "@id": "https://52n34s.app/#org" },
       },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://52n34s.app/#erdiknows",
+        name: "ErdiKnows",
+        description:
+          "An event timeline for product metrics. Deploys, releases and incidents as markers on the curve — not an analytics tool, the layer on top.",
+        applicationCategory: "DeveloperApplication",
+        operatingSystem: "Web",
+        url: "https://erdiknows.com",
+        author: { "@id": "https://52n34s.app/#steffen" },
+        publisher: { "@id": "https://52n34s.app/#org" },
+      },
     ],
   };
 

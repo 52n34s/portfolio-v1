@@ -464,7 +464,7 @@ export default function AppsPage() {
           Apps — built by Steffen.
         </h1>
         <p className="mx-auto mt-2 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[16px] lg:mt-6 lg:text-[17px]">
-          Four products. Four different problems.
+          Five products. Five different problems.
         </p>
       </header>
 

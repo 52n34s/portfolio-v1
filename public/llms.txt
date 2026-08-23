@@ -10,6 +10,7 @@ Steffen Giebler is a solo founder and software developer in Berlin Mitte. He has
 - Kolibi (https://apps.apple.com/us/app/kolibi/id6790129149): AI photo calorie tracker for iOS and Android. Reads a meal from a single photo. Live on the App Store.
 - Peeranimo (https://peeranimo.app/): Peer-matching social platform on the web. Connects people who are in the same chapter of life. Live.
 - Carpincho (https://carpincho.app/): Spanish learning app focused on the 1,000 highest-frequency words, in Rioplatense, neutral Latin American and Spanish variants. Waitlist.
+- [ErdiKnows](https://erdiknows.com): Event timeline for product metrics. Deploys, releases and incidents as markers on the curve. Not an analytics tool, the layer on top.
 
 ## Services
 - From idea to MVP: https://52n34s.app/work/idea-to-mvp
