@@ -263,8 +263,15 @@ function AppIdentity({
         ) : (
           <>
             <p className="text-[11px] text-[#1A1A1A]/55">{app.platform}</p>
-            {app.subline && app.subline !== app.platform && (
-              <p className="text-[11px] text-[#1A1A1A]/55">{app.subline}</p>
+            {app.description ? (
+              <p className="max-w-[46ch] text-[15px] leading-relaxed text-[#1A1A1A]/55">
+                {app.description}
+              </p>
+            ) : (
+              app.subline &&
+              app.subline !== app.platform && (
+                <p className="text-[11px] text-[#1A1A1A]/55">{app.subline}</p>
+              )
             )}
           </>
         )}
@@ -746,9 +753,9 @@ function ErdiKnowsFace({
               color: ERDI_MAGENTA,
             }}
           >
-            Numbers moved.
+            {app.handwriting![0]}
             <br />
-            Erdi was watching.
+            {app.handwriting![1]}
           </p>
         </Expand>
       </div>

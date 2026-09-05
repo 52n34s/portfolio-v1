@@ -20,6 +20,7 @@ export type AppDefinition = {
   icon: string;
   platform: string;
   subline?: string;
+  description?: string;
   handwriting?: [string, string];
   stamp: [string, string, string];
   appsCtas: AppCta[];
@@ -108,8 +109,10 @@ export const APPS: AppDefinition[] = [
     href: "https://erdiknows.com",
     icon: "/erdiknows.png",
     platform: "Web · for developers",
-    subline: "Event timeline for product metrics",
-    handwriting: ["Numbers moved.", "Erdi was watching."],
+    subline: "See which changes pay off.",
+    description:
+      "See which changes pay off. Your releases, ad spend and price changes sit on one timeline, next to the paying customers that followed. You know what a customer really costs, and what happened after every change you made.",
+    handwriting: ["Numbers moved.", "Erdi knew why."],
     stamp: ["ERDIKNOWS", "LIVE", "ON THE WEB"],
     appsCtas: [
       {
