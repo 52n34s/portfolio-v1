@@ -311,15 +311,15 @@ export default function CountdownPage() {
         >
           <p style={{ margin: 0 }}>
             I built no-code apps and platforms for other founders. That work is
-            drying up — AI builds faster than no-code ever did, and the requests
+            drying up. AI builds faster than no-code ever did, and the requests
             stopped coming.
           </p>
           <p style={{ margin: "12px 0 0" }}>
             Five apps of my own are live. None of them earns money yet.
           </p>
           <p style={{ margin: "12px 0 0" }}>
-            If you have an idea and need someone who takes a product all the way
-            — data model, build, payments, App Store — that&apos;s what I do.
+            If you have an idea and need someone who takes a product all the way:
+            data model, build, payments, App Store, that&apos;s what I do.
           </p>
         </div>
 
