@@ -50,6 +50,7 @@ const ROUTE_ACTIVE_LABEL: Record<string, string> = {
 const navItems: NavItem[] = [
   { kind: "scroll", id: "room-01", label: "~/home", tone: "cream" },
   { kind: "link", label: "./builds", href: "/builds", tone: "lavender" },
+  { kind: "link", href: "/countdown", label: "./countdown", tone: "lavender" },
   { kind: "scroll", id: "room-05", label: "./work-with-me", tone: "sage" },
   { kind: "scroll", id: "room-06", label: ">_ contact", tone: "peach" },
   { kind: "label", label: "MY APPS" },
