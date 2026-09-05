@@ -281,13 +281,22 @@ function AppIdentity({
       </div>
       {showFocusCopy && (
         <div className="mt-4 flex min-h-0 flex-1 flex-col justify-center">
+          <span
+            className="mb-4 inline-block rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-[#FFFFFF]"
+            style={{
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              backgroundColor: ERDI_MAGENTA,
+            }}
+          >
+            FOR INDIE DEVELOPERS
+          </span>
           <h4
             className="m-0 text-[22px] font-semibold leading-tight text-[#1A1A1A] md:text-[28px]"
             style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
           >
             {app.focusHeadline}
           </h4>
-          <p className="mt-4 max-w-[46ch] font-inter text-[15px] leading-relaxed text-[#1A1A1A]/55">
+          <p className="mt-4 max-w-[46ch] font-inter text-[15px] leading-relaxed text-[#1A1A1A]/90">
             {app.focusBody}
           </p>
         </div>
@@ -728,29 +737,29 @@ function ErdiKnowsFace({
           backgroundImage: `
             repeating-linear-gradient(
               to right,
-              rgba(252, 46, 112, 0.11) 0,
-              rgba(252, 46, 112, 0.11) 1px,
+              rgba(252, 46, 112, 0.088) 0,
+              rgba(252, 46, 112, 0.088) 1px,
               transparent 1px,
               transparent 8px
             ),
             repeating-linear-gradient(
               to bottom,
-              rgba(252, 46, 112, 0.11) 0,
-              rgba(252, 46, 112, 0.11) 1px,
+              rgba(252, 46, 112, 0.088) 0,
+              rgba(252, 46, 112, 0.088) 1px,
               transparent 1px,
               transparent 8px
             ),
             repeating-linear-gradient(
               to right,
-              rgba(252, 46, 112, 0.28) 0,
-              rgba(252, 46, 112, 0.28) 1.5px,
+              rgba(252, 46, 112, 0.224) 0,
+              rgba(252, 46, 112, 0.224) 1.5px,
               transparent 1.5px,
               transparent 40px
             ),
             repeating-linear-gradient(
               to bottom,
-              rgba(252, 46, 112, 0.28) 0,
-              rgba(252, 46, 112, 0.28) 1.5px,
+              rgba(252, 46, 112, 0.224) 0,
+              rgba(252, 46, 112, 0.224) 1.5px,
               transparent 1.5px,
               transparent 40px
             )
