@@ -204,6 +204,7 @@ function ServiceCard({
 
   return (
     <div
+      id="pitch"
       className={`relative bg-white px-4 pb-5 pt-4 ${PAPER_SHADOW} ${className}`}
     >
       <Tape className="-left-2 -top-2 -rotate-[14deg]" />
@@ -243,6 +244,7 @@ function placementFor(
 
 export default function HomeCollage() {
   const stageRef = useRef<HTMLDivElement>(null);
+  const scrolledToPitch = useRef(false);
   const [scale, setScale] = useState(1);
   const [layout, setLayout] = useState<"desktop" | "tablet" | "mobile">(
     "desktop",
@@ -264,6 +266,18 @@ export default function HomeCollage() {
       mqTablet.removeEventListener("change", update);
     };
   }, []);
+
+  useEffect(() => {
+    if (scrolledToPitch.current) return;
+    if (window.location.hash !== "#pitch") return;
+    const t = window.setTimeout(() => {
+      const el = document.getElementById("pitch");
+      if (!el) return;
+      scrolledToPitch.current = true;
+      el.scrollIntoView({ behavior: "smooth" });
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, [layout]);
 
   useEffect(() => {
     if (layout !== "desktop") return;

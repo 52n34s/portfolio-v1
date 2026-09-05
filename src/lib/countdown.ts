@@ -29,8 +29,8 @@ export function daysCoveredFromRevenue(revenue: number) {
   return Math.min(DAYS_COVER_GOAL, Math.floor(revenue / EUR_PER_COVERED_DAY));
 }
 
-export const INSTAGRAM_URL = ""; // <- von Steffen einzutragen
-export const PITCH_URL = "/work-with-me";
+export const INSTAGRAM_URL = "https://www.instagram.com/steffendoesthings";
+export const PITCH_URL = "/#pitch";
 
 export type ChallengeApp = {
   name: string;

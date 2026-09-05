@@ -15,7 +15,7 @@ import CountdownClock from "./CountdownClock";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Countdown — Steffen Giebler",
+  title: "Steffen",
   description:
     "Getting my own apps to €3,000 MRR before the money runs out. Public, from day one.",
 };
