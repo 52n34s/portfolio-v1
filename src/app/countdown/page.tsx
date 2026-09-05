@@ -3,14 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CHALLENGE_APPS,
-  CURRENT_MRR_EUR,
-  GOAL_EUR,
+  DAYS_COVER_GOAL,
+  daysCoveredFromRevenue,
+  getCountdownStats,
   INSTAGRAM_URL,
-  PAYING_ACCOUNTS,
   PITCH_URL,
   type ChallengeApp,
 } from "@/lib/countdown";
 import CountdownClock from "./CountdownClock";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Countdown — Steffen Giebler",
@@ -151,6 +153,9 @@ function AppRow({ app }: { app: ChallengeApp }) {
 }
 
 export default function CountdownPage() {
+  const { monthlyRevenue, subscriberCount } = getCountdownStats();
+  const daysCovered = daysCoveredFromRevenue(monthlyRevenue);
+
   return (
     <main
       style={{
@@ -230,11 +235,11 @@ export default function CountdownPage() {
           >
             <div>
               <span style={{ ...lora, fontSize: 24, color: "#F5F0E8" }}>
-                €{formatNumber(CURRENT_MRR_EUR)}
+                {formatNumber(daysCovered)}
               </span>
               <span style={{ ...lora, fontSize: 15, color: "#55636F" }}>
                 {" "}
-                / {formatNumber(GOAL_EUR)}
+                / {formatNumber(DAYS_COVER_GOAL)}
               </span>
             </div>
             <div
@@ -246,7 +251,7 @@ export default function CountdownPage() {
                 color: "#7A8894",
               }}
             >
-              MRR
+              DAYS MY APPS COVER
             </div>
           </div>
           <div
@@ -258,7 +263,7 @@ export default function CountdownPage() {
             }}
           >
             <div style={{ ...lora, fontSize: 24, color: "#F5F0E8" }}>
-              {formatNumber(PAYING_ACCOUNTS)}
+              {formatNumber(subscriberCount)}
             </div>
             <div
               style={{
@@ -269,7 +274,7 @@ export default function CountdownPage() {
                 color: "#7A8894",
               }}
             >
-              PAYING ACCOUNTS
+              APP SUBSCRIBERS
             </div>
           </div>
         </div>

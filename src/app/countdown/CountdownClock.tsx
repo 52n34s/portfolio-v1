@@ -7,7 +7,6 @@ type Remaining = {
   days: number;
   hours: number;
   minutes: number;
-  seconds: number;
 };
 
 const MS_DAY = 86_400_000;
@@ -20,7 +19,6 @@ function remainingFromTarget(): Remaining {
     days: Math.floor(diff / MS_DAY),
     hours: Math.floor((diff % MS_DAY) / MS_HOUR),
     minutes: Math.floor((diff % MS_HOUR) / MS_MINUTE),
-    seconds: Math.floor((diff % MS_MINUTE) / 1000),
   };
 }
 
@@ -84,8 +82,7 @@ export default function CountdownClock() {
           color: "#8A9BA8",
         }}
       >
-        {pad(remaining.hours)}h {pad(remaining.minutes)}m{" "}
-        {pad(remaining.seconds)}s
+        {pad(remaining.hours)}h {pad(remaining.minutes)}m
       </div>
       <div
         style={{

@@ -1,8 +1,33 @@
 export const TARGET_DATE = "2026-12-31T23:59:59+01:00";
 
 export const GOAL_EUR = 3000;
-export const CURRENT_MRR_EUR = 0;
-export const PAYING_ACCOUNTS = 0;
+
+/** Weekly defaults. Override without a code change via env. */
+export const monthlyRevenue = 0;
+export const subscriberCount = 0;
+
+export const DAYS_COVER_GOAL = 30;
+const EUR_PER_COVERED_DAY = 100;
+
+function envInt(name: string, fallback: number) {
+  const raw = process.env[name];
+  if (raw == null || raw.trim() === "") return fallback;
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0) return fallback;
+  return n;
+}
+
+/** COUNTDOWN_MONTHLY_REVENUE and COUNTDOWN_SUBSCRIBER_COUNT override the defaults. */
+export function getCountdownStats() {
+  return {
+    monthlyRevenue: envInt("COUNTDOWN_MONTHLY_REVENUE", monthlyRevenue),
+    subscriberCount: envInt("COUNTDOWN_SUBSCRIBER_COUNT", subscriberCount),
+  };
+}
+
+export function daysCoveredFromRevenue(revenue: number) {
+  return Math.min(DAYS_COVER_GOAL, Math.floor(revenue / EUR_PER_COVERED_DAY));
+}
 
 export const INSTAGRAM_URL = ""; // <- von Steffen einzutragen
 export const PITCH_URL = "/work-with-me";
