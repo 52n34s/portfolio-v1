@@ -232,50 +232,66 @@ function AppIdentity({
   app: AppDefinition;
   compact: boolean;
 }) {
+  const showFocusCopy = !compact && !!app.focusHeadline && !!app.focusBody;
+
   return (
-    <div className="flex items-center gap-2.5">
-      <img
-        src={app.icon}
-        alt={`${app.name} app icon`}
-        className="app-store-icon"
-      />
-      <div className="min-w-0 leading-tight">
-        <h3 className="m-0 truncate text-[14px] font-medium text-[#1A1A1A]">
-          {app.name}
-        </h3>
-        {compact ? (
-          app.id === "erdiknows" ? (
-            <>
-              <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
-                {app.platform}
-              </p>
-              {app.subline && (
-                <p className="truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
-                  {app.subline}
+    <div
+      className={
+        showFocusCopy ? "flex min-h-0 flex-1 flex-col" : undefined
+      }
+    >
+      <div className="flex items-center gap-2.5">
+        <img
+          src={app.icon}
+          alt={`${app.name} app icon`}
+          className="app-store-icon"
+        />
+        <div className="min-w-0 leading-tight">
+          <h3 className="m-0 truncate text-[14px] font-medium text-[#1A1A1A]">
+            {app.name}
+          </h3>
+          {compact ? (
+            app.id === "erdiknows" ? (
+              <>
+                <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+                  {app.platform}
                 </p>
-              )}
-            </>
-          ) : (
-            <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
-              {app.subline ?? app.platform}
-            </p>
-          )
-        ) : (
-          <>
-            <p className="text-[11px] text-[#1A1A1A]/55">{app.platform}</p>
-            {app.description ? (
-              <p className="max-w-[46ch] text-[15px] leading-relaxed text-[#1A1A1A]/55">
-                {app.description}
-              </p>
+                {app.stackLine && (
+                  <p className="truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+                    {app.stackLine}
+                  </p>
+                )}
+              </>
             ) : (
-              app.subline &&
-              app.subline !== app.platform && (
-                <p className="text-[11px] text-[#1A1A1A]/55">{app.subline}</p>
-              )
-            )}
-          </>
-        )}
+              <p className="mt-0.5 truncate font-inter text-[11px] leading-tight text-[#1A1A1A]/50">
+                {app.subline ?? app.platform}
+              </p>
+            )
+          ) : (
+            <>
+              <p className="text-[11px] text-[#1A1A1A]/55">{app.platform}</p>
+              {!showFocusCopy &&
+                app.subline &&
+                app.subline !== app.platform && (
+                  <p className="text-[11px] text-[#1A1A1A]/55">{app.subline}</p>
+                )}
+            </>
+          )}
+        </div>
       </div>
+      {showFocusCopy && (
+        <div className="mt-4 flex min-h-0 flex-1 flex-col justify-center">
+          <h4
+            className="m-0 text-[22px] font-semibold leading-tight text-[#1A1A1A] md:text-[28px]"
+            style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+          >
+            {app.focusHeadline}
+          </h4>
+          <p className="mt-4 max-w-[46ch] font-inter text-[15px] leading-relaxed text-[#1A1A1A]/55">
+            {app.focusBody}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -371,7 +387,11 @@ function AppObjectShell({
         <StatusStamp lines={app.stamp} />
       </div>
       <div
-        className="relative z-10"
+        className={
+          !compact && app.focusHeadline
+            ? "relative z-10 flex min-h-0 flex-1 flex-col"
+            : "relative z-10"
+        }
         style={{ order: compact ? 0 : 2 }}
       >
         <AppIdentity app={app} compact={compact} />
@@ -753,9 +773,9 @@ function ErdiKnowsFace({
               color: ERDI_MAGENTA,
             }}
           >
-            {app.handwriting![0]}
+            {app.handwrittenNote![0]}
             <br />
-            {app.handwriting![1]}
+            {app.handwrittenNote![1]}
           </p>
         </Expand>
       </div>

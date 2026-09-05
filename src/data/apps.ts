@@ -20,8 +20,10 @@ export type AppDefinition = {
   icon: string;
   platform: string;
   subline?: string;
-  description?: string;
-  handwriting?: [string, string];
+  handwrittenNote?: [string, string];
+  stackLine?: string;
+  focusHeadline?: string;
+  focusBody?: string;
   stamp: [string, string, string];
   appsCtas: AppCta[];
   appsNote?: string;
@@ -109,10 +111,11 @@ export const APPS: AppDefinition[] = [
     href: "https://erdiknows.com",
     icon: "/erdiknows.png",
     platform: "Web · for developers",
-    subline: "See which changes pay off.",
-    description:
-      "See which changes pay off. Your releases, ad spend and price changes sit on one timeline, next to the paying customers that followed. You know what a customer really costs, and what happened after every change you made.",
-    handwriting: ["Numbers moved.", "Erdi knew why."],
+    handwrittenNote: ["Numbers moved.", "Erdi knew why."],
+    stackLine: "See which changes pay off.",
+    focusHeadline: "See which changes pay off.",
+    focusBody:
+      "Every release, campaign and price change lands on one timeline, next to the paying customers that followed. You see what a customer really costs, and what your last change actually did. One page, and you know where you stand.",
     stamp: ["ERDIKNOWS", "LIVE", "ON THE WEB"],
     appsCtas: [
       {
