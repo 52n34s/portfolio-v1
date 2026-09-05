@@ -310,16 +310,16 @@ export default function CountdownPage() {
           }}
         >
           <p style={{ margin: 0 }}>
-            I built Bubble apps for other founders. That work has dried up. AI
-            changed what clients are willing to pay for, and the requests
+            I built no-code apps and platforms for other founders. That work is
+            drying up — AI builds faster than no-code ever did, and the requests
             stopped coming.
           </p>
           <p style={{ margin: "12px 0 0" }}>
-            Five apps of my own are live. None of them earns money.
+            Five apps of my own are live. None of them earns money yet.
           </p>
           <p style={{ margin: "12px 0 0" }}>
-            No job, no plan B, money for three or four months. So here is a
-            number and a date.
+            If you have an idea and need someone who takes a product all the way
+            — data model, build, payments, App Store — that&apos;s what I do.
           </p>
         </div>
 
