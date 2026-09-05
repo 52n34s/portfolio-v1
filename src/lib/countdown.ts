@@ -20,7 +20,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     name: "Kolibi",
     description:
       "Photograph your plate, get the calories. No database search, no typing. Subscription, live on iOS.",
-    logo: "/app-logo-kolibi.png",
+    logo: "/app-logo-kolibi.jpg",
     href: "https://apps.apple.com/us/app/kolibi-calories-by-photo/id6790129149",
   },
   {
