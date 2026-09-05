@@ -33,7 +33,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
   {
     name: "Carpincho",
     description:
-      "Rioplatense Spanish, the version people actually speak in Buenos Aires. A thousand words, spoken and graded.",
+      "A Spanish learning app built around one number: a thousand words is enough to hold a real conversation. You speak, it listens and grades you honestly. Rioplatense, neutral Latin American or Spain.",
     logo: "/app-logo-carpincho.jpg",
     href: "https://apps.apple.com/us/app/carpi-speak-learn-spanish/id6795982399",
   },
