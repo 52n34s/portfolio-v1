@@ -37,7 +37,6 @@ export type ChallengeApp = {
   description: string;
   logo: string;
   href: string | null;
-  comingSoon?: boolean;
 };
 
 export const CHALLENGE_APPS: ChallengeApp[] = [

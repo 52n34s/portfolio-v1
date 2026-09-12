@@ -62,7 +62,7 @@ const SOCIALS = [
 
 function SocialRow() {
   return (
-    <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-4">
+    <div className="mt-6 grid grid-cols-1 gap-x-3 gap-y-3 min-[360px]:grid-cols-2 min-[360px]:gap-y-4">
       {SOCIALS.map(({ name, handle, href, Icon }) => (
         <a
           key={name}
@@ -75,7 +75,7 @@ function SocialRow() {
           <Icon className="h-5 w-5 shrink-0 md:h-[22px] md:w-[22px]" />
           <span
             style={mono}
-            className="min-w-0 whitespace-nowrap text-[12px]"
+            className="min-w-0 whitespace-nowrap text-[11px]"
           >
             {handle}
           </span>
@@ -153,21 +153,7 @@ function AppRowInner({ app }: { app: ChallengeApp }) {
           }}
         >
           <span style={{ fontSize: 14, color: "#F5F0E8" }}>{app.name}</span>
-          {app.comingSoon ? (
-            <span
-              style={{
-                ...mono,
-                fontSize: 9,
-                letterSpacing: "0.06em",
-                color: "#55636F",
-                flexShrink: 0,
-              }}
-            >
-              COMING SOON
-            </span>
-          ) : app.href ? (
-            <ArrowUpRight />
-          ) : null}
+          {app.href ? <ArrowUpRight /> : null}
         </div>
         {app.description ? (
           <p

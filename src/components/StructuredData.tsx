@@ -13,7 +13,7 @@ export default function StructuredData() {
         description:
           "Solo founder and software developer in Berlin Mitte. Builds and ships his own mobile and web applications and turns founders' early ideas into production products.",
         url: "https://steffendoesthings.com",
-        image: "https://52n34s.app/me-steffen.png",
+        image: "https://steffendoesthings.com/me-steffen.png",
         email: "steffen@52n34s.com",
         nationality: { "@type": "Country", name: "Germany" },
         address: {
