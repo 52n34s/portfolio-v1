@@ -11,6 +11,12 @@ import {
   type ChallengeApp,
 } from "@/lib/countdown";
 import CountdownClock from "./CountdownClock";
+import {
+  InstagramIcon,
+  TikTokIcon,
+  XIcon,
+  YouTubeIcon,
+} from "@/components/icons/SocialIcons";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +31,52 @@ const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" } as const;
 
 function formatNumber(n: number) {
   return n.toLocaleString("en-US");
+}
+
+const SOCIALS = [
+  {
+    name: "YouTube",
+    handle: "@steffendoesthings",
+    href: "https://www.youtube.com/@steffendoesthings",
+    Icon: YouTubeIcon,
+  },
+  {
+    name: "Instagram",
+    handle: "@steffendoesthings",
+    href: INSTAGRAM_URL,
+    Icon: InstagramIcon,
+  },
+  {
+    name: "X",
+    handle: "@steffdoesthings",
+    href: "https://x.com/steffdoesthings",
+    Icon: XIcon,
+  },
+  {
+    name: "TikTok",
+    handle: "@steffendoesthings",
+    href: "https://www.tiktok.com/@steffendoesthings",
+    Icon: TikTokIcon,
+  },
+] as const;
+
+function SocialRow() {
+  return (
+    <div className="mt-6 flex items-center justify-between">
+      {SOCIALS.map(({ name, handle, href, Icon }) => (
+        <a
+          key={name}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${name}, ${handle}`}
+          className="flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[#F5F0E8] opacity-60 transition-opacity duration-300 hover:opacity-100"
+        >
+          <Icon className="h-5 w-5 shrink-0 md:h-[22px] md:w-[22px]" />
+        </a>
+      ))}
+    </div>
+  );
 }
 
 function ArrowUpRight() {
@@ -322,6 +374,8 @@ export default function CountdownPage() {
             data model, build, payments, App Store, that&apos;s what I do.
           </p>
         </div>
+
+        <SocialRow />
 
         <div
           style={{
