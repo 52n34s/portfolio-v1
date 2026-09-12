@@ -119,7 +119,7 @@ function ServiceCard({ className = "" }: { className?: string }) {
             .getElementById("room-05")
             ?.scrollIntoView({ behavior: "smooth" })
         }
-        className="mt-3 rounded-full bg-[var(--orange)] px-4 py-2 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--orange-hover)]"
+        className="mt-3 rounded-full bg-[var(--purple-button)] px-4 py-2 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--purple-button-hover)]"
       >
         Let&apos;s think it through →
       </button>
