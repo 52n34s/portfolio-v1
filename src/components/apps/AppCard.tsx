@@ -20,7 +20,7 @@ const ROTATIONS = [-1.1, 0.8, -0.6, 1.2, -0.9, 0.5];
 
 function LiveStamp({ name, note }: { name: string; note: string }) {
   return (
-    <div className="absolute -right-3 -top-3 z-30 flex h-[68px] w-[68px] shrink-0 -rotate-12 flex-col items-center justify-center rounded-full border-2 border-[#1D9E75] bg-[#F5F0E8] text-[#1D9E75] opacity-90">
+    <div className="absolute right-4 top-4 z-30 flex h-[68px] w-[68px] shrink-0 origin-top-right -rotate-12 scale-90 flex-col items-center justify-center rounded-full border-2 border-[#1D9E75] bg-[#F5F0E8] text-[#1D9E75] opacity-90 lg:scale-100">
       <span
         className="text-[7px] tracking-wider"
         style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
@@ -50,7 +50,7 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
 
   return (
     <article
-      className="group relative flex min-h-[480px] flex-col overflow-hidden rounded-[20px] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0 md:min-h-[560px]"
+      className="group relative flex min-h-[480px] min-w-0 flex-col overflow-hidden rounded-[20px] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0 md:min-h-[560px]"
       style={{ transform: `rotate(${rotate}deg)` }}
     >
       <LiveStamp name={app.name} note={stampNote(app.href)} />

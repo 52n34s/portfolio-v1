@@ -34,8 +34,13 @@ export default function Home() {
       <HomeCollage />
 
       <div className="mx-auto w-full max-w-[1100px] bg-[#F5F0E8] px-5 md:px-12">
-        {APP_SECTIONS.map((section) => (
-          <AppSection key={section.eyebrow} section={section} />
+        <div className="border-t border-black/10" />
+        {APP_SECTIONS.map((section, index) => (
+          <AppSection
+            key={section.eyebrow}
+            section={section}
+            topClassName={index === 0 ? "pt-16 md:pt-24" : undefined}
+          />
         ))}
       </div>
 

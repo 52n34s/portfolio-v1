@@ -1,9 +1,15 @@
 import type { AppSection as AppSectionData } from "@/data/apps";
 import AppCard from "@/components/apps/AppCard";
 
-export default function AppSection({ section }: { section: AppSectionData }) {
+export default function AppSection({
+  section,
+  topClassName = "pt-24 md:pt-32",
+}: {
+  section: AppSectionData;
+  topClassName?: string;
+}) {
   return (
-    <section className="py-24 md:py-32">
+    <section className={`${topClassName} pb-24 md:pb-32`}>
       <p
         className="text-[12px] uppercase tracking-[0.22em] text-[#1A1A1A]/50"
         style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}

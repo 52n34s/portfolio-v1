@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
-
-const DESIGN_W = 1440;
-const DESIGN_H = 900;
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
@@ -104,102 +95,11 @@ function Clickable({
   );
 }
 
-function SubtitleLines({ className = "" }: { className?: string }) {
-  return (
-    <div className={`leading-[1.6] text-[#1A1A1A]/75 ${className}`}>
-      <p>
-        Hi, I&apos;m Steffen. Curious by default, happiest when nothing exists
-        yet, and rarely convinced that the obvious way is the right one.
-      </p>
-      <p className="mt-3">
-        Six apps of my own, plus platforms for people who came with an idea
-        and no map.
-      </p>
-    </div>
-  );
-}
-
-function HeadlineOnly({
-  className = "",
-  size = "desktop",
-}: {
-  className?: string;
-  size?: "desktop" | "mobile" | "tablet";
-}) {
-  const sizeClass =
-    size === "mobile"
-      ? "text-[32px]"
-      : size === "tablet"
-        ? "text-[42px]"
-        : "text-[48px]";
-
-  return (
-    <p
-      className={`leading-[1.1] tracking-tight text-[#1A1A1A] ${sizeClass} ${className}`}
-      style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-    >
-      Start before you can.
-      <br />
-      Find the way while walking.
-      <br />
-      Trust the process.
-    </p>
-  );
-}
-
-function HeadlineBlock({
-  className = "",
-  variant = "desktop",
-}: {
-  className?: string;
-  variant?: "desktop" | "mobile" | "tablet";
-}) {
-  if (variant === "mobile") {
-    return (
-      <div className={className}>
-        <HeadlineOnly size="mobile" />
-        <SubtitleLines className="mt-10 max-w-[560px] text-[15px]" />
-      </div>
-    );
-  }
-
-  if (variant === "tablet") {
-    return (
-      <div className={className}>
-        <HeadlineOnly size="tablet" />
-        <SubtitleLines className="mt-10 max-w-[560px] text-[16px]" />
-      </div>
-    );
-  }
-
-  return (
-    <div className={className}>
-      <HeadlineOnly />
-      <SubtitleLines className="mt-10 max-w-[560px] text-[17px]" />
-    </div>
-  );
-}
-
-function ServiceCard({
-  className = "",
-  variant = "desktop",
-}: {
-  className?: string;
-  variant?: "desktop" | "mobile" | "tablet";
-}) {
-  const copySize =
-    variant === "mobile"
-      ? "text-[18px]"
-      : variant === "tablet"
-        ? "text-[19px]"
-        : "text-[18px]";
-  const buttonSize =
-    variant === "mobile" ? "px-5 py-2.5 text-[14px]" : "px-4 py-2 text-[13px]";
-
+function ServiceCard({ className = "" }: { className?: string }) {
   return (
     <div
       id="pitch"
-      className={`relative bg-white px-4 pb-5 pt-4 ${PAPER_SHADOW} ${className}`}
+      className={`relative w-full min-w-0 bg-white px-4 pb-5 pt-4 ${PAPER_SHADOW} ${className}`}
     >
       <Tape className="-left-2 -top-2 -rotate-[14deg]" />
       <div
@@ -207,7 +107,7 @@ function ServiceCard({
         aria-hidden="true"
       />
       <p
-        className={`${copySize} leading-snug text-[#1A1A1A]`}
+        className="text-[18px] leading-snug text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         Pitch me your idea. We&apos;ll take it apart together.
@@ -219,7 +119,7 @@ function ServiceCard({
             .getElementById("room-05")
             ?.scrollIntoView({ behavior: "smooth" })
         }
-        className={`mt-3 rounded-full bg-[#1A1A1A] font-medium text-[#F5F0E8] transition-opacity hover:opacity-90 ${buttonSize}`}
+        className="mt-3 rounded-full bg-[#1A1A1A] px-4 py-2 text-[13px] font-medium text-[#F5F0E8] transition-opacity hover:opacity-90"
       >
         Let&apos;s think it through →
       </button>
@@ -229,29 +129,7 @@ function ServiceCard({
 }
 
 export default function HomeCollage() {
-  const stageRef = useRef<HTMLDivElement>(null);
   const scrolledToPitch = useRef(false);
-  const [scale, setScale] = useState(1);
-  const [layout, setLayout] = useState<"desktop" | "tablet" | "mobile">(
-    "desktop",
-  );
-
-  useEffect(() => {
-    const mqDesktop = window.matchMedia("(min-width: 1024px)");
-    const mqTablet = window.matchMedia("(min-width: 768px)");
-    const update = () => {
-      if (mqDesktop.matches) setLayout("desktop");
-      else if (mqTablet.matches) setLayout("tablet");
-      else setLayout("mobile");
-    };
-    update();
-    mqDesktop.addEventListener("change", update);
-    mqTablet.addEventListener("change", update);
-    return () => {
-      mqDesktop.removeEventListener("change", update);
-      mqTablet.removeEventListener("change", update);
-    };
-  }, []);
 
   useEffect(() => {
     if (scrolledToPitch.current) return;
@@ -263,45 +141,37 @@ export default function HomeCollage() {
       el.scrollIntoView({ behavior: "smooth" });
     }, 0);
     return () => window.clearTimeout(t);
-  }, [layout]);
-
-  useEffect(() => {
-    if (layout !== "desktop") return;
-    const el = stageRef.current;
-    if (!el) return;
-    const update = () => {
-      const r = el.getBoundingClientRect();
-      setScale(Math.min(r.width / DESIGN_W, r.height / DESIGN_H));
-    };
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [layout]);
+  }, []);
 
   return (
-    <div id="room-01">
+    <div id="room-01" className="bg-[#F5F0E8] pb-16 md:pb-24">
       <h1 className="sr-only">
         Steffen Giebler — Product Developer and Indie Founder in Berlin
       </h1>
       <h2 className="sr-only">Apps</h2>
-      {layout === "desktop" && (
-        <section className="relative w-full overflow-hidden bg-[#F5F0E8]">
-          <div
-            ref={stageRef}
-            className="relative h-screen w-full overflow-hidden"
-          >
-            <div
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: DESIGN_W,
-                height: DESIGN_H,
-                transform: `translate(-50%, -50%) scale(${scale})`,
-              }}
+
+      <div className="mx-auto w-full max-w-[1100px] px-5 pt-16 md:px-12 md:pt-20">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:items-center lg:gap-16">
+          <div className="min-w-0">
+            <p
+              className="max-w-[18ch] text-[2rem] leading-[1.15] text-[#1A1A1A] md:text-5xl lg:max-w-[16ch] lg:text-6xl"
+              style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
             >
+              I build apps of my own, and platforms for people who came with
+              an idea and no map.
+            </p>
+            <p className="mt-8 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[17px]">
+              Hi, I&apos;m Steffen. Berlin, working solo. Happiest when
+              nothing exists yet, and rarely convinced that the obvious way
+              is the right one.
+            </p>
+          </div>
+
+          <div className="min-w-0">
+            <div className="relative mx-auto w-full max-w-[320px] lg:mx-0 lg:max-w-[260px]">
               <svg
-                className="pointer-events-none absolute z-0 -rotate-[4deg]"
-                style={{ left: 0, top: 480, width: 300, height: 380 }}
+                className="pointer-events-none absolute -left-3 -top-3 -z-10 -rotate-[4deg]"
+                style={{ width: "112%", height: "106%" }}
                 viewBox="0 0 280 340"
                 preserveAspectRatio="none"
                 aria-hidden="true"
@@ -312,76 +182,27 @@ export default function HomeCollage() {
                 />
               </svg>
 
-              <div
-                className="absolute z-30"
-                style={{ left: 80, top: 90, width: 780 }}
-              >
-                <HeadlineOnly />
-                <SubtitleLines className="mt-10 max-w-[560px] text-[15px]" />
-              </div>
+              <img
+                src="/me-steffen.png"
+                alt="Steffen Giebler, product developer and indie founder, Berlin"
+                className="pointer-events-none relative z-10 block h-auto w-full object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
+              />
 
-              <div
-                className="absolute z-20"
-                style={{ left: 80, top: 500, width: 250, height: 370 }}
+              <Clickable
+                label="Why I wear colors"
+                scrollTo="#room-05"
+                className="left-0 top-[45%] h-[55%] w-full"
               >
-                <img
-                  src="/me-steffen.png"
-                  alt="Steffen Giebler, product developer and indie founder, Berlin"
-                  className="pointer-events-none h-full w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-                />
-                <Clickable
-                  label="Why I wear colors"
-                  scrollTo="#room-05"
-                  className="left-0 top-[45%] h-[55%] w-full"
-                >
-                  <span className="block h-full w-full" aria-hidden="true" />
-                </Clickable>
-              </div>
+                <span className="block h-full w-full" aria-hidden="true" />
+              </Clickable>
+            </div>
 
-              <div
-                className="absolute z-30 -rotate-[1deg]"
-                style={{ left: 360, top: 620, width: 230, height: 250 }}
-              >
-                <ServiceCard />
-              </div>
+            <div className="relative z-20 mx-auto mt-8 w-full max-w-[285px] lg:mx-0 lg:ml-[140px] lg:mt-[-64px]">
+              <ServiceCard className="-rotate-[1deg]" />
             </div>
           </div>
-          {/* Card→skyline breathing room (desktop) */}
-          <div className="h-[220px]" aria-hidden="true" />
-        </section>
-      )}
-
-      {layout === "tablet" && (
-        <section className="overflow-visible bg-[#F5F0E8] px-8 pt-14 pb-[220px]">
-          <HeadlineBlock variant="tablet" />
-
-          <img
-            src="/me-steffen.png"
-            alt="Steffen Giebler, product developer and indie founder, Berlin"
-            className="mx-auto mt-12 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-          />
-
-          <div className="mx-auto mt-10 w-full max-w-[285px]">
-            <ServiceCard className="-rotate-[1deg]" variant="tablet" />
-          </div>
-        </section>
-      )}
-
-      {layout === "mobile" && (
-        <section className="overflow-visible bg-[#F5F0E8] px-5 pt-12 pb-[128px]">
-          <HeadlineBlock variant="mobile" />
-
-          <img
-            src="/me-steffen.png"
-            alt="Steffen Giebler, product developer and indie founder, Berlin"
-            className="mx-auto mt-8 h-[280px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
-          />
-
-          <div className="mx-auto mt-10 w-full max-w-[285px]">
-            <ServiceCard className="-rotate-[1deg]" variant="mobile" />
-          </div>
-        </section>
-      )}
+        </div>
+      </div>
     </div>
   );
 }
