@@ -189,7 +189,7 @@ export function WorkPageShell({
           </Link>
           {showHomeLink ? (
             <Link href="/" className="work-home">
-              52n34s.app
+              steffendoesthings.com
             </Link>
           ) : (
             <span />
@@ -202,7 +202,7 @@ export function WorkPageShell({
 }
 
 export function WorkJsonLd({ workCase }: { workCase: WorkCase }) {
-  const pageUrl = `https://52n34s.app/work/${workCase.slug}`;
+  const pageUrl = `https://steffendoesthings.com/work/${workCase.slug}`;
 
   const service = {
     "@context": "https://schema.org",
@@ -211,7 +211,7 @@ export function WorkJsonLd({ workCase }: { workCase: WorkCase }) {
     name: workCase.serviceName,
     description: workCase.description,
     url: pageUrl,
-    provider: { "@id": "https://52n34s.app/#steffen" },
+    provider: { "@id": "https://steffendoesthings.com/#steffen" },
     areaServed: { "@type": "Place", name: "Worldwide" },
     availableLanguage: ["en", "de", "es"],
   };
@@ -224,13 +224,13 @@ export function WorkJsonLd({ workCase }: { workCase: WorkCase }) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://52n34s.app",
+        item: "https://steffendoesthings.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Work",
-        item: "https://52n34s.app/work",
+        item: "https://steffendoesthings.com/work",
       },
       {
         "@type": "ListItem",

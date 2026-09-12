@@ -28,13 +28,13 @@ export default function WorkIndexPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://52n34s.app",
+        item: "https://steffendoesthings.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Work",
-        item: "https://52n34s.app/work",
+        item: "https://steffendoesthings.com/work",
       },
     ],
   };
@@ -45,7 +45,7 @@ export default function WorkIndexPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <WorkPageShell backHref="/" backLabel="← 52n34s.app" showHomeLink={false}>
+      <WorkPageShell backHref="/" backLabel="← steffendoesthings.com" showHomeLink={false}>
         <nav className="work-breadcrumb" aria-label="Breadcrumb">
           <ol>
             <li>

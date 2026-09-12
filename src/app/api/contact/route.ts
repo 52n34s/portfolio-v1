@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
             </div>
             <div class="footer">
               <a href="mailto:${email}">Reply to ${name} →</a>
-              <p>Received via 52n34s.app · portfolio contact form</p>
+              <p>Received via steffendoesthings.com · portfolio contact form</p>
             </div>
           </div>
         </body>

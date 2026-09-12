@@ -24,12 +24,12 @@ export const metadata: Metadata = {
 const contactPageLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "@id": "https://52n34s.app/contact#page",
-  url: "https://52n34s.app/contact",
+  "@id": "https://steffendoesthings.com/contact#page",
+  url: "https://steffendoesthings.com/contact",
   name: "Contact — Steffen Giebler",
   description:
     "Freelance product development, software architecture and long-term product partnerships. Berlin-based, remote worldwide.",
-  mainEntity: { "@id": "https://52n34s.app/#steffen" },
+  mainEntity: { "@id": "https://steffendoesthings.com/#steffen" },
 };
 
 export default function ContactPage() {
@@ -39,7 +39,7 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageLd) }}
       />
-      <WorkPageShell backHref="/" backLabel="← 52n34s.app" showHomeLink={false}>
+      <WorkPageShell backHref="/" backLabel="← steffendoesthings.com" showHomeLink={false}>
         <nav className="work-breadcrumb" aria-label="Breadcrumb">
           <ol>
             <li>

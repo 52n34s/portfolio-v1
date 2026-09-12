@@ -29,22 +29,22 @@ export default function AppsPage() {
       {
         "@type": "ListItem",
         position: 1,
-        item: { "@id": "https://52n34s.app/#orivela" },
+        item: { "@id": "https://steffendoesthings.com/#orivela" },
       },
       {
         "@type": "ListItem",
         position: 2,
-        item: { "@id": "https://52n34s.app/#kolibi" },
+        item: { "@id": "https://steffendoesthings.com/#kolibi" },
       },
       {
         "@type": "ListItem",
         position: 3,
-        item: { "@id": "https://52n34s.app/#peeranimo" },
+        item: { "@id": "https://steffendoesthings.com/#peeranimo" },
       },
       {
         "@type": "ListItem",
         position: 4,
-        item: { "@id": "https://52n34s.app/#carpincho" },
+        item: { "@id": "https://steffendoesthings.com/#carpincho" },
       },
     ],
   };
