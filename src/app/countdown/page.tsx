@@ -62,7 +62,7 @@ const SOCIALS = [
 
 function SocialRow() {
   return (
-    <div className="mt-6 flex items-center justify-between">
+    <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-4">
       {SOCIALS.map(({ name, handle, href, Icon }) => (
         <a
           key={name}
@@ -70,9 +70,15 @@ function SocialRow() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${name}, ${handle}`}
-          className="flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[#F5F0E8] opacity-60 transition-opacity duration-300 hover:opacity-100"
+          className="flex min-h-[44px] min-w-0 items-center gap-1.5 text-[#F5F0E8] opacity-60 transition-opacity duration-300 hover:opacity-100"
         >
           <Icon className="h-5 w-5 shrink-0 md:h-[22px] md:w-[22px]" />
+          <span
+            style={mono}
+            className="min-w-0 whitespace-nowrap text-[12px]"
+          >
+            {handle}
+          </span>
         </a>
       ))}
     </div>
@@ -400,23 +406,6 @@ export default function CountdownPage() {
           >
             Have your own idea?
           </Link>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "block",
-              padding: 13,
-              borderRadius: 8,
-              border: "0.5px solid #2A3844",
-              textAlign: "center",
-              fontSize: 13,
-              color: "#A8B4BE",
-              textDecoration: "none",
-            }}
-          >
-            Follow on Instagram
-          </a>
         </div>
       </div>
     </main>
