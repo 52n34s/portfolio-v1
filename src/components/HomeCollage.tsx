@@ -7,17 +7,11 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import AppCardStack, {
-  type StackPlacement,
-} from "@/components/AppCardStack";
 
 const DESIGN_W = 1440;
 const DESIGN_H = 900;
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
-
-const GRID_X = 680;
-const GRID_Y = 268;
 
 function Tape({ className = "" }: { className?: string }) {
   return (
@@ -118,7 +112,7 @@ function SubtitleLines({ className = "" }: { className?: string }) {
         yet, and rarely convinced that the obvious way is the right one.
       </p>
       <p className="mt-3">
-        Five apps of my own, plus platforms for people who came with an idea
+        Six apps of my own, plus platforms for people who came with an idea
         and no map.
       </p>
     </div>
@@ -234,14 +228,6 @@ function ServiceCard({
   );
 }
 
-function placementFor(
-  layout: "desktop" | "tablet" | "mobile",
-): StackPlacement {
-  if (layout === "desktop") return "beside";
-  if (layout === "tablet") return "below";
-  return "row";
-}
-
 export default function HomeCollage() {
   const stageRef = useRef<HTMLDivElement>(null);
   const scrolledToPitch = useRef(false);
@@ -292,8 +278,6 @@ export default function HomeCollage() {
     ro.observe(el);
     return () => ro.disconnect();
   }, [layout]);
-
-  const placement = placementFor(layout);
 
   return (
     <div id="room-01">
@@ -360,13 +344,6 @@ export default function HomeCollage() {
               >
                 <ServiceCard />
               </div>
-
-              <div
-                className="absolute z-30 overflow-visible"
-                style={{ left: GRID_X, top: GRID_Y }}
-              >
-                <AppCardStack variant="home" placement="beside" />
-              </div>
             </div>
           </div>
           {/* Card→skyline breathing room (desktop) */}
@@ -384,10 +361,6 @@ export default function HomeCollage() {
             className="mx-auto mt-12 h-[300px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
 
-          <div className="mx-auto mt-12 flex w-full max-w-[720px] justify-center overflow-visible px-5 pt-5">
-            <AppCardStack variant="home" placement={placement} />
-          </div>
-
           <div className="mx-auto mt-10 w-full max-w-[285px]">
             <ServiceCard className="-rotate-[1deg]" variant="tablet" />
           </div>
@@ -403,10 +376,6 @@ export default function HomeCollage() {
             alt="Steffen Giebler, product developer and indie founder, Berlin"
             className="mx-auto mt-8 h-[280px] w-auto object-contain drop-shadow-[3px_5px_9px_rgba(26,26,26,0.22)]"
           />
-
-          <div className="mx-auto mt-10 w-full overflow-visible pt-5">
-            <AppCardStack variant="home" placement={placement} />
-          </div>
 
           <div className="mx-auto mt-10 w-full max-w-[285px]">
             <ServiceCard className="-rotate-[1deg]" variant="mobile" />

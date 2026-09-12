@@ -1,135 +1,128 @@
 export const ERDI_MAGENTA = "#FC2E70";
 
-export type AppId =
+export type AppSlug =
   | "kolibi"
+  | "getabite"
   | "carpincho"
-  | "orivela"
   | "peeranimo"
+  | "orivela"
   | "erdiknows";
 
-export type AppCta = {
-  label: string;
-  href: string;
-  className: string;
-};
-
-export type AppDefinition = {
-  id: AppId;
+export type AppEntry = {
+  slug: AppSlug;
   name: string;
-  href: string;
-  icon: string;
   platform: string;
-  subline?: string;
-  handwrittenNote?: [string, string];
-  stackLine?: string;
-  focusHeadline?: string;
-  focusBody?: string;
-  stamp: [string, string, string];
-  appsCtas: AppCta[];
-  appsNote?: string;
+  hook: string;
+  body: string;
+  href: string;
+  logo: string;
+  visual: AppSlug;
+  badge?: string;
 };
 
-const STORE_BTN =
-  "inline-block rounded-full bg-[#1D9E75] px-4 py-2 text-[13px] font-medium text-white";
+export type AppSection = {
+  eyebrow: string;
+  headline: string;
+  subline: string;
+  apps: AppEntry[];
+};
 
-export const APPS: AppDefinition[] = [
+/** App Store / Play Store links get the "Get the app" CTA; everything else gets "Open". */
+export function isStoreHref(href: string) {
+  return href.includes("apps.apple.com") || href.includes("play.google.com");
+}
+
+export function ctaLabel(href: string) {
+  return isStoreHref(href) ? "Get the app" : "Open";
+}
+
+export function stampNote(href: string) {
+  return isStoreHref(href) ? "ON THE APP STORE" : "ON THE WEB";
+}
+
+export const APP_SECTIONS: AppSection[] = [
   {
-    id: "kolibi",
-    name: "Kolibi",
-    href: "https://apps.apple.com/us/app/kolibi/id6790129149",
-    icon: "/app-logo-kolibi.jpg",
-    platform: "iOS · Android",
-    subline: "AI photo calorie tracker",
-    stamp: ["KOLIBI", "LIVE", "ON THE APP STORE"],
-    appsCtas: [
+    eyebrow: "FOOD",
+    headline: "Two apps for what ends up on the plate.",
+    subline: "Decide fast, eat the way you meant to.",
+    apps: [
       {
-        label: "Get the app →",
+        slug: "kolibi",
+        name: "Kolibi",
+        platform: "iOS · Android",
+        hook: "Photograph your food. That's it.",
+        body: "Kolibi reads the plate, estimates the portions and fills in calories and macros in seconds. Your targets are calculated for your body and your goal, and they shift on training days. Correct a portion once and every estimate after that lands closer.",
         href: "https://apps.apple.com/us/app/kolibi/id6790129149",
-        className: `${STORE_BTN} px-5`,
+        logo: "/app-logo-kolibi.jpg",
+        visual: "kolibi",
+      },
+      {
+        slug: "getabite",
+        name: "GetaBite",
+        platform: "Web",
+        hook: "Know where you're going and what you'll order before you leave the house.",
+        body: "GetaBite maps vegan and vegetarian places together with the dishes they actually serve, built from menus people photograph on the spot. The scanner covers the supermarket shelf for the rest of the week. You walk in knowing what fits and what to ask about.",
+        href: "/go/getabite",
+        logo: "/getabite-mark-128.png",
+        visual: "getabite",
       },
     ],
   },
   {
-    id: "carpincho",
-    name: "Carpincho",
-    href: "https://carpincho.app/",
-    icon: "/app-logo-carpincho.jpg",
-    platform: "Spanish with the least effort possible",
-    subline: "Spanish with the least effort possible",
-    stamp: ["CARPINCHO", "LIVE", "ON THE APP STORE"],
-    appsCtas: [
+    eyebrow: "LANGUAGE & PEOPLE",
+    headline: "Two apps for the conversation you want to have.",
+    subline: "Say it in Spanish. Say it to someone who gets it.",
+    apps: [
       {
-        label: "Get the app →",
+        slug: "carpincho",
+        name: "Carpincho",
+        platform: "Spanish with the least effort possible",
+        hook: "You say your sentence and the answer comes back in Spanish.",
+        body: "Carpincho drills the moments you actually land in, from ordering at the cafe to the call you keep putting off. You speak, it listens and tells you the two words it hung on. Every word is spoken in Rioplatense, neutral Latin American and Spain, so you hear which one you are learning.",
         href: "https://apps.apple.com/de/app/carpincho-learn-less-say-more/id6795982399",
-        className:
-          "inline-block rounded-full bg-[#D6156F] px-5 py-2 text-[13px] font-medium text-white",
-      },
-    ],
-  },
-  {
-    id: "orivela",
-    name: "Orivela",
-    href: "https://www.orivela.app/",
-    icon: "/app-logo-orivela.jpg",
-    platform: "iOS",
-    subline: "Every document, found in seconds",
-    stamp: ["ORIVELA", "LIVE", "ON THE APP STORE"],
-    appsCtas: [
-      {
-        label: "App Store →",
-        href: "https://apps.apple.com/us/app/orivela/id6785050823",
-        className: STORE_BTN,
+        logo: "/app-logo-carpincho.jpg",
+        visual: "carpincho",
       },
       {
-        label: "Play Store (beta) →",
-        href: "https://play.google.com/apps/testing/com.steffen.orivela.android",
-        className: STORE_BTN,
-      },
-    ],
-    appsNote:
-      "Android is in closed testing — request access after tapping Play Store.",
-  },
-  {
-    id: "peeranimo",
-    name: "Peeranimo",
-    href: "https://peeranimo.app/",
-    icon: "/app-logo-peeranimo.webp",
-    platform: "Social platform · Web",
-    subline: "Find people who get it",
-    stamp: ["PEERANIMO", "LIVE", "ON THE WEB"],
-    appsCtas: [
-      {
-        label: "Try it now →",
+        slug: "peeranimo",
+        name: "Peeranimo",
+        platform: "Social platform · Web",
+        hook: "Find people who get it.",
+        body: "Peeranimo matches you with people working on the same thing you are. You describe where you are stuck, and the conversation starts with someone who has been there.",
         href: "https://peeranimo.app/",
-        className: `${STORE_BTN} px-5`,
+        logo: "/app-logo-peeranimo.webp",
+        visual: "peeranimo",
       },
     ],
   },
   {
-    id: "erdiknows",
-    name: "ErdiKnows",
-    href: "https://erdiknows.com",
-    icon: "/erdiknows.png",
-    platform: "Web",
-    handwrittenNote: ["Numbers moved.", "Erdi knew why."],
-    stackLine: "See which changes pay off.",
-    focusHeadline: "See which changes pay off.",
-    focusBody:
-      "Every release, campaign and price change lands on one timeline, next to the paying customers that followed. You see what a customer really costs, and what your last change actually did. One page, and you know where you stand.",
-    stamp: ["ERDIKNOWS", "LIVE", "ON THE WEB"],
-    appsCtas: [
+    eyebrow: "DOCUMENTS & DATA",
+    headline: "Two apps for finding the answer fast.",
+    subline: "The document you need now. The reason the number moved.",
+    apps: [
       {
-        label: "Open on the web →",
+        slug: "orivela",
+        name: "Orivela",
+        platform: "iOS",
+        hook: "Every document, found in seconds.",
+        body: "Passport, insurance, the contract someone wants a copy of today. Orivela keeps them in one place and puts the right one in your hand while you are still in the conversation. Add it once and you stop searching for it.",
+        href: "https://apps.apple.com/us/app/orivela/id6785050823",
+        logo: "/app-logo-orivela.jpg",
+        visual: "orivela",
+      },
+      {
+        slug: "erdiknows",
+        name: "ErdiKnows",
+        platform: "Web",
+        badge: "FOR INDIE DEVELOPERS",
+        hook: "You shipped something last week. Did it pay off?",
+        body: "ErdiKnows puts your releases, price changes and campaigns on the same timeline as your revenue and your signups. When a number moves, you can see what you changed the week before. Built for developers who ship weekly and want the answer in one screen.",
         href: "https://erdiknows.com",
-        className:
-          "inline-block rounded-full bg-[#FC2E70] px-5 py-2 text-[13px] font-medium text-white",
+        logo: "/erdiknows.png",
+        visual: "erdiknows",
       },
     ],
   },
 ];
 
-export const DEFAULT_FEATURED_ID: AppId = "kolibi";
-
-export const APP_BY_ID: Record<AppId, AppDefinition> = Object.fromEntries(
-  APPS.map((app) => [app.id, app]),
-) as Record<AppId, AppDefinition>;
+export const APPS: AppEntry[] = APP_SECTIONS.flatMap((section) => section.apps);

@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AppsGallery from "@/components/AppsGallery";
+import AppSection from "@/components/apps/AppSection";
+import { APP_SECTIONS } from "@/data/apps";
 
 export const metadata: Metadata = {
   title:
-    "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho",
+    "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
   description:
-    "Four apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, and a Spanish course. Live on iOS, Android and web.",
+    "Six apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS, Android and web.",
   alternates: {
     canonical: "/apps",
   },
   openGraph: {
-    title: "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho",
+    title: "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
     description:
-      "Four apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, and a Spanish course. Live on iOS, Android and web.",
+      "Six apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS, Android and web.",
     url: "https://52n34s.app/apps",
     type: "website",
   },
@@ -62,13 +63,15 @@ export default function AppsPage() {
           Apps — built by Steffen.
         </h1>
         <p className="mx-auto mt-2 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[16px] lg:mt-6 lg:text-[17px]">
-          Five products. Five different problems.
+          Six products. Six different problems.
         </p>
       </header>
 
-      <section className="flex w-full flex-1 justify-center overflow-x-auto px-5 py-8 md:px-12 md:py-12">
-        <AppsGallery />
-      </section>
+      <div className="mx-auto w-full max-w-[1100px] px-5 md:px-12">
+        {APP_SECTIONS.map((section) => (
+          <AppSection key={section.eyebrow} section={section} />
+        ))}
+      </div>
 
       <footer className="flex flex-col items-center gap-4 px-6 pt-16 pb-8 md:px-12 md:pb-10">
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">

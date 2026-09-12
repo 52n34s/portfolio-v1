@@ -1,8 +1,10 @@
 "use client";
 
 import HomeCollage from "@/components/HomeCollage";
+import AppSection from "@/components/apps/AppSection";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
+import { APP_SECTIONS } from "@/data/apps";
 
 export default function Home() {
   return (
@@ -30,6 +32,12 @@ export default function Home() {
       </div>
 
       <HomeCollage />
+
+      <div className="mx-auto w-full max-w-[1100px] bg-[#F5F0E8] px-5 md:px-12">
+        {APP_SECTIONS.map((section) => (
+          <AppSection key={section.eyebrow} section={section} />
+        ))}
+      </div>
 
       {/*
         Boot-Terminal war früher room-01 (Typing-Sequenz + App-Icons), ist
