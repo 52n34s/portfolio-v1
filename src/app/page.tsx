@@ -2,6 +2,7 @@
 
 import HomeCollage from "@/components/HomeCollage";
 import AppSection from "@/components/apps/AppSection";
+import SectionDivider from "@/components/SectionDivider";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
 import { APP_SECTIONS } from "@/data/apps";
@@ -33,13 +34,14 @@ export default function Home() {
 
       <HomeCollage />
 
+      <SectionDivider />
+
       <div className="mx-auto w-full max-w-[1100px] bg-[#F5F0E8] px-5 md:px-12">
-        <div className="border-t border-black/10" />
         {APP_SECTIONS.map((section, index) => (
           <AppSection
             key={section.eyebrow}
             section={section}
-            topClassName={index === 0 ? "pt-16 md:pt-24" : undefined}
+            topClassName={index === 0 ? "pt-10 md:pt-14" : undefined}
           />
         ))}
       </div>

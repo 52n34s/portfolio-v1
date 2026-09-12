@@ -144,7 +144,7 @@ export default function HomeCollage() {
   }, []);
 
   return (
-    <div id="room-01" className="bg-[#F5F0E8] pb-16 md:pb-24">
+    <div id="room-01" className="bg-[#F5F0E8] pb-10 md:pb-14">
       <h1 className="sr-only">
         Steffen Giebler — Product Developer and Indie Founder in Berlin
       </h1>
