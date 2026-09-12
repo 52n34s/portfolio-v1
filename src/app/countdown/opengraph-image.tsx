@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { GOAL_EUR, getCountdownStats, TARGET_DATE } from "@/lib/countdown";
+import { TARGET_DATE } from "@/lib/countdown";
 
 export const runtime = "edge";
 export const alt = "Countdown — Steffen Giebler";
@@ -15,8 +15,7 @@ function daysLeft() {
 
 export default function Image() {
   const days = daysLeft();
-  const { monthlyRevenue } = getCountdownStats();
-  const mrr = `€${monthlyRevenue.toLocaleString("en-US")} of €${GOAL_EUR.toLocaleString("en-US")} MRR · 52n34s.app/countdown`;
+  const domainLine = "steffendoesthings.com/countdown";
 
   return new ImageResponse(
     (
@@ -60,7 +59,7 @@ export default function Image() {
             color: "#8A9BA8",
           }}
         >
-          {mrr}
+          {domainLine}
         </div>
       </div>
     ),
