@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
     description:
       "Six apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS, Android and web.",
-    url: "https://52n34s.app/apps",
+    url: "https://steffendoesthings.com/apps",
     type: "website",
   },
 };

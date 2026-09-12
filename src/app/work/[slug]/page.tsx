@@ -33,7 +33,7 @@ export async function generateMetadata({
     openGraph: {
       title: workCase.title,
       description: workCase.description,
-      url: `https://52n34s.app/work/${workCase.slug}`,
+      url: `https://steffendoesthings.com/work/${workCase.slug}`,
       type: "website",
     },
   };

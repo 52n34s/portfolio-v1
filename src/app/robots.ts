@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "Bytespider", allow: "/" },
       { userAgent: "meta-externalagent", allow: "/" },
     ],
-    sitemap: "https://52n34s.app/sitemap.xml",
-    host: "https://52n34s.app",
+    sitemap: "https://steffendoesthings.com/sitemap.xml",
+    host: "https://steffendoesthings.com",
   };
 }

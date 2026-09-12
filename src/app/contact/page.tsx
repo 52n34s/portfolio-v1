@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Contact — Steffen Giebler, Product Developer Berlin",
     description:
       "Freelance product development, software architecture and long-term product partnerships. Berlin-based, remote worldwide.",
-    url: "https://52n34s.app/contact",
+    url: "https://steffendoesthings.com/contact",
     type: "website",
   },
 };

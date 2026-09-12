@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Work With Me — Product Development, Berlin | Steffen Giebler",
     description:
       "Six ways I work with founders: from raw idea to shipped MVP, technical blueprints, rescuing broken builds, and long-term product partnerships. Berlin-based, remote worldwide.",
-    url: "https://52n34s.app/work",
+    url: "https://steffendoesthings.com/work",
     type: "website",
   },
 };
