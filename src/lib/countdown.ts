@@ -44,21 +44,21 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
   {
     name: "Kolibi",
     description:
-      "Photograph your plate, get the calories. No database search, no typing. Subscription, live on iOS.",
+      "Photograph your plate and the calories fill themselves in. Subscription, live on iOS.",
     logo: "/app-logo-kolibi.jpg",
     href: "https://apps.apple.com/us/app/kolibi-calories-by-photo/id6790129149",
   },
   {
     name: "ErdiKnows",
     description:
-      "Ad spend, releases and price changes on one timeline, next to the customers that followed. For developers running more than one product. Web, 14-day trial.",
+      "Releases, price changes and ad spend on one timeline, next to the customers that followed. Web, 14-day trial.",
     logo: "/erdiknows.png",
     href: "https://erdiknows.com/",
   },
   {
     name: "Carpincho",
     description:
-      "A Spanish learning app built around one number: a thousand words is enough to hold a real conversation. You speak, it listens and grades you honestly. Rioplatense, neutral Latin American or Spain.",
+      "Speak Rioplatense Spanish from the first lesson and get graded honestly. Subscription, iOS.",
     logo: "/app-logo-carpincho.jpg",
     href: "https://apps.apple.com/us/app/carpi-speak-learn-spanish/id6795982399",
   },
@@ -72,15 +72,15 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
   {
     name: "Peeranimo",
     description:
-      "Peer matching for people who want to be understood without explaining first. Live on the web.",
+      "Peers in the exact same chapter of life, matched to you. Free, live on the web.",
     logo: "/app-logo-peeranimo.webp",
     href: "https://peeranimo.app/",
   },
   {
     name: "GetaBite",
-    description: "", // <- von Steffen einzutragen
-    logo: "", // <- leer lassen, falls kein Logo vorhanden
-    href: null,
-    comingSoon: true,
+    description:
+      "Know what you'll order before you leave the house. Vegan and vegetarian places with the dishes they actually serve. Free, on the web.",
+    logo: "/getabite-mark-128.png",
+    href: "/go/getabite",
   },
 ];
