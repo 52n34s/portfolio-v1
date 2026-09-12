@@ -3,6 +3,7 @@
 :root {
   --bg: #F5F0E8;
   --orange: #7B5CF0;
+  --orange-hover: #5D37ED;
   --teal: #00C2A8;
   --gold: #F4D35E;
   --dark: #1A1A1A;
@@ -443,7 +444,7 @@ body {
 }
 
 .room-02-label {
-  background: var(--dark);
+  background: var(--orange);
   color: var(--text);
   font-family: var(--font-jetbrains-mono), monospace;
   font-size: 12px;
@@ -456,8 +457,8 @@ body {
 }
 
 .room-02-label:hover {
-  background: var(--orange);
-  color: var(--dark);
+  background: var(--orange-hover);
+  color: var(--text);
 }
 
 .room-02-tooltip {

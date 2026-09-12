@@ -105,7 +105,7 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
         <a
           href={app.href}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className="mt-auto inline-block w-fit rounded-full bg-[#1A1A1A] px-5 py-2.5 text-[13px] font-medium text-[#F5F0E8] transition-opacity hover:opacity-85"
+          className="mt-auto inline-block w-fit rounded-full bg-[var(--orange)] px-5 py-2.5 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--orange-hover)]"
         >
           {ctaLabel(app.href)} →
         </a>
