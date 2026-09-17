@@ -3,23 +3,23 @@ import Link from "next/link";
 const OUTCOMES = [
   {
     icon: "🔍",
-    title: "Find anything in seconds",
-    body: '"Where\'s my car registration?" — asked, answered.',
+    title: "Notes and records",
+    body: "Notes for what just crossed your mind. Records for insurance, contracts and documents. Both land in the same place.",
   },
   {
     icon: "📄",
-    title: "Not just files. Everything.",
-    body: "Subscriptions, passport, lease, that paper in your drawer — all in one place.",
+    title: "Ori files it for you",
+    body: "Title, labels, keywords and dates, suggested before you save.",
   },
   {
     icon: "🔒",
-    title: "Only you can read it",
-    body: "Encrypted on-device before it ever leaves your phone.",
+    title: "Ask in plain language",
+    body: "Full text search, or a whole question across everything you kept.",
   },
   {
     icon: "🤖",
-    title: "AI that knows your life",
-    body: "Ask in plain language. No folders, no scrolling, no guessing.",
+    title: "Reminders that arrive on time",
+    body: "Local notifications on device, with lead time for documents about to expire.",
   },
 ];
 
@@ -90,16 +90,16 @@ export default function OrivelaBuild({
             </span>
 
             <HeadlineTag className="orivela-room-headline">
-              Your records,
+              Out of your head.
               <br />
-              <span className="orivela-room-headline-accent">always at hand</span>
+              <span className="orivela-room-headline-accent">Into one place</span>
               <span className="orivela-room-dot">.</span>
             </HeadlineTag>
 
             <p className="orivela-room-intro">
-              A personal records vault for iOS. Store insurance PDFs, subscription
-              logins, lease agreements, and emergency contacts in one encrypted
-              place — then ask for anything in plain language.
+              A thought on the walk home. An insurance PDF. A note to yourself at
+              2am. Say it or snap it, and Orivela puts it where you&apos;ll find
+              it.
             </p>
 
             <div className="orivela-room-divider" />
@@ -107,7 +107,7 @@ export default function OrivelaBuild({
             <dl className="orivela-room-meta">
               <div className="orivela-room-meta-item">
                 <dt>Platform</dt>
-                <dd>iOS & Android</dd>
+                <dd>iOS · Android beta · orivela.app</dd>
               </div>
               <div className="orivela-room-meta-item">
                 <dt>Role</dt>

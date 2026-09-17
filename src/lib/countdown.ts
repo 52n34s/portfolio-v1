@@ -64,7 +64,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
   {
     name: "Orivela",
     description:
-      "Every document in one place, asked for in plain language. Free, iOS and Android beta.",
+      "Notes and records in one place, back in seconds when you ask.",
     logo: "/app-logo-orivela.jpg",
     href: "https://www.orivela.app/",
   },

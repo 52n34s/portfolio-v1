@@ -98,9 +98,9 @@ export default function StructuredData() {
         "@id": "https://steffendoesthings.com/#orivela",
         name: "Orivela",
         description:
-          "A personal records vault that stores documents, contracts and subscriptions and answers questions about them in plain language.",
+          "Notes and records in one place. Capture by voice, text or photo, then ask in plain language to find anything again.",
         applicationCategory: "ProductivityApplication",
-        operatingSystem: "iOS, Android",
+        operatingSystem: "iOS, Android, Web",
         url: "https://www.orivela.app/",
         author: { "@id": "https://steffendoesthings.com/#steffen" },
         publisher: { "@id": "https://steffendoesthings.com/#org" },
