@@ -103,10 +103,10 @@ export const APP_SECTIONS: AppSection[] = [
       {
         slug: "orivela",
         name: "Orivela",
-        platform: "iOS · Android · Web",
+        platform: "iOS",
         hook: "Out of your head. Into one place.",
         body: "A thought on the walk home, an insurance PDF, the contract someone wants today. Say it, type it or snap it, and Orivela files it with the right title and labels. Ask in plain language and it comes straight back.",
-        href: "https://apps.apple.com/us/app/orivela/id6785050823",
+        href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
         logo: "/app-logo-orivela.jpg",
         visual: "orivela",
       },

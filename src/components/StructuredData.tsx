@@ -100,8 +100,8 @@ export default function StructuredData() {
         description:
           "Notes and records in one place. Capture by voice, text or photo, then ask in plain language to find anything again.",
         applicationCategory: "ProductivityApplication",
-        operatingSystem: "iOS, Android, Web",
-        url: "https://www.orivela.app/",
+        operatingSystem: "iOS",
+        url: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
         author: { "@id": "https://steffendoesthings.com/#steffen" },
         publisher: { "@id": "https://steffendoesthings.com/#org" },
       },

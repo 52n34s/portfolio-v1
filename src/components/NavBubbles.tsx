@@ -57,7 +57,7 @@ const navItems: NavItem[] = [
   {
     kind: "external",
     label: "./orivela",
-    href: "https://www.orivela.app/",
+    href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
     tone: "mint",
   },
   {

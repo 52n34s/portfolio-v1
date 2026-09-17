@@ -66,7 +66,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     description:
       "Notes and records in one place, back in seconds when you ask.",
     logo: "/app-logo-orivela.jpg",
-    href: "https://www.orivela.app/",
+    href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
   },
   {
     name: "Peeranimo",

@@ -107,7 +107,7 @@ export default function OrivelaBuild({
             <dl className="orivela-room-meta">
               <div className="orivela-room-meta-item">
                 <dt>Platform</dt>
-                <dd>iOS · Android beta · orivela.app</dd>
+                <dd>iOS · App Store</dd>
               </div>
               <div className="orivela-room-meta-item">
                 <dt>Role</dt>
@@ -117,11 +117,11 @@ export default function OrivelaBuild({
                 <dt>Live</dt>
                 <dd>
                   <a
-                    href="https://orivela.app"
+                    href="https://apps.apple.com/app/orivela-life-admin-vault/id6785050823"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    orivela.app
+                    App Store
                   </a>
                 </dd>
               </div>
@@ -133,12 +133,12 @@ export default function OrivelaBuild({
 
             <div className="orivela-room-actions">
               <a
-                href="https://orivela.app"
+                href="https://apps.apple.com/app/orivela-life-admin-vault/id6785050823"
                 className="orivela-room-btn-primary"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Visit orivela.app →
+                Download on iOS →
               </a>
               <a
                 href={UPWORK_URL}

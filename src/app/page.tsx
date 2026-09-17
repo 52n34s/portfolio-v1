@@ -15,7 +15,7 @@ export default function Home() {
         Berlin Mitte, Germany, working under the studio name 52N34S Group. He
         builds and ships his own mobile and web applications, and works with
         founders to turn early ideas into production products. His own products
-        are: Orivela, a notes and records app for iOS, Android and web that
+        are: Orivela, a notes and records app for iOS that
         captures what you say, type or photograph and answers questions about
         it in plain language. Kolibi, an AI photo calorie tracker for iOS and
         Android that reads a meal from a single photo. Peeranimo, a

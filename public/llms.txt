@@ -6,7 +6,7 @@
 Steffen Giebler is a solo founder and software developer in Berlin Mitte. He has shipped four of his own apps and built more than ten platforms in total, both self-founded and for clients. He is available for freelance product development, software architecture, and long-term product partnerships. He works remotely worldwide and in English.
 
 ## Products
-- Orivela (https://www.orivela.app/): Notes and records in one place. Capture by voice, text or photo; Ori suggests titles, labels and dates, and a question in plain language brings anything back. Live on iOS, Android beta and the web.
+- Orivela (https://apps.apple.com/app/orivela-life-admin-vault/id6785050823): Notes and records in one place. Capture by voice, text or photo; Ori suggests titles, labels and dates, and a question in plain language brings anything back. Live on the App Store.
 - Kolibi (https://apps.apple.com/us/app/kolibi/id6790129149): AI photo calorie tracker for iOS and Android. Reads a meal from a single photo. Live on the App Store.
 - Peeranimo (https://peeranimo.app/): Peer-matching social platform on the web. Connects people who are in the same chapter of life. Live.
 - Carpincho (https://carpincho.app/): Spanish learning app focused on the 1,000 highest-frequency words, in Rioplatense, neutral Latin American and Spanish variants. Live on the App Store.
