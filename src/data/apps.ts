@@ -96,14 +96,14 @@ export const APP_SECTIONS: AppSection[] = [
     ],
   },
   {
-    eyebrow: "DOCUMENTS & DATA",
+    eyebrow: "MEMORY & DATA",
     headline: "Two apps for finding the answer fast.",
-    subline: "The document you need now. The reason the number moved.",
+    subline: "The note you'll want later. The reason the number moved.",
     apps: [
       {
         slug: "orivela",
         name: "Orivela",
-        platform: "iOS",
+        platform: "iOS · Android · Web",
         hook: "Out of your head. Into one place.",
         body: "A thought on the walk home, an insurance PDF, the contract someone wants today. Say it, type it or snap it, and Orivela files it with the right title and labels. Ask in plain language and it comes straight back.",
         href: "https://apps.apple.com/us/app/orivela/id6785050823",
