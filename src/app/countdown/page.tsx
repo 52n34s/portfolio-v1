@@ -36,9 +36,43 @@ const APP_PAIRS: { label: string; ids: readonly [string, string] }[] = [
   { label: "free, on the web", ids: ["getabite", "peeranimo"] },
 ];
 
-/** Only Kolibi has a real screenshot so far — everything else is a marked TODO. */
-const APP_SCREENSHOTS: Record<string, string> = {
-  kolibi: "/2.png",
+/** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web
+ * screens) — the card crops them to a fixed box via CSS, not the other way
+ * around, so all six cards stay the same height regardless. */
+const APP_SCREENSHOTS: Record<
+  string,
+  { src: string; width: number; height: number }
+> = {
+  carpincho: {
+    src: "/app-screens/carpincho_screen_1.webp",
+    width: 552,
+    height: 1200,
+  },
+  kolibi: {
+    src: "/app-screens/kolibi_screen_1.webp",
+    width: 552,
+    height: 1200,
+  },
+  orivela: {
+    src: "/app-screens/orivela_screen_1.webp",
+    width: 552,
+    height: 1200,
+  },
+  erdiknows: {
+    src: "/app-screens/erdiknows_screen_1.webp",
+    width: 1041,
+    height: 1200,
+  },
+  getabite: {
+    src: "/app-screens/getabite_screen_1.webp",
+    width: 921,
+    height: 1200,
+  },
+  peeranimo: {
+    src: "/app-screens/peeranimo_screen_1.webp",
+    width: 555,
+    height: 1200,
+  },
 };
 
 function byId(id: string): ChallengeApp {
@@ -187,7 +221,13 @@ function AppAction({ app }: { app: ChallengeApp }) {
 }
 
 /** All six cards share size and structure — colour and screenshot are the only variation. */
-function AppCard({ app }: { app: ChallengeApp }) {
+function AppCard({
+  app,
+  priority = false,
+}: {
+  app: ChallengeApp;
+  priority?: boolean;
+}) {
   const shot = APP_SCREENSHOTS[app.id];
 
   return (
@@ -223,7 +263,14 @@ function AppCard({ app }: { app: ChallengeApp }) {
 
       <div className="countdown-app-shot" style={{ top: 190 }}>
         {shot ? (
-          <Image src={shot} alt={`${app.name} screenshot`} width={600} height={1300} />
+          <Image
+            src={shot.src}
+            alt={`${app.name} screenshot`}
+            width={shot.width}
+            height={shot.height}
+            loading={priority ? undefined : "lazy"}
+            priority={priority}
+          />
         ) : (
           <div
             style={{
@@ -253,16 +300,18 @@ function AppCard({ app }: { app: ChallengeApp }) {
 function PairGroup({
   label,
   apps,
+  isFirstGroup = false,
 }: {
   label: string;
   apps: [ChallengeApp, ChallengeApp];
+  isFirstGroup?: boolean;
 }) {
   return (
     <div style={{ marginTop: 32 }}>
       <p className="countdown-pair-label">{label}</p>
       <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {apps.map((app) => (
-          <AppCard key={app.id} app={app} />
+        {apps.map((app, index) => (
+          <AppCard key={app.id} app={app} priority={isFirstGroup && index === 0} />
         ))}
       </div>
     </div>
@@ -448,8 +497,13 @@ export default function CountdownPage() {
             Five apps of my own are live. None of them earns money yet.
           </p>
 
-          {pairs.map((pair) => (
-            <PairGroup key={pair.label} label={pair.label} apps={pair.apps} />
+          {pairs.map((pair, index) => (
+            <PairGroup
+              key={pair.label}
+              label={pair.label}
+              apps={pair.apps}
+              isFirstGroup={index === 0}
+            />
           ))}
 
           <div style={{ marginTop: 40 }}>
