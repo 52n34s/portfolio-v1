@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import { APP_SECTIONS } from "@/data/apps";
@@ -71,6 +72,39 @@ export default function AppsPage() {
 
       <div className="countdown-content">
         <div className="apps-page-inner">
+          {/* Quiet page intro — same left-text / right-cutout idea as /countdown,
+              but smaller so the apps stay the main event. */}
+          <header className="apps-page-hero">
+            <div className="apps-page-hero-text">
+              <h1 className="apps-page-hero-title">Apps I built.</h1>
+              <p className="apps-page-hero-sub">
+                Six products. Six different problems. All mine.
+              </p>
+            </div>
+
+            <div className="apps-page-hero-cutout apps-page-hero-cutout--desktop">
+              <Image
+                src="/me-steffen.png"
+                alt="Steffen"
+                width={819}
+                height={948}
+                className="countdown-cutout"
+                priority
+              />
+            </div>
+
+            <div className="apps-page-hero-cutout apps-page-hero-cutout--mobile">
+              <Image
+                src="/me-steffen.png"
+                alt="Steffen"
+                width={819}
+                height={948}
+                className="countdown-cutout"
+                priority
+              />
+            </div>
+          </header>
+
           {APP_SECTIONS.map((section, sectionIndex) => (
             <section
               key={section.eyebrow}

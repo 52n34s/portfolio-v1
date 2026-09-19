@@ -4849,12 +4849,96 @@ body {
   z-index: 2;
 }
 
+/* Quiet intro: text left, cut-out right — smaller than the /countdown hero
+   so the page stays about the apps. */
+.apps-page-hero {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.apps-page-hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+}
+
+.apps-page-hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.2vw, 40px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.apps-page-hero-sub {
+  margin: 12px 0 0;
+  max-width: 360px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+/* Desktop cut-out: absolute, breaks past the container edge, never over text. */
+.apps-page-hero-cutout--desktop {
+  display: none;
+}
+
+.apps-page-hero-cutout--desktop img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Mobile: full-bleed under the text, height-capped so the first card
+   stays within roughly two scrolls. */
+.apps-page-hero-cutout--mobile {
+  position: relative;
+  z-index: 1;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: 16px;
+  max-height: 200px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.apps-page-hero-cutout--mobile img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .apps-page-hero {
+    min-height: 200px;
+    margin-bottom: 12px;
+  }
+
+  .apps-page-hero-cutout--mobile {
+    display: none;
+  }
+
+  .apps-page-hero-cutout--desktop {
+    display: block;
+    position: absolute;
+    top: -12px;
+    right: -48px;
+    width: min(22vw, 240px);
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
 .apps-page-section {
   margin-top: 56px;
 }
 
 .apps-page-section.is-first {
-  margin-top: 8px;
+  margin-top: 36px;
 }
 
 .apps-page-eyebrow {
