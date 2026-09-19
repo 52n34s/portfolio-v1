@@ -37,13 +37,15 @@ const APP_PAIRS: { label: string; ids: readonly [string, string] }[] = [
 ];
 
 /** The outcome, not the feature — what people actually read on the card. */
+/** Same headlines as each app's own landing page — kept in sync by hand. */
 const OUTCOME_HEADLINES: Record<string, string> = {
-  carpincho: "Order your coffee in Spanish without freezing.",
-  kolibi: "Know what you ate without typing a word.",
-  orivela: "Find that document in four seconds.",
-  erdiknows: "See which release actually made you money.",
-  getabite: "Walk in already knowing what you'll order.",
-  peeranimo: "Talk to someone three chapters ahead of you.",
+  carpincho:
+    "Order dinner, joke with family, never get switched to English.",
+  kolibi: "Know where you stand.",
+  orivela: "Out of your head. Into one place.",
+  erdiknows: "See which changes pay off.",
+  getabite: "Decide where to eat before you leave.",
+  peeranimo: "Find people who get it.",
 };
 
 /** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web
@@ -246,25 +248,31 @@ function AppCard({
       style={{
         ...glass,
         background: hexToRgba(app.color, 0.1),
-        height: 548,
+        height: 500,
         padding: "22px 18px 0",
       }}
     >
-      <AppLogo app={app} size={64} />
-      <div style={{ marginTop: 12 }}>
-        <div style={{ fontSize: 18, fontWeight: 600, color: "var(--ink)" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <AppLogo app={app} size={60} />
+        {/* Reserves two full lines so the row height — and the card below it
+            — never shifts, whether the headline wraps to one line or two. */}
+        <p className="countdown-card-headline" style={{ flex: 1 }}>
+          {OUTCOME_HEADLINES[app.id]}
+        </p>
+      </div>
+
+      <div style={{ marginTop: 14 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)" }}>
           {app.name}
         </div>
-        <div className="countdown-eyebrow" style={{ marginTop: 4 }}>
+        <div className="countdown-eyebrow" style={{ marginTop: 2 }}>
           {app.platform}
         </div>
       </div>
-      <p className="countdown-card-headline" style={{ maxWidth: 220 }}>
-        {OUTCOME_HEADLINES[app.id]}
-      </p>
+
       <p
         style={{
-          margin: "6px 0 0",
+          margin: "8px 0 0",
           maxWidth: 220,
           fontSize: 13,
           lineHeight: 1.5,
@@ -274,7 +282,7 @@ function AppCard({
         {app.description}
       </p>
 
-      <div className="countdown-app-shot" style={{ top: 280 }}>
+      <div className="countdown-app-shot" style={{ top: 235 }}>
         {shot ? (
           <Image
             src={shot.src}
