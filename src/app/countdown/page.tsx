@@ -3,10 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CHALLENGE_APPS,
-  DAYS_COVER_GOAL,
-  daysCoveredFromRevenue,
-  firstSentence,
-  getCountdownStats,
+  daysUntilTarget,
   INSTAGRAM_URL,
   PITCH_URL,
   type ChallengeApp,
@@ -27,16 +24,38 @@ export const metadata: Metadata = {
     "Getting my own apps to €3,000 MRR before the money runs out. Public, from day one.",
 };
 
-/** One-line change to swap which app fills the hero conversion block. */
-const FEATURED_APP = "carpincho";
+/** Campaign token appended to every App Store link on this page — change this
+ * one constant to attribute a different page/placement in App Store Connect. */
+const APP_STORE_CAMPAIGN = "countdown-page";
 
-/** Placeholder — replace with the real margin note copy. */
-const MARGIN_NOTE_PLACEHOLDER = "— your note here";
+/** Order: Carpincho, Kolibi, Orivela, ErdiKnows, GetaBite, Peeranimo —
+ * hardcoded, not derived. Peeranimo is always last. */
+const APP_PAIRS: { label: string; ids: readonly [string, string] }[] = [
+  { label: "the paid ones", ids: ["carpincho", "kolibi"] },
+  { label: "notes and numbers", ids: ["orivela", "erdiknows"] },
+  { label: "free, on the web", ids: ["getabite", "peeranimo"] },
+];
 
-/** App Store campaign token (`ct`) for the featured block's badge link — change per page to attribute downloads separately in App Store Connect. */
-const APP_STORE_CAMPAIGN_TOKEN = "countdown-page";
+/** Only Kolibi has a real screenshot so far — everything else is a marked TODO. */
+const APP_SCREENSHOTS: Record<string, string> = {
+  kolibi: "/2.png",
+};
 
-/** Adds Apple's campaign-link params to an App Store URL: `ct` (campaign token) + `mt=8` (iOS app), as required for App Analytics attribution. Falls back to the original URL if it isn't absolute (e.g. a featured app whose link isn't on the App Store). */
+function byId(id: string): ChallengeApp {
+  const app = CHALLENGE_APPS.find((a) => a.id === id);
+  if (!app) throw new Error(`Unknown app id: ${id}`);
+  return app;
+}
+
+function hexToRgba(hex: string, alpha: number) {
+  const value = hex.replace("#", "");
+  const r = parseInt(value.slice(0, 2), 16);
+  const g = parseInt(value.slice(2, 4), 16);
+  const b = parseInt(value.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/** Adds Apple's campaign-link params to an App Store URL: `ct` (campaign token) + `mt=8` (iOS app), as required for App Analytics attribution. */
 function withCampaignToken(url: string, token: string) {
   try {
     const withParams = new URL(url);
@@ -50,9 +69,12 @@ function withCampaignToken(url: string, token: string) {
 
 const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" } as const;
 
-function formatNumber(n: number) {
-  return n.toLocaleString("en-US");
-}
+/** Applied inline: this build's CSS bundler silently drops `backdrop-filter`
+ * from stylesheet rules, so the glass blur has to travel as an inline style. */
+const glass = {
+  backdropFilter: "blur(20px) saturate(160%)",
+  WebkitBackdropFilter: "blur(20px) saturate(160%)",
+} as const;
 
 const SOCIALS = [
   {
@@ -91,7 +113,7 @@ function SocialRow() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${name}, ${handle}`}
-          className="flex min-h-[44px] min-w-0 items-center gap-1.5 text-[var(--ink-muted)] transition-colors duration-200 hover:text-[var(--accent)]"
+          className="flex min-h-[44px] min-w-0 items-center gap-1.5 text-[var(--ink-muted)] transition-colors duration-200 hover:text-[var(--ink)]"
         >
           <Icon className="h-5 w-5 shrink-0 md:h-[22px] md:w-[22px]" />
           <span
@@ -106,368 +128,347 @@ function SocialRow() {
   );
 }
 
-function AppLogo({ app, size = 34 }: { app: ChallengeApp; size?: number }) {
-  if (!app.logo) {
-    return (
-      <div
-        aria-hidden="true"
-        style={{
-          width: size,
-          height: size,
-          border: "1px solid var(--ink)",
-          flexShrink: 0,
-        }}
-      />
-    );
-  }
-
+/** Every logo, whatever its source format or native size, renders at the same
+ * size with the same rounded-square mask — plus a soft glow in the app's own colour. */
+function AppLogo({ app, size = 64 }: { app: ChallengeApp; size?: number }) {
   return (
     <Image
       src={app.logo}
       alt={app.name}
       width={size}
       height={size}
+      className="countdown-logo"
       style={{
         width: size,
         height: size,
-        border: "1px solid var(--ink)",
-        objectFit: "cover",
-        flexShrink: 0,
+        boxShadow: `0 10px 18px -8px ${hexToRgba(app.color, 0.5)}`,
       }}
     />
   );
 }
 
-/** Stat blocks act as negative social proof at zero — only render once earned. */
-function StatBlock({
-  value,
-  goal,
-  label,
-}: {
-  value: number;
-  goal?: number;
-  label: string;
-}) {
-  if (value <= 0) return null;
+function AppAction({ app }: { app: ChallengeApp }) {
+  if (!app.href) return null;
+
+  const isIOS = app.platform.includes("IOS");
+
+  if (isIOS) {
+    return (
+      <a
+        href={withCampaignToken(app.href, APP_STORE_CAMPAIGN)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Download ${app.name} on the App Store`}
+        style={{ display: "inline-block" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element -- official Apple badge, must render pixel-exact and unoptimized */}
+        <img
+          src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+          alt="Download on the App Store"
+          width={140}
+          height={47}
+          style={{ display: "block", height: 36, width: "auto" }}
+        />
+      </a>
+    );
+  }
 
   return (
-    <div
-      className="countdown-card countdown-card--sm"
-      style={{ padding: "14px 10px", textAlign: "center" }}
+    <a
+      href={app.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="countdown-btn"
+      style={{ background: app.color, padding: "9px 18px", fontSize: 12.5, fontWeight: 600 }}
     >
-      <div className="countdown-mono" style={{ fontSize: 22 }}>
-        {formatNumber(value)}
-        {goal ? (
-          <span style={{ fontSize: 14, color: "var(--ink-muted)" }}>
-            {" "}
-            / {formatNumber(goal)}
-          </span>
-        ) : null}
-      </div>
-      <div
-        className="countdown-mono"
-        style={{
-          marginTop: 8,
-          fontSize: 9,
-          letterSpacing: "0.1em",
-          color: "var(--ink-muted)",
-        }}
-      >
-        {label}
-      </div>
-    </div>
+      Open
+    </a>
   );
 }
 
-function AppTile({ app }: { app: ChallengeApp }) {
+/** All six cards share size and structure — colour and screenshot are the only variation. */
+function AppCard({ app }: { app: ChallengeApp }) {
+  const shot = APP_SCREENSHOTS[app.id];
+
   return (
     <div
-      className="countdown-card countdown-card--sm"
+      className="countdown-card"
       style={{
-        padding: 16,
-        display: "flex",
-        flexDirection: "column",
-        gap: 10,
+        ...glass,
+        background: hexToRgba(app.color, 0.1),
+        height: 460,
+        padding: "22px 18px 0",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <AppLogo app={app} size={40} />
-        <div style={{ minWidth: 0 }}>
-          <div style={{ fontSize: 15, color: "var(--ink)" }}>{app.name}</div>
-          <div
-            className="countdown-mono"
-            style={{
-              marginTop: 2,
-              fontSize: 9,
-              letterSpacing: "0.1em",
-              color: "var(--ink-muted)",
-            }}
-          >
-            {app.platform}
-          </div>
+      <AppLogo app={app} size={64} />
+      <div style={{ marginTop: 12 }}>
+        <div style={{ fontSize: 18, fontWeight: 600, color: "var(--ink)" }}>
+          {app.name}
+        </div>
+        <div className="countdown-eyebrow" style={{ marginTop: 4 }}>
+          {app.platform}
         </div>
       </div>
       <p
         style={{
-          margin: 0,
-          fontSize: 12.5,
+          margin: "8px 0 0",
+          maxWidth: 210,
+          fontSize: 13,
           lineHeight: 1.5,
           color: "var(--ink-muted)",
         }}
       >
         {app.description}
       </p>
-      {app.href ? (
-        <a
-          href={app.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="countdown-outline-btn"
-          style={{
-            marginTop: "auto",
-            padding: "8px 12px",
-            fontSize: 12,
-            textAlign: "center",
-          }}
-        >
-          Open ↗
-        </a>
-      ) : null}
+
+      <div className="countdown-app-shot" style={{ top: 190 }}>
+        {shot ? (
+          <Image src={shot} alt={`${app.name} screenshot`} width={600} height={1300} />
+        ) : (
+          <div
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <span
+              className="countdown-mono"
+              style={{ fontSize: 10, letterSpacing: "0.12em", color: "var(--ink-muted)" }}
+            >
+              TODO — SCREENSHOT
+            </span>
+          </div>
+        )}
+      </div>
+
+      <div style={{ position: "absolute", left: 18, bottom: 16 }}>
+        <AppAction app={app} />
+      </div>
     </div>
   );
 }
 
-function FeaturedApp({ app }: { app: ChallengeApp }) {
-  const benefit = firstSentence(app.description);
-
+function PairGroup({
+  label,
+  apps,
+}: {
+  label: string;
+  apps: [ChallengeApp, ChallengeApp];
+}) {
   return (
-    <section
-      className="countdown-card countdown-featured countdown-card--tilt-l grid grid-cols-1 md:grid-cols-2"
-      style={{ marginTop: 40, gap: 24, padding: 24 }}
-    >
-      <div className="order-2 md:order-1">
-        <div className="countdown-phone-frame">
-          <span className="countdown-phone-notch" aria-hidden="true" />
-          <div className="countdown-phone-screen">
-            <span
-              className="countdown-mono"
-              style={{ fontSize: 11, letterSpacing: "0.08em" }}
-            >
-              TODO
-              <br />
-              SCREENSHOT
-            </span>
-          </div>
-        </div>
-        <div style={{ textAlign: "center", marginTop: 14 }}>
-          <span className="countdown-hand countdown-margin-note">
-            {MARGIN_NOTE_PLACEHOLDER}
-          </span>
-        </div>
+    <div style={{ marginTop: 32 }}>
+      <p className="countdown-pair-label">{label}</p>
+      <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {apps.map((app) => (
+          <AppCard key={app.id} app={app} />
+        ))}
       </div>
-      <div
-        className="order-1 md:order-2"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: 14,
-        }}
-      >
-        <span className="countdown-eyebrow" style={{ color: "var(--accent)" }}>
-          Featured app
-        </span>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <AppLogo app={app} size={56} />
-          <span
-            style={{
-              fontSize: "clamp(28px, 6vw, 38px)",
-              fontWeight: 600,
-              lineHeight: 1.1,
-              color: "var(--ink)",
-            }}
-          >
-            {app.name}
-          </span>
-        </div>
-        <p
-          style={{
-            margin: 0,
-            fontSize: 18,
-            lineHeight: 1.45,
-            color: "var(--ink)",
-          }}
-        >
-          {benefit}
-        </p>
-        {app.href ? (
-          <a
-            href={withCampaignToken(app.href, APP_STORE_CAMPAIGN_TOKEN)}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Download ${app.name} on the App Store`}
-            style={{ display: "inline-block" }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element -- official Apple badge, must render pixel-exact and unoptimized */}
-            <img
-              src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
-              alt="Download on the App Store"
-              width={200}
-              height={67}
-              style={{ display: "block", height: 54, width: "auto" }}
-            />
-          </a>
-        ) : null}
+    </div>
+  );
+}
+
+/** Three generated layers, bottom to top: soft colour blooms, the giant faint
+ * day count (same value as the live countdown), a tinted skyline low on the page. */
+function PageBackground({ days }: { days: number }) {
+  return (
+    <>
+      <div className="countdown-bg-blooms" aria-hidden="true" />
+      <div className="countdown-bg-number" aria-hidden="true">
+        {days}
       </div>
-    </section>
+      <div className="countdown-bg-skyline" aria-hidden="true" />
+    </>
   );
 }
 
 export default function CountdownPage() {
-  const { monthlyRevenue, subscriberCount } = getCountdownStats();
-  const daysCovered = daysCoveredFromRevenue(monthlyRevenue);
-  const hasStats = daysCovered > 0 || subscriberCount > 0;
-
-  const featuredApp =
-    CHALLENGE_APPS.find((app) => app.id === FEATURED_APP) ?? CHALLENGE_APPS[0];
-  const remainingApps = CHALLENGE_APPS.filter(
-    (app) => app.id !== featuredApp.id,
-  );
+  const days = daysUntilTarget();
+  const pairs = APP_PAIRS.map((pair) => ({
+    label: pair.label,
+    apps: pair.ids.map(byId) as [ChallengeApp, ChallengeApp],
+  }));
 
   return (
     <main className="countdown-page">
+      <PageBackground days={days} />
+
+      {/* Collage — real assets only, decorative, desktop-only (see .countdown-collage). */}
       <div
-        style={{
-          maxWidth: 900,
-          margin: "0 auto",
-          padding: "20px 20px 40px",
-        }}
+        className="countdown-collage hidden md:block"
+        style={{ top: 520, right: -160, width: 620 }}
+        aria-hidden="true"
       >
-        {/* 1. Hero — who I am, what's at stake, the date */}
-        <header style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Image
-            src="/me-steffen.png"
-            alt="Steffen"
-            width={26}
-            height={26}
-            style={{
-              width: 26,
-              height: 26,
-              borderRadius: "50%",
-              objectFit: "cover",
-              objectPosition: "top",
-              flexShrink: 0,
-              border: "1px solid var(--ink)",
-            }}
-          />
-          <span style={{ ...mono, fontSize: 11, color: "var(--ink-muted)" }}>
-            Steffen · Berlin
-          </span>
-        </header>
+        <Image
+          src="/studio.png"
+          alt=""
+          width={1236}
+          height={1024}
+          style={{ width: "100%", height: "auto", opacity: 0.9 }}
+        />
+      </div>
+      <div
+        className="countdown-collage hidden md:block"
+        style={{ top: 1120, left: 40, width: 64, transform: "rotate(-9deg)" }}
+        aria-hidden="true"
+      >
+        <Image
+          src="/original-logo.svg"
+          alt=""
+          width={64}
+          height={64}
+          style={{ width: "100%", height: "auto" }}
+        />
+      </div>
 
-        <h1
+      <div className="countdown-content">
+        <div
           style={{
-            margin: "24px 0 0",
-            maxWidth: 560,
-            fontSize: "clamp(26px, 5vw, 32px)",
-            fontWeight: 600,
-            lineHeight: 1.15,
-            letterSpacing: "-0.01em",
-            color: "var(--ink)",
+            maxWidth: 1040,
+            margin: "0 auto",
+            padding: "20px 20px 0",
+            position: "relative",
           }}
         >
-          To make my own apps pay my rent before the money runs out.
-        </h1>
+          <header style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Image
+              src="/me-steffen.png"
+              alt="Steffen"
+              width={26}
+              height={26}
+              style={{
+                width: 26,
+                height: 26,
+                borderRadius: "50%",
+                objectFit: "cover",
+                objectPosition: "top",
+                flexShrink: 0,
+              }}
+            />
+            <span style={{ ...mono, fontSize: 11, color: "var(--ink-muted)" }}>
+              Steffen · Berlin
+            </span>
+          </header>
 
-        <p
-          style={{
-            margin: "16px 0 0",
-            maxWidth: 560,
-            fontSize: 14,
-            lineHeight: 1.65,
-            color: "var(--ink)",
-          }}
-        >
-          I built no-code apps and platforms for other founders. That work is
-          drying up. AI builds faster than no-code ever did, and the requests
-          stopped coming.
-        </p>
+          {/* Hero — headline left, cut-out right, overlapping on desktop. */}
+          <div className="countdown-hero" style={{ marginTop: 28 }}>
+            <div
+              className="countdown-hero-text"
+              style={{ maxWidth: 600, position: "relative", zIndex: 2 }}
+            >
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(38px, 6vw, 58px)",
+                  fontWeight: 700,
+                  lineHeight: 0.98,
+                  letterSpacing: "-0.02em",
+                  color: "var(--ink)",
+                }}
+              >
+                To make my own apps pay my rent before the money runs out.
+              </h1>
 
-        <CountdownClock />
+              <p
+                style={{
+                  margin: "20px 0 0",
+                  maxWidth: 520,
+                  fontSize: 14,
+                  lineHeight: 1.65,
+                  color: "var(--ink)",
+                }}
+              >
+                I built no-code apps and platforms for other founders. That
+                work is drying up. AI builds faster than no-code ever did, and
+                the requests stopped coming.
+              </p>
 
-        {hasStats ? (
+              <CountdownClock />
+            </div>
+
+            {/* Desktop cut-out: absolute, overlapping the headline, breaking past the container edge. */}
+            <div
+              className="hidden md:block"
+              style={{
+                position: "absolute",
+                top: -20,
+                right: -60,
+                width: "28vw",
+                maxWidth: 340,
+                zIndex: 3,
+                pointerEvents: "none",
+              }}
+            >
+              <Image
+                src="/me-steffen.png"
+                alt="Steffen"
+                width={819}
+                height={948}
+                className="countdown-cutout"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+          </div>
+
+          {/* Mobile cut-out: in flow, full-bleed, overlapping the section below. */}
           <div
+            className="md:hidden"
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 12,
-              marginTop: 16,
-              maxWidth: 320,
+              position: "relative",
+              zIndex: 2,
+              marginLeft: -20,
+              marginRight: -20,
+              marginTop: 20,
+              marginBottom: -80,
+              pointerEvents: "none",
             }}
           >
-            <StatBlock
-              value={daysCovered}
-              goal={DAYS_COVER_GOAL}
-              label="DAYS MY APPS COVER"
+            <Image
+              src="/me-steffen.png"
+              alt="Steffen"
+              width={819}
+              height={948}
+              className="countdown-cutout"
+              style={{ width: "100%", height: "auto" }}
             />
-            <StatBlock value={subscriberCount} label="APP SUBSCRIBERS" />
           </div>
-        ) : null}
-
-        {/* 2. Primary app block — the conversion centrepiece */}
-        <FeaturedApp app={featuredApp} />
-
-        {/* 3. Connecting line */}
-        <p
-          style={{
-            margin: "32px 0 0",
-            textAlign: "center",
-            fontSize: 13,
-            color: "var(--ink-muted)",
-          }}
-        >
-          That&apos;s one. Four more are part of the same challenge.
-        </p>
-
-        {/* 4. The rest of the apps, as compact tiles */}
-        <div
-          className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3"
-          style={{ marginTop: 20 }}
-        >
-          {remainingApps.map((app) => (
-            <AppTile key={app.id} app={app} />
-          ))}
         </div>
 
-        {/* 5. Socials */}
-        <SocialRow />
-
         <div
           style={{
-            marginTop: 24,
-            fontSize: 13,
-            lineHeight: 1.75,
-            color: "var(--ink)",
+            maxWidth: 1040,
+            margin: "0 auto",
+            padding: "0 20px 48px",
+            position: "relative",
+            zIndex: 2,
           }}
         >
-          <p style={{ margin: 0 }}>
+          <p className="countdown-strong-line" style={{ marginTop: 56 }}>
             Five apps of my own are live. None of them earns money yet.
           </p>
-          <p style={{ margin: "12px 0 0" }}>
-            If you have an idea and need someone who takes a product all the way:
-            data model, build, payments, App Store, that&apos;s what I do.
-          </p>
-        </div>
 
-        {/* 6. Quiet text link for client enquiries */}
-        <div style={{ marginTop: 20, textAlign: "center" }}>
-          <Link
-            href={PITCH_URL}
-            className="countdown-quiet-link"
-            style={{ fontSize: 13 }}
+          {pairs.map((pair) => (
+            <PairGroup key={pair.label} label={pair.label} apps={pair.apps} />
+          ))}
+
+          <div style={{ marginTop: 40 }}>
+            <SocialRow />
+          </div>
+
+          <p
+            style={{
+              marginTop: 28,
+              textAlign: "center",
+              fontSize: 13,
+              color: "var(--ink-muted)",
+            }}
           >
-            Have your own idea?
-          </Link>
+            I also build for other founders —{" "}
+            <Link href={PITCH_URL} className="countdown-quiet-link">
+              have your own idea?
+            </Link>
+          </p>
         </div>
       </div>
     </main>

@@ -34,7 +34,7 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-/** Context, not the headline: a single quiet line, no card, no accent. */
+/** The reason the page exists — big days number, small mono clock beside it. Never a grey line. */
 export default function CountdownClock() {
   const [remaining, setRemaining] = useState(remainingFromTarget);
 
@@ -46,18 +46,17 @@ export default function CountdownClock() {
   }, []);
 
   return (
-    <div
-      suppressHydrationWarning
-      className="countdown-mono"
-      style={{
-        marginTop: 14,
-        fontSize: 12,
-        letterSpacing: "0.02em",
-        color: "var(--ink-muted)",
-      }}
-    >
-      {remaining.days}d {pad(remaining.hours)}h {pad(remaining.minutes)}m{" "}
-      {pad(remaining.seconds)}s left · {TARGET_LABEL}
+    <div className="countdown-hero-clock">
+      <span suppressHydrationWarning className="countdown-days-number">
+        {remaining.days}
+      </span>
+      <div className="countdown-hero-clock-meta">
+        <span suppressHydrationWarning className="countdown-mono">
+          {pad(remaining.hours)}h {pad(remaining.minutes)}m{" "}
+          {pad(remaining.seconds)}s
+        </span>
+        <span className="countdown-mono">{TARGET_LABEL}</span>
+      </div>
     </div>
   );
 }
