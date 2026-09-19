@@ -4723,24 +4723,27 @@ body {
   color: var(--ink-muted);
 }
 
-/* Short lowercase mono label above a pair of cards. */
-.countdown-pair-label {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--ink-muted);
-}
-
-/* Base glass card: no border, ever — depth comes from blur + soft shadow.
-   backdrop-filter is applied inline (see `glass` in page.tsx) — this build's
-   CSS bundler silently strips it from stylesheet rules. Background colour is
-   set inline per card (each app's own tint). */
+/* Base glass card: self-contained block, hard bottom edge, no bleed past
+   its own rounded corners. Flex column so header → shot → footer stack in
+   normal flow. Grid stretch keeps paired cards equal height on desktop. */
 .countdown-card {
   position: relative;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 22px 18px 18px;
   box-shadow:
     0 1px 1px rgba(23, 23, 27, 0.03),
     0 16px 32px -20px rgba(23, 23, 27, 0.22);
+}
+
+.countdown-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-shrink: 0;
 }
 
 .countdown-logo {
@@ -4773,25 +4776,161 @@ body {
   color: var(--ink-muted);
 }
 
-/* Screenshot slot: bleeds past the card's own bottom edge instead of sitting
-   as a neat rectangle. The card itself stays overflow:visible to allow it. */
+/* Screenshot slot in normal flow — clipped inside the card, never bleeds
+   past the card's bottom edge or into the next card. Grows when paired
+   cards stretch to equal height on desktop. */
 .countdown-app-shot {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: -28px;
-  border-radius: 16px;
+  position: relative;
+  flex: 1 1 280px;
+  min-height: 280px;
+  margin-top: 16px;
+  border-radius: 14px;
   overflow: hidden;
   background: rgba(23, 23, 27, 0.045);
-  box-shadow: 0 14px 26px -16px rgba(23, 23, 27, 0.3);
 }
 
 .countdown-app-shot img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
+}
+
+.countdown-app-shot-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Name, platform and CTA sit below the screenshot — never overlaid on it. */
+.countdown-card-footer {
+  flex-shrink: 0;
+  margin-top: 14px;
+}
+
+/* Continuous six-card set: generous vertical gap on mobile (≥40px), tighter
+   from 768px up where two columns sit side by side. */
+.countdown-app-grid {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.countdown-pair-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .countdown-app-grid {
+    gap: 20px;
+  }
+
+  .countdown-pair-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* /apps — same surface as /countdown, with section headings above each pair. */
+.apps-page-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+  position: relative;
+  z-index: 2;
+}
+
+.apps-page-section {
+  margin-top: 56px;
+}
+
+.apps-page-section.is-first {
+  margin-top: 8px;
+}
+
+.apps-page-eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.apps-page-headline {
+  margin: 10px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.apps-page-subline {
+  margin: 12px 0 0;
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.apps-page-section .countdown-pair-grid {
+  margin-top: 28px;
+}
+
+.apps-page-footer {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.apps-page-footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .apps-page-footer-links {
+    flex-direction: row;
+    gap: 28px;
+  }
+}
+
+.apps-page-home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.apps-page-home-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .countdown-quiet-link {

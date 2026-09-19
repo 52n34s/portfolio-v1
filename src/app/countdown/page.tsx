@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import {
   CHALLENGE_APPS,
   daysUntilTarget,
@@ -29,63 +30,13 @@ export const metadata: Metadata = {
 const APP_STORE_CAMPAIGN = "countdown-page";
 
 /** Order: Carpincho, Kolibi, Orivela, ErdiKnows, GetaBite, Peeranimo —
- * hardcoded, not derived. Peeranimo is always last. */
-const APP_PAIRS: { label: string; ids: readonly [string, string] }[] = [
-  { label: "the paid ones", ids: ["carpincho", "kolibi"] },
-  { label: "notes and numbers", ids: ["orivela", "erdiknows"] },
-  { label: "free, on the web", ids: ["getabite", "peeranimo"] },
+ * hardcoded, not derived. Peeranimo is always last. Shown as three unlabeled
+ * pairs so the grid reads as one continuous set of six. */
+const APP_PAIRS: { ids: readonly [string, string] }[] = [
+  { ids: ["carpincho", "kolibi"] },
+  { ids: ["orivela", "erdiknows"] },
+  { ids: ["getabite", "peeranimo"] },
 ];
-
-/** The outcome, not the feature — what people actually read on the card. */
-/** Same headlines as each app's own landing page — kept in sync by hand. */
-const OUTCOME_HEADLINES: Record<string, string> = {
-  carpincho:
-    "Order dinner, joke with family, never get switched to English.",
-  kolibi: "Know where you stand.",
-  orivela: "Out of your head. Into one place.",
-  erdiknows: "See which changes pay off.",
-  getabite: "Decide where to eat before you leave.",
-  peeranimo: "Find people who get it.",
-};
-
-/** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web
- * screens) — the card crops them to a fixed box via CSS, not the other way
- * around, so all six cards stay the same height regardless. */
-const APP_SCREENSHOTS: Record<
-  string,
-  { src: string; width: number; height: number }
-> = {
-  carpincho: {
-    src: "/app-screens/carpincho_screen_1.webp",
-    width: 552,
-    height: 1200,
-  },
-  kolibi: {
-    src: "/app-screens/kolibi_screen_1.webp",
-    width: 552,
-    height: 1200,
-  },
-  orivela: {
-    src: "/app-screens/orivela_screen_1.webp",
-    width: 552,
-    height: 1200,
-  },
-  erdiknows: {
-    src: "/app-screens/erdiknows_screen_1.webp",
-    width: 1041,
-    height: 1200,
-  },
-  getabite: {
-    src: "/app-screens/getabite_screen_1.webp",
-    width: 921,
-    height: 1200,
-  },
-  peeranimo: {
-    src: "/app-screens/peeranimo_screen_1.webp",
-    width: 555,
-    height: 1200,
-  },
-};
 
 function byId(id: string): ChallengeApp {
   const app = CHALLENGE_APPS.find((a) => a.id === id);
@@ -93,34 +44,7 @@ function byId(id: string): ChallengeApp {
   return app;
 }
 
-function hexToRgba(hex: string, alpha: number) {
-  const value = hex.replace("#", "");
-  const r = parseInt(value.slice(0, 2), 16);
-  const g = parseInt(value.slice(2, 4), 16);
-  const b = parseInt(value.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-/** Adds Apple's campaign-link params to an App Store URL: `ct` (campaign token) + `mt=8` (iOS app), as required for App Analytics attribution. */
-function withCampaignToken(url: string, token: string) {
-  try {
-    const withParams = new URL(url);
-    withParams.searchParams.set("ct", token);
-    withParams.searchParams.set("mt", "8");
-    return withParams.toString();
-  } catch {
-    return url;
-  }
-}
-
 const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" } as const;
-
-/** Applied inline: this build's CSS bundler silently drops `backdrop-filter`
- * from stylesheet rules, so the glass blur has to travel as an inline style. */
-const glass = {
-  backdropFilter: "blur(20px) saturate(160%)",
-  WebkitBackdropFilter: "blur(20px) saturate(160%)",
-} as const;
 
 const SOCIALS = [
   {
@@ -174,172 +98,23 @@ function SocialRow() {
   );
 }
 
-/** Every logo, whatever its source format or native size, renders at the same
- * size with the same rounded-square mask — plus a soft glow in the app's own colour. */
-function AppLogo({ app, size = 64 }: { app: ChallengeApp; size?: number }) {
-  return (
-    <Image
-      src={app.logo}
-      alt={app.name}
-      width={size}
-      height={size}
-      className="countdown-logo"
-      style={{
-        width: size,
-        height: size,
-        boxShadow: `0 10px 18px -8px ${hexToRgba(app.color, 0.5)}`,
-      }}
-    />
-  );
-}
-
-function AppAction({ app }: { app: ChallengeApp }) {
-  if (!app.href) return null;
-
-  const isIOS = app.platform.includes("IOS");
-
-  if (isIOS) {
-    return (
-      <a
-        href={withCampaignToken(app.href, APP_STORE_CAMPAIGN)}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Download ${app.name} on the App Store`}
-        className="countdown-badge-link"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element -- official Apple badge, must render pixel-exact and unoptimized */}
-        <img
-          src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
-          alt="Download on the App Store"
-          width={140}
-          height={47}
-          style={{ display: "block", height: 36, width: "auto" }}
-        />
-      </a>
-    );
-  }
-
-  return (
-    <a
-      href={app.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="countdown-btn"
-      style={{ background: app.color, padding: "9px 18px", fontSize: 12.5, fontWeight: 600 }}
-    >
-      Open
-    </a>
-  );
-}
-
-/** All six cards share size and structure — colour and screenshot are the only variation. */
-function AppCard({
-  app,
-  priority = false,
-}: {
-  app: ChallengeApp;
-  priority?: boolean;
-}) {
-  const shot = APP_SCREENSHOTS[app.id];
-
-  return (
-    <div
-      className="countdown-card"
-      style={{
-        ...glass,
-        background: hexToRgba(app.color, 0.1),
-        height: 500,
-        padding: "22px 18px 0",
-      }}
-    >
-      {/* Logo left; headline + description as one text block beside it. */}
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-        <AppLogo app={app} size={60} />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Reserves two full lines so a one-line headline still lands in the
-              same spot as a two-line one — the description below never shifts. */}
-          <p className="countdown-card-headline">{OUTCOME_HEADLINES[app.id]}</p>
-          <p className="countdown-card-desc">{app.description}</p>
-        </div>
-      </div>
-
-      <div className="countdown-app-shot" style={{ top: 168 }}>
-        {shot ? (
-          <Image
-            src={shot.src}
-            alt={`${app.name} screenshot`}
-            width={shot.width}
-            height={shot.height}
-            loading={priority ? undefined : "lazy"}
-            priority={priority}
-          />
-        ) : (
-          <div
-            style={{
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <span
-              className="countdown-mono"
-              style={{ fontSize: 10, letterSpacing: "0.12em", color: "var(--ink-muted)" }}
-            >
-              TODO — SCREENSHOT
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Name + platform sit quiet above the action, bottom-left over the shot. */}
-      <div
-        style={{
-          position: "absolute",
-          left: 18,
-          bottom: 16,
-          zIndex: 2,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 12,
-            fontWeight: 500,
-            lineHeight: 1.2,
-            color: "var(--ink)",
-            opacity: 0.75,
-          }}
-        >
-          {app.name}
-        </div>
-        <div className="countdown-eyebrow" style={{ marginTop: 2, opacity: 0.85 }}>
-          {app.platform}
-        </div>
-        <div style={{ marginTop: 8 }}>
-          <AppAction app={app} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function PairGroup({
-  label,
   apps,
   isFirstGroup = false,
 }: {
-  label: string;
   apps: [ChallengeApp, ChallengeApp];
   isFirstGroup?: boolean;
 }) {
   return (
-    <div style={{ marginTop: 32 }}>
-      <p className="countdown-pair-label">{label}</p>
-      <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
-        {apps.map((app, index) => (
-          <AppCard key={app.id} app={app} priority={isFirstGroup && index === 0} />
-        ))}
-      </div>
+    <div className="countdown-pair-grid">
+      {apps.map((app, index) => (
+        <ShowcaseAppCard
+          key={app.id}
+          app={app}
+          campaign={APP_STORE_CAMPAIGN}
+          priority={isFirstGroup && index === 0}
+        />
+      ))}
     </div>
   );
 }
@@ -347,7 +122,6 @@ function PairGroup({
 export default function CountdownPage() {
   const days = daysUntilTarget();
   const pairs = APP_PAIRS.map((pair) => ({
-    label: pair.label,
     apps: pair.ids.map(byId) as [ChallengeApp, ChallengeApp],
   }));
 
@@ -490,14 +264,13 @@ export default function CountdownPage() {
             Five apps of my own are live. None of them earns money yet.
           </p>
 
-          {/* Collage: studio.png sits beside the grid, anchored to the content
-              column's own right edge (left: 100%) so it can only ever occupy
-              real margin space — never the grid itself. Only shown once the
-              viewport is wide enough to guarantee that margin exists; hidden
-              rather than shrunk at every narrower width. */}
+          {/* Collage: studio.png sits just past the content column (left: 100%)
+              so it never enters the card grid. Sized large; on narrower desktops
+              most of it crops past the viewport rather than shrinking. Hidden
+              below md (768px). */}
           <div
-            className="countdown-collage hidden min-[1700px]:block"
-            style={{ top: 60, left: "100%", marginLeft: 24, width: 280 }}
+            className="countdown-collage hidden md:block"
+            style={{ top: 40, left: "100%", marginLeft: 32, width: 560 }}
             aria-hidden="true"
           >
             <Image
@@ -509,14 +282,15 @@ export default function CountdownPage() {
             />
           </div>
 
-          {pairs.map((pair, index) => (
-            <PairGroup
-              key={pair.label}
-              label={pair.label}
-              apps={pair.apps}
-              isFirstGroup={index === 0}
-            />
-          ))}
+          <div className="countdown-app-grid">
+            {pairs.map((pair, index) => (
+              <PairGroup
+                key={pair.apps.map((a) => a.id).join("-")}
+                apps={pair.apps}
+                isFirstGroup={index === 0}
+              />
+            ))}
+          </div>
 
           <div style={{ marginTop: 40 }}>
             <SocialRow />

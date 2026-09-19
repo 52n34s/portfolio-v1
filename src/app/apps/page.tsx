@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AppSection from "@/components/apps/AppSection";
+import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import { APP_SECTIONS } from "@/data/apps";
+import { CHALLENGE_APPS, type ChallengeApp } from "@/lib/countdown";
 
 export const metadata: Metadata = {
   title:
@@ -12,13 +13,23 @@ export const metadata: Metadata = {
     canonical: "/apps",
   },
   openGraph: {
-    title: "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
+    title:
+      "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
     description:
       "Six apps built solo in Berlin: a document vault, an AI calorie tracker, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS, Android and web.",
     url: "https://steffendoesthings.com/apps",
     type: "website",
   },
 };
+
+const APP_STORE_CAMPAIGN = "apps-page";
+
+/** Map /apps section slugs onto countdown showcase apps (copy, colour, links). */
+function bySlug(slug: string): ChallengeApp {
+  const app = CHALLENGE_APPS.find((a) => a.id === slug);
+  if (!app) throw new Error(`Unknown app slug: ${slug}`);
+  return app;
+}
 
 export default function AppsPage() {
   const itemList = {
@@ -50,54 +61,55 @@ export default function AppsPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col bg-[#F5F0E8]">
+    <main className="countdown-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
       />
-      <header className="px-6 pt-10 pb-16 text-center md:px-12 md:pt-16">
-        <h1
-          className="text-[32px] leading-[1.1] tracking-tight text-[#1A1A1A] md:text-[42px] lg:text-[48px]"
-          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-        >
-          Apps — built by Steffen.
-        </h1>
-        <p className="mx-auto mt-2 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[16px] lg:mt-6 lg:text-[17px]">
-          Six products. Six different problems.
-        </p>
-      </header>
 
-      <div className="mx-auto w-full max-w-[1100px] px-5 md:px-12">
-        {APP_SECTIONS.map((section) => (
-          <AppSection key={section.eyebrow} section={section} />
-        ))}
+      <div className="countdown-bg-blooms" aria-hidden="true" />
+
+      <div className="countdown-content">
+        <div className="apps-page-inner">
+          {APP_SECTIONS.map((section, sectionIndex) => (
+            <section
+              key={section.eyebrow}
+              className={`apps-page-section${sectionIndex === 0 ? " is-first" : ""}`}
+            >
+              <p className="apps-page-eyebrow">{section.eyebrow}</p>
+              <h2 className="apps-page-headline">{section.headline}</h2>
+              <p className="apps-page-subline">{section.subline}</p>
+
+              <div className="countdown-pair-grid">
+                {section.apps.map((entry, index) => (
+                  <ShowcaseAppCard
+                    key={entry.slug}
+                    app={bySlug(entry.slug)}
+                    campaign={APP_STORE_CAMPAIGN}
+                    priority={sectionIndex === 0 && index === 0}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
+
+          <footer className="apps-page-footer">
+            <div className="apps-page-footer-links">
+              <Link href="/" className="countdown-quiet-link">
+                Curious who&apos;s behind these? → About Steffen
+              </Link>
+              <Link href="/#room-05" className="countdown-quiet-link">
+                Have your own idea? → Work with Steffen
+              </Link>
+            </div>
+            <Link href="/" className="apps-page-home-btn">
+              ← Home
+            </Link>
+          </footer>
+        </div>
       </div>
 
-      <footer className="flex flex-col items-center gap-4 px-6 pt-16 pb-8 md:px-12 md:pb-10">
-        <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
-          <Link
-            href="/"
-            className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
-            style={{ fontFamily: "var(--font-inter), sans-serif" }}
-          >
-            Curious who&apos;s behind these? → About Steffen
-          </Link>
-          <Link
-            href="/#room-05"
-            className="text-[14px] text-[#1A1A1A]/60 underline underline-offset-4 hover:text-[#1A1A1A]"
-            style={{ fontFamily: "var(--font-inter), sans-serif" }}
-          >
-            Have your own idea? → Work with Steffen
-          </Link>
-        </div>
-        <Link
-          href="/"
-          className="rounded-full border border-[#1A1A1A] px-5 py-2 text-[14px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#1A1A1A] hover:text-[#F5F0E8]"
-          style={{ fontFamily: "var(--font-inter), sans-serif" }}
-        >
-          ← Home
-        </Link>
-      </footer>
+      <div className="countdown-bg-skyline" aria-hidden="true" />
     </main>
   );
 }
