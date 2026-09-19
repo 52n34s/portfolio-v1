@@ -4750,6 +4750,16 @@ body {
   flex-shrink: 0;
 }
 
+/* The outcome headline is what people read — bigger and bolder than the
+ * one-sentence description underneath it. */
+.countdown-card-headline {
+  margin: 10px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
 /* Screenshot slot: bleeds past the card's own bottom edge instead of sitting
    as a neat rectangle. The card itself stays overflow:visible to allow it. */
 .countdown-app-shot {
@@ -4782,9 +4792,13 @@ body {
   color: var(--ink);
 }
 
-/* Structural only — background colour is set inline per app. */
+/* Structural only — background colour is set inline per app. Min 44px tap
+   target, padding does the work so the visible label can stay small. */
 .countdown-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   border-radius: 10px;
   color: #fff;
   text-decoration: none;
@@ -4796,6 +4810,31 @@ body {
 
 .countdown-btn:hover {
   filter: brightness(1.08);
+}
+
+/* App Store badge link — badge art stays its official size, the tappable
+   box around it grows to a 44px minimum. */
+.countdown-badge-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Quiet closing block — separated from the grid by whitespace, not a card. */
+.countdown-pitch {
+  text-align: center;
+}
+
+.countdown-pitch-heading {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.countdown-pitch-scope {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--ink-muted);
 }
 
 /* Hero: headline left, cut-out photo right, overlapping. */
@@ -4870,19 +4909,43 @@ body {
     );
 }
 
-/* Background layer 2 — the day count, huge and faint, cropped by the edge. */
+/* Hero background wrapper — clips the giant day count to the hero's own
+   height, so it can never reach into the app grid at any breakpoint. */
+.countdown-hero-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background layer 2 — the day count, huge and faint, cropped by an edge.
+   Below 1024px the headline runs full-width, so the only safe spot is low,
+   behind the full-bleed cut-out photo (opaque there, so it reads as nothing)
+   — never behind the headline or the countdown itself. From 1024px up the
+   headline column tops out at 620px, so the number is pinned to start past
+   it instead, clear of every line of text regardless of its height. */
 .countdown-bg-number {
   position: absolute;
-  top: 4vw;
-  right: -4vw;
+  left: auto;
+  right: -8vw;
+  top: auto;
+  bottom: -4vw;
   z-index: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(280px, 46vw, 720px);
+  font-size: 60vw;
   line-height: 1;
   color: rgba(23, 23, 27, 0.05);
   white-space: nowrap;
   user-select: none;
+}
+
+@media (min-width: 1024px) {
+  .countdown-bg-number {
+    left: calc(max(0px, (100vw - 1040px) / 2) + 620px);
+    right: auto;
+    top: 2vw;
+    bottom: auto;
+    font-size: clamp(300px, 30vw, 520px);
+  }
 }
 
 /* Background layer 3 — skyline, tinted, low third of the page. */
@@ -4910,23 +4973,18 @@ body {
   z-index: 1;
 }
 
-/* Collage: real assets, decorative, never below 768px. */
+.countdown-content-hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Collage: real assets, decorative. Visibility per element is set with
+   Tailwind classes on the element itself (single source of truth), never
+   here — this just keeps it out of the way of layout and interaction. */
 .countdown-collage {
   position: absolute;
   z-index: 0;
   pointer-events: none;
-}
-
-@media (max-width: 767px) {
-  .countdown-bg-number {
-    font-size: 80vw;
-    right: -10vw;
-    top: 8vw;
-  }
-
-  .countdown-collage {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

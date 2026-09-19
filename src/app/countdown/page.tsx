@@ -36,6 +36,16 @@ const APP_PAIRS: { label: string; ids: readonly [string, string] }[] = [
   { label: "free, on the web", ids: ["getabite", "peeranimo"] },
 ];
 
+/** The outcome, not the feature — what people actually read on the card. */
+const OUTCOME_HEADLINES: Record<string, string> = {
+  carpincho: "Order your coffee in Spanish without freezing.",
+  kolibi: "Know what you ate without typing a word.",
+  orivela: "Find that document in four seconds.",
+  erdiknows: "See which release actually made you money.",
+  getabite: "Walk in already knowing what you'll order.",
+  peeranimo: "Talk to someone three chapters ahead of you.",
+};
+
 /** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web
  * screens) — the card crops them to a fixed box via CSS, not the other way
  * around, so all six cards stay the same height regardless. */
@@ -193,7 +203,7 @@ function AppAction({ app }: { app: ChallengeApp }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Download ${app.name} on the App Store`}
-        style={{ display: "inline-block" }}
+        className="countdown-badge-link"
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- official Apple badge, must render pixel-exact and unoptimized */}
         <img
@@ -236,7 +246,7 @@ function AppCard({
       style={{
         ...glass,
         background: hexToRgba(app.color, 0.1),
-        height: 460,
+        height: 548,
         padding: "22px 18px 0",
       }}
     >
@@ -249,10 +259,13 @@ function AppCard({
           {app.platform}
         </div>
       </div>
+      <p className="countdown-card-headline" style={{ maxWidth: 220 }}>
+        {OUTCOME_HEADLINES[app.id]}
+      </p>
       <p
         style={{
-          margin: "8px 0 0",
-          maxWidth: 210,
+          margin: "6px 0 0",
+          maxWidth: 220,
           fontSize: 13,
           lineHeight: 1.5,
           color: "var(--ink-muted)",
@@ -261,7 +274,7 @@ function AppCard({
         {app.description}
       </p>
 
-      <div className="countdown-app-shot" style={{ top: 190 }}>
+      <div className="countdown-app-shot" style={{ top: 280 }}>
         {shot ? (
           <Image
             src={shot.src}
@@ -309,26 +322,12 @@ function PairGroup({
   return (
     <div style={{ marginTop: 32 }}>
       <p className="countdown-pair-label">{label}</p>
-      <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
         {apps.map((app, index) => (
           <AppCard key={app.id} app={app} priority={isFirstGroup && index === 0} />
         ))}
       </div>
     </div>
-  );
-}
-
-/** Three generated layers, bottom to top: soft colour blooms, the giant faint
- * day count (same value as the live countdown), a tinted skyline low on the page. */
-function PageBackground({ days }: { days: number }) {
-  return (
-    <>
-      <div className="countdown-bg-blooms" aria-hidden="true" />
-      <div className="countdown-bg-number" aria-hidden="true">
-        {days}
-      </div>
-      <div className="countdown-bg-skyline" aria-hidden="true" />
-    </>
   );
 }
 
@@ -341,44 +340,18 @@ export default function CountdownPage() {
 
   return (
     <main className="countdown-page">
-      <PageBackground days={days} />
+      <div className="countdown-bg-blooms" aria-hidden="true" />
 
-      {/* Collage — real assets only, decorative, desktop-only (see .countdown-collage). */}
-      <div
-        className="countdown-collage hidden md:block"
-        style={{ top: 520, right: -160, width: 620 }}
-        aria-hidden="true"
-      >
-        <Image
-          src="/studio.png"
-          alt=""
-          width={1236}
-          height={1024}
-          style={{ width: "100%", height: "auto", opacity: 0.9 }}
-        />
-      </div>
-      <div
-        className="countdown-collage hidden md:block"
-        style={{ top: 1120, left: 40, width: 64, transform: "rotate(-9deg)" }}
-        aria-hidden="true"
-      >
-        <Image
-          src="/original-logo.svg"
-          alt=""
-          width={64}
-          height={64}
-          style={{ width: "100%", height: "auto" }}
-        />
-      </div>
+      {/* Hero background: the giant day count is clipped to this wrapper's own
+          height (see .countdown-hero-bg), so it can never reach the app grid. */}
+      <div className="countdown-hero-bg">
+        <div className="countdown-bg-number" aria-hidden="true">
+          {days}
+        </div>
 
-      <div className="countdown-content">
         <div
-          style={{
-            maxWidth: 1040,
-            margin: "0 auto",
-            padding: "20px 20px 0",
-            position: "relative",
-          }}
+          className="countdown-content-hero"
+          style={{ maxWidth: 1040, margin: "0 auto", padding: "20px 20px 0" }}
         >
           <header style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <Image
@@ -400,7 +373,7 @@ export default function CountdownPage() {
             </span>
           </header>
 
-          {/* Hero — headline left, cut-out right, overlapping on desktop. */}
+          {/* Hero — headline left, cut-out right, overlapping from lg (1024px) up. */}
           <div className="countdown-hero" style={{ marginTop: 28 }}>
             <div
               className="countdown-hero-text"
@@ -436,15 +409,17 @@ export default function CountdownPage() {
               <CountdownClock />
             </div>
 
-            {/* Desktop cut-out: absolute, overlapping the headline, breaking past the container edge. */}
+            {/* Desktop cut-out: absolute, overlapping the headline, breaking past
+                the container edge. Only from lg up — at md/tablet widths the
+                headline column is too narrow for this not to crowd it. */}
             <div
-              className="hidden md:block"
+              className="hidden lg:block"
               style={{
                 position: "absolute",
                 top: -20,
                 right: -60,
-                width: "28vw",
-                maxWidth: 340,
+                width: "26vw",
+                maxWidth: 320,
                 zIndex: 3,
                 pointerEvents: "none",
               }}
@@ -460,16 +435,19 @@ export default function CountdownPage() {
             </div>
           </div>
 
-          {/* Mobile cut-out: in flow, full-bleed, overlapping the section below. */}
+          {/* Mobile/tablet cut-out: in flow, full-bleed, stacked below the
+              headline. Stays in place through tablet widths (< lg) so nothing
+              crowds the headline at intermediate sizes. Sits above whitespace
+              only — the strong line below it starts with its own margin, no
+              negative-margin overlap into body copy. */}
           <div
-            className="md:hidden"
+            className="lg:hidden"
             style={{
               position: "relative",
               zIndex: 2,
               marginLeft: -20,
               marginRight: -20,
               marginTop: 20,
-              marginBottom: -80,
               pointerEvents: "none",
             }}
           >
@@ -483,19 +461,40 @@ export default function CountdownPage() {
             />
           </div>
         </div>
+      </div>
 
+      <div className="countdown-content">
         <div
           style={{
             maxWidth: 1040,
             margin: "0 auto",
-            padding: "0 20px 48px",
+            padding: "24px 20px 48px",
             position: "relative",
             zIndex: 2,
           }}
         >
-          <p className="countdown-strong-line" style={{ marginTop: 56 }}>
+          <p className="countdown-strong-line">
             Five apps of my own are live. None of them earns money yet.
           </p>
+
+          {/* Collage: studio.png sits beside the grid, anchored to the content
+              column's own right edge (left: 100%) so it can only ever occupy
+              real margin space — never the grid itself. Only shown once the
+              viewport is wide enough to guarantee that margin exists; hidden
+              rather than shrunk at every narrower width. */}
+          <div
+            className="countdown-collage hidden min-[1700px]:block"
+            style={{ top: 60, left: "100%", marginLeft: 24, width: 280 }}
+            aria-hidden="true"
+          >
+            <Image
+              src="/studio.png"
+              alt=""
+              width={1236}
+              height={1024}
+              style={{ width: "100%", height: "auto", opacity: 0.9 }}
+            />
+          </div>
 
           {pairs.map((pair, index) => (
             <PairGroup
@@ -510,21 +509,23 @@ export default function CountdownPage() {
             <SocialRow />
           </div>
 
-          <p
-            style={{
-              marginTop: 28,
-              textAlign: "center",
-              fontSize: 13,
-              color: "var(--ink-muted)",
-            }}
-          >
-            I also build for other founders —{" "}
-            <Link href={PITCH_URL} className="countdown-quiet-link">
-              have your own idea?
-            </Link>
-          </p>
+          <div className="countdown-pitch" style={{ marginTop: 64 }}>
+            <p className="countdown-pitch-heading">
+              I also build native iOS, Android and web apps.
+            </p>
+            <p className="countdown-pitch-scope">
+              Data model, build, payments, App Store submission — end to end.
+            </p>
+            <p style={{ marginTop: 12, fontSize: 13 }}>
+              <Link href={PITCH_URL} className="countdown-quiet-link">
+                Let&apos;s talk
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
+
+      <div className="countdown-bg-skyline" aria-hidden="true" />
     </main>
   );
 }
