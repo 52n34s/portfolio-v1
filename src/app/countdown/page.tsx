@@ -252,37 +252,18 @@ function AppCard({
         padding: "22px 18px 0",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      {/* Logo left; headline + description as one text block beside it. */}
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
         <AppLogo app={app} size={60} />
-        {/* Reserves two full lines so the row height — and the card below it
-            — never shifts, whether the headline wraps to one line or two. */}
-        <p className="countdown-card-headline" style={{ flex: 1 }}>
-          {OUTCOME_HEADLINES[app.id]}
-        </p>
-      </div>
-
-      <div style={{ marginTop: 14 }}>
-        <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ink)" }}>
-          {app.name}
-        </div>
-        <div className="countdown-eyebrow" style={{ marginTop: 2 }}>
-          {app.platform}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {/* Reserves two full lines so a one-line headline still lands in the
+              same spot as a two-line one — the description below never shifts. */}
+          <p className="countdown-card-headline">{OUTCOME_HEADLINES[app.id]}</p>
+          <p className="countdown-card-desc">{app.description}</p>
         </div>
       </div>
 
-      <p
-        style={{
-          margin: "8px 0 0",
-          maxWidth: 220,
-          fontSize: 13,
-          lineHeight: 1.5,
-          color: "var(--ink-muted)",
-        }}
-      >
-        {app.description}
-      </p>
-
-      <div className="countdown-app-shot" style={{ top: 235 }}>
+      <div className="countdown-app-shot" style={{ top: 168 }}>
         {shot ? (
           <Image
             src={shot.src}
@@ -311,8 +292,32 @@ function AppCard({
         )}
       </div>
 
-      <div style={{ position: "absolute", left: 18, bottom: 16 }}>
-        <AppAction app={app} />
+      {/* Name + platform sit quiet above the action, bottom-left over the shot. */}
+      <div
+        style={{
+          position: "absolute",
+          left: 18,
+          bottom: 16,
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 12,
+            fontWeight: 500,
+            lineHeight: 1.2,
+            color: "var(--ink)",
+            opacity: 0.75,
+          }}
+        >
+          {app.name}
+        </div>
+        <div className="countdown-eyebrow" style={{ marginTop: 2, opacity: 0.85 }}>
+          {app.platform}
+        </div>
+        <div style={{ marginTop: 8 }}>
+          <AppAction app={app} />
+        </div>
       </div>
     </div>
   );

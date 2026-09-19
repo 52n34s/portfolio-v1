@@ -4750,11 +4750,9 @@ body {
   flex-shrink: 0;
 }
 
-/* The outcome headline is what people read — bigger and bolder than the
- * one-sentence description underneath it. */
-/* Sits beside the logo, not below it. Height is fixed to exactly two lines
-   (2 x 27px) and vertically centred, so a one-line headline still lands in
-   the same spot as a two-line one — nothing in the card below ever shifts. */
+/* Outcome headline beside the logo. Height fixed to two lines (2 × 27px) so
+   a one-line headline still lands in the same spot as a two-line one — the
+   description under it never shifts. */
 .countdown-card-headline {
   display: flex;
   align-items: center;
@@ -4764,6 +4762,15 @@ body {
   font-weight: 700;
   line-height: 1.25;
   color: var(--ink);
+}
+
+/* One-sentence support line — sits under the headline, aligned with it
+   (not under the logo), reading as one block. */
+.countdown-card-desc {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-muted);
 }
 
 /* Screenshot slot: bleeds past the card's own bottom edge instead of sitting

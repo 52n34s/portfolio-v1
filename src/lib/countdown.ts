@@ -49,7 +49,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     id: "carpincho",
     name: "Carpincho",
     description:
-      "Speak Rioplatense Spanish from the first lesson and get graded honestly.",
+      "Speak Spanish from the first lesson and get graded honestly.",
     platform: "IOS",
     logo: "/app-logo-carpincho.jpg",
     href: "https://apps.apple.com/us/app/carpi-speak-learn-spanish/id6795982399",
