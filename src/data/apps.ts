@@ -49,9 +49,9 @@ export const APP_SECTIONS: AppSection[] = [
       {
         slug: "kolibi",
         name: "Kolibi",
-        platform: "iOS · Android",
-        hook: "Photograph your food. That's it.",
-        body: "Kolibi reads the plate, estimates the portions and fills in calories and macros in seconds. Your targets are calculated for your body and your goal, and they shift on training days. Correct a portion once and every estimate after that lands closer.",
+        platform: "iOS",
+        hook: "Your food knows it's training day.",
+        body: "Kolibi puts nutrition and bodyweight training in one app. Train at home or in the park, and your calories and macros adjust to the session while protein stays steady. Thirty-nine exercises across eleven ladders show you when you are ready for the next level.",
         href: "https://apps.apple.com/us/app/kolibi/id6790129149",
         logo: "/app-logo-kolibi.jpg",
         visual: "kolibi",

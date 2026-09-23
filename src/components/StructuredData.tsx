@@ -110,9 +110,9 @@ export default function StructuredData() {
         "@id": "https://steffendoesthings.com/#kolibi",
         name: "Kolibi",
         description:
-          "An AI photo calorie tracker that reads a meal from a single photo.",
+          "Nutrition and bodyweight training in one app. Photo recognition per ingredient, targets that adjust to each session, and exercise ladders that level up as you get stronger.",
         applicationCategory: "HealthApplication",
-        operatingSystem: "iOS, Android",
+        operatingSystem: "iOS",
         url: "https://apps.apple.com/us/app/kolibi/id6790129149",
         author: { "@id": "https://steffendoesthings.com/#steffen" },
         publisher: { "@id": "https://steffendoesthings.com/#org" },

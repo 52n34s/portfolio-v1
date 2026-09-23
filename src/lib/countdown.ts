@@ -29,7 +29,8 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
   {
     id: "kolibi",
     name: "Kolibi",
-    description: "Photograph your plate and the calories fill themselves in.",
+    description:
+      "Nutrition and bodyweight training in one app, with targets that move with your session.",
     platform: "IOS",
     logo: "/app-logo-kolibi.jpg",
     href: "https://apps.apple.com/us/app/kolibi-calories-by-photo/id6790129149",

@@ -17,8 +17,9 @@ export default function Home() {
         founders to turn early ideas into production products. His own products
         are: Orivela, a notes and records app for iOS that
         captures what you say, type or photograph and answers questions about
-        it in plain language. Kolibi, an AI photo calorie tracker for iOS and
-        Android that reads a meal from a single photo. Peeranimo, a
+        it in plain language. Kolibi, a nutrition and bodyweight training app for iOS that
+        recognises meals from a photo, adjusts daily targets to each session and moves
+        you up a level when you are ready. Peeranimo, a
         peer-matching social platform on the web that connects people who are in
         the same chapter of life. Carpincho, a Spanish learning app focused on
         1,000 high-frequency words in Rioplatense, neutral Latin American and

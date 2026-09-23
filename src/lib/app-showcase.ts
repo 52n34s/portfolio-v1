@@ -4,7 +4,7 @@
 export const OUTCOME_HEADLINES: Record<string, string> = {
   carpincho:
     "Order dinner, joke with family, never get switched to English.",
-  kolibi: "Know where you stand.",
+  kolibi: "Your food knows it's training day.",
   orivela: "Out of your head. Into one place.",
   erdiknows: "See which changes pay off.",
   getabite: "Decide where to eat before you leave.",
