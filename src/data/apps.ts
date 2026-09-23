@@ -42,9 +42,9 @@ export function stampNote(href: string) {
 
 export const APP_SECTIONS: AppSection[] = [
   {
-    eyebrow: "FOOD",
-    headline: "Two apps for what ends up on the plate.",
-    subline: "Decide fast, eat the way you meant to.",
+    eyebrow: "FOOD & TRAINING",
+    headline: "Two apps for eating the way you meant to.",
+    subline: "The dish that fits you. The target that moves with your training.",
     apps: [
       {
         slug: "kolibi",

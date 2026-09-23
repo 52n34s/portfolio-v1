@@ -478,7 +478,7 @@ export const workCases: WorkCase[] = [
           },
           {
             title: "AI features.",
-            body: "Features where a model does something specific and useful. Photo-to-calorie recognition and natural-language document search are both live in my own products. Cost, latency, and the bad response are solved problems here.",
+            body: "Features where a model does something specific and useful. Per-ingredient photo recognition and natural-language document search are both live in my own products. Cost, latency, and the bad response are solved problems here.",
           },
           {
             title: "Integrations.",

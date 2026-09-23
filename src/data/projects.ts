@@ -127,11 +127,12 @@ export const projects: Project[] = [
       "RevenueCat",
     ],
     problem:
-      "Calorie tracking fails because logging a meal takes too long and portion estimates are generic. A photo-based approach solves the input problem but creates two harder ones: portions still have to be personal, and historical totals must stay stable even when the underlying nutrition reference data changes later.",
+      "People training without a gym want to get stronger and leaner at the same time. With nutrition in one app and training in another, neither side knows what the other did.",
     approach:
-      "Built a two-stage personalized portion-calibration system that learns from each user's corrections through a trigger-based running average over raw data. Added nutrition snapshotting so past entries never drift when reference data is updated, plus versioned goal history so changing a target does not rewrite the past. Designed the data model as GDPR-by-design for Article 9 sensitive photo data, and abstracted the AI layer so the vision provider can be swapped without touching application logic.",
+      "One app where every finished session flows into the day's target. Carbs and fat scale with the intensity while protein holds steady. Meals are captured per ingredient from a photo, and eleven exercise ladders carry a clear rule for when the next level is due.",
     timeline: "",
-    outcome: "Live on the App Store for iOS, with Android available.",
+    outcome:
+      "Live on iOS in German, English and Spanish, with a weekly review that turns the numbers into one sentence and names the single thing worth adjusting.",
   },
   {
     id: "film-discovery",
