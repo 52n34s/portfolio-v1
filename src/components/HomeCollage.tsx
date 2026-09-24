@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import Link from "next/link";
 
 const PAPER_SHADOW = "shadow-[2px_5px_14px_rgba(26,26,26,0.13)]";
 
@@ -95,11 +96,12 @@ function Clickable({
   );
 }
 
-function ServiceCard({ className = "" }: { className?: string }) {
+/** Paper note for client pitches — lives in ./work-with-me, not the hero. */
+export function PitchNote({ className = "" }: { className?: string }) {
   return (
     <div
       id="pitch"
-      className={`relative w-full min-w-0 bg-white px-4 pb-5 pt-4 ${PAPER_SHADOW} ${className}`}
+      className={`relative w-full min-w-0 max-w-[285px] bg-white px-4 pb-5 pt-4 ${PAPER_SHADOW} ${className}`}
     >
       <Tape className="-left-2 -top-2 -rotate-[14deg]" />
       <div
@@ -112,18 +114,13 @@ function ServiceCard({ className = "" }: { className?: string }) {
       >
         Pitch me your idea. We&apos;ll take it apart together.
       </p>
-      <button
-        type="button"
-        onClick={() =>
-          document
-            .getElementById("room-05")
-            ?.scrollIntoView({ behavior: "smooth" })
-        }
-        className="mt-3 rounded-full bg-[var(--purple-button)] px-4 py-2 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--purple-button-hover)]"
+      <Link
+        href="/work/idea-to-mvp"
+        className="mt-3 inline-block rounded-full bg-[var(--purple-button)] px-4 py-2 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--purple-button-hover)]"
       >
         Let&apos;s think it through →
-      </button>
-      <TornEdge />
+      </Link>
+      <TornEdge fill="#0e1620" />
     </div>
   );
 }
@@ -144,7 +141,7 @@ export default function HomeCollage() {
   }, []);
 
   return (
-    <div id="room-01" className="bg-[#F5F0E8] pb-10 md:pb-14">
+    <div id="room-01" className="pb-10 md:pb-14">
       <h1 className="sr-only">
         Steffen Giebler — Product Developer and Indie Founder in Berlin
       </h1>
@@ -154,16 +151,14 @@ export default function HomeCollage() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:items-center lg:gap-16">
           <div className="min-w-0">
             <p
-              className="max-w-[18ch] text-[2rem] leading-[1.15] text-[#1A1A1A] md:text-5xl lg:max-w-[16ch] lg:text-6xl"
+              className="max-w-[11ch] text-[2.5rem] leading-[1.05] tracking-tight text-[#1A1A1A] md:max-w-[12ch] md:text-5xl lg:text-6xl"
               style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
             >
-              I build apps of my own, and platforms for people who came with
-              an idea and no map.
+              I love making new things.
             </p>
-            <p className="mt-8 max-w-[520px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[17px]">
-              Hi, I&apos;m Steffen. Berlin, working solo. Happiest when
-              nothing exists yet, and rarely convinced that the obvious way
-              is the right one.
+            <p className="mt-8 max-w-[420px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[17px]">
+              Hi, I&apos;m Steffen. Berlin, working solo. Six of them are live
+              right now.
             </p>
           </div>
 
@@ -195,10 +190,6 @@ export default function HomeCollage() {
               >
                 <span className="block h-full w-full" aria-hidden="true" />
               </Clickable>
-            </div>
-
-            <div className="relative z-20 mx-auto mt-8 w-full max-w-[285px] lg:mx-0 lg:ml-[140px] lg:mt-[-64px]">
-              <ServiceCard className="-rotate-[1deg]" />
             </div>
           </div>
         </div>

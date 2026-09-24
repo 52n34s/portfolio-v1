@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SkylineSeam from "@/components/SkylineSeam";
+import { PitchNote } from "@/components/HomeCollage";
 
 const CASES = [
   { command: "./i-have-an-idea", href: "/work/idea-to-mvp" },
@@ -43,6 +44,10 @@ export default function Room05() {
             See all six →
           </Link>
         </header>
+
+        <div className="room-05-pitch">
+          <PitchNote className="-rotate-[1deg]" />
+        </div>
 
         <div className="room-05-cases">
           {CASES.map((caseItem, index) => (

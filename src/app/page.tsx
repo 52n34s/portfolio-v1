@@ -33,18 +33,28 @@ export default function Home() {
         product partnerships.
       </div>
 
-      <HomeCollage />
+      {/* Countdown paper + blooms above the Berlin skyline band only.
+          The SectionDivider skyline is the seam; apps below stay beige. */}
+      <div className="home-upper">
+        <div className="countdown-bg-blooms" aria-hidden="true" />
+        <div className="home-upper-content">
+          <HomeCollage />
+        </div>
+        <div className="home-upper-fade" aria-hidden="true" />
+      </div>
 
-      <SectionDivider />
+      <div className="home-lower">
+        <SectionDivider />
 
-      <div className="mx-auto w-full max-w-[1100px] bg-[#F5F0E8] px-5 md:px-12">
-        {APP_SECTIONS.map((section, index) => (
-          <AppSection
-            key={section.eyebrow}
-            section={section}
-            topClassName={index === 0 ? "pt-10 md:pt-14" : undefined}
-          />
-        ))}
+        <div className="mx-auto w-full max-w-[1100px] px-5 md:px-12">
+          {APP_SECTIONS.map((section, index) => (
+            <AppSection
+              key={section.eyebrow}
+              section={section}
+              topClassName={index === 0 ? "pt-10 md:pt-14" : undefined}
+            />
+          ))}
+        </div>
       </div>
 
       {/*
