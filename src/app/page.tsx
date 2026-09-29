@@ -2,6 +2,7 @@
 
 import HomeCollage from "@/components/HomeCollage";
 import PageBackground from "@/components/PageBackground";
+import AppDock from "@/components/AppDock";
 import AppSection from "@/components/apps/AppSection";
 import SectionDivider from "@/components/SectionDivider";
 import Room05 from "@/components/Room05";
@@ -48,6 +49,8 @@ export default function Home() {
         <SectionDivider />
 
         <div className="mx-auto w-full max-w-[1100px] px-5 md:px-12">
+          <AppDock />
+
           {APP_SECTIONS.map((section, index) => (
             <AppSection
               key={section.eyebrow}
