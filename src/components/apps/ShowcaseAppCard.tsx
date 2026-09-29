@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  APP_SCREENSHOTS,
   OUTCOME_HEADLINES,
   hexToRgba,
   showcaseGlass,
@@ -76,17 +75,14 @@ function AppAction({
 }
 
 /** Shared glass app card — used by /countdown and /apps.
- *  Flow: header → screenshot → footer. No absolute bleed. */
+ *  Flow: header → footer. No screenshot, no absolute bleed. */
 export default function ShowcaseAppCard({
   app,
   campaign,
-  priority = false,
 }: {
   app: ChallengeApp;
   campaign: string;
-  priority?: boolean;
 }) {
-  const shot = APP_SCREENSHOTS[app.id];
   const headline = OUTCOME_HEADLINES[app.id];
 
   return (
@@ -103,32 +99,6 @@ export default function ShowcaseAppCard({
           <p className="countdown-card-headline">{headline}</p>
           <p className="countdown-card-desc">{app.description}</p>
         </div>
-      </div>
-
-      <div className="countdown-app-shot">
-        {shot ? (
-          <Image
-            src={shot.src}
-            alt={`${app.name} screenshot`}
-            width={shot.width}
-            height={shot.height}
-            loading={priority ? undefined : "lazy"}
-            priority={priority}
-          />
-        ) : (
-          <div className="countdown-app-shot-placeholder">
-            <span
-              className="countdown-mono"
-              style={{
-                fontSize: 10,
-                letterSpacing: "0.12em",
-                color: "var(--ink-muted)",
-              }}
-            >
-              TODO — SCREENSHOT
-            </span>
-          </div>
-        )}
       </div>
 
       <div className="countdown-card-footer">

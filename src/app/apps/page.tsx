@@ -115,12 +115,11 @@ export default function AppsPage() {
               <p className="apps-page-subline">{section.subline}</p>
 
               <div className="countdown-pair-grid">
-                {section.apps.map((entry, index) => (
+                {section.apps.map((entry) => (
                   <ShowcaseAppCard
                     key={entry.slug}
                     app={bySlug(entry.slug)}
                     campaign={APP_STORE_CAMPAIGN}
-                    priority={sectionIndex === 0 && index === 0}
                   />
                 ))}
               </div>

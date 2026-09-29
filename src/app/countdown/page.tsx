@@ -98,22 +98,11 @@ function SocialRow() {
   );
 }
 
-function PairGroup({
-  apps,
-  isFirstGroup = false,
-}: {
-  apps: [ChallengeApp, ChallengeApp];
-  isFirstGroup?: boolean;
-}) {
+function PairGroup({ apps }: { apps: [ChallengeApp, ChallengeApp] }) {
   return (
     <div className="countdown-pair-grid">
-      {apps.map((app, index) => (
-        <ShowcaseAppCard
-          key={app.id}
-          app={app}
-          campaign={APP_STORE_CAMPAIGN}
-          priority={isFirstGroup && index === 0}
-        />
+      {apps.map((app) => (
+        <ShowcaseAppCard key={app.id} app={app} campaign={APP_STORE_CAMPAIGN} />
       ))}
     </div>
   );
@@ -283,11 +272,10 @@ export default function CountdownPage() {
           </div>
 
           <div className="countdown-app-grid">
-            {pairs.map((pair, index) => (
+            {pairs.map((pair) => (
               <PairGroup
                 key={pair.apps.map((a) => a.id).join("-")}
                 apps={pair.apps}
-                isFirstGroup={index === 0}
               />
             ))}
           </div>
