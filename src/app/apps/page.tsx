@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title:
     "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
   description:
-    "Six apps built solo in Berlin: a document vault, a nutrition and bodyweight training app, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS, Android and web.",
+    "Apps built solo in Berlin: a document vault, a nutrition and bodyweight training app, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS and web.",
   alternates: {
     canonical: "/apps",
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title:
       "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
     description:
-      "Six apps built solo in Berlin: a document vault, a nutrition and bodyweight training app, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS, Android and web.",
+      "Apps built solo in Berlin: a document vault, a nutrition and bodyweight training app, a peer-matching platform, a Spanish course, a dev metrics timeline, and a vegan food finder. Live on iOS and web.",
     url: "https://steffendoesthings.com/apps",
     type: "website",
   },
