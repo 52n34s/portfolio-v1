@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import PageBackground from "@/components/PageBackground";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import { APP_SECTIONS } from "@/data/apps";
 import { CHALLENGE_APPS, type ChallengeApp } from "@/lib/countdown";
@@ -68,7 +69,7 @@ export default function AppsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
       />
 
-      <div className="countdown-bg-blooms" aria-hidden="true" />
+      <PageBackground />
 
       <div className="countdown-content">
         <div className="apps-page-inner">

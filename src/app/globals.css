@@ -1428,7 +1428,6 @@ body {
    Soft fade into beige so the SectionDivider skyline reads as the seam. */
 .home-upper {
   position: relative;
-  background: #fafafa;
   color: #17171b;
   /* Blooms need a positioning context; countdown-bg-blooms is absolute */
   isolation: isolate;
@@ -1459,9 +1458,10 @@ body {
   );
 }
 
-/* SectionDivider + apps sit on the site beige — skyline grounds the handoff */
+/* SectionDivider + apps sit on the shared PageBackground — skyline grounds
+   the handoff. */
 .home-lower {
-  background: #f5f0e8;
+  background: transparent;
 }
 
 .home-skyline-band {
@@ -4759,7 +4759,6 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: clip;
-  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
 }
@@ -5250,5 +5249,57 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .countdown-btn {
     transition: none;
+  }
+}
+
+/* Shared page background (Home, /apps, /countdown) — taken 1:1 from the
+   erdibuilds.app hero (.hero-bg in erdibuilds/app/globals.css). Fixed to the
+   viewport so dots and glows stay visible while scrolling. The base colour
+   sits on the element, the glows + dot grid on ::before so the bottom fade
+   mask only thins out the pattern, never the base. Nothing animates. */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #faf8f5;
+}
+
+.page-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(55% 50% at 80% 5%, rgba(91, 76, 240, 0.2), transparent 70%),
+    radial-gradient(
+      45% 40% at 15% 95%,
+      rgba(255, 45, 120, 0.06),
+      transparent 70%
+    ),
+    radial-gradient(rgba(21, 19, 26, 0.13) 1.2px, transparent 1.3px);
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: auto, auto, 22px 22px;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .page-bg::before {
+    background-image:
+      radial-gradient(
+        35% 28% at 85% -6%,
+        rgba(91, 76, 240, 0.2),
+        transparent 70%
+      ),
+      radial-gradient(
+        45% 40% at 15% 95%,
+        rgba(255, 45, 120, 0.06),
+        transparent 70%
+      ),
+      radial-gradient(rgba(21, 19, 26, 0.13) 1.2px, transparent 1.3px);
   }
 }

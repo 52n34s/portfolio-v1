@@ -1,6 +1,7 @@
 "use client";
 
 import HomeCollage from "@/components/HomeCollage";
+import PageBackground from "@/components/PageBackground";
 import AppSection from "@/components/apps/AppSection";
 import SectionDivider from "@/components/SectionDivider";
 import Room05 from "@/components/Room05";
@@ -10,6 +11,8 @@ import { APP_SECTIONS } from "@/data/apps";
 export default function Home() {
   return (
     <>
+      <PageBackground />
+
       <div className="sr-only">
         Steffen Giebler is a solo founder and software developer based in
         Berlin Mitte, Germany, working under the studio name 52N34S Group. He
@@ -33,14 +36,12 @@ export default function Home() {
         product partnerships.
       </div>
 
-      {/* Countdown paper + blooms above the Berlin skyline band only.
-          The SectionDivider skyline is the seam; apps below stay beige. */}
+      {/* Hero and apps both sit on the shared PageBackground; the
+          SectionDivider skyline is the only seam between them. */}
       <div className="home-upper">
-        <div className="countdown-bg-blooms" aria-hidden="true" />
         <div className="home-upper-content">
           <HomeCollage />
         </div>
-        <div className="home-upper-fade" aria-hidden="true" />
       </div>
 
       <div className="home-lower">
