@@ -23,6 +23,8 @@ export type ChallengeApp = {
   href: string | null;
   /** Sampled from the app icon — the page's only source of colour, no shared theme accent. */
   color: string;
+  /** Button text for non-App-Store links. Defaults to "Open". */
+  cta?: string;
 };
 
 export const CHALLENGE_APPS: ChallengeApp[] = [
@@ -84,5 +86,28 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     logo: "/getabite-mark-128.png",
     href: "/go/getabite",
     color: "#F04E3E",
+  },
+  // Shown on /apps only — /countdown picks its six apps by id in APP_PAIRS.
+  {
+    id: "findmystack",
+    name: "Find My Stack",
+    description:
+      "Answer a few questions about your idea and get one clear, honest recommendation.",
+    platform: "WEB",
+    logo: "/findmystack.png",
+    href: "https://findmystack.app",
+    color: "#3D6FE0",
+    cta: "Take the assessment",
+  },
+  {
+    id: "erdibuilds",
+    name: "erdibuilds",
+    description:
+      "Pick from verified developers who have already built apps like yours.",
+    platform: "WEB",
+    logo: "/erdibuilds.png",
+    href: "https://erdibuilds.app",
+    color: "#5B4CF0",
+    cta: "Join the waitlist",
   },
 ];

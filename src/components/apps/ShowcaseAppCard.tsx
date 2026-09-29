@@ -69,7 +69,7 @@ function AppAction({
         fontWeight: 600,
       }}
     >
-      Open
+      {app.cta ?? "Open"}
     </a>
   );
 }
@@ -87,6 +87,7 @@ export default function ShowcaseAppCard({
 
   return (
     <div
+      id={app.id}
       className="countdown-card"
       style={{
         ...showcaseGlass,

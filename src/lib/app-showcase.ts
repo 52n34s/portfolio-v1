@@ -9,6 +9,8 @@ export const OUTCOME_HEADLINES: Record<string, string> = {
   erdiknows: "See which changes pay off.",
   getabite: "Decide where to eat before you leave.",
   peeranimo: "Find people who get it.",
+  findmystack: "Build your app right the first time.",
+  erdibuilds: "Your app, live in people's hands.",
 };
 
 /** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web

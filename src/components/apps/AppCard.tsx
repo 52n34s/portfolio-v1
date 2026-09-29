@@ -1,4 +1,4 @@
-import type { AppEntry } from "@/data/apps";
+import type { AppEntry, VisualSlug } from "@/data/apps";
 import { ctaLabel, stampNote } from "@/data/apps";
 import KolibiVisual from "@/components/apps/visuals/KolibiVisual";
 import GetaBiteVisual from "@/components/apps/visuals/GetaBiteVisual";
@@ -7,7 +7,7 @@ import PeeranimoVisual from "@/components/apps/visuals/PeeranimoVisual";
 import OrivelaVisual from "@/components/apps/visuals/OrivelaVisual";
 import ErdiKnowsVisual from "@/components/apps/visuals/ErdiKnowsVisual";
 
-const VISUALS: Record<AppEntry["visual"], () => React.ReactElement> = {
+const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   kolibi: KolibiVisual,
   getabite: GetaBiteVisual,
   carpincho: CarpinchoVisual,
@@ -18,7 +18,15 @@ const VISUALS: Record<AppEntry["visual"], () => React.ReactElement> = {
 
 const ROTATIONS = [-1.1, 0.8, -0.6, 1.2, -0.9, 0.5];
 
-function LiveStamp({ name, note }: { name: string; note: string }) {
+function LiveStamp({
+  name,
+  note,
+  label = "LIVE",
+}: {
+  name: string;
+  note: string;
+  label?: string;
+}) {
   return (
     <div className="absolute right-4 top-4 z-30 flex h-[68px] w-[68px] shrink-0 origin-top-right -rotate-12 scale-90 flex-col items-center justify-center rounded-full border-2 border-[#1D9E75] bg-[#F5F0E8] text-[#1D9E75] opacity-90 lg:scale-100">
       <span
@@ -28,10 +36,10 @@ function LiveStamp({ name, note }: { name: string; note: string }) {
         {name.toUpperCase()}
       </span>
       <span
-        className="text-[13px] font-medium leading-none"
+        className={`${label.length > 4 ? "text-[8px]" : "text-[13px]"} font-medium leading-none`}
         style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
       >
-        LIVE
+        {label}
       </span>
       <span
         className="px-1.5 text-center text-[5.5px] leading-[1.15] tracking-wider"
@@ -44,23 +52,31 @@ function LiveStamp({ name, note }: { name: string; note: string }) {
 }
 
 export default function AppCard({ app, index }: { app: AppEntry; index: number }) {
-  const Visual = VISUALS[app.visual];
+  const Visual = app.visual ? VISUALS[app.visual] : null;
   const rotate = ROTATIONS[index % ROTATIONS.length];
   const external = app.href.startsWith("http");
 
   return (
     <article
-      className="group relative flex min-h-[480px] min-w-0 flex-col overflow-hidden rounded-[20px] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0 md:min-h-[560px]"
+      id={app.slug}
+      className={`group relative flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-[20px] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0 ${Visual ? "min-h-[480px] md:min-h-[560px]" : ""}`}
       style={{ transform: `rotate(${rotate}deg)` }}
     >
-      <LiveStamp name={app.name} note={stampNote(app.href)} />
+      <LiveStamp name={app.name} note={stampNote(app.href)} label={app.stamp} />
 
-      <div className="h-[240px] w-full shrink-0 md:h-[300px]">
-        <Visual />
-      </div>
+      {Visual && (
+        <div className="h-[240px] w-full shrink-0 md:h-[300px]">
+          <Visual />
+        </div>
+      )}
 
-      <div className="flex flex-1 flex-col gap-4 p-6 md:p-8">
-        <div className="flex items-center gap-3.5">
+      {/* Without an illustration the stamp sits over the text: below lg the
+          content starts under it (pt-20 clears the 77px stamp), from lg up
+          the name row keeps clear of it on the right instead. */}
+      <div
+        className={`flex flex-1 flex-col gap-4 p-6 md:p-8 ${Visual ? "" : "pt-20 md:pt-20 lg:pt-8"}`}
+      >
+        <div className={`flex items-center gap-3.5 ${Visual ? "" : "lg:pr-16"}`}>
           <img
             src={app.logo}
             alt={`${app.name} app icon`}
@@ -107,7 +123,7 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           className="mt-auto inline-block w-fit rounded-full bg-[var(--purple-button)] px-5 py-2.5 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--purple-button-hover)]"
         >
-          {ctaLabel(app.href)} →
+          {app.cta ?? ctaLabel(app.href)} →
         </a>
       </div>
     </article>

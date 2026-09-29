@@ -6,7 +6,12 @@ export type AppSlug =
   | "carpincho"
   | "peeranimo"
   | "orivela"
-  | "erdiknows";
+  | "erdiknows"
+  | "findmystack"
+  | "erdibuilds";
+
+/** Apps that have a home-card illustration in components/apps/visuals. */
+export type VisualSlug = Exclude<AppSlug, "findmystack" | "erdibuilds">;
 
 export type AppEntry = {
   slug: AppSlug;
@@ -16,8 +21,13 @@ export type AppEntry = {
   body: string;
   href: string;
   logo: string;
-  visual: AppSlug;
+  /** Optional: without it the home card renders text-only, no illustration. */
+  visual?: VisualSlug;
   badge?: string;
+  /** Stamp word on the home card. Defaults to "LIVE". */
+  stamp?: string;
+  /** Button text on the home card. Defaults to ctaLabel(href). */
+  cta?: string;
 };
 
 export type AppSection = {
@@ -120,6 +130,35 @@ export const APP_SECTIONS: AppSection[] = [
         href: "https://erdiknows.com",
         logo: "/erdiknows.png",
         visual: "erdiknows",
+      },
+    ],
+  },
+  {
+    eyebrow: "FOR FOUNDERS",
+    headline: "Two tools for getting your app built.",
+    subline: "The stack that fits your idea. The developer who has built it before.",
+    apps: [
+      {
+        slug: "findmystack",
+        name: "Find My Stack",
+        platform: "WEB",
+        hook: "Build your app right the first time.",
+        body: "Answer a few questions about your idea and get one clear, honest recommendation.",
+        href: "https://findmystack.app",
+        logo: "/findmystack.png",
+        stamp: "LIVE",
+        cta: "Take the assessment",
+      },
+      {
+        slug: "erdibuilds",
+        name: "erdibuilds",
+        platform: "WEB",
+        hook: "Your app, live in people's hands.",
+        body: "Pick from verified developers who have already built apps like yours.",
+        href: "https://erdibuilds.app",
+        logo: "/erdibuilds.png",
+        stamp: "WAITLIST",
+        cta: "Join the waitlist",
       },
     ],
   },
