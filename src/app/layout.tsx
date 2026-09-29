@@ -75,9 +75,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // The inline script below adds "reveal-js" before React hydrates.
+      suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} ${lora.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
+        {/* Hides the home dock icons before first paint so their entrance can
+            play without a flash; ScrollReveal removes the class on mount.
+            Without JS the class never exists and everything stays visible. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: 'document.documentElement.classList.add("reveal-js")',
+          }}
+        />
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
           rel="stylesheet"

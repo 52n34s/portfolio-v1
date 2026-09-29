@@ -2,6 +2,7 @@ export default function SectionDivider() {
   return (
     <div
       aria-hidden="true"
+      data-reveal="divider"
       className="home-skyline-band mx-[calc(50%-50vw)] h-16 w-screen overflow-x-hidden border-b border-black/[0.06] md:h-24"
     >
       <div

@@ -36,7 +36,10 @@ function scrollToCard(event: MouseEvent<HTMLAnchorElement>, id: string) {
   event.preventDefault();
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // Offset for the fixed menu button comes from the card's scroll-margin-top.
-  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  target.scrollIntoView({
+    behavior: reduce ? "auto" : "smooth",
+    block: "start",
+  });
 }
 
 /** macOS-dock style row of app icons that jumps to each app card.
@@ -44,7 +47,11 @@ function scrollToCard(event: MouseEvent<HTMLAnchorElement>, id: string) {
  *  static icons with a short press feedback. */
 export default function AppDock() {
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const canMagnify = useSyncExternalStore(subscribe, canMagnifySnapshot, () => false);
+  const canMagnify = useSyncExternalStore(
+    subscribe,
+    canMagnifySnapshot,
+    () => false,
+  );
   const [scales, setScales] = useState<number[]>(() => APPS.map(() => 1));
 
   function handleMouseMove(event: MouseEvent<HTMLUListElement>) {
@@ -72,6 +79,7 @@ export default function AppDock() {
       {/* md:pt-10 reserves the headroom the magnified icons grow into, so
           the row never changes height. */}
       <ul
+        data-reveal-group
         className="flex flex-wrap items-end justify-center gap-4 md:gap-x-7 md:pt-10"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -86,21 +94,27 @@ export default function AppDock() {
               }}
               className="group relative h-11 w-11 md:h-14 md:w-14"
             >
-              <a
-                href={`#${app.slug}`}
-                aria-label={app.name}
-                onClick={(event) => scrollToCard(event, app.slug)}
-                className="block h-full w-full origin-bottom rounded-[22%] transition-[transform,scale] duration-150 ease-out motion-safe:active:scale-90"
-                style={canMagnify ? { transform: `scale(${scale})` } : undefined}
-              >
-                <Image
-                  src={app.logo}
-                  alt=""
-                  width={112}
-                  height={112}
-                  className="h-full w-full rounded-[22%] border border-black/5 object-cover shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
-                />
-              </a>
+              {/* Entrance (scale via ScrollReveal) lives on this wrapper so it
+                  never fights the magnification transform on the link. */}
+              <span data-reveal="dock" className="block h-full w-full">
+                <a
+                  href={`#${app.slug}`}
+                  aria-label={app.name}
+                  onClick={(event) => scrollToCard(event, app.slug)}
+                  className="block h-full w-full origin-bottom rounded-[22%] transition-[transform,scale] duration-150 ease-out motion-safe:active:scale-90"
+                  style={
+                    canMagnify ? { transform: `scale(${scale})` } : undefined
+                  }
+                >
+                  <Image
+                    src={app.logo}
+                    alt=""
+                    width={112}
+                    height={112}
+                    className="h-full w-full rounded-[22%] border border-black/5 object-cover shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+                  />
+                </a>
+              </span>
 
               {/* Tooltip above the (possibly magnified) icon — hover devices
                   and keyboard focus only; the link's aria-label carries the

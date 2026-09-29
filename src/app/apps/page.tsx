@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
+import ScrollReveal from "@/components/ScrollReveal";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import { APP_SECTIONS } from "@/data/apps";
 import { CHALLENGE_APPS, type ChallengeApp } from "@/lib/countdown";
@@ -70,6 +71,7 @@ export default function AppsPage() {
       />
 
       <PageBackground />
+      <ScrollReveal />
 
       <div className="countdown-content">
         <div className="apps-page-inner">
@@ -111,9 +113,9 @@ export default function AppsPage() {
               key={section.eyebrow}
               className={`apps-page-section${sectionIndex === 0 ? " is-first" : ""}`}
             >
-              <p className="apps-page-eyebrow">{section.eyebrow}</p>
-              <h2 className="apps-page-headline">{section.headline}</h2>
-              <p className="apps-page-subline">{section.subline}</p>
+              <p data-reveal="head" className="apps-page-eyebrow">{section.eyebrow}</p>
+              <h2 data-reveal="head" className="apps-page-headline">{section.headline}</h2>
+              <p data-reveal="head" className="apps-page-subline">{section.subline}</p>
 
               <div className="countdown-pair-grid">
                 {section.apps.map((entry) => (

@@ -2,6 +2,7 @@
 
 import HomeCollage from "@/components/HomeCollage";
 import PageBackground from "@/components/PageBackground";
+import ScrollReveal from "@/components/ScrollReveal";
 import AppDock from "@/components/AppDock";
 import AppSection from "@/components/apps/AppSection";
 import SectionDivider from "@/components/SectionDivider";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <PageBackground />
+      <ScrollReveal />
 
       <div className="sr-only">
         Steffen Giebler is a solo founder and software developer based in

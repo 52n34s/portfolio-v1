@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
+import ScrollReveal from "@/components/ScrollReveal";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import {
   CHALLENGE_APPS,
@@ -118,6 +119,7 @@ export default function CountdownPage() {
   return (
     <main className="countdown-page">
       <PageBackground />
+      <ScrollReveal />
 
       {/* Hero background: the giant day count is clipped to this wrapper's own
           height (see .countdown-hero-bg), so it can never reach the app grid. */}

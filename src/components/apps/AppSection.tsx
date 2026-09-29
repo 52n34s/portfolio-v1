@@ -11,18 +11,20 @@ export default function AppSection({
   return (
     <section className={`${topClassName} pb-24 md:pb-32`}>
       <p
+        data-reveal="head"
         className="text-[12px] uppercase tracking-[0.22em] text-[#1A1A1A]/50"
         style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
       >
         {section.eyebrow}
       </p>
       <h2
+        data-reveal="head"
         className="mt-3 text-[clamp(30px,4vw,46px)] font-semibold leading-tight text-[#1A1A1A]"
         style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
       >
         {section.headline}
       </h2>
-      <p className="mt-4 max-w-[520px] text-[18px] leading-relaxed text-[#1A1A1A]/70">
+      <p data-reveal="head" className="mt-4 max-w-[520px] text-[18px] leading-relaxed text-[#1A1A1A]/70">
         {section.subline}
       </p>
 

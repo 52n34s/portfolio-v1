@@ -88,6 +88,7 @@ export default function ShowcaseAppCard({
   return (
     <div
       id={app.id}
+      data-reveal="card"
       className="countdown-card"
       style={{
         ...showcaseGlass,

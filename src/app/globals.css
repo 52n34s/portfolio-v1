@@ -5303,3 +5303,71 @@ body {
       radial-gradient(rgba(21, 19, 26, 0.13) 1.2px, transparent 1.3px);
   }
 }
+
+/* Scroll reveals (see components/ScrollReveal.tsx). Hidden states only exist
+   once JS has set data-reveal-state, so without JS everything is visible.
+   Only opacity + transform-type properties animate — no layout shift. Each
+   kind uses its own property (translate / transform / scale / clip-path) so
+   it composes with the element's existing rotate, scale or magnification. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Dock: hidden before first paint via the .reveal-js class (layout.tsx). */
+  .reveal-js [data-reveal="dock"]:not([data-reveal-state]),
+  [data-reveal="dock"][data-reveal-state="hidden"] {
+    opacity: 0;
+    scale: 0.6;
+  }
+
+  [data-reveal="head"][data-reveal-state="hidden"] {
+    opacity: 0;
+    translate: 0 10px;
+  }
+
+  [data-reveal="card"][data-reveal-state="hidden"] {
+    opacity: 0;
+    translate: 0 12px;
+  }
+
+  @media (min-width: 768px) {
+    [data-reveal="head"][data-reveal-state="hidden"] {
+      translate: 0 16px;
+    }
+
+    [data-reveal="card"][data-reveal-state="hidden"] {
+      translate: 0 20px;
+    }
+  }
+
+  /* Stamp: on top of its own rotate/scale, lands back on them. */
+  [data-reveal="stamp"][data-reveal-state="hidden"] {
+    opacity: 0;
+    transform: scale(1.4) rotate(-12deg);
+  }
+
+  [data-reveal="divider"][data-reveal-state="hidden"] {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  [data-reveal-state="shown"] {
+    transition-duration: var(--reveal-dur, 500ms);
+    transition-delay: var(--reveal-delay, 0ms);
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [data-reveal="head"][data-reveal-state="shown"],
+  [data-reveal="card"][data-reveal-state="shown"] {
+    transition-property: opacity, translate;
+  }
+
+  [data-reveal="stamp"][data-reveal-state="shown"] {
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  [data-reveal="dock"][data-reveal-state="shown"] {
+    transition-property: opacity, scale;
+  }
+
+  [data-reveal="divider"][data-reveal-state="shown"] {
+    transition-property: clip-path;
+  }
+}

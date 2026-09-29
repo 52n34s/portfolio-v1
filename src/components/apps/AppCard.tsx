@@ -28,7 +28,9 @@ function LiveStamp({
   label?: string;
 }) {
   return (
-    <div className="absolute right-4 top-4 z-30 flex h-[68px] w-[68px] shrink-0 origin-top-right -rotate-12 scale-90 flex-col items-center justify-center rounded-full border-2 border-[#1D9E75] bg-[#F5F0E8] text-[#1D9E75] opacity-90 lg:scale-100">
+    <div
+      data-reveal="stamp"
+      className="absolute right-4 top-4 z-30 flex h-[68px] w-[68px] shrink-0 origin-top-right -rotate-12 scale-90 flex-col items-center justify-center rounded-full border-2 border-[#1D9E75] bg-[#F5F0E8] text-[#1D9E75] opacity-90 lg:scale-100">
       <span
         className="text-[7px] tracking-wider"
         style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
@@ -59,6 +61,7 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
   return (
     <article
       id={app.slug}
+      data-reveal="card"
       className={`group relative flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-[20px] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0 ${Visual ? "min-h-[480px] md:min-h-[560px]" : ""}`}
       style={{ transform: `rotate(${rotate}deg)` }}
     >
