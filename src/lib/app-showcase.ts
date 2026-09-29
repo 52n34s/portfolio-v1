@@ -77,3 +77,52 @@ export const showcaseGlass = {
   backdropFilter: "blur(20px) saturate(160%)",
   WebkitBackdropFilter: "blur(20px) saturate(160%)",
 } as const;
+
+type Rgb = [number, number, number];
+
+/** Page base colour the row tint sits on (PageBackground). */
+const PAGE_BASE: Rgb = [0xfa, 0xf8, 0xf5];
+
+function parseHex(hex: string): Rgb {
+  const value = hex.replace("#", "");
+  return [0, 2, 4].map((i) => parseInt(value.slice(i, i + 2), 16)) as Rgb;
+}
+
+function toHex(rgb: Rgb) {
+  return `#${rgb.map((c) => Math.round(c).toString(16).padStart(2, "0")).join("")}`;
+}
+
+/** Linear mix: t = 0 → a, t = 1 → b. */
+function mix(a: Rgb, b: Rgb, t: number): Rgb {
+  return a.map((c, i) => c + (b[i] - c) * t) as Rgb;
+}
+
+function luminance(rgb: Rgb) {
+  const [r, g, b] = rgb.map((c) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+export function contrastRatio(a: string, b: string) {
+  const [hi, lo] = [luminance(parseHex(a)), luminance(parseHex(b))].sort(
+    (x, y) => y - x,
+  );
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+/** Open-row colours derived from an app's `color`:
+ *  tint — 12% of the app colour on the page base (row background);
+ *  ink  — the app colour darkened in 5% steps (from 30%) until it reaches
+ *         4.5:1 against the tint (headline colour). */
+export function rowColors(color: string) {
+  const rgb = parseHex(color);
+  const tint = toHex(mix(PAGE_BASE, rgb, 0.12));
+  let ink = color;
+  for (let t = 0.3; t <= 1.0001; t += 0.05) {
+    ink = toHex(mix(rgb, [0, 0, 0], t));
+    if (contrastRatio(ink, tint) >= 4.5) break;
+  }
+  return { tint, ink };
+}

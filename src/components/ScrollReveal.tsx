@@ -14,15 +14,16 @@ import { useEffect } from "react";
  * untouched, so nothing flickers. The dock is the one exception: it always
  * plays its entrance (see the pre-paint class in app/layout.tsx).
  *
- * Kinds: head, card, stamp (follows its card), dock, divider.
+ * Kinds: head, card, row, stamp (follows its card), dock, divider.
  */
 
-type Kind = "head" | "card" | "stamp" | "dock" | "divider";
+type Kind = "head" | "card" | "row" | "stamp" | "dock" | "divider";
 
 /** Duration per kind (ms) — also written to --reveal-dur for the CSS. */
 const DURATION: Record<Kind, number> = {
   head: 500,
   card: 550,
+  row: 550,
   stamp: 350,
   dock: 300,
   divider: 1200,
@@ -32,6 +33,7 @@ const DURATION: Record<Kind, number> = {
 const STAGGER: Partial<Record<Kind, number>> = {
   head: 80,
   card: 120,
+  row: 60,
   dock: 40,
 };
 

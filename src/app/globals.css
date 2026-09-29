@@ -5304,6 +5304,43 @@ body {
   }
 }
 
+/* Second glow at the purple glow's exact position, in the colour of the open
+   app row (/apps, /countdown — AppIndexList sets --page-glow-color and
+   data-page-glow on <html>). Fades over the purple glow; at opacity 0 the
+   background above is untouched. */
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  background-image: radial-gradient(
+    55% 50% at 80% 5%,
+    color-mix(in srgb, var(--page-glow-color, transparent) 20%, transparent),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .page-bg::after {
+    background-image: radial-gradient(
+      35% 28% at 85% -6%,
+      color-mix(in srgb, var(--page-glow-color, transparent) 20%, transparent),
+      transparent 70%
+    );
+  }
+}
+
+:root[data-page-glow="on"] .page-bg::after {
+  opacity: 1;
+}
+
 /* Scroll reveals (see components/ScrollReveal.tsx). Hidden states only exist
    once JS has set data-reveal-state, so without JS everything is visible.
    Only opacity + transform-type properties animate — no layout shift. Each
@@ -5325,6 +5362,11 @@ body {
   [data-reveal="card"][data-reveal-state="hidden"] {
     opacity: 0;
     translate: 0 12px;
+  }
+
+  [data-reveal="row"][data-reveal-state="hidden"] {
+    opacity: 0;
+    translate: 0 20px;
   }
 
   @media (min-width: 768px) {
@@ -5354,7 +5396,8 @@ body {
   }
 
   [data-reveal="head"][data-reveal-state="shown"],
-  [data-reveal="card"][data-reveal-state="shown"] {
+  [data-reveal="card"][data-reveal-state="shown"],
+  [data-reveal="row"][data-reveal-state="shown"] {
     transition-property: opacity, translate;
   }
 
@@ -5369,5 +5412,262 @@ body {
 
   [data-reveal="divider"][data-reveal-state="shown"] {
     transition-property: clip-path;
+  }
+}
+
+/* App index list (/apps, /countdown) — one full-width row per app that
+   expands on hover / tap / Enter. Closed: no fill, 1px rules between rows.
+   Open: app-colour tint, headline shifts 8px in the dark app shade, panel
+   opens via grid-template-rows (no measured heights), logo drops out. */
+.app-index {
+  margin-top: 2.5rem;
+}
+
+.apps-page-inner .app-index {
+  margin-top: 28px;
+}
+
+.app-index-group + .app-index-group {
+  margin-top: 40px;
+}
+
+.app-index-label {
+  margin: 0 0 10px;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.app-index-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-index-row {
+  --icon: 44px;
+  --gap: 14px;
+  --pad-x: 12px;
+  --pad-y: 20px;
+  --dur: 380ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.app-index-row + .app-index-row {
+  border-top: 1px solid rgba(23, 23, 27, 0.1);
+}
+
+.app-index-row[data-open] {
+  background-color: var(--app-tint);
+}
+
+.app-index-head {
+  display: grid;
+  grid-template-columns: var(--icon) minmax(0, 1fr);
+  grid-template-areas:
+    "icon headline"
+    ". meta";
+  column-gap: var(--gap);
+  row-gap: 6px;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: var(--pad-y) var(--pad-x);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.app-index-head:focus-visible {
+  outline: 2px solid var(--app-ink);
+  outline-offset: -2px;
+}
+
+.app-index-icon {
+  grid-area: icon;
+  align-self: start;
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.app-index-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 22%;
+  object-fit: cover;
+}
+
+.app-index-headline {
+  grid-area: headline;
+  font-family: var(--font-lora), Georgia, serif;
+  font-size: clamp(24px, 7vw, 28px);
+  line-height: 1.15;
+  color: var(--ink);
+  transition:
+    translate var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.app-index-row[data-open] .app-index-headline {
+  translate: 8px 0;
+  color: var(--app-ink);
+}
+
+.app-index-meta {
+  grid-area: meta;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-muted);
+}
+
+.app-index-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur) var(--ease);
+}
+
+.app-index-row[data-open] .app-index-panel {
+  grid-template-rows: 1fr;
+}
+
+.app-index-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Aligned under the (shifted) headline. */
+.app-index-panel-content {
+  padding: 0 var(--pad-x) var(--pad-y)
+    calc(var(--pad-x) + var(--icon) + var(--gap) + 8px);
+}
+
+.app-index-desc {
+  margin: 0;
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.app-index-cta {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--app-color);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: filter 200ms ease;
+}
+
+.app-index-cta:hover {
+  filter: brightness(0.92);
+}
+
+@media (min-width: 768px) {
+  .app-index-row {
+    --icon: 56px;
+    --gap: 24px;
+    --pad-x: 16px;
+    --pad-y: 28px;
+  }
+
+  .app-index-head {
+    grid-template-columns: var(--icon) minmax(0, 1fr) auto;
+    grid-template-areas: "icon headline meta";
+  }
+
+  .app-index-icon {
+    align-self: center;
+  }
+
+  .app-index-headline {
+    font-size: clamp(44px, 4.8vw, 56px);
+  }
+}
+
+/* Falling logo. Its slot (.app-index-icon) keeps its size, so nothing moves;
+   the row's overflow: hidden clips the drop. */
+.app-index-logo[data-logo="fall"] {
+  animation: app-logo-fall 650ms both;
+}
+
+.app-index-logo[data-logo="return"] {
+  animation: app-logo-return 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes app-logo-fall {
+  0% {
+    transform: none;
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  18% {
+    transform: translateY(-6px) rotate(-6deg);
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  100% {
+    transform: translateY(220px) rotate(38deg);
+    opacity: 0;
+  }
+}
+
+@keyframes app-logo-return {
+  from {
+    transform: translateY(-60px) rotate(-10deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes app-logo-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes app-logo-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: same timing logic, opacity only. */
+@media (prefers-reduced-motion: reduce) {
+  .app-index-logo[data-logo="fall"] {
+    animation-name: app-logo-fade-out;
+    animation-timing-function: ease;
+  }
+
+  .app-index-logo[data-logo="return"] {
+    animation-name: app-logo-fade-in;
+    animation-timing-function: ease;
   }
 }

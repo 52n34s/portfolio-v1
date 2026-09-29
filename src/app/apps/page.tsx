@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
 import ScrollReveal from "@/components/ScrollReveal";
-import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
+import AppIndexList from "@/components/apps/AppIndexList";
 import { APP_SECTIONS } from "@/data/apps";
 import { CHALLENGE_APPS, type ChallengeApp } from "@/lib/countdown";
 
@@ -108,26 +108,15 @@ export default function AppsPage() {
             </div>
           </header>
 
-          {APP_SECTIONS.map((section, sectionIndex) => (
-            <section
-              key={section.eyebrow}
-              className={`apps-page-section${sectionIndex === 0 ? " is-first" : ""}`}
-            >
-              <p data-reveal="head" className="apps-page-eyebrow">{section.eyebrow}</p>
-              <h2 data-reveal="head" className="apps-page-headline">{section.headline}</h2>
-              <p data-reveal="head" className="apps-page-subline">{section.subline}</p>
-
-              <div className="countdown-pair-grid">
-                {section.apps.map((entry) => (
-                  <ShowcaseAppCard
-                    key={entry.slug}
-                    app={bySlug(entry.slug)}
-                    campaign={APP_STORE_CAMPAIGN}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
+          {/* Categories stay as small labels; section headlines and sublines
+              live on the home page only. */}
+          <AppIndexList
+            groups={APP_SECTIONS.map((section) => ({
+              label: section.eyebrow,
+              apps: section.apps.map((entry) => bySlug(entry.slug)),
+            }))}
+            campaign={APP_STORE_CAMPAIGN}
+          />
 
           <footer className="apps-page-footer">
             <div className="apps-page-footer-links">

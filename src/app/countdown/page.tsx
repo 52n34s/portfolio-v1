@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
 import ScrollReveal from "@/components/ScrollReveal";
+import AppIndexList from "@/components/apps/AppIndexList";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
 import {
   CHALLENGE_APPS,
@@ -32,8 +33,8 @@ export const metadata: Metadata = {
 const APP_STORE_CAMPAIGN = "countdown-page";
 
 /** Order: Carpincho, Kolibi, Orivela, ErdiKnows, GetaBite, Peeranimo —
- * hardcoded, not derived. Peeranimo is always last. Shown as three unlabeled
- * pairs so the grid reads as one continuous set of six. */
+ * hardcoded, not derived. Peeranimo is always last. Rendered as one
+ * continuous, unlabeled index list in this order. */
 const APP_PAIRS: { ids: readonly [string, string] }[] = [
   { ids: ["carpincho", "kolibi"] },
   { ids: ["orivela", "erdiknows"] },
@@ -100,6 +101,8 @@ function SocialRow() {
   );
 }
 
+// Unused since the index list replaced the card grid — kept on purpose.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function PairGroup({ apps }: { apps: [ChallengeApp, ChallengeApp] }) {
   return (
     <div className="countdown-pair-grid">
@@ -112,9 +115,7 @@ function PairGroup({ apps }: { apps: [ChallengeApp, ChallengeApp] }) {
 
 export default function CountdownPage() {
   const days = daysUntilTarget();
-  const pairs = APP_PAIRS.map((pair) => ({
-    apps: pair.ids.map(byId) as [ChallengeApp, ChallengeApp],
-  }));
+  const apps = APP_PAIRS.flatMap((pair) => pair.ids.map(byId));
 
   return (
     <main className="countdown-page">
@@ -269,14 +270,7 @@ export default function CountdownPage() {
             />
           </div>
 
-          <div className="countdown-app-grid">
-            {pairs.map((pair) => (
-              <PairGroup
-                key={pair.apps.map((a) => a.id).join("-")}
-                apps={pair.apps}
-              />
-            ))}
-          </div>
+          <AppIndexList groups={[{ apps }]} campaign={APP_STORE_CAMPAIGN} />
 
           <div style={{ marginTop: 40 }}>
             <SocialRow />
