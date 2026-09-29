@@ -157,8 +157,8 @@ export default function HomeCollage() {
               I love making new things.
             </p>
             <p className="mt-8 max-w-[420px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[17px]">
-              Hi, I&apos;m Steffen. Berlin, working solo. Six of them are live
-              right now.
+              Hi, I&apos;m Steffen. Berlin, working solo. Each one solves a
+              different problem.
             </p>
           </div>
 

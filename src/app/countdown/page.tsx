@@ -165,7 +165,7 @@ export default function CountdownPage() {
                   color: "var(--ink)",
                 }}
               >
-                To make my own apps pay my rent before the money runs out.
+                I love making new things.
               </h1>
 
               <p
@@ -177,9 +177,8 @@ export default function CountdownPage() {
                   color: "var(--ink)",
                 }}
               >
-                I built no-code apps and platforms for other founders. That
-                work is drying up. AI builds faster than no-code ever did, and
-                the requests stopped coming.
+                Hi, I&apos;m Steffen. Berlin, working solo. Each one solves a
+                different problem.
               </p>
 
               <CountdownClock />
@@ -214,7 +213,7 @@ export default function CountdownPage() {
           {/* Mobile/tablet cut-out: in flow, full-bleed, stacked below the
               headline. Stays in place through tablet widths (< lg) so nothing
               crowds the headline at intermediate sizes. Sits above whitespace
-              only — the strong line below it starts with its own margin, no
+              only — the app grid below it starts with its own margin, no
               negative-margin overlap into body copy. */}
           <div
             className="lg:hidden"
@@ -249,10 +248,6 @@ export default function CountdownPage() {
             zIndex: 2,
           }}
         >
-          <p className="countdown-strong-line">
-            Five apps of my own are live. None of them earns money yet.
-          </p>
-
           {/* Collage: studio.png sits just past the content column (left: 100%)
               so it never enters the card grid. Sized large; on narrower desktops
               most of it crops past the viewport rather than shrinking. Hidden
