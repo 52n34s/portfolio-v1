@@ -5603,6 +5603,13 @@ body {
   }
 }
 
+/* ~18% smaller from 1024px up: clamp(44px, 4.8vw, 56px) × 0.82. */
+@media (min-width: 1024px) {
+  .app-index-headline {
+    font-size: clamp(36px, 3.94vw, 46px);
+  }
+}
+
 /* Falling logo. Its slot (.app-index-icon) keeps its size, so nothing moves;
    the row's overflow: hidden clips the drop. */
 .app-index-logo[data-logo="fall"] {

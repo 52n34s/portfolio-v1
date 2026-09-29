@@ -73,7 +73,7 @@ export const APP_SECTIONS: AppSection[] = [
         hook: "Know where you're going and what you'll order before you leave the house.",
         body: "GetaBite maps vegan and vegetarian places together with the dishes they actually serve, built from menus people photograph on the spot. The scanner covers the supermarket shelf for the rest of the week. You walk in knowing what fits and what to ask about.",
         href: "/go/getabite",
-        logo: "/getabite-mark-128.png",
+        logo: "/icon-getabite.png",
         visual: "getabite",
       },
     ],

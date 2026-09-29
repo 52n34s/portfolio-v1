@@ -83,7 +83,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     name: "GetaBite",
     description: "Know what you'll order before you leave the house.",
     platform: "WEB",
-    logo: "/getabite-mark-128.png",
+    logo: "/icon-getabite.png",
     href: "/go/getabite",
     color: "#F04E3E",
   },

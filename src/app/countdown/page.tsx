@@ -5,6 +5,7 @@ import PageBackground from "@/components/PageBackground";
 import ScrollReveal from "@/components/ScrollReveal";
 import AppIndexList from "@/components/apps/AppIndexList";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
+import { APP_SECTIONS } from "@/data/apps";
 import {
   CHALLENGE_APPS,
   daysUntilTarget,
@@ -32,14 +33,11 @@ export const metadata: Metadata = {
  * one constant to attribute a different page/placement in App Store Connect. */
 const APP_STORE_CAMPAIGN = "countdown-page";
 
-/** Order: Carpincho, Kolibi, Orivela, ErdiKnows, GetaBite, Peeranimo —
- * hardcoded, not derived. Peeranimo is always last. Rendered as one
- * continuous, unlabeled index list in this order. */
-const APP_PAIRS: { ids: readonly [string, string] }[] = [
-  { ids: ["carpincho", "kolibi"] },
-  { ids: ["orivela", "erdiknows"] },
-  { ids: ["getabite", "peeranimo"] },
-];
+/** Same apps and order as /apps (APP_SECTIONS), rendered as one continuous,
+ * unlabeled index list. */
+const APP_IDS = APP_SECTIONS.flatMap((section) =>
+  section.apps.map((entry) => entry.slug),
+);
 
 function byId(id: string): ChallengeApp {
   const app = CHALLENGE_APPS.find((a) => a.id === id);
@@ -115,7 +113,7 @@ function PairGroup({ apps }: { apps: [ChallengeApp, ChallengeApp] }) {
 
 export default function CountdownPage() {
   const days = daysUntilTarget();
-  const apps = APP_PAIRS.flatMap((pair) => pair.ids.map(byId));
+  const apps = APP_IDS.map(byId);
 
   return (
     <main className="countdown-page">
