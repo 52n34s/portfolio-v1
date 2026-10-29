@@ -1,31 +1,34 @@
 import type { Metadata } from "next";
-import { Caveat, Inter, JetBrains_Mono, Lora } from "next/font/google";
+import localFont from "next/font/local";
 import NavBubbles from "@/components/NavBubbles";
 import SiteFooter from "@/components/SiteFooter";
 import StructuredData from "@/components/StructuredData";
 import "./globals.css";
 
-const inter = Inter({
-  weight: ["300", "400", "500"],
-  subsets: ["latin"],
+// Self-hosted Google Fonts (latin variable files) so builds never fetch
+// from fonts.googleapis.com.
+const inter = localFont({
+  src: "./fonts/inter-latin-var.woff2",
+  weight: "300 500",
   variable: "--font-inter",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin"],
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin-var.woff2",
+  weight: "400 500",
   variable: "--font-jetbrains-mono",
 });
 
-const lora = Lora({
-  weight: ["400", "600"],
-  subsets: ["latin"],
+const lora = localFont({
+  src: "./fonts/lora-latin-var.woff2",
+  weight: "400 600",
   variable: "--font-lora",
+  adjustFontFallback: "Times New Roman",
 });
 
-const caveat = Caveat({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
+const caveat = localFont({
+  src: "./fonts/caveat-latin-var.woff2",
+  weight: "400 700",
   variable: "--font-hand",
 });
 
