@@ -94,7 +94,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     description:
       "Answer a few questions about your idea and get one clear, honest recommendation.",
     platform: "WEB",
-    logo: "/brand-2026/app-logo-findmystack-2026.png",
+    logo: "/brand-2026/app-logo-findmystack-2026.png?v=2",
     href: "https://findmystack.app",
     color: "#3D6FE0",
     cta: "Take the assessment",

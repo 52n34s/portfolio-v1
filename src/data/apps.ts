@@ -145,7 +145,7 @@ export const APP_SECTIONS: AppSection[] = [
         hook: "Build your app right the first time.",
         body: "Answer a few questions about your idea and get one clear, honest recommendation.",
         href: "https://findmystack.app",
-        logo: "/brand-2026/app-logo-findmystack-2026.png",
+        logo: "/brand-2026/app-logo-findmystack-2026.png?v=2",
         stamp: "LIVE",
         cta: "Take the assessment",
       },
