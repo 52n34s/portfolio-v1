@@ -63,7 +63,7 @@ export const APP_SECTIONS: AppSection[] = [
         hook: "Your food knows it's training day.",
         body: "Kolibi puts nutrition and bodyweight training in one app. Train at home or in the park, and your calories and macros adjust to the session while protein stays steady. Thirty-nine exercises across eleven ladders show you when you are ready for the next level.",
         href: "https://apps.apple.com/us/app/kolibi/id6790129149",
-        logo: "/app-logo-kolibi.jpg",
+        logo: "/brand-2026/app-logo-kolibi-2026.png",
         visual: "kolibi",
       },
       {
@@ -90,7 +90,7 @@ export const APP_SECTIONS: AppSection[] = [
         hook: "You say your sentence and the answer comes back in Spanish.",
         body: "Carpincho drills the moments you actually land in, from ordering at the cafe to the call you keep putting off. You speak, it listens and tells you the two words it hung on. Every word is spoken in Rioplatense, neutral Latin American and Spain, so you hear which one you are learning.",
         href: "https://apps.apple.com/de/app/carpincho-learn-less-say-more/id6795982399",
-        logo: "/app-logo-carpincho.jpg",
+        logo: "/brand-2026/app-logo-carpincho-2026.png",
         visual: "carpincho",
       },
       {
@@ -145,7 +145,7 @@ export const APP_SECTIONS: AppSection[] = [
         hook: "Build your app right the first time.",
         body: "Answer a few questions about your idea and get one clear, honest recommendation.",
         href: "https://findmystack.app",
-        logo: "/findmystack.png",
+        logo: "/brand-2026/app-logo-findmystack-2026.png",
         stamp: "LIVE",
         cta: "Take the assessment",
       },

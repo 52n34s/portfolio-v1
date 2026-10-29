@@ -34,7 +34,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     description:
       "Nutrition and bodyweight training in one app, with targets that move with your session.",
     platform: "IOS",
-    logo: "/app-logo-kolibi.jpg",
+    logo: "/brand-2026/app-logo-kolibi-2026.png",
     href: "https://apps.apple.com/us/app/kolibi-calories-by-photo/id6790129149",
     color: "#4F52D9",
   },
@@ -54,7 +54,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     description:
       "Speak Spanish from the first lesson and get graded honestly.",
     platform: "IOS",
-    logo: "/app-logo-carpincho.jpg",
+    logo: "/brand-2026/app-logo-carpincho-2026.png",
     href: "https://apps.apple.com/us/app/carpi-speak-learn-spanish/id6795982399",
     color: "#EC1E7E",
   },
@@ -94,7 +94,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     description:
       "Answer a few questions about your idea and get one clear, honest recommendation.",
     platform: "WEB",
-    logo: "/findmystack.png",
+    logo: "/brand-2026/app-logo-findmystack-2026.png",
     href: "https://findmystack.app",
     color: "#3D6FE0",
     cta: "Take the assessment",
