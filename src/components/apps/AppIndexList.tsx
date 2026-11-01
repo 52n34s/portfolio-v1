@@ -38,7 +38,7 @@ export type AppIndexGroup = {
 
 function ctaFor(app: ChallengeApp, campaign: string) {
   if (!app.href) return null;
-  const isIOS = app.platform.includes("IOS");
+  const isIOS = app.href.includes("apps.apple.com");
   return {
     href: isIOS ? withCampaignToken(app.href, campaign) : app.href,
     label: isIOS ? "Get the app" : (app.cta ?? "Open"),

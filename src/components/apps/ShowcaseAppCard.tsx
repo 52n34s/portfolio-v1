@@ -33,7 +33,7 @@ function AppAction({
 }) {
   if (!app.href) return null;
 
-  const isIOS = app.platform.includes("IOS");
+  const isIOS = app.href.includes("apps.apple.com");
   const external = app.href.startsWith("http");
 
   if (isIOS) {

@@ -144,12 +144,12 @@ export default function StructuredData() {
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://steffendoesthings.com/#erdiknows",
-        name: "ErdiKnows",
+        "@id": "https://steffendoesthings.com/#erdi",
+        name: "Erdi",
         description:
-          "An event timeline for product metrics. Deploys, releases and incidents as markers on the curve — not an analytics tool, the layer on top.",
-        applicationCategory: "DeveloperApplication",
-        operatingSystem: "Web",
+          "An assistant for founders. Erdi keeps an eye on your numbers, sorts your inbox and remembers what matters, for every business you run. You approve, Erdi does the rest.",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web, iOS",
         url: "https://erdiknows.com",
         author: { "@id": "https://steffendoesthings.com/#steffen" },
         publisher: { "@id": "https://steffendoesthings.com/#org" },

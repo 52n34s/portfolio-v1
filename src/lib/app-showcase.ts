@@ -6,7 +6,7 @@ export const OUTCOME_HEADLINES: Record<string, string> = {
     "Order dinner, joke with family, never get switched to English.",
   kolibi: "Your food knows it's training day.",
   orivela: "Out of your head. Into one place.",
-  erdiknows: "See which changes pay off.",
+  erdi: "Everything runs. More time for everything else.",
   getabite: "Decide where to eat before you leave.",
   peeranimo: "Find people who get it.",
   findmystack: "Build your app right the first time.",
@@ -32,11 +32,6 @@ export const APP_SCREENSHOTS: Record<
   orivela: {
     src: "/app-screens/orivela_screen_1.webp",
     width: 552,
-    height: 1200,
-  },
-  erdiknows: {
-    src: "/app-screens/erdiknows_screen_1.webp",
-    width: 1041,
     height: 1200,
   },
   getabite: {

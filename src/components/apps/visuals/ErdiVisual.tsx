@@ -1,6 +1,6 @@
 const ERDI_MAGENTA = "#FC2E70";
 
-export default function ErdiKnowsVisual() {
+export default function ErdiVisual() {
   return (
     <div className="relative h-full w-full overflow-hidden bg-[#F4EBD4]">
       <div
@@ -21,9 +21,7 @@ export default function ErdiKnowsVisual() {
           className="max-w-[180px] text-[17px] leading-snug"
           style={{ fontFamily: "var(--font-hand), cursive", color: ERDI_MAGENTA }}
         >
-          Numbers moved.
-          <br />
-          Erdi knew why.
+          Everything runs.
         </p>
 
         <svg

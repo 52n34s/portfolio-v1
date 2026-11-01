@@ -6,7 +6,7 @@ export type AppSlug =
   | "carpincho"
   | "peeranimo"
   | "orivela"
-  | "erdiknows"
+  | "erdi"
   | "findmystack"
   | "erdibuilds";
 
@@ -108,7 +108,7 @@ export const APP_SECTIONS: AppSection[] = [
   {
     eyebrow: "MEMORY & DATA",
     headline: "Two apps for finding the answer fast.",
-    subline: "The note you'll want later. The reason the number moved.",
+    subline: "The note you'll want later. The morning you don't have to think about.",
     apps: [
       {
         slug: "orivela",
@@ -121,15 +121,17 @@ export const APP_SECTIONS: AppSection[] = [
         visual: "orivela",
       },
       {
-        slug: "erdiknows",
-        name: "ErdiKnows",
-        platform: "Web",
-        badge: "FOR INDIE DEVELOPERS",
-        hook: "You shipped something last week. Did it pay off?",
-        body: "ErdiKnows puts your releases, price changes and campaigns on the same timeline as your revenue and your signups. When a number moves, you can see what you changed the week before. Built for developers who ship weekly and want the answer in one screen.",
+        slug: "erdi",
+        name: "Erdi",
+        platform: "WEB · IOS",
+        badge: "FOR FOUNDERS",
+        hook: "Everything runs. More time for everything else.",
+        body: "Erdi keeps an eye on your numbers, sorts your inbox and remembers what matters, for every business you run. You approve, Erdi does the rest.",
         href: "https://erdiknows.com",
-        logo: "/erdiknows.png",
-        visual: "erdiknows",
+        logo: "/erdi-icon.svg",
+        visual: "erdi",
+        stamp: "WAITLIST",
+        cta: "Join the waitlist",
       },
     ],
   },

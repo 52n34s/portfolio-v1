@@ -5,7 +5,7 @@ import GetaBiteVisual from "@/components/apps/visuals/GetaBiteVisual";
 import CarpinchoVisual from "@/components/apps/visuals/CarpinchoVisual";
 import PeeranimoVisual from "@/components/apps/visuals/PeeranimoVisual";
 import OrivelaVisual from "@/components/apps/visuals/OrivelaVisual";
-import ErdiKnowsVisual from "@/components/apps/visuals/ErdiKnowsVisual";
+import ErdiVisual from "@/components/apps/visuals/ErdiVisual";
 
 const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   kolibi: KolibiVisual,
@@ -13,7 +13,7 @@ const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   carpincho: CarpinchoVisual,
   peeranimo: PeeranimoVisual,
   orivela: OrivelaVisual,
-  erdiknows: ErdiKnowsVisual,
+  erdi: ErdiVisual,
 };
 
 const ROTATIONS = [-1.1, 0.8, -0.6, 1.2, -0.9, 0.5];

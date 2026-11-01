@@ -39,14 +39,15 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     color: "#4F52D9",
   },
   {
-    id: "erdiknows",
-    name: "ErdiKnows",
+    id: "erdi",
+    name: "Erdi",
     description:
-      "Releases, price changes and ad spend on one timeline, next to the customers that followed.",
-    platform: "WEB",
-    logo: "/erdiknows.png",
-    href: "https://erdiknows.com/",
-    color: "#DC2450",
+      "Erdi keeps an eye on your numbers, sorts your inbox and remembers what matters, for every business you run.",
+    platform: "WEB · IOS",
+    logo: "/erdi-icon.svg",
+    href: "https://erdiknows.com",
+    color: "#FC2E70",
+    cta: "Join the waitlist",
   },
   {
     id: "carpincho",
