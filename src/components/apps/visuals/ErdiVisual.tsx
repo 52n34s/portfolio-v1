@@ -1,6 +1,13 @@
 const ERDI_MAGENTA = "#FC2E70";
 
+const BRIEF = [
+  { label: "Moved", text: "Revenue +12%", note: "new bundle" },
+  { label: "Inbox", text: "14 sorted", note: "3 replies ready" },
+];
+
 export default function ErdiVisual() {
+  const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
+
   return (
     <div className="relative h-full w-full overflow-hidden bg-[#F4EBD4]">
       <div
@@ -16,30 +23,53 @@ export default function ErdiVisual() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-7 py-6">
+      <div className="relative z-10 flex h-full flex-col justify-between px-7 py-5 md:py-7">
         <p
-          className="max-w-[180px] text-[17px] leading-snug"
+          className="text-[17px] leading-snug"
           style={{ fontFamily: "var(--font-hand), cursive", color: ERDI_MAGENTA }}
         >
           Everything runs.
         </p>
 
-        <svg
-          viewBox="0 0 280 90"
-          className="w-full"
-          preserveAspectRatio="none"
+        {/* The morning brief: what moved and why, the inbox, the one thing
+            that needs you today. */}
+        <div
+          className="w-full max-w-[280px] self-center rounded-[12px] bg-white px-4 py-3 shadow-[0_4px_14px_rgba(26,26,26,0.12)]"
           aria-hidden="true"
         >
-          <path
-            d="M6 74 C 42 70, 54 50, 86 44 C 118 38, 128 66, 158 28 C 178 4, 198 22, 228 16 C 248 12, 262 10, 274 12"
-            fill="none"
-            stroke={ERDI_MAGENTA}
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <circle cx="158" cy="28" r="5" fill={ERDI_MAGENTA} />
-          <circle cx="158" cy="28" r="9" fill="none" stroke={ERDI_MAGENTA} strokeWidth="1.5" opacity="0.5" />
-        </svg>
+          <p className="text-[9px] tracking-[0.14em] text-[#1A1A1A]/45" style={mono}>
+            GOOD MORNING · 3 MIN
+          </p>
+
+          {BRIEF.map((row) => (
+            <div
+              key={row.label}
+              className="mt-2 flex items-baseline gap-2 text-[11px] leading-tight"
+              style={mono}
+            >
+              <span className="w-[42px] shrink-0 text-[9px] uppercase tracking-wider text-[#1A1A1A]/40">
+                {row.label}
+              </span>
+              <span className="text-[#1A1A1A]">{row.text}</span>
+              <span className="truncate text-[#1A1A1A]/45">{row.note}</span>
+            </div>
+          ))}
+
+          <div className="mt-2.5 flex items-center gap-2 border-t border-[#1A1A1A]/10 pt-2.5" style={mono}>
+            <span className="w-[42px] shrink-0 text-[9px] uppercase tracking-wider" style={{ color: ERDI_MAGENTA }}>
+              Today
+            </span>
+            <span className="min-w-0 flex-1 truncate text-[11px] text-[#1A1A1A]">
+              Refund for Lena
+            </span>
+            <span
+              className="shrink-0 rounded-full px-2.5 py-1 text-[10px] text-white"
+              style={{ backgroundColor: ERDI_MAGENTA }}
+            >
+              Approve
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

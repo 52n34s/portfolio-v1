@@ -29,10 +29,16 @@ export default function Home() {
         peer-matching social platform on the web that connects people who are in
         the same chapter of life. Carpincho, a Spanish learning app focused on
         1,000 high-frequency words in Rioplatense, neutral Latin American and
-        Spanish variants, live on the App Store. Erdi, an assistant for
-        founders on the web and iOS that keeps an eye on the numbers, sorts the
-        inbox and remembers what matters, for every business they run. The
-        founder approves, Erdi does the rest. Erdi is open for its waitlist.
+        Spanish variants, live on the App Store. Erdi, an assistant on the
+        web and iOS for founders who run several businesses, such as apps,
+        shops, an agency or a newsletter. Every morning it says in three
+        minutes what moved, why, and the one thing that needs attention today.
+        It sorts the inbox, prepares replies in the founder's tone and reports
+        drops in checkout or installs right away, with the likely cause and a
+        fix to approve. The founder chooses per area whether Erdi only
+        suggests, works as a copilot or runs on autopilot. Every action is
+        logged and can be undone, and data stays in the EU and is never used
+        to train AI models. Erdi is open for its waitlist.
         He has built more than ten platforms, both self-founded and for clients, and is available for
         freelance product development, software architecture and long-term
         product partnerships.

@@ -126,7 +126,7 @@ export const APP_SECTIONS: AppSection[] = [
         platform: "WEB · IOS",
         badge: "FOR FOUNDERS",
         hook: "Everything runs. More time for everything else.",
-        body: "Erdi keeps an eye on your numbers, sorts your inbox and remembers what matters, for every business you run. You approve, Erdi does the rest.",
+        body: "Every morning Erdi tells you in three minutes what moved, why, and the one thing that needs you today. Your inbox sorts itself and replies wait in your tone, one tap sends them. When checkout drops or installs fall, you know right away, with the likely cause and a fix to approve.",
         href: "https://erdiknows.com",
         logo: "/erdi-icon.svg",
         visual: "erdi",

@@ -147,7 +147,7 @@ export default function StructuredData() {
         "@id": "https://steffendoesthings.com/#erdi",
         name: "Erdi",
         description:
-          "An assistant for founders. Erdi keeps an eye on your numbers, sorts your inbox and remembers what matters, for every business you run. You approve, Erdi does the rest.",
+          "An assistant for founders who run several businesses. A three-minute morning brief on what moved and why, an inbox that sorts itself with replies ready in your tone, and instant alerts with the likely cause and a fix to approve. Suggestions, copilot or autopilot per area, every action reversible, data in the EU.",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web, iOS",
         url: "https://erdiknows.com",

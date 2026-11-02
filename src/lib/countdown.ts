@@ -42,7 +42,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     id: "erdi",
     name: "Erdi",
     description:
-      "Erdi keeps an eye on your numbers, sorts your inbox and remembers what matters, for every business you run.",
+      "Every morning in three minutes: what moved, why, and the one thing that needs you today.",
     platform: "WEB · IOS",
     logo: "/erdi-icon.svg",
     href: "https://erdiknows.com",
