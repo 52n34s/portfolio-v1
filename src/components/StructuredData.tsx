@@ -113,7 +113,7 @@ export default function StructuredData() {
           "Nutrition and bodyweight training in one app. Photo recognition per ingredient, targets that adjust to each session, and exercise ladders that level up as you get stronger.",
         applicationCategory: "HealthApplication",
         operatingSystem: "iOS",
-        url: "https://apps.apple.com/us/app/kolibi/id6790129149",
+        url: "https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149",
         author: { "@id": "https://steffendoesthings.com/#steffen" },
         publisher: { "@id": "https://steffendoesthings.com/#org" },
       },

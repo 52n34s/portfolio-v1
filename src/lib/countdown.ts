@@ -32,10 +32,10 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     id: "kolibi",
     name: "Kolibi",
     description:
-      "Nutrition and bodyweight training in one app, with targets that move with your session.",
+      "Your bodyweight training plan, with food that adjusts to every session.",
     platform: "IOS",
     logo: "/brand-2026/app-logo-kolibi-2026.png",
-    href: "https://apps.apple.com/us/app/kolibi-calories-by-photo/id6790129149",
+    href: "https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149",
     color: "#4F52D9",
   },
   {
@@ -53,7 +53,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     id: "carpincho",
     name: "Carpincho",
     description:
-      "Speak Spanish from the first lesson and get graded honestly.",
+      "Understand real Spanish and answer so well nobody switches to English.",
     platform: "IOS",
     logo: "/brand-2026/app-logo-carpincho-2026.png",
     href: "https://apps.apple.com/us/app/carpi-speak-learn-spanish/id6795982399",
@@ -106,7 +106,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     description:
       "Verified developers who have built something like your idea, paid one approved milestone at a time.",
     platform: "WEB",
-    logo: "/erdibuilds.png",
+    logo: "/brand-2026/app-logo-erdibuilds-2026.png",
     href: "https://erdibuilds.app",
     color: "#5B4CF0",
     cta: "Start your project",

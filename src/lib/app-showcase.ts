@@ -3,8 +3,8 @@
 
 export const OUTCOME_HEADLINES: Record<string, string> = {
   carpincho:
-    "Order dinner, joke with family, never get switched to English.",
-  kolibi: "Your food knows it's training day.",
+    "Walk in like you live here.",
+  kolibi: "Your coach. Always with you.",
   orivela: "Out of your head. Into one place.",
   erdi: "Everything runs. More time for everything else.",
   getabite: "Decide where to eat before you leave.",
