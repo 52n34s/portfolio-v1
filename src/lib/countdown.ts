@@ -47,7 +47,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     logo: "/erdi-icon.svg",
     href: "https://erdiknows.com",
     color: "#FC2E70",
-    cta: "Join the waitlist",
+    cta: "Start free trial",
   },
   {
     id: "carpincho",
@@ -102,13 +102,13 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
   },
   {
     id: "erdibuilds",
-    name: "erdibuilds",
+    name: "ErdiBuilds",
     description:
-      "Pick from verified developers who have already built apps like yours.",
+      "Verified developers who have built something like your idea, paid one approved milestone at a time.",
     platform: "WEB",
     logo: "/erdibuilds.png",
     href: "https://erdibuilds.app",
     color: "#5B4CF0",
-    cta: "Join the waitlist",
+    cta: "Start your project",
   },
 ];

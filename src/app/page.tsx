@@ -38,7 +38,10 @@ export default function Home() {
         fix to approve. The founder chooses per area whether Erdi only
         suggests, works as a copilot or runs on autopilot. Every action is
         logged and can be undone, and data stays in the EU and is never used
-        to train AI models. Erdi is open for its waitlist.
+        to train AI models. Erdi is live with a 14-day free trial. ErdiBuilds,
+        a marketplace on the web, matches founders with verified developers
+        who have already built something similar and releases each payment
+        only after the founder approves that milestone.
         He has built more than ten platforms, both self-founded and for clients, and is available for
         freelance product development, software architecture and long-term
         product partnerships.
