@@ -91,7 +91,7 @@ export default function AppsPage() {
             <div className="apps-page-hero-text">
               <h1 className="apps-page-hero-title">Apps I built.</h1>
               <p className="apps-page-hero-sub">
-                Different products. Different problems. All mine.
+                Apps people pay for, and the tools I run my businesses with.
               </p>
             </div>
 
