@@ -9,17 +9,17 @@ import { CHALLENGE_APPS, type ChallengeApp } from "@/lib/countdown";
 
 export const metadata: Metadata = {
   title:
-    "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
+    "Apps by Steffen Giebler: Carpincho, Kolibi, Erdi, ErdiBuilds, Orivela and more",
   description:
-    "Apps built solo in Berlin: a document vault, a nutrition and bodyweight training app, a peer-matching platform, a Spanish course, a morning assistant for founders, and a vegan food finder. Live on iOS and web.",
+    "Apps built solo in Berlin: a Spanish app you learn with while you scroll, a bodyweight training coach, an AI assistant for business owners, a marketplace for verified developers, a notes and records app, and free tools for founders. Live on iOS and web.",
   alternates: {
     canonical: "/apps",
   },
   openGraph: {
     title:
-      "Apps by Steffen Giebler — Orivela, Kolibi, Peeranimo, Carpincho, GetaBite",
+      "Apps by Steffen Giebler: Carpincho, Kolibi, Erdi, ErdiBuilds, Orivela and more",
     description:
-      "Apps built solo in Berlin: a document vault, a nutrition and bodyweight training app, a peer-matching platform, a Spanish course, a morning assistant for founders, and a vegan food finder. Live on iOS and web.",
+      "Apps built solo in Berlin: a Spanish app you learn with while you scroll, a bodyweight training coach, an AI assistant for business owners, a marketplace for verified developers, a notes and records app, and free tools for founders. Live on iOS and web.",
     url: "https://steffendoesthings.com/apps",
     type: "website",
   },
@@ -43,7 +43,7 @@ export default function AppsPage() {
       {
         "@type": "ListItem",
         position: 1,
-        item: { "@id": "https://steffendoesthings.com/#orivela" },
+        item: { "@id": "https://steffendoesthings.com/#carpincho" },
       },
       {
         "@type": "ListItem",
@@ -53,12 +53,22 @@ export default function AppsPage() {
       {
         "@type": "ListItem",
         position: 3,
-        item: { "@id": "https://steffendoesthings.com/#peeranimo" },
+        item: { "@id": "https://steffendoesthings.com/#erdi" },
       },
       {
         "@type": "ListItem",
         position: 4,
-        item: { "@id": "https://steffendoesthings.com/#carpincho" },
+        item: { "@id": "https://steffendoesthings.com/#erdibuilds" },
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
+        item: { "@id": "https://steffendoesthings.com/#orivela" },
+      },
+      {
+        "@type": "ListItem",
+        position: 6,
+        item: { "@id": "https://steffendoesthings.com/#peeranimo" },
       },
     ],
   };

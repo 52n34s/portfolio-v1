@@ -56,9 +56,9 @@ const navItems: NavItem[] = [
   { kind: "label", label: "MY APPS" },
   {
     kind: "external",
-    label: "./orivela",
-    href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
-    tone: "mint",
+    label: "./carpincho",
+    href: "https://carpincho.app/",
+    tone: "rose",
   },
   {
     kind: "external",
@@ -68,9 +68,21 @@ const navItems: NavItem[] = [
   },
   {
     kind: "external",
-    label: "./carpincho",
-    href: "https://carpincho.app/",
-    tone: "rose",
+    label: "./erdi",
+    href: "https://erdiknows.com",
+    tone: "peach",
+  },
+  {
+    kind: "external",
+    label: "./erdibuilds",
+    href: "https://erdibuilds.app",
+    tone: "lavender",
+  },
+  {
+    kind: "external",
+    label: "./orivela",
+    href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
+    tone: "mint",
   },
   {
     kind: "external",

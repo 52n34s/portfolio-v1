@@ -154,11 +154,13 @@ export default function HomeCollage() {
               className="max-w-[11ch] text-[2.5rem] leading-[1.05] tracking-tight text-[#1A1A1A] md:max-w-[12ch] md:text-5xl lg:text-6xl"
               style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
             >
-              I love making new things.
+              I build apps people pay for. Yours too.
             </p>
             <p className="mt-8 max-w-[420px] text-[15px] leading-[1.6] text-[#1A1A1A]/75 md:text-[17px]">
-              Hi, I&apos;m Steffen. Berlin, working solo. Each one solves a
-              different problem.
+              Hi, I&apos;m Steffen, a solo founder in Berlin. I design, code,
+              launch and grow my own apps, from Spanish lessons to the tools I
+              run my businesses with. Founders bring me their idea, and I build
+              it the same way.
             </p>
           </div>
 

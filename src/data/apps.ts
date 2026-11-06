@@ -61,9 +61,9 @@ export const APP_SECTIONS: AppSection[] = [
       {
         slug: "carpincho",
         name: "Carpincho",
-        platform: "Spanish with the least effort possible",
+        platform: "iOS",
         hook: "Walk in like you live here.",
-        body: "Understand real Spanish and answer so well nobody switches to English. Over 180 places through your day, from the café to talking about your family. Say it out loud and hear if it lands, in the Spanish of Argentina, Latin America or Spain.",
+        body: "Short clips with live subtitles teach you real Spanish while you scroll. A route of over 180 places takes you through your day, from the café to talking about your family. Say it out loud and hear right away if it lands, in the Spanish of Argentina, Latin America or Spain.",
         href: "https://apps.apple.com/de/app/carpincho-learn-less-say-more/id6795982399",
         logo: "/brand-2026/app-logo-carpincho-2026.png",
         visual: "carpincho",

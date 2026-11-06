@@ -7,7 +7,7 @@ export const alt =
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const HEADLINE = "I build my own apps.";
+const HEADLINE = "I build apps people pay for.";
 const ROLE_LINE = "Steffen · Berlin · shipping in public";
 const WATERMARK = "steffendoesthings.com";
 const HEADLINE_FONT_SIZE = 66;

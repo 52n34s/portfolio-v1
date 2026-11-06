@@ -53,7 +53,7 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     id: "carpincho",
     name: "Carpincho",
     description:
-      "Understand real Spanish and answer so well nobody switches to English.",
+      "Real Spanish while you scroll, and you hear right away if what you say lands.",
     platform: "IOS",
     logo: "/brand-2026/app-logo-carpincho-2026.png",
     href: "https://apps.apple.com/us/app/carpi-speak-learn-spanish/id6795982399",

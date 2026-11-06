@@ -110,7 +110,7 @@ export default function StructuredData() {
         "@id": "https://steffendoesthings.com/#kolibi",
         name: "Kolibi",
         description:
-          "Nutrition and bodyweight training in one app. Photo recognition per ingredient, targets that adjust to each session, and exercise ladders that level up as you get stronger.",
+          "A bodyweight training coach with nutrition built in. A personal weekly plan, food targets that adjust to every session, meals logged from one photo, and a coach that moves you up a level when you are ready.",
         applicationCategory: "HealthApplication",
         operatingSystem: "iOS",
         url: "https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149",
@@ -135,7 +135,7 @@ export default function StructuredData() {
         "@id": "https://steffendoesthings.com/#carpincho",
         name: "Carpincho",
         description:
-          "A Spanish learning app focused on the 1,000 highest-frequency words, in Rioplatense, neutral Latin American and Spanish variants.",
+          "A Spanish learning app for iOS. Short clips with live subtitles, a route of over 180 everyday places, and spoken answers checked right away, in the Spanish of Argentina, Latin America or Spain.",
         applicationCategory: "EducationalApplication",
         operatingSystem: "iOS, Android",
         url: "https://carpincho.app/",

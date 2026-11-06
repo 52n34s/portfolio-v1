@@ -75,7 +75,7 @@ export const projects: Project[] = [
       "Built security-by-design from the start: the API key never enters the app bundle, all AI calls route through JWT-verified Edge Functions rather than directly from the client, and documents are encrypted client-side via WebCrypto. Claude Vision handles document scanning, Claude Haiku powers plain-language search over stored records. Carried the full release pipeline end to end, from EAS Build through TestFlight to a live App Store listing.",
     timeline: "Idea to App Store, full release pipeline",
     outcome:
-      "Shipped and live on the App Store, with an Android beta in closed testing.",
+      "Shipped and live on the App Store.",
   },
   {
     id: "tournament-platform",

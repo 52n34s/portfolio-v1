@@ -35,7 +35,7 @@ const caveat = localFont({
 const TITLE =
   "Steffen Giebler — Product Developer & Indie Founder, Berlin";
 const DESCRIPTION =
-  "Solo founder and developer in Berlin Mitte. I build my own apps — Orivela, Kolibi, Peeranimo, Carpincho — and turn other people's ideas into shipped products. From concept to App Store.";
+  "Solo founder and developer in Berlin. I build apps people pay for, like Carpincho, Kolibi and Erdi, and I build products for other founders, from the first idea to launch day.";
 
 export const metadata: Metadata = {
   title: TITLE,

@@ -3,15 +3,16 @@
 > Solo founder and product developer based in Berlin Mitte, Germany, operating as 52N34S Group. Builds and ships his own mobile and web applications, and works with founders to turn early ideas into production products.
 
 ## About
-Steffen Giebler is a solo founder and software developer in Berlin Mitte. He has shipped four of his own apps and built more than ten platforms in total, both self-founded and for clients. He is available for freelance product development, software architecture, and long-term product partnerships. He works remotely worldwide and in English.
+Steffen Giebler is a solo founder and software developer in Berlin Mitte. He has shipped his own apps, several with paying subscribers, and built more than ten platforms in total, both self-founded and for clients. He is available for freelance product development, software architecture, and long-term product partnerships. He works remotely worldwide and in English.
 
 ## Products
-- Orivela (https://apps.apple.com/app/orivela-life-admin-vault/id6785050823): Notes and records in one place. Capture by voice, text or photo; Ori suggests titles, labels and dates, and a question in plain language brings anything back. Live on the App Store.
-- Kolibi (https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149): Nutrition and bodyweight training in one app. Meals recognised per ingredient from a photo, daily targets that adjust to each training session, and eleven exercise ladders that show when you are ready for the next level. German food database, data hosted in Germany. Live on the App Store.
-- Peeranimo (https://peeranimo.app/): Peer-matching social platform on the web. Connects people who are in the same chapter of life. Live.
-- Carpincho (https://carpincho.app/): Spanish learning app focused on the 1,000 highest-frequency words, in Rioplatense, neutral Latin American and Spanish variants. Live on the App Store.
+- Carpincho (https://carpincho.app/): Spanish learning app. Short clips with live subtitles, a route of over 180 everyday places, and spoken answers checked right away, in the Spanish of Argentina, Latin America or Spain. Live on the App Store, 7 days free.
+- Kolibi (https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149): Bodyweight training coach with nutrition built in. Builds a personal weekly plan, adjusts food to every session, logs meals from one photo and moves you up a level when you are ready. Data hosted in Germany. Live on the App Store, 14 days free.
 - Erdi (https://erdiknows.com): Assistant for founders who run several businesses (apps, shops, an agency, a newsletter). A three-minute morning brief on what moved, why, and the one thing that needs you today. The inbox sorts itself, replies wait in your tone, and drops in checkout or installs are reported right away with the likely cause and a fix to approve. Suggestions, copilot or autopilot per area; every action logged and reversible; data stays in the EU and is never used to train AI models. Web, iPhone and iPad, live with a 14-day free trial.
 - ErdiBuilds (https://erdibuilds.app): Marketplace for apps, SaaS, websites and games. Matches founders with verified developers who have already built something similar. Payment runs one milestone at a time, held by Stripe and released only after the founder approves the work; the code belongs to the founder once a milestone is paid. Free for clients.
+- Orivela (https://apps.apple.com/app/orivela-life-admin-vault/id6785050823): Notes and records in one place. Capture by voice, text or photo; Ori suggests titles, labels and dates, and a question in plain language brings anything back. Live on the App Store.
+- Peeranimo (https://peeranimo.app/): Peer-matching social platform on the web. Connects people who are in the same chapter of life. Live.
+- Find My Stack (https://findmystack.app): A few questions about your app idea, then one clear, honest tech stack recommendation. Free.
 
 ## Services
 - From idea to MVP: https://52n34s.app/work/idea-to-mvp

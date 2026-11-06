@@ -167,7 +167,7 @@ export default function CountdownPage() {
                   color: "var(--ink)",
                 }}
               >
-                I love making new things.
+                I build apps people pay for. Yours too.
               </h1>
 
               <p
@@ -179,8 +179,10 @@ export default function CountdownPage() {
                   color: "var(--ink)",
                 }}
               >
-                Hi, I&apos;m Steffen. Berlin, working solo. Each one solves a
-                different problem.
+                Hi, I&apos;m Steffen, a solo founder in Berlin. I design, code,
+                launch and grow my own apps, from Spanish lessons to the tools I
+                run my businesses with. Founders bring me their idea, and I build
+                it the same way.
               </p>
 
               <CountdownClock />

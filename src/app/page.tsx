@@ -27,9 +27,10 @@ export default function Home() {
         recognises meals from a photo, adjusts daily targets to each session and moves
         you up a level when you are ready. Peeranimo, a
         peer-matching social platform on the web that connects people who are in
-        the same chapter of life. Carpincho, a Spanish learning app focused on
-        1,000 high-frequency words in Rioplatense, neutral Latin American and
-        Spanish variants, live on the App Store. Erdi, an assistant on the
+        the same chapter of life. Carpincho, a Spanish learning app on the App Store
+        with short subtitled clips, a route of over 180 everyday places and
+        spoken answers checked right away, in the Spanish of Argentina, Latin
+        America or Spain. Erdi, an assistant on the
         web and iOS for founders who run several businesses, such as apps,
         shops, an agency or a newsletter. Every morning it says in three
         minutes what moved, why, and the one thing that needs attention today.
