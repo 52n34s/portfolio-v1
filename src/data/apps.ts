@@ -11,7 +11,7 @@ export type AppSlug =
   | "erdibuilds";
 
 /** Apps that have a home-card illustration in components/apps/visuals. */
-export type VisualSlug = Exclude<AppSlug, "findmystack" | "erdibuilds">;
+export type VisualSlug = AppSlug;
 
 export type AppEntry = {
   slug: AppSlug;
@@ -28,6 +28,8 @@ export type AppEntry = {
   stamp?: string;
   /** Button text on the home card. Defaults to ctaLabel(href). */
   cta?: string;
+  /** Optional brand wordmark; replaces icon + name on the home card. Height in px. */
+  wordmark?: { src: string; height: number };
 };
 
 export type AppSection = {
@@ -52,36 +54,9 @@ export function stampNote(href: string) {
 
 export const APP_SECTIONS: AppSection[] = [
   {
-    eyebrow: "FOOD & TRAINING",
-    headline: "Two apps for eating the way you meant to.",
-    subline: "The dish that fits you. The target that moves with your training.",
-    apps: [
-      {
-        slug: "kolibi",
-        name: "Kolibi",
-        platform: "iOS",
-        hook: "Your coach. Always with you.",
-        body: "Kolibi builds your bodyweight training plan, adjusts your food to every session and tells you what's next every day. One photo logs your meal, and your coach moves you up a level when you are ready. From your first push-up to your first pull-up.",
-        href: "https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149",
-        logo: "/brand-2026/app-logo-kolibi-2026.png",
-        visual: "kolibi",
-      },
-      {
-        slug: "getabite",
-        name: "GetaBite",
-        platform: "Web",
-        hook: "Know where you're going and what you'll order before you leave the house.",
-        body: "GetaBite maps vegan and vegetarian places together with the dishes they actually serve, built from menus people photograph on the spot. The scanner covers the supermarket shelf for the rest of the week. You walk in knowing what fits and what to ask about.",
-        href: "/go/getabite",
-        logo: "/icon-getabite.png",
-        visual: "getabite",
-      },
-    ],
-  },
-  {
-    eyebrow: "LANGUAGE & PEOPLE",
-    headline: "Two apps for the conversation you want to have.",
-    subline: "Say it in Spanish. Say it to someone who gets it.",
+    eyebrow: "LANGUAGE & TRAINING",
+    headline: "Two apps people pay for.",
+    subline: "Spanish that sounds like you live there. A coach that knows what's next.",
     apps: [
       {
         slug: "carpincho",
@@ -92,6 +67,64 @@ export const APP_SECTIONS: AppSection[] = [
         href: "https://apps.apple.com/de/app/carpincho-learn-less-say-more/id6795982399",
         logo: "/brand-2026/app-logo-carpincho-2026.png",
         visual: "carpincho",
+      },
+      {
+        slug: "kolibi",
+        name: "Kolibi",
+        platform: "iOS",
+        hook: "Your coach. Always with you.",
+        body: "Kolibi builds your bodyweight training plan, adjusts your food to every session and tells you what's next every day. One photo logs your meal, and your coach moves you up a level when you are ready. From your first push-up to your first pull-up.",
+        href: "https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149",
+        logo: "/brand-2026/app-logo-kolibi-2026.png",
+        visual: "kolibi",
+      },
+    ],
+  },
+  {
+    eyebrow: "FOR FOUNDERS",
+    headline: "Two tools for running and building a business.",
+    subline: "The morning that runs itself. The developer who has built it before.",
+    apps: [
+      {
+        slug: "erdi",
+        name: "Erdi",
+        platform: "WEB · IOS",
+        hook: "Everything runs. More time for everything else.",
+        body: "Every morning Erdi tells you in three minutes what moved, why, and the one thing that needs you today. Your inbox sorts itself and replies wait in your tone, one tap sends them. When checkout drops or installs fall, you know right away, with the likely cause and a fix to approve.",
+        href: "https://erdiknows.com",
+        logo: "/erdi-icon.svg",
+        wordmark: { src: "/brand-2026/wordmark-erdi-2026.svg", height: 56 },
+        visual: "erdi",
+        cta: "Start free trial",
+      },
+      {
+        slug: "erdibuilds",
+        name: "ErdiBuilds",
+        platform: "WEB",
+        hook: "Build what you imagine.",
+        body: "Your idea, live and in people's hands. Pick from verified developers who have already built something like yours. You pay one milestone at a time, and the money is held until you approve the work.",
+        href: "https://erdibuilds.app",
+        logo: "/brand-2026/app-logo-erdibuilds-2026.png",
+        wordmark: { src: "/brand-2026/wordmark-erdibuilds-2026.svg", height: 36 },
+        visual: "erdibuilds",
+        cta: "Start your project",
+      },
+    ],
+  },
+  {
+    eyebrow: "NOTES & PEOPLE",
+    headline: "Two apps for what's on your mind.",
+    subline: "The note you'll want later. People who get it.",
+    apps: [
+      {
+        slug: "orivela",
+        name: "Orivela",
+        platform: "iOS",
+        hook: "Out of your head. Into one place.",
+        body: "A thought on the walk home, an insurance PDF, the contract someone wants today. Say it, type it or snap it, and Orivela files it with the right title and labels. Ask in plain language and it comes straight back.",
+        href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
+        logo: "/app-logo-orivela.jpg",
+        visual: "orivela",
       },
       {
         slug: "peeranimo",
@@ -106,38 +139,9 @@ export const APP_SECTIONS: AppSection[] = [
     ],
   },
   {
-    eyebrow: "MEMORY & DATA",
-    headline: "Two apps for finding the answer fast.",
-    subline: "The note you'll want later. The morning you don't have to think about.",
-    apps: [
-      {
-        slug: "orivela",
-        name: "Orivela",
-        platform: "iOS",
-        hook: "Out of your head. Into one place.",
-        body: "A thought on the walk home, an insurance PDF, the contract someone wants today. Say it, type it or snap it, and Orivela files it with the right title and labels. Ask in plain language and it comes straight back.",
-        href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
-        logo: "/app-logo-orivela.jpg",
-        visual: "orivela",
-      },
-      {
-        slug: "erdi",
-        name: "Erdi",
-        platform: "WEB · IOS",
-        badge: "FOR FOUNDERS",
-        hook: "Everything runs. More time for everything else.",
-        body: "Every morning Erdi tells you in three minutes what moved, why, and the one thing that needs you today. Your inbox sorts itself and replies wait in your tone, one tap sends them. When checkout drops or installs fall, you know right away, with the likely cause and a fix to approve.",
-        href: "https://erdiknows.com",
-        logo: "/erdi-icon.svg",
-        visual: "erdi",
-        cta: "Start free trial",
-      },
-    ],
-  },
-  {
-    eyebrow: "FOR FOUNDERS",
-    headline: "Two tools for getting your app built.",
-    subline: "The stack that fits your idea. The developer who has built it before.",
+    eyebrow: "FREE TO START",
+    headline: "Two free tools for the first step.",
+    subline: "The stack that fits your idea. The dish that fits you.",
     apps: [
       {
         slug: "findmystack",
@@ -147,18 +151,19 @@ export const APP_SECTIONS: AppSection[] = [
         body: "Answer a few questions about your idea and get one clear, honest recommendation.",
         href: "https://findmystack.app",
         logo: "/brand-2026/app-logo-findmystack-2026.png?v=2",
+        visual: "findmystack",
         stamp: "LIVE",
         cta: "Take the assessment",
       },
       {
-        slug: "erdibuilds",
-        name: "ErdiBuilds",
-        platform: "WEB",
-        hook: "Build what you imagine.",
-        body: "Your idea, live and in people's hands. Pick from verified developers who have already built something like yours. You pay one milestone at a time, and the money is held until you approve the work.",
-        href: "https://erdibuilds.app",
-        logo: "/brand-2026/app-logo-erdibuilds-2026.png",
-        cta: "Start your project",
+        slug: "getabite",
+        name: "GetaBite",
+        platform: "Web",
+        hook: "Know where you're going and what you'll order before you leave the house.",
+        body: "GetaBite maps vegan and vegetarian places together with the dishes they actually serve, built from menus people photograph on the spot. The scanner covers the supermarket shelf for the rest of the week. You walk in knowing what fits and what to ask about.",
+        href: "/go/getabite",
+        logo: "/icon-getabite.png",
+        visual: "getabite",
       },
     ],
   },

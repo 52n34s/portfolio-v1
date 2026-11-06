@@ -6,6 +6,8 @@ import CarpinchoVisual from "@/components/apps/visuals/CarpinchoVisual";
 import PeeranimoVisual from "@/components/apps/visuals/PeeranimoVisual";
 import OrivelaVisual from "@/components/apps/visuals/OrivelaVisual";
 import ErdiVisual from "@/components/apps/visuals/ErdiVisual";
+import ErdiBuildsVisual from "@/components/apps/visuals/ErdiBuildsVisual";
+import FindMyStackVisual from "@/components/apps/visuals/FindMyStackVisual";
 
 const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   kolibi: KolibiVisual,
@@ -14,6 +16,8 @@ const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   peeranimo: PeeranimoVisual,
   orivela: OrivelaVisual,
   erdi: ErdiVisual,
+  erdibuilds: ErdiBuildsVisual,
+  findmystack: FindMyStackVisual,
 };
 
 const ROTATIONS = [-1.1, 0.8, -0.6, 1.2, -0.9, 0.5];
@@ -80,18 +84,31 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
         className={`flex flex-1 flex-col gap-4 p-6 md:p-8 ${Visual ? "" : "pt-20 md:pt-20 lg:pt-8"}`}
       >
         <div className={`flex items-center gap-3.5 ${Visual ? "" : "lg:pr-16"}`}>
-          <img
-            src={app.logo}
-            alt={`${app.name} app icon`}
-            className="h-14 w-14 shrink-0 rounded-[14px] border border-black/5 object-cover shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
-          />
+          {!app.wordmark && (
+            <img
+              src={app.logo}
+              alt={`${app.name} app icon`}
+              className="h-14 w-14 shrink-0 rounded-[14px] border border-black/5 object-cover shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+            />
+          )}
           <div className="min-w-0">
-            <h3
-              className="truncate text-[30px] font-semibold leading-tight text-[#1A1A1A]"
-              style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
-            >
-              {app.name}
-            </h3>
+            {app.wordmark ? (
+              <h3 className="leading-none">
+                <img
+                  src={app.wordmark.src}
+                  alt={app.name}
+                  style={{ height: app.wordmark.height }}
+                  className="block w-auto max-w-full"
+                />
+              </h3>
+            ) : (
+              <h3
+                className="truncate text-[30px] font-semibold leading-tight text-[#1A1A1A]"
+                style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+              >
+                {app.name}
+              </h3>
+            )}
             <p
               className="truncate text-[12px] uppercase tracking-wide text-[#1A1A1A]/55"
               style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
