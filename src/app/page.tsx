@@ -4,11 +4,11 @@ import HomeCollage from "@/components/HomeCollage";
 import PageBackground from "@/components/PageBackground";
 import ScrollReveal from "@/components/ScrollReveal";
 import AppDock from "@/components/AppDock";
-import AppSection from "@/components/apps/AppSection";
+import AppCard, { YourAppCard } from "@/components/apps/AppCard";
 import SectionDivider from "@/components/SectionDivider";
 import Room05 from "@/components/Room05";
 import Room06 from "@/components/Room06";
-import { APP_SECTIONS } from "@/data/apps";
+import { APPS } from "@/data/apps";
 
 export default function Home() {
   return (
@@ -62,13 +62,12 @@ export default function Home() {
         <div className="mx-auto w-full max-w-[1100px] px-5 md:px-12">
           <AppDock />
 
-          {APP_SECTIONS.map((section, index) => (
-            <AppSection
-              key={section.eyebrow}
-              section={section}
-              topClassName={index === 0 ? "pt-10 md:pt-14" : undefined}
-            />
-          ))}
+          <div className="grid grid-cols-1 gap-6 pb-24 pt-10 md:grid-cols-2 md:pb-32 md:pt-14 lg:grid-cols-4">
+            {APPS.map((app, index) => (
+              <AppCard key={app.slug} app={app} index={index} />
+            ))}
+            <YourAppCard index={APPS.length} />
+          </div>
         </div>
       </div>
 

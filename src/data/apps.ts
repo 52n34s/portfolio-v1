@@ -8,16 +8,22 @@ export type AppSlug =
   | "orivela"
   | "erdi"
   | "findmystack"
-  | "erdibuilds";
+  | "erdibuilds"
+  | "applento"
+  | "getabite1"
+  | "the";
 
-/** Apps that have a home-card illustration in components/apps/visuals. */
-export type VisualSlug = AppSlug;
+/** Apps that have a home-card illustration in components/apps/visuals.
+ *  The closed archive apps without one show a screenshot instead. */
+export type VisualSlug = Exclude<AppSlug, "applento" | "getabite1" | "the">;
 
 export type AppEntry = {
   slug: AppSlug;
   name: string;
   platform: string;
+  /** Dream-outcome line on the home card (at most two short sentences). */
   hook: string;
+  /** Longer text, shown in the info popup. */
   body: string;
   href: string;
   logo: string;
@@ -30,6 +36,10 @@ export type AppEntry = {
   cta?: string;
   /** Optional brand wordmark; replaces icon + name on the home card. Height in px. */
   wordmark?: { src: string; height: number };
+  /** "closed" apps are archived and no longer linked. Defaults to "live". */
+  status?: "live" | "closed";
+  /** Screenshot for the card's image area when there is no visual. */
+  screenshot?: string;
 };
 
 export type AppSection = {
@@ -131,10 +141,11 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Peeranimo",
         platform: "Social platform · Web",
         hook: "Find people who get it.",
-        body: "Peeranimo matches you with people working on the same thing you are. You describe where you are stuck, and the conversation starts with someone who has been there.",
-        href: "https://peeranimo.app/",
+        body: "Peeranimo matched you with people working on the same thing you were. You described where you were stuck, and the conversation started with someone who had been there.",
+        href: "",
         logo: "/app-logo-peeranimo.webp",
         visual: "peeranimo",
+        status: "closed",
       },
     ],
   },
@@ -157,16 +168,68 @@ export const APP_SECTIONS: AppSection[] = [
       },
       {
         slug: "getabite",
-        name: "GetaBite",
+        name: "GetaBite 2.0",
         platform: "Web",
-        hook: "Know where you're going and what you'll order before you leave the house.",
-        body: "GetaBite maps vegan and vegetarian places together with the dishes they actually serve, built from menus people photograph on the spot. The scanner covers the supermarket shelf for the rest of the week. You walk in knowing what fits and what to ask about.",
-        href: "/go/getabite",
+        hook: "Decide where to eat before you leave.",
+        body: "GetaBite mapped vegan and vegetarian places together with the dishes they actually served, built from menus people photographed on the spot. The scanner covered the supermarket shelf for the rest of the week.",
+        href: "",
         logo: "/icon-getabite.png",
         visual: "getabite",
+        status: "closed",
       },
     ],
   },
 ];
 
-export const APPS: AppEntry[] = APP_SECTIONS.flatMap((section) => section.apps);
+/** Closed products that never had a home-page section. */
+const ARCHIVE_ONLY: AppEntry[] = [
+  {
+    slug: "applento",
+    name: "Applento",
+    platform: "Property applications · Web",
+    hook: "Goodbye chaos. Hello clarity.",
+    body: "Agents listed a flat, shared one link and received only complete applications, all in the same format. Every applicant sat side by side in one dashboard, one click accepted or declined, and each applicant got a professional reply automatically.",
+    href: "",
+    logo: "/logos/applento.png",
+    screenshot: "/app-screens/applento_screen_1.webp",
+    status: "closed",
+  },
+  {
+    slug: "getabite1",
+    name: "GetaBite 1.0",
+    platform: "Restaurant SaaS · Web",
+    hook: "Your menu online. Your tables booked.",
+    body: "Restaurants signed up on their own and got a website with their menu, online ordering and table reservations, all run from one dashboard. Guests searched for the dish they craved, with vegan and vegetarian marked. AI read printed menus straight onto the platform.",
+    href: "",
+    logo: "/logos/getabite-1.png",
+    screenshot: "/app-screens/getabite1_screen_1.webp",
+    status: "closed",
+  },
+  {
+    slug: "the",
+    name: "THE",
+    platform: "The Honest Experience · Web",
+    hook: "Reviews you can trust. Every one earned.",
+    body: "THE was a review platform built on real experiences. Every review needed proof of purchase and walked through seven questions, from delivery and packaging to price and performance, and the overall score came from all of them. Reviewers earned badges and helpful votes, and brands got a profile they could claim.",
+    href: "",
+    logo: "/logos/the.png",
+    screenshot: "/app-screens/the_screen_1.webp",
+    status: "closed",
+  },
+];
+
+const ALL_APPS: AppEntry[] = [
+  ...APP_SECTIONS.flatMap((section) => section.apps),
+  ...ARCHIVE_ONLY,
+];
+
+export function isClosed(app: { status?: "live" | "closed" }) {
+  return app.status === "closed";
+}
+
+/** Home grid, dock and /apps order: live apps in APP_SECTIONS order, then the
+ *  closed ones (Peeranimo, GetaBite 2.0, Applento, GetaBite 1.0, THE). */
+export const APPS: AppEntry[] = [
+  ...ALL_APPS.filter((app) => !isClosed(app)),
+  ...ALL_APPS.filter(isClosed),
+];
