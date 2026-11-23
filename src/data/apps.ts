@@ -13,9 +13,8 @@ export type AppSlug =
   | "getabite1"
   | "the";
 
-/** Apps that have a home-card illustration in components/apps/visuals.
- *  The closed archive apps without one show a screenshot instead. */
-export type VisualSlug = Exclude<AppSlug, "applento" | "getabite1" | "the">;
+/** Apps that have a home-card illustration in components/apps/visuals. */
+export type VisualSlug = AppSlug;
 
 export type AppEntry = {
   slug: AppSlug;
@@ -191,7 +190,7 @@ const ARCHIVE_ONLY: AppEntry[] = [
     body: "Agents listed a flat, shared one link and received only complete applications, all in the same format. Every applicant sat side by side in one dashboard, one click accepted or declined, and each applicant got a professional reply automatically.",
     href: "",
     logo: "/logos/applento.png",
-    screenshot: "/app-screens/applento_screen_1.webp",
+    visual: "applento",
     status: "closed",
   },
   {
@@ -202,7 +201,7 @@ const ARCHIVE_ONLY: AppEntry[] = [
     body: "Restaurants signed up on their own and got a website with their menu, online ordering and table reservations, all run from one dashboard. Guests searched for the dish they craved, with vegan and vegetarian marked. AI read printed menus straight onto the platform.",
     href: "",
     logo: "/logos/getabite-1.png",
-    screenshot: "/app-screens/getabite1_screen_1.webp",
+    visual: "getabite1",
     status: "closed",
   },
   {
@@ -213,7 +212,7 @@ const ARCHIVE_ONLY: AppEntry[] = [
     body: "THE was a review platform built on real experiences. Every review needed proof of purchase and walked through seven questions, from delivery and packaging to price and performance, and the overall score came from all of them. Reviewers earned badges and helpful votes, and brands got a profile they could claim.",
     href: "",
     logo: "/logos/the.png",
-    screenshot: "/app-screens/the_screen_1.webp",
+    visual: "the",
     status: "closed",
   },
 ];

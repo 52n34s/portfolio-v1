@@ -11,6 +11,9 @@ import OrivelaVisual from "@/components/apps/visuals/OrivelaVisual";
 import ErdiVisual from "@/components/apps/visuals/ErdiVisual";
 import ErdiBuildsVisual from "@/components/apps/visuals/ErdiBuildsVisual";
 import FindMyStackVisual from "@/components/apps/visuals/FindMyStackVisual";
+import ApplentoVisual from "@/components/apps/visuals/ApplentoVisual";
+import GetaBiteOneVisual from "@/components/apps/visuals/GetaBiteOneVisual";
+import TheVisual from "@/components/apps/visuals/TheVisual";
 import ClosedButton from "@/components/apps/ClosedButton";
 import AppInfoModal from "@/components/apps/AppInfoModal";
 
@@ -23,6 +26,9 @@ const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   erdi: ErdiVisual,
   erdibuilds: ErdiBuildsVisual,
   findmystack: FindMyStackVisual,
+  applento: ApplentoVisual,
+  getabite1: GetaBiteOneVisual,
+  the: TheVisual,
 };
 
 export const CARD_ROTATIONS = [-1.1, 0.8, -0.6, 1.2, -0.9, 0.5];
