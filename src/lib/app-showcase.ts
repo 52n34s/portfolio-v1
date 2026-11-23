@@ -1,19 +1,18 @@
 /** Shared showcase data for /countdown and /apps card grids.
- *  Headlines match each app's landing page — kept in sync by hand. */
+ *  Headlines match `hook` in src/data/apps.ts — kept in sync by hand. */
 
 export const OUTCOME_HEADLINES: Record<string, string> = {
-  carpincho:
-    "Walk in like you live here.",
-  kolibi: "Your coach. Always with you.",
-  orivela: "Out of your head. Into one place.",
-  erdi: "Everything runs. More time for everything else.",
-  getabite: "Decide where to eat before you leave.",
-  peeranimo: "Find people who get it.",
-  findmystack: "Build your app right the first time.",
-  erdibuilds: "Build what you imagine.",
-  applento: "Goodbye chaos. Hello clarity.",
-  getabite1: "Your menu online. Your tables booked.",
-  the: "Reviews you can trust. Every one earned.",
+  carpincho: "Learn Spanish by doomscrolling.",
+  kolibi: "Your calories change with every workout.",
+  erdi: "Your businesses in three minutes every morning.",
+  erdibuilds: "Get matched with the right developer.",
+  orivela: "Ask your notes and documents anything.",
+  peeranimo: "Meet people working on the same thing as you.",
+  findmystack: "Find out what to build your app with in two minutes.",
+  getabite: "See the vegan dishes near you before you go out.",
+  applento: "Get complete rental applications in one dashboard.",
+  getabite1: "Give your restaurant a website with ordering and bookings.",
+  the: "Read reviews from people who actually bought it.",
 };
 
 /** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web
