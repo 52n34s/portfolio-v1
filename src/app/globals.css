@@ -5508,6 +5508,16 @@ body {
   object-fit: cover;
 }
 
+/* Closed projects: muted logo, full colour once the row opens. */
+.app-index-logo--closed {
+  filter: grayscale(70%);
+  transition: filter var(--dur) var(--ease);
+}
+
+.app-index-row[data-open] .app-index-logo--closed {
+  filter: grayscale(0);
+}
+
 .app-index-headline {
   grid-area: headline;
   font-family: var(--font-lora), Georgia, serif;
@@ -5676,5 +5686,72 @@ body {
   .app-index-logo[data-logo="return"] {
     animation-name: app-logo-fade-in;
     animation-timing-function: ease;
+  }
+}
+
+/* Closed-project CTA (ClosedButton): the button drops like the index-row logo,
+   then stays hidden; a handwritten "Closed." fades in where it was. */
+.closed-cta[data-state="fall"] {
+  animation: cta-fall 650ms both;
+  pointer-events: none;
+}
+
+.closed-cta[data-state="gone"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@keyframes cta-fall {
+  0% {
+    transform: none;
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  18% {
+    transform: translateY(-6px) rotate(-6deg);
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  100% {
+    transform: translateY(220px) rotate(38deg);
+    opacity: 0;
+  }
+}
+
+.closed-note {
+  display: inline-block;
+  rotate: -3deg;
+  animation: closed-note-in 300ms ease 250ms both;
+}
+
+@keyframes closed-note-in {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes closed-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: opacity only, no fall. */
+@media (prefers-reduced-motion: reduce) {
+  .closed-cta[data-state="fall"] {
+    animation-name: app-logo-fade-out;
+    animation-timing-function: ease;
+  }
+
+  .closed-note {
+    animation-name: closed-fade-in;
   }
 }
