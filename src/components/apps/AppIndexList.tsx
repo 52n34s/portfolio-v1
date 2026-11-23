@@ -14,6 +14,7 @@ import {
   withCampaignToken,
 } from "@/lib/app-showcase";
 import type { ChallengeApp } from "@/lib/countdown";
+import ClosedButton from "@/components/apps/ClosedButton";
 
 /** Logo stays gone this long while its row is open, then drops back in. */
 const LOGO_RETURN_MS = 10_000;
@@ -95,7 +96,8 @@ function AppIndexRow({
       : "idle";
 
   const { tint, ink } = rowColors(app.color);
-  const cta = ctaFor(app, campaign);
+  const closed = app.status === "closed";
+  const cta = closed ? null : ctaFor(app, campaign);
 
   return (
     <li
@@ -132,12 +134,13 @@ function AppIndexRow({
             width={112}
             height={112}
             data-logo={logo}
-            className="app-index-logo"
+            className={`app-index-logo${closed ? " app-index-logo--closed" : ""}`}
           />
         </span>
         <span className="app-index-headline">{OUTCOME_HEADLINES[app.id]}</span>
         <span className="app-index-meta">
           {app.name} · {app.platform}
+          {closed && " · CLOSED"}
         </span>
       </button>
 
@@ -145,6 +148,7 @@ function AppIndexRow({
         <div className="app-index-panel-inner">
           <div className="app-index-panel-content">
             <p className="app-index-desc">{app.description}</p>
+            {closed && <ClosedButton name={app.name} variant="row" />}
             {cta && (
               <a
                 href={cta.href}

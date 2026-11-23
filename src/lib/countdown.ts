@@ -25,6 +25,8 @@ export type ChallengeApp = {
   color: string;
   /** Button text for non-App-Store links. Defaults to "Open". */
   cta?: string;
+  /** "closed" apps are archived and no longer linked. Defaults to "live". */
+  status?: "live" | "closed";
 };
 
 export const CHALLENGE_APPS: ChallengeApp[] = [
@@ -76,16 +78,18 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
       "Peers in the exact same chapter of life, matched to you.",
     platform: "WEB",
     logo: "/app-logo-peeranimo.webp",
-    href: "https://peeranimo.app/",
+    href: null,
+    status: "closed",
     color: "#7C6FE5",
   },
   {
     id: "getabite",
-    name: "GetaBite",
+    name: "GetaBite 2.0",
     description: "Know what you'll order before you leave the house.",
     platform: "WEB",
     logo: "/icon-getabite.png",
-    href: "/go/getabite",
+    href: null,
+    status: "closed",
     color: "#F04E3E",
   },
   // Shown on /apps only — /countdown picks its six apps by id in APP_PAIRS.
@@ -110,5 +114,38 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     href: "https://erdibuilds.app",
     color: "#5B4CF0",
     cta: "Start your project",
+  },
+  {
+    id: "applento",
+    name: "Applento",
+    description:
+      "Complete rental applications, compared side by side, answered in one click.",
+    platform: "WEB",
+    logo: "/logos/applento.png",
+    href: null,
+    color: "#6D28D9",
+    status: "closed",
+  },
+  {
+    id: "getabite1",
+    name: "GetaBite 1.0",
+    description:
+      "Restaurant websites with menu, ordering and reservations, run from one dashboard.",
+    platform: "WEB",
+    logo: "/logos/getabite-1.png",
+    href: null,
+    color: "#1A1A1A",
+    status: "closed",
+  },
+  {
+    id: "the",
+    name: "THE",
+    description:
+      "Verified reviews scored across seven questions, with proof for every one.",
+    platform: "WEB",
+    logo: "/logos/the.png",
+    href: null,
+    color: "#FF403F",
+    status: "closed",
   },
 ];

@@ -5,7 +5,7 @@ import PageBackground from "@/components/PageBackground";
 import ScrollReveal from "@/components/ScrollReveal";
 import AppIndexList from "@/components/apps/AppIndexList";
 import ShowcaseAppCard from "@/components/apps/ShowcaseAppCard";
-import { APP_SECTIONS } from "@/data/apps";
+import { APPS } from "@/data/apps";
 import {
   CHALLENGE_APPS,
   daysUntilTarget,
@@ -33,11 +33,9 @@ export const metadata: Metadata = {
  * one constant to attribute a different page/placement in App Store Connect. */
 const APP_STORE_CAMPAIGN = "countdown-page";
 
-/** Same apps and order as /apps (APP_SECTIONS), rendered as one continuous,
- * unlabeled index list. */
-const APP_IDS = APP_SECTIONS.flatMap((section) =>
-  section.apps.map((entry) => entry.slug),
-);
+/** Same order as /apps (APPS: live apps, then the closed ones), rendered as
+ * one continuous, unlabeled index list. */
+const APP_IDS = APPS.map((entry) => entry.slug);
 
 function byId(id: string): ChallengeApp {
   const app = CHALLENGE_APPS.find((a) => a.id === id);

@@ -118,19 +118,6 @@ export default function StructuredData() {
         publisher: { "@id": "https://steffendoesthings.com/#org" },
       },
       {
-        "@type": "WebApplication",
-        "@id": "https://steffendoesthings.com/#peeranimo",
-        name: "Peeranimo",
-        description:
-          "A peer-matching social platform that connects people who are in the same chapter of life.",
-        applicationCategory: "SocialNetworkingApplication",
-        operatingSystem: "Web",
-        browserRequirements: "Requires JavaScript",
-        url: "https://peeranimo.app/",
-        author: { "@id": "https://steffendoesthings.com/#steffen" },
-        publisher: { "@id": "https://steffendoesthings.com/#org" },
-      },
-      {
         "@type": "SoftwareApplication",
         "@id": "https://steffendoesthings.com/#carpincho",
         name: "Carpincho",

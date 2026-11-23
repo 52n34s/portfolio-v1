@@ -84,12 +84,6 @@ const navItems: NavItem[] = [
     href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
     tone: "mint",
   },
-  {
-    kind: "external",
-    label: "~/peeranimo",
-    href: "https://peeranimo.app/",
-    tone: "sky",
-  },
 ];
 
 /** Fixed per-item tilt — max ±1.5deg */

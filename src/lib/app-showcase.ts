@@ -11,6 +11,9 @@ export const OUTCOME_HEADLINES: Record<string, string> = {
   peeranimo: "Find people who get it.",
   findmystack: "Build your app right the first time.",
   erdibuilds: "Build what you imagine.",
+  applento: "Goodbye chaos. Hello clarity.",
+  getabite1: "Your menu online. Your tables booked.",
+  the: "Reviews you can trust. Every one earned.",
 };
 
 /** Optimised WebP screenshots. Native sizes vary (tall phone vs. wider web

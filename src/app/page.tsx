@@ -25,9 +25,7 @@ export default function Home() {
         captures what you say, type or photograph and answers questions about
         it in plain language. Kolibi, a nutrition and bodyweight training app for iOS that
         recognises meals from a photo, adjusts daily targets to each session and moves
-        you up a level when you are ready. Peeranimo, a
-        peer-matching social platform on the web that connects people who are in
-        the same chapter of life. Carpincho, a Spanish learning app on the App Store
+        you up a level when you are ready. Carpincho, a Spanish learning app on the App Store
         with short subtitled clips, a route of over 180 everyday places and
         spoken answers checked right away, in the Spanish of Argentina, Latin
         America or Spain. Erdi, an assistant on the
@@ -43,6 +41,11 @@ export default function Home() {
         a marketplace on the web, matches founders with verified developers
         who have already built something similar and releases each payment
         only after the founder approves that milestone.
+        Peeranimo, a peer-matching platform on the web, ran until November
+        2026. Earlier products include GetaBite, a restaurant platform with
+        websites, ordering and reservations, a vegan dish finder of the same
+        name, Applento for rental applications, and THE, a verified review
+        platform. All four are closed.
         He has built more than ten platforms, both self-founded and for clients, and is available for
         freelance product development, software architecture and long-term
         product partnerships.

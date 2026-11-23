@@ -4,7 +4,7 @@ import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
 import ScrollReveal from "@/components/ScrollReveal";
 import AppIndexList from "@/components/apps/AppIndexList";
-import { APP_SECTIONS } from "@/data/apps";
+import { APP_SECTIONS, APPS, isClosed } from "@/data/apps";
 import { CHALLENGE_APPS, type ChallengeApp } from "@/lib/countdown";
 
 export const metadata: Metadata = {
@@ -65,11 +65,6 @@ export default function AppsPage() {
         position: 5,
         item: { "@id": "https://steffendoesthings.com/#orivela" },
       },
-      {
-        "@type": "ListItem",
-        position: 6,
-        item: { "@id": "https://steffendoesthings.com/#peeranimo" },
-      },
     ],
   };
 
@@ -119,12 +114,18 @@ export default function AppsPage() {
           </header>
 
           {/* Categories stay as small labels; section headlines and sublines
-              live on the home page only. */}
+              live on the home page only. Live apps keep their category; the
+              closed ones follow at the end, as one unlabeled group in APPS order. */}
           <AppIndexList
-            groups={APP_SECTIONS.map((section) => ({
-              label: section.eyebrow,
-              apps: section.apps.map((entry) => bySlug(entry.slug)),
-            }))}
+            groups={[
+              ...APP_SECTIONS.map((section) => ({
+                label: section.eyebrow,
+                apps: section.apps
+                  .filter((entry) => !isClosed(entry))
+                  .map((entry) => bySlug(entry.slug)),
+              })).filter((group) => group.apps.length > 0),
+              { apps: APPS.filter(isClosed).map((entry) => bySlug(entry.slug)) },
+            ]}
             campaign={APP_STORE_CAMPAIGN}
           />
 
