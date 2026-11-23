@@ -64,8 +64,11 @@ export default function Home() {
 
         <div className="mx-auto w-full max-w-[1100px] px-5 md:px-12">
           <AppDock />
+        </div>
 
-          <div className="grid grid-cols-1 gap-6 pb-24 pt-10 md:grid-cols-2 md:pb-32 md:pt-14 lg:grid-cols-4">
+        {/* Wider than the dock's column so four cards get room to breathe. */}
+        <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 pb-24 pt-10 md:grid-cols-2 md:gap-x-10 md:gap-y-14 md:pb-32 md:pt-14 lg:grid-cols-4 lg:gap-x-12 lg:gap-y-16">
             {APPS.map((app, index) => (
               <AppCard key={app.slug} app={app} index={index} />
             ))}
