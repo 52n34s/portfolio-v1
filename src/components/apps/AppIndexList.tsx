@@ -134,7 +134,7 @@ function AppIndexRow({
             width={112}
             height={112}
             data-logo={logo}
-            className={`app-index-logo${closed ? " app-index-logo--closed" : ""}`}
+            className="app-index-logo"
           />
         </span>
         <span className="app-index-headline">{OUTCOME_HEADLINES[app.id]}</span>

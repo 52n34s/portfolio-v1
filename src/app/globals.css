@@ -5508,16 +5508,6 @@ body {
   object-fit: cover;
 }
 
-/* Closed projects: muted logo, full colour once the row opens. */
-.app-index-logo--closed {
-  filter: grayscale(70%);
-  transition: filter var(--dur) var(--ease);
-}
-
-.app-index-row[data-open] .app-index-logo--closed {
-  filter: grayscale(0);
-}
-
 .app-index-headline {
   grid-area: headline;
   font-family: var(--font-lora), Georgia, serif;
