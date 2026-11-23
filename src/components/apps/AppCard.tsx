@@ -199,9 +199,10 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
             <a
               href={app.href}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className={`${CTA_CLASS} min-w-0`}
+              className={`${CTA_CLASS} whitespace-nowrap`}
             >
-              {app.cta ?? ctaLabel(app.href)} →
+              {/* Short label on the card; the full `cta` text is in the popup. */}
+              {ctaLabel(app.href)} →
             </a>
           )}
 
