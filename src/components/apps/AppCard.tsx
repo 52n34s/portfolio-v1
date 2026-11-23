@@ -15,6 +15,14 @@ import ApplentoVisual from "@/components/apps/visuals/ApplentoVisual";
 import GetaBiteOneVisual from "@/components/apps/visuals/GetaBiteOneVisual";
 import TheVisual from "@/components/apps/visuals/TheVisual";
 import ClosedButton from "@/components/apps/ClosedButton";
+import {
+  FOCUS_RING,
+  THEMED_CTA_CLASS,
+  hookClass,
+  hookStyle,
+  isDarkSurface,
+  themeVars,
+} from "@/components/apps/cardTheme";
 import AppInfoModal from "@/components/apps/AppInfoModal";
 
 const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
@@ -40,8 +48,8 @@ const VISUAL_SCALE = 0.57;
 const LIVE_STAMP_COLOR = "#1D9E75";
 const CLOSED_STAMP_COLOR = "#8A8580";
 
-const CTA_CLASS =
-  "inline-block w-fit rounded-full bg-[var(--purple-button)] px-5 py-2.5 text-[13px] font-medium text-[#F5F0E8] transition-colors hover:bg-[var(--purple-button-hover)]";
+const YOUR_APP_SURFACE = "#FAF6EE";
+const YOUR_APP_ACCENT = "#7B5CF0";
 
 function LiveStamp({
   name,
@@ -87,14 +95,32 @@ function LiveStamp({
 function InfoIcon() {
   return (
     <svg viewBox="0 0 20 20" className="h-[18px] w-[18px]" aria-hidden="true">
-      <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <circle
+        cx="10"
+        cy="10"
+        r="8.25"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
       <circle cx="10" cy="6.25" r="1.1" fill="currentColor" />
-      <path d="M10 9v5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path
+        d="M10 9v5.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
 
-export default function AppCard({ app, index }: { app: AppEntry; index: number }) {
+export default function AppCard({
+  app,
+  index,
+}: {
+  app: AppEntry;
+  index: number;
+}) {
   const [infoOpen, setInfoOpen] = useState(false);
   const infoRef = useRef<HTMLButtonElement>(null);
 
@@ -104,6 +130,7 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
   const closed = isClosed(app);
   const rotate = CARD_ROTATIONS[index % CARD_ROTATIONS.length];
   const external = app.href.startsWith("http");
+  const { theme } = app;
 
   const closeInfo = useCallback(() => {
     setInfoOpen(false);
@@ -114,8 +141,8 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
     <article
       id={app.slug}
       data-reveal="card"
-      className="group relative flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-[20px] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0"
-      style={{ transform: `rotate(${rotate}deg)` }}
+      className="group relative flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-[20px] border border-[var(--card-line)] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0"
+      style={{ ...themeVars(theme), transform: `rotate(${rotate}deg)` }}
     >
       {closed ? (
         <LiveStamp
@@ -125,13 +152,15 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
           color={CLOSED_STAMP_COLOR}
         />
       ) : (
-        <LiveStamp name={app.name} note={stampNote(app.href)} label={app.stamp} />
+        <LiveStamp
+          name={app.name}
+          note={stampNote(app.href)}
+          label={app.stamp}
+        />
       )}
 
       {hasMedia && (
-        <div
-          className={`relative h-[170px] w-full shrink-0 overflow-hidden ${closed ? "grayscale-[60%] transition duration-500 group-hover:grayscale-0" : ""}`}
-        >
+        <div className="relative h-[170px] w-full shrink-0 overflow-hidden">
           {Visual ? (
             // Full 300px composition, scaled down; the width is widened by
             // 1 / scale so the scaled box fills the card exactly.
@@ -155,7 +184,10 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
       )}
 
       {/* Without media the stamp sits over the text; pt-16 clears it. */}
-      <div className={`flex flex-1 flex-col gap-3 p-5 ${hasMedia ? "" : "pt-16"}`}>
+      <div
+        className={`flex flex-1 flex-col gap-3 p-5 ${hasMedia ? "" : "pt-16"}`}
+        style={{ background: theme.surface }}
+      >
         <div className="flex items-center gap-3">
           {!app.wordmark && (
             <img
@@ -176,14 +208,14 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
               </h3>
             ) : (
               <h3
-                className="truncate text-[22px] font-semibold leading-tight text-[#1A1A1A]"
+                className="truncate text-[22px] font-semibold leading-tight text-[var(--card-ink)]"
                 style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
               >
                 {app.name}
               </h3>
             )}
             <p
-              className="truncate text-[11px] uppercase tracking-wide text-[#1A1A1A]/55"
+              className="truncate text-[11px] uppercase tracking-wide text-[var(--card-muted)]"
               style={{ fontFamily: "var(--font-jetbrains-mono), monospace" }}
             >
               {app.platform}
@@ -192,20 +224,31 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
         </div>
 
         <p
-          className="flex-1 text-[18px] font-semibold leading-snug text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+          className={`flex-1 text-[18px] ${hookClass(theme)}`}
+          style={hookStyle(theme)}
         >
           {app.hook}
         </p>
 
         <div className="mt-auto flex items-center justify-between gap-3 pt-1">
           {closed ? (
-            <ClosedButton name={app.name} variant="card" />
+            <ClosedButton
+              name={app.name}
+              variant="card"
+              colors={{
+                accent: theme.accent,
+                onAccent: theme.onAccent,
+                ink: theme.ink,
+                ring: isDarkSurface(theme) ? theme.ink : theme.accent,
+              }}
+            />
           ) : (
             <a
               href={app.href}
-              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className={`${CTA_CLASS} whitespace-nowrap`}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className={`${THEMED_CTA_CLASS} whitespace-nowrap`}
             >
               {/* Short label on the card; the full `cta` text is in the popup. */}
               {ctaLabel(app.href)} →
@@ -218,7 +261,7 @@ export default function AppCard({ app, index }: { app: AppEntry; index: number }
             aria-label={`More about ${app.name}`}
             aria-haspopup="dialog"
             onClick={() => setInfoOpen(true)}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#1A1A1A]/15 text-[#1A1A1A]/70 transition-colors hover:border-[#1A1A1A]/40 hover:text-[#1A1A1A]"
+            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--card-line)] text-[var(--card-muted)] transition-colors hover:border-[var(--card-muted)] hover:text-[var(--card-ink)] ${FOCUS_RING}`}
           >
             <InfoIcon />
           </button>
@@ -236,19 +279,27 @@ export function YourAppCard({ index }: { index: number }) {
   return (
     <article
       data-reveal="card"
-      className="relative flex min-w-0 flex-col gap-3 rounded-[20px] border-2 border-dashed border-[#1A1A1A]/25 bg-white p-5 transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0"
-      style={{ transform: `rotate(${rotate}deg)` }}
+      className="relative flex min-w-0 flex-col gap-3 rounded-[20px] border-2 border-dashed border-[#1A1A1A]/25 p-5 transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0"
+      style={
+        {
+          background: YOUR_APP_SURFACE,
+          "--card-accent": YOUR_APP_ACCENT,
+          "--card-on-accent": "#FFFFFF",
+          "--card-ring": YOUR_APP_ACCENT,
+          transform: `rotate(${rotate}deg)`,
+        } as React.CSSProperties
+      }
     >
       <h3
-        className="text-[22px] font-semibold leading-tight text-[#1A1A1A]"
-        style={{ fontFamily: "var(--font-lora), Georgia, serif" }}
+        className="text-[30px] leading-tight text-[#1A1A1A]"
+        style={{ fontFamily: "var(--font-hand), cursive" }}
       >
         Your app next.
       </h3>
       <p className="flex-1 text-[15px] leading-relaxed text-[#1A1A1A]/80">
         Bring me your idea. I build it the same way.
       </p>
-      <a href="/#room-05" className={`${CTA_CLASS} mt-auto`}>
+      <a href="/#room-05" className={`${THEMED_CTA_CLASS} mt-auto`}>
         Work with me →
       </a>
     </article>

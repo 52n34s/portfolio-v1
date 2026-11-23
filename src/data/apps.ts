@@ -16,6 +16,23 @@ export type AppSlug =
 /** Apps that have a home-card illustration in components/apps/visuals. */
 export type VisualSlug = AppSlug;
 
+/** Per-app branding of the home card. */
+export type CardTheme = {
+  /** Background of the card's text area (colour or CSS gradient). */
+  surface: string;
+  /** Name + hook. */
+  ink: string;
+  /** Platform line, info icon. */
+  muted: string;
+  /** Button background. */
+  accent: string;
+  /** Button text. */
+  onAccent: string;
+  hookFont: "serif" | "serif-italic" | "sans" | "mono" | "hand";
+  hookWeight?: 600 | 700 | 800;
+  hookUppercase?: boolean;
+};
+
 export type AppEntry = {
   slug: AppSlug;
   name: string;
@@ -39,6 +56,7 @@ export type AppEntry = {
   status?: "live" | "closed";
   /** Screenshot for the card's image area when there is no visual. */
   screenshot?: string;
+  theme: CardTheme;
 };
 
 export type AppSection = {
@@ -72,6 +90,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Carpincho",
         platform: "iOS",
         hook: "Learn Spanish by doomscrolling.",
+        theme: { surface: "#FFF3B8", ink: "#1A1A1A", muted: "rgba(26,26,26,0.55)", accent: "#EC1E7E", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 800 },
         body: "Short clips with live subtitles teach you real Spanish while you scroll. A route of over 180 places takes you through your day, from the café to talking about your family. Say it out loud and hear right away if it lands, in the Spanish of Argentina, Latin America or Spain.",
         href: "https://apps.apple.com/de/app/carpincho-learn-less-say-more/id6795982399",
         logo: "/brand-2026/app-logo-carpincho-2026.png",
@@ -82,6 +101,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Kolibi",
         platform: "iOS",
         hook: "Your calories change with every workout.",
+        theme: { surface: "#EEF0FF", ink: "#1A1A3A", muted: "rgba(26,26,58,0.55)", accent: "#4F52D9", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 700 },
         body: "Kolibi builds your bodyweight training plan, adjusts your food to every session and tells you what's next every day. One photo logs your meal, and your coach moves you up a level when you are ready. From your first push-up to your first pull-up.",
         href: "https://apps.apple.com/us/app/kolibi-calories-workouts/id6790129149",
         logo: "/brand-2026/app-logo-kolibi-2026.png",
@@ -99,6 +119,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Erdi",
         platform: "WEB · IOS",
         hook: "Your businesses in three minutes every morning.",
+        theme: { surface: "#FFF5F8", ink: "#1A1A1A", muted: "rgba(26,26,26,0.55)", accent: "#FC2E70", onAccent: "#FFFFFF", hookFont: "serif-italic", hookWeight: 600 },
         body: "Every morning Erdi tells you in three minutes what moved, why, and the one thing that needs you today. Your inbox sorts itself and replies wait in your tone, one tap sends them. When checkout drops or installs fall, you know right away, with the likely cause and a fix to approve.",
         href: "https://erdiknows.com",
         logo: "/erdi-icon.svg",
@@ -111,6 +132,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "ErdiBuilds",
         platform: "WEB",
         hook: "Get matched with the right developer.",
+        theme: { surface: "#F1EFFE", ink: "#17133A", muted: "rgba(23,19,58,0.55)", accent: "#5B4CF0", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 700 },
         body: "Your idea, live and in people's hands. Pick from verified developers who have already built something like yours. You pay one milestone at a time, and the money is held until you approve the work.",
         href: "https://erdibuilds.app",
         logo: "/brand-2026/app-logo-erdibuilds-2026.png",
@@ -130,6 +152,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Orivela",
         platform: "iOS",
         hook: "Ask your notes and documents anything.",
+        theme: { surface: "#0E0B1A", ink: "#F5F0E8", muted: "rgba(245,240,232,0.6)", accent: "#A78BFA", onAccent: "#0E0B1A", hookFont: "serif", hookWeight: 600 },
         body: "A thought on the walk home, an insurance PDF, the contract someone wants today. Say it, type it or snap it, and Orivela files it with the right title and labels. Ask in plain language and it comes straight back.",
         href: "https://apps.apple.com/app/orivela-life-admin-vault/id6785050823",
         logo: "/app-logo-orivela.jpg",
@@ -140,6 +163,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Peeranimo",
         platform: "WEB",
         hook: "Meet people working on the same thing as you.",
+        theme: { surface: "#F3F1FD", ink: "#1E1A3D", muted: "rgba(30,26,61,0.55)", accent: "#7C6FE5", onAccent: "#FFFFFF", hookFont: "serif", hookWeight: 600 },
         body: "Peeranimo matched you with people working on the same thing you were. You described where you were stuck, and the conversation started with someone who had been there.",
         href: "",
         logo: "/app-logo-peeranimo.webp",
@@ -158,6 +182,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "Find My Stack",
         platform: "WEB",
         hook: "Find out what to build your app with in two minutes.",
+        theme: { surface: "#0B1020", ink: "#E8EEFB", muted: "rgba(232,238,251,0.6)", accent: "#3D6FE0", onAccent: "#FFFFFF", hookFont: "mono", hookWeight: 600 },
         body: "Answer a few questions about your idea and get one clear, honest recommendation.",
         href: "https://findmystack.app",
         logo: "/brand-2026/app-logo-findmystack-2026.png?v=2",
@@ -170,6 +195,7 @@ export const APP_SECTIONS: AppSection[] = [
         name: "GetaBite 2.0",
         platform: "Web",
         hook: "See the vegan dishes near you before you go out.",
+        theme: { surface: "#FFF0F3", ink: "#2A1018", muted: "rgba(42,16,24,0.55)", accent: "#D6336C", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 700 },
         body: "GetaBite mapped vegan and vegetarian places together with the dishes they actually served, built from menus people photographed on the spot. The scanner covered the supermarket shelf for the rest of the week.",
         href: "",
         logo: "/icon-getabite.png",
@@ -187,6 +213,7 @@ const ARCHIVE_ONLY: AppEntry[] = [
     name: "Applento",
     platform: "Property applications · Web",
     hook: "Get complete rental applications in one dashboard.",
+    theme: { surface: "linear-gradient(180deg, #E9E3FD 0%, #FFFFFF 100%)", ink: "#14102E", muted: "rgba(20,16,46,0.55)", accent: "#6D28D9", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 800 },
     body: "Agents listed a flat, shared one link and received only complete applications, all in the same format. Every applicant sat side by side in one dashboard, one click accepted or declined, and each applicant got a professional reply automatically.",
     href: "",
     logo: "/logos/applento.png",
@@ -198,6 +225,7 @@ const ARCHIVE_ONLY: AppEntry[] = [
     name: "GetaBite 1.0",
     platform: "Restaurant SaaS · Web",
     hook: "Give your restaurant a website with ordering and bookings.",
+    theme: { surface: "#F5EFE6", ink: "#111111", muted: "rgba(17,17,17,0.55)", accent: "#111111", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 800 },
     body: "Restaurants signed up on their own and got a website with their menu, online ordering and table reservations, all run from one dashboard. Guests searched for the dish they craved, with vegan and vegetarian marked. AI read printed menus straight onto the platform.",
     href: "",
     logo: "/logos/getabite-1.png",
@@ -209,6 +237,7 @@ const ARCHIVE_ONLY: AppEntry[] = [
     name: "THE",
     platform: "The Honest Experience · Web",
     hook: "Read reviews from people who actually bought it.",
+    theme: { surface: "#FF403F", ink: "#FFFFFF", muted: "rgba(255,255,255,0.75)", accent: "#FFFFFF", onAccent: "#FF403F", hookFont: "sans", hookWeight: 800, hookUppercase: true },
     body: "THE was a review platform built on real experiences. Every review needed proof of purchase and walked through seven questions, from delivery and packaging to price and performance, and the overall score came from all of them. Reviewers earned badges and helpful votes, and brands got a profile they could claim.",
     href: "",
     logo: "/logos/the.png",
