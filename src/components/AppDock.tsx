@@ -75,13 +75,12 @@ export default function AppDock() {
   }
 
   return (
-    <nav aria-label="Apps" className="pt-4 md:pt-6 lg:pt-2">
-      {/* lg:pt-10 reserves the headroom the magnified icons grow into, so
-          the row never changes height. Below lg (mostly touch) there is
-          none; magnified icons may grow into the skyline band above. */}
+    <nav aria-label="Apps" className="pt-10 md:pt-14">
+      {/* md:pt-10 reserves the headroom the magnified icons grow into, so
+          the row never changes height. */}
       <ul
         data-reveal-group
-        className="flex flex-wrap items-end justify-center gap-4 md:gap-x-7 lg:pt-10"
+        className="flex flex-wrap items-end justify-center gap-4 md:gap-x-7 md:pt-10"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >

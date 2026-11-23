@@ -3,7 +3,7 @@ export default function SectionDivider() {
     <div
       aria-hidden="true"
       data-reveal="divider"
-      className="home-skyline-band mx-[calc(50%-50vw)] h-10 w-screen overflow-x-hidden border-b border-black/[0.06] md:h-12"
+      className="home-skyline-band mx-[calc(50%-50vw)] h-16 w-screen overflow-x-hidden border-b border-black/[0.06] md:h-24"
     >
       <div
         className="h-full opacity-[0.18] md:opacity-[0.22]"
