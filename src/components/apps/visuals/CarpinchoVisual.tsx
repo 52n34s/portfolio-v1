@@ -1,69 +1,58 @@
 const PINK = "#EC1E7E";
 
-const WORDS = ["Tom", "está", "feliz", "en", "el", "parque."];
-const LIT = 2;
-
-/** Learn while you scroll: a clip with live subtitles, the word lighting up as
- *  it is spoken, and the honest answer after you say it yourself. */
+/** The capybara, a clip mid-scroll and the word that just landed. */
 export default function CarpinchoVisual() {
   const mono = { fontFamily: "var(--font-jetbrains-mono), monospace" };
+  const hand = { fontFamily: "var(--font-hand), cursive" };
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[#FBEB86]">
+    <div className="relative h-full w-full overflow-hidden bg-[#FFE45C]">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(to bottom, transparent, transparent 27px, rgba(26,26,26,0.1) 27px, rgba(26,26,26,0.1) 28px)",
+            "repeating-linear-gradient(to bottom, transparent 0, transparent 27px, rgba(26,26,26,0.09) 27px, rgba(26,26,26,0.09) 28px)",
         }}
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-7 py-5 md:py-7">
-        <p
-          className="text-[17px] leading-snug text-[#1A1A1A]"
-          style={{ fontFamily: "var(--font-hand), cursive" }}
+      <div aria-hidden="true">
+        <img
+          src="/brand-2026/app-logo-carpincho-2026.png"
+          alt=""
+          className="absolute bottom-6 left-6 h-[80px] w-[80px] -rotate-[8deg] rounded-[22px] shadow-[3px_6px_14px_rgba(26,26,26,0.25)]"
+        />
+
+        <div
+          className="absolute bottom-[96px] left-[70px] z-10 -rotate-[4deg] rounded-[16px] rounded-bl-[4px] px-3 py-1.5 text-[13px] font-bold text-white shadow-[0_4px_10px_rgba(236,30,126,0.35)]"
+          style={{ backgroundColor: PINK }}
         >
-          Walk in like you live here.
+          ¡Hola!
+        </div>
+
+        <p className="absolute left-6 top-5 -rotate-2 text-[18px] text-[#1A1A1A]" style={hand}>
+          Scroll. Learn. Repeat.
         </p>
 
-        <div className="flex flex-col items-center gap-3" aria-hidden="true">
-          <div className="relative w-full max-w-[280px] -rotate-[1deg] overflow-hidden rounded-[14px] bg-[#1A1A1A] px-4 pb-3 pt-10 shadow-[0_4px_14px_rgba(26,26,26,0.18)]">
+        <div className="absolute bottom-6 right-6 w-[230px] rotate-[2deg] rounded-[18px] bg-[#1A1A1A] px-4 py-3.5 text-white shadow-[4px_8px_18px_rgba(26,26,26,0.3)]">
+          <span
+            className="inline-block rounded-full bg-white/10 px-2 py-0.5 text-[8px] tracking-[0.16em] text-white/70"
+            style={mono}
+          >
+            LEARN WHILE YOU SCROLL
+          </span>
+          <p className="mt-2 text-[15px] font-semibold leading-snug">
+            Tom está <span style={{ color: PINK }}>feliz</span> en el parque.
+          </p>
+          <p className="mt-1 text-[10px] text-white/55">Tom is happy at the park.</p>
+          <div className="mt-3 flex items-center gap-2 rounded-full bg-white px-2.5 py-1.5 text-[#1A1A1A]">
             <span
-              className="absolute left-3 top-3 rounded-full bg-white/15 px-2 py-0.5 text-[9px] tracking-[0.12em] text-white/80"
-              style={mono}
-            >
-              LEARN WHILE YOU SCROLL
-            </span>
-            <p className="text-center text-[14px] font-medium leading-snug text-white">
-              {WORDS.map((word, i) => (
-                <span key={word} style={i === LIT ? { color: PINK } : undefined}>
-                  {word}
-                  {i < WORDS.length - 1 ? " " : ""}
-                </span>
-              ))}
-            </p>
-            <p className="mt-1 text-center text-[11px] text-white/55">
-              Tom is happy at the park.
-            </p>
-          </div>
-
-          <div className="flex w-full max-w-[280px] rotate-[1.2deg] items-center gap-3 rounded-[14px] bg-white px-4 py-2.5 shadow-[0_4px_14px_rgba(26,26,26,0.12)]">
-            <span
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white"
+              className="flex h-5 w-5 items-center justify-center rounded-full text-[10px] text-white"
               style={{ backgroundColor: PINK }}
             >
-              <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="currentColor">
-                <rect x="5.5" y="1.5" width="5" height="8.5" rx="2.5" />
-                <path d="M3.5 7.5a4.5 4.5 0 009 0M8 12v2.5" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
-              </svg>
+              ●
             </span>
-            <p className="min-w-0 flex-1 truncate text-[12px] text-[#1A1A1A]">
-              Understood
-            </p>
-            <span className="shrink-0 text-[10px] text-[#1A1A1A]/50" style={mono}>
-              say it out loud
-            </span>
+            <span className="text-[11px] font-semibold">Understood</span>
           </div>
         </div>
       </div>

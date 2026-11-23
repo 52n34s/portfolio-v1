@@ -3,8 +3,8 @@
 
 export const OUTCOME_HEADLINES: Record<string, string> = {
   carpincho: "Learn Spanish by doomscrolling.",
-  kolibi: "Your calories change with every workout.",
-  erdi: "Your businesses in three minutes every morning.",
+  kolibi: "A coach that plans your workout and adjusts what you eat.",
+  erdi: "Know the moment something happens in your business.",
   erdibuilds: "Get matched with the right developer.",
   orivela: "Ask your notes and documents anything.",
   peeranimo: "Meet people working on the same thing as you.",
