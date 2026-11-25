@@ -1,11 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type OrbItem = {
-  href: string;
+  /** Id of the home section this item scrolls to. */
+  section: string;
   label: string;
   /** Offset from the orb centre on desktop, in px; mobile scales it by 0.85. */
   x: number;
@@ -34,7 +41,7 @@ function Icon({ children }: { children: React.ReactNode }) {
 // Order: left → top → right.
 const ITEMS: OrbItem[] = [
   {
-    href: "/apps",
+    section: "apps",
     label: "Apps",
     x: -118,
     y: -72,
@@ -48,7 +55,7 @@ const ITEMS: OrbItem[] = [
     ),
   },
   {
-    href: "/work",
+    section: "room-05",
     label: "Work with me",
     x: 0,
     y: -128,
@@ -61,7 +68,7 @@ const ITEMS: OrbItem[] = [
     ),
   },
   {
-    href: "/contact",
+    section: "room-06",
     label: "Contact",
     x: 118,
     y: -72,
@@ -74,14 +81,51 @@ const ITEMS: OrbItem[] = [
   },
 ];
 
-function isActive(pathname: string, href: string) {
-  return pathname === href || pathname.startsWith(`${href}/`);
+const SPIN_TURNS = 10;
+const SPIN_MS = 10_000;
+const SPIN_EASING = "cubic-bezier(0.05, 0.85, 0.15, 1)";
+
+function reducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/** Current `rotate` of an element in degrees, mid-animation included. */
+function currentAngle(el: HTMLElement) {
+  const value = parseFloat(getComputedStyle(el).rotate);
+  return Number.isFinite(value) ? value : 0;
+}
+
+/** Stop any spin and keep the circle at the angle it reached. */
+function freezeSpin(el: HTMLElement) {
+  const angle = currentAngle(el) % 360;
+  el.getAnimations().forEach((animation) => animation.cancel());
+  el.style.rotate = `${angle}deg`;
+}
+
+/** Very fast start, then a long even run-out: SPIN_TURNS turns in SPIN_MS.
+ *  A new click restarts from the current angle for another full SPIN_MS. */
+function spin(el: HTMLElement) {
+  if (reducedMotion()) return;
+  const from = currentAngle(el) % 360;
+  el.getAnimations().forEach((animation) => animation.cancel());
+  el.style.rotate = `${from}deg`;
+  const animation = el.animate(
+    [{ rotate: `${from}deg` }, { rotate: `${from + SPIN_TURNS * 360}deg` }],
+    { duration: SPIN_MS, easing: SPIN_EASING, fill: "forwards" },
+  );
+  animation.onfinish = () => {
+    // from + 3600 ≡ from (mod 360): same visual angle, no jump.
+    el.style.rotate = `${from}deg`;
+    animation.cancel();
+  };
 }
 
 /** Site navigation: a gradient orb at the bottom centre that fans three
- *  links out in an arc. Replaces NavBubbles. */
+ *  links out in an arc. On the home page the links scroll to their section
+ *  and the fan stays open; elsewhere they go to /#section. */
 export default function OrbNav() {
   const pathname = usePathname() ?? "/";
+  const onHome = pathname === "/";
   // The page the fan was opened on; navigating anywhere else closes it.
   const [openOn, setOpenOn] = useState<string | null>(null);
   const open = openOn === pathname;
@@ -89,9 +133,12 @@ export default function OrbNav() {
     (value: boolean) => setOpenOn(value ? pathname : null),
     [pathname],
   );
+  const [spySection, setSpySection] = useState<string | null>(null);
+  const activeSection = onHome ? spySection : null;
   const navRef = useRef<HTMLElement>(null);
   const orbRef = useRef<HTMLButtonElement>(null);
   const firstRef = useRef<HTMLAnchorElement>(null);
+  const spinRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const close = useCallback(
     (refocus: boolean) => {
@@ -102,7 +149,11 @@ export default function OrbNav() {
   );
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      // Closing mid-spin: stop, and the circle flies back as usual.
+      spinRefs.current.forEach((el) => el && freezeSpin(el));
+      return;
+    }
     firstRef.current?.focus();
 
     function onKeyDown(event: KeyboardEvent) {
@@ -119,6 +170,48 @@ export default function OrbNav() {
     };
   }, [open, close]);
 
+  // Home only: the section crossing the middle of the viewport is active.
+  useEffect(() => {
+    if (!onHome) return;
+    const visible = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        });
+        setSpySection(
+          ITEMS.find((item) => visible.has(item.section))?.section ?? null,
+        );
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+    ITEMS.forEach((item) => {
+      const el = document.getElementById(item.section);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [onHome]);
+
+  function onItemClick(
+    event: MouseEvent<HTMLAnchorElement>,
+    item: OrbItem,
+    index: number,
+  ) {
+    // Elsewhere the link navigates to /#section; Next scrolls on arrival.
+    if (!onHome) return;
+    const target = document.getElementById(item.section);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({
+      behavior: reducedMotion() ? "auto" : "smooth",
+      block: "start",
+    });
+    window.history.replaceState(window.history.state, "", `#${item.section}`);
+    const el = spinRefs.current[index];
+    if (el) spin(el);
+  }
+
   return (
     <nav
       ref={navRef}
@@ -128,10 +221,10 @@ export default function OrbNav() {
     >
       <ul className="orb-items" role="list" inert={!open}>
         {ITEMS.map((item, index) => {
-          const active = isActive(pathname, item.href);
+          const active = activeSection === item.section;
           return (
             <li
-              key={item.href}
+              key={item.section}
               className="orb-item"
               style={
                 {
@@ -143,13 +236,21 @@ export default function OrbNav() {
             >
               <Link
                 ref={index === 0 ? firstRef : undefined}
-                href={item.href}
+                href={`/#${item.section}`}
                 className="orb-link"
-                aria-current={active ? "page" : undefined}
-                onClick={() => setOpen(false)}
+                aria-current={active ? "true" : undefined}
+                onClick={(event) => onItemClick(event, item, index)}
               >
                 <span className="orb-dot" data-active={active || undefined}>
-                  {item.icon}
+                  {/* Own wrapper for the spin, apart from hover scale and fan position. */}
+                  <span
+                    ref={(el) => {
+                      spinRefs.current[index] = el;
+                    }}
+                    className="orb-spin"
+                  >
+                    {item.icon}
+                  </span>
                 </span>
                 <span className="orb-label">{item.label}</span>
               </Link>
