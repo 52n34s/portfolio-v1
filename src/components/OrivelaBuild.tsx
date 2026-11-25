@@ -65,8 +65,7 @@ const RECORDS = [
   },
 ];
 
-const UPWORK_URL =
-  "https://www.upwork.com/freelancers/~01984538d26b3fcb98?viewMode=1";
+const ERDIBUILDS_URL = "https://erdibuilds.app/d/steffen";
 
 export default function OrivelaBuild({
   headingLevel = "h1",
@@ -141,7 +140,7 @@ export default function OrivelaBuild({
                 Download on iOS →
               </a>
               <a
-                href={UPWORK_URL}
+                href={ERDIBUILDS_URL}
                 className="orivela-room-btn-ghost"
                 target="_blank"
                 rel="noopener noreferrer"

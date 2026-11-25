@@ -20,10 +20,7 @@ export const CONTACT_USPS = [
 
 export const CONTACT_SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/steffenletsdoit/" },
-  {
-    label: "Upwork",
-    href: "https://www.upwork.com/freelancers/~01984538d26b3fcb98?viewMode=1",
-  },
+  { label: "ErdiBuilds", href: "https://erdibuilds.app/d/steffen" },
   { label: "Email", href: "mailto:steffen@52n34s.com" },
 ] as const;
 

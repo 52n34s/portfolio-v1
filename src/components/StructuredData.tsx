@@ -41,7 +41,7 @@ export default function StructuredData() {
         founder: { "@id": "https://steffendoesthings.com/#org" },
         sameAs: [
           "https://www.instagram.com/steffenletsdoit/",
-          "https://www.upwork.com/freelancers/~01984538d26b3fcb98",
+          "https://erdibuilds.app/d/steffen",
           "https://52n34s.app",
         ],
       },
