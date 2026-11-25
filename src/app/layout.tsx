@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import NavBubbles from "@/components/NavBubbles";
+import OrbNav from "@/components/OrbNav";
 import SiteFooter from "@/components/SiteFooter";
 import StructuredData from "@/components/StructuredData";
 import "./globals.css";
@@ -98,9 +98,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-full">
         <StructuredData />
-        <NavBubbles />
         {children}
         <SiteFooter />
+        <OrbNav />
       </body>
     </html>
   );

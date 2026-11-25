@@ -141,7 +141,7 @@ export default function AppCard({
     <article
       id={app.slug}
       data-reveal="card"
-      className="group relative flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-[20px] border border-[var(--card-line)] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0"
+      className="group relative flex min-w-0 scroll-mt-8 flex-col overflow-hidden rounded-[20px] border border-[var(--card-line)] bg-white shadow-[2px_5px_14px_rgba(26,26,26,0.13)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0"
       style={{ ...themeVars(theme), transform: `rotate(${rotate}deg)` }}
     >
       {closed ? (

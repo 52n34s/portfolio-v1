@@ -15,7 +15,7 @@ export default function SiteFooter({ variant }: SiteFooterProps) {
 
   return (
     <footer
-      className="flex justify-center px-6 py-8"
+      className="flex justify-center px-6 pb-[calc(8.5rem+env(safe-area-inset-bottom))] pt-8"
       style={dark ? { background: "#0E1620" } : undefined}
     >
       <nav

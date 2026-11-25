@@ -35,7 +35,7 @@ function scrollToCard(event: MouseEvent<HTMLAnchorElement>, id: string) {
   if (!target) return;
   event.preventDefault();
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Offset for the fixed menu button comes from the card's scroll-margin-top.
+  // The small top offset comes from the card's scroll-margin-top.
   target.scrollIntoView({
     behavior: reduce ? "auto" : "smooth",
     block: "start",
