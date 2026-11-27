@@ -116,6 +116,16 @@ export const CHALLENGE_APPS: ChallengeApp[] = [
     cta: "Start your project",
   },
   {
+    id: "spicecut",
+    name: "SpiceCut",
+    description:
+      "Upload a video and get a finished reel back, ready for Instagram and TikTok.",
+    platform: "WEB",
+    logo: "/brand-2026/app-logo-spicecut-2026.png",
+    href: "https://spicecut.app",
+    color: "#FF2E93",
+  },
+  {
     id: "applento",
     name: "Applento",
     description:

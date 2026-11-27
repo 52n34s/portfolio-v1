@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title:
     "Apps by Steffen Giebler: Carpincho, Kolibi, Erdi, ErdiBuilds, Orivela and more",
   description:
-    "Apps built solo in Berlin: a Spanish app you learn with while you scroll, a bodyweight training coach, an AI assistant for business owners, a marketplace for verified developers, a notes and records app, and free tools for founders. Live on iOS and web.",
+    "Apps built solo in Berlin: a Spanish app you learn with while you scroll, a bodyweight training coach, an AI assistant for business owners, a marketplace for verified developers, a tool that cuts your videos into reels, a notes and records app, and free tools for founders. Live on iOS and web.",
   alternates: {
     canonical: "/apps",
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title:
       "Apps by Steffen Giebler: Carpincho, Kolibi, Erdi, ErdiBuilds, Orivela and more",
     description:
-      "Apps built solo in Berlin: a Spanish app you learn with while you scroll, a bodyweight training coach, an AI assistant for business owners, a marketplace for verified developers, a notes and records app, and free tools for founders. Live on iOS and web.",
+      "Apps built solo in Berlin: a Spanish app you learn with while you scroll, a bodyweight training coach, an AI assistant for business owners, a marketplace for verified developers, a tool that cuts your videos into reels, a notes and records app, and free tools for founders. Live on iOS and web.",
     url: "https://steffendoesthings.com/apps",
     type: "website",
   },
@@ -64,6 +64,11 @@ export default function AppsPage() {
         "@type": "ListItem",
         position: 5,
         item: { "@id": "https://steffendoesthings.com/#orivela" },
+      },
+      {
+        "@type": "ListItem",
+        position: 6,
+        item: { "@id": "https://steffendoesthings.com/#spicecut" },
       },
     ],
   };

@@ -40,7 +40,10 @@ export default function Home() {
         to train AI models. Erdi is live with a 14-day free trial. ErdiBuilds,
         a marketplace on the web, matches founders with verified developers
         who have already built something similar and releases each payment
-        only after the founder approves that milestone.
+        only after the founder approves that milestone. SpiceCut, a web app
+        for restaurants, salons, shops and creators, turns phone videos into
+        finished 9:16 reels with music and text, ready for Instagram and
+        TikTok.
         Peeranimo, a peer-matching platform on the web, ran until November
         2026. Earlier products include GetaBite, a restaurant platform with
         websites, ordering and reservations, a vegan dish finder of the same
