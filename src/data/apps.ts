@@ -9,6 +9,7 @@ export type AppSlug =
   | "erdi"
   | "findmystack"
   | "erdibuilds"
+  | "spicecut"
   | "applento"
   | "getabite1"
   | "the";
@@ -139,6 +140,24 @@ export const APP_SECTIONS: AppSection[] = [
         wordmark: { src: "/brand-2026/wordmark-erdibuilds-2026.svg", height: 36 },
         visual: "erdibuilds",
         cta: "Start your project",
+      },
+    ],
+  },
+  {
+    eyebrow: "VIDEO & SOCIAL",
+    headline: "One app for the reels you never get to.",
+    subline: "You film. SpiceCut cuts.",
+    apps: [
+      {
+        slug: "spicecut",
+        name: "SpiceCut",
+        platform: "WEB",
+        hook: "You film. SpiceCut cuts the reel that brings people in.",
+        theme: { surface: "#0A0A0E", ink: "#F5F5F7", muted: "rgba(245,245,247,0.6)", accent: "#FF2E93", onAccent: "#FFFFFF", hookFont: "sans", hookWeight: 800 },
+        body: "Film your dishes, your salon or your day on your phone and upload the clips. SpiceCut picks the best moments, adds music, text and stickers and hands you a finished 9:16 reel, ready for Instagram and TikTok. You can plan when it goes out, and the editor is there if you want to change something yourself.",
+        href: "https://spicecut.app",
+        logo: "/brand-2026/app-logo-spicecut-2026.png",
+        visual: "spicecut",
       },
     ],
   },

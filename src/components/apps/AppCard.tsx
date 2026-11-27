@@ -11,6 +11,7 @@ import OrivelaVisual from "@/components/apps/visuals/OrivelaVisual";
 import ErdiVisual from "@/components/apps/visuals/ErdiVisual";
 import ErdiBuildsVisual from "@/components/apps/visuals/ErdiBuildsVisual";
 import FindMyStackVisual from "@/components/apps/visuals/FindMyStackVisual";
+import SpiceCutVisual from "@/components/apps/visuals/SpiceCutVisual";
 import ApplentoVisual from "@/components/apps/visuals/ApplentoVisual";
 import GetaBiteOneVisual from "@/components/apps/visuals/GetaBiteOneVisual";
 import TheVisual from "@/components/apps/visuals/TheVisual";
@@ -34,6 +35,7 @@ const VISUALS: Record<VisualSlug, () => React.ReactElement> = {
   erdi: ErdiVisual,
   erdibuilds: ErdiBuildsVisual,
   findmystack: FindMyStackVisual,
+  spicecut: SpiceCutVisual,
   applento: ApplentoVisual,
   getabite1: GetaBiteOneVisual,
   the: TheVisual,

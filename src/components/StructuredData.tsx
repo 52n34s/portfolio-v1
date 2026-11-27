@@ -159,6 +159,18 @@ export default function StructuredData() {
         author: { "@id": "https://steffendoesthings.com/#steffen" },
         publisher: { "@id": "https://steffendoesthings.com/#org" },
       },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://steffendoesthings.com/#spicecut",
+        name: "SpiceCut",
+        description:
+          "Upload your phone videos and get a finished 9:16 reel with music, text and stickers, ready to share on Instagram and TikTok. Made for restaurants, salons, shops and creators.",
+        applicationCategory: "MultimediaApplication",
+        operatingSystem: "Web",
+        url: "https://spicecut.app",
+        author: { "@id": "https://steffendoesthings.com/#steffen" },
+        publisher: { "@id": "https://steffendoesthings.com/#org" },
+      },
     ],
   };
 

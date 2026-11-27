@@ -6,6 +6,7 @@ export const OUTCOME_HEADLINES: Record<string, string> = {
   kolibi: "A coach that plans your workout and adjusts what you eat.",
   erdi: "Know the moment something happens in your business.",
   erdibuilds: "Get matched with the right developer.",
+  spicecut: "You film. SpiceCut cuts the reel that brings people in.",
   orivela: "Ask your notes and documents anything.",
   peeranimo: "Meet people working on the same thing as you.",
   findmystack: "Find out what to build your app with in two minutes.",
